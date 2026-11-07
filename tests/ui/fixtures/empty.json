@@ -1,0 +1,17 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-31T08:00:00Z",
+ "range": {
+  "start": "2026-07-01T00:00:00Z",
+  "end": "2026-11-01T00:00:00Z"
+ },
+ "methodology": {
+  "version": "empty-1",
+  "notes": [
+   "No records captured in this window."
+  ]
+ },
+ "coverage": [],
+ "months": [],
+ "prs": []
+}

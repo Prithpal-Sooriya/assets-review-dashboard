@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-real/
+dist-empty/
+dist-invalid/
+test-results/
+playwright-report/
+.vercel/
+*.log
+.DS_Store
+.vercel
+.env*

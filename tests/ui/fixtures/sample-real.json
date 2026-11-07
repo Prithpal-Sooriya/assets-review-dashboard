@@ -1,0 +1,4201 @@
+{
+ "schemaVersion": 1,
+ "generatedAt": "2026-10-31T08:00:00Z",
+ "range": {
+  "start": "2026-07-01T00:00:00Z",
+  "end": "2026-11-01T00:00:00Z"
+ },
+ "methodology": {
+  "version": "test-1",
+  "notes": [
+   "Sample dataset for automated UI tests; synthetic values, not real activity.",
+   "Reviewed counts dedupe per PR per month; snapshot semantics for unmerged."
+  ]
+ },
+ "coverage": [
+  {
+   "repo": "MetaMask/core",
+   "month": "2026-07",
+   "status": "partial",
+   "detail": "Backfill still running."
+  },
+  {
+   "repo": "MetaMask/core",
+   "month": "2026-08",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/core",
+   "month": "2026-09",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/core",
+   "month": "2026-10",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/metamask-mobile",
+   "month": "2026-07",
+   "status": "partial",
+   "detail": "Backfill still running."
+  },
+  {
+   "repo": "MetaMask/metamask-mobile",
+   "month": "2026-08",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/metamask-mobile",
+   "month": "2026-09",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/metamask-mobile",
+   "month": "2026-10",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/metamask-extension",
+   "month": "2026-07",
+   "status": "partial",
+   "detail": "Backfill still running."
+  },
+  {
+   "repo": "MetaMask/metamask-extension",
+   "month": "2026-08",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/metamask-extension",
+   "month": "2026-09",
+   "status": "complete"
+  },
+  {
+   "repo": "MetaMask/metamask-extension",
+   "month": "2026-10",
+   "status": "complete"
+  }
+ ],
+ "months": [
+  {
+   "month": "2026-07",
+   "repo": "MetaMask/core",
+   "internalReviewedPrs": 5,
+   "externalReviewedPrs": 4,
+   "reviewSubmissions": 18,
+   "reviewedUnmergedPrs": 1,
+   "mergedInternalPrs": 7,
+   "mergedExternalReviewedPrs": 3
+  },
+  {
+   "month": "2026-08",
+   "repo": "MetaMask/core",
+   "internalReviewedPrs": 4,
+   "externalReviewedPrs": 8,
+   "reviewSubmissions": 31,
+   "reviewedUnmergedPrs": 1,
+   "mergedInternalPrs": 10,
+   "mergedExternalReviewedPrs": 6
+  },
+  {
+   "month": "2026-09",
+   "repo": "MetaMask/core",
+   "internalReviewedPrs": 6,
+   "externalReviewedPrs": 7,
+   "reviewSubmissions": 32,
+   "reviewedUnmergedPrs": 3,
+   "mergedInternalPrs": 7,
+   "mergedExternalReviewedPrs": 4
+  },
+  {
+   "month": "2026-10",
+   "repo": "MetaMask/core",
+   "internalReviewedPrs": 4,
+   "externalReviewedPrs": 8,
+   "reviewSubmissions": 24,
+   "reviewedUnmergedPrs": 5,
+   "mergedInternalPrs": 9,
+   "mergedExternalReviewedPrs": 3
+  },
+  {
+   "month": "2026-07",
+   "repo": "MetaMask/metamask-mobile",
+   "internalReviewedPrs": 4,
+   "externalReviewedPrs": 10,
+   "reviewSubmissions": 34,
+   "reviewedUnmergedPrs": 5,
+   "mergedInternalPrs": 9,
+   "mergedExternalReviewedPrs": 6
+  },
+  {
+   "month": "2026-08",
+   "repo": "MetaMask/metamask-mobile",
+   "internalReviewedPrs": 6,
+   "externalReviewedPrs": 12,
+   "reviewSubmissions": 45,
+   "reviewedUnmergedPrs": 4,
+   "mergedInternalPrs": 17,
+   "mergedExternalReviewedPrs": 7
+  },
+  {
+   "month": "2026-09",
+   "repo": "MetaMask/metamask-mobile",
+   "internalReviewedPrs": 5,
+   "externalReviewedPrs": 12,
+   "reviewSubmissions": 29,
+   "reviewedUnmergedPrs": 1,
+   "mergedInternalPrs": 13,
+   "mergedExternalReviewedPrs": 8
+  },
+  {
+   "month": "2026-10",
+   "repo": "MetaMask/metamask-mobile",
+   "internalReviewedPrs": 6,
+   "externalReviewedPrs": 11,
+   "reviewSubmissions": 45,
+   "reviewedUnmergedPrs": 3,
+   "mergedInternalPrs": 16,
+   "mergedExternalReviewedPrs": 7
+  },
+  {
+   "month": "2026-07",
+   "repo": "MetaMask/metamask-extension",
+   "internalReviewedPrs": 5,
+   "externalReviewedPrs": 4,
+   "reviewSubmissions": 18,
+   "reviewedUnmergedPrs": 1,
+   "mergedInternalPrs": 8,
+   "mergedExternalReviewedPrs": 3
+  },
+  {
+   "month": "2026-08",
+   "repo": "MetaMask/metamask-extension",
+   "internalReviewedPrs": 7,
+   "externalReviewedPrs": 4,
+   "reviewSubmissions": 27,
+   "reviewedUnmergedPrs": 1,
+   "mergedInternalPrs": 9,
+   "mergedExternalReviewedPrs": 3
+  },
+  {
+   "month": "2026-09",
+   "repo": "MetaMask/metamask-extension",
+   "internalReviewedPrs": 2,
+   "externalReviewedPrs": 7,
+   "reviewSubmissions": 21,
+   "reviewedUnmergedPrs": 2,
+   "mergedInternalPrs": 6,
+   "mergedExternalReviewedPrs": 4
+  },
+  {
+   "month": "2026-10",
+   "repo": "MetaMask/metamask-extension",
+   "internalReviewedPrs": 5,
+   "externalReviewedPrs": 6,
+   "reviewSubmissions": 20,
+   "reviewedUnmergedPrs": 4,
+   "mergedInternalPrs": 7,
+   "mergedExternalReviewedPrs": 3
+  }
+ ],
+ "prs": [
+  {
+   "id": "MetaMask/core#900003",
+   "repo": "MetaMask/core",
+   "number": 900003,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/core/pull/900003",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-15T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900004",
+   "repo": "MetaMask/core",
+   "number": 900004,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/core/pull/900004",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-15T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "Gas",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900007",
+   "repo": "MetaMask/core",
+   "number": 900007,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/core/pull/900007",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-05T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "CI",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900009",
+   "repo": "MetaMask/core",
+   "number": 900009,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/core/pull/900009",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-27T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900010",
+   "repo": "MetaMask/core",
+   "number": 900010,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/core/pull/900010",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-13T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900013",
+   "repo": "MetaMask/core",
+   "number": 900013,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/core/pull/900013",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-07",
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2,
+    "2026-08": 1
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900015",
+   "repo": "MetaMask/core",
+   "number": 900015,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/core/pull/900015",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-03T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900017",
+   "repo": "MetaMask/core",
+   "number": 900017,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/core/pull/900017",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900020",
+   "repo": "MetaMask/core",
+   "number": 900020,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/core/pull/900020",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 4
+   },
+   "labels": [
+    "CI",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900023",
+   "repo": "MetaMask/core",
+   "number": 900023,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/core/pull/900023",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 4
+   },
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900026",
+   "repo": "MetaMask/core",
+   "number": 900026,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/core/pull/900026",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-12T12:30:00Z",
+   "reviewMonths": [
+    "2026-07",
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1,
+    "2026-08": 1
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900002",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900002,
+   "title": "Fix sprite sheet padding",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900002",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 3
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900005",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900005,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900005",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900008",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900008,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900008",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-21T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900011",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900011,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900011",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-16T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Sprites",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900012",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900012,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900012",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "Tokens",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900015",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900015,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900015",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-11T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900017",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900017,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900017",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-09T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Tokens",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900020",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900020,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900020",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-11T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900022",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900022,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900022",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900025",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900025,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900025",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-13T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900028",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900028,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900028",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 4
+   },
+   "labels": [
+    "Icons",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900031",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900031,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900031",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-11T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900034",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900034,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900034",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900036",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900036,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900036",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 3
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900037",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900037,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900037",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900038",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900038,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900038",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-12T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 3
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900041",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900041,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900041",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 4
+   },
+   "labels": [
+    "CI",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900044",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900044,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900044",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-09T12:30:00Z",
+   "reviewMonths": [
+    "2026-07",
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 4,
+    "2026-08": 1
+   },
+   "labels": [
+    "Chores",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900047",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900047,
+   "title": "Remove deprecated asset entries",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900047",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "Chores",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900050",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900050,
+   "title": "Align extension asset manifest",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900050",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900003",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900003,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900003",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-19T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900004",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900004,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900004",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-18T12:30:00Z",
+   "reviewMonths": [
+    "2026-07",
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1,
+    "2026-08": 2
+   },
+   "labels": [
+    "team-assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900006",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900006,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900006",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-07",
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 3,
+    "2026-08": 1
+   },
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900009",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900009,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900009",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-16T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Gas",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900012",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900012,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900012",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "team-assets",
+    "Sprites",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900015",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900015,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900015",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-07-22T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900016",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900016,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900016",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900017",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900017,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900017",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-07-15T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "team-assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900019",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900019,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900019",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-15T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 4
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900022",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900022,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900022",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 2
+   },
+   "labels": [
+    "NFT",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900024",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900024,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900024",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 1
+   },
+   "labels": [
+    "Sprites",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900025",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900025,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900025",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-07-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-07"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": 3
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900027",
+   "repo": "MetaMask/core",
+   "number": 900027,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/core/pull/900027",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-18T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900029",
+   "repo": "MetaMask/core",
+   "number": 900029,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/core/pull/900029",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-15T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900032",
+   "repo": "MetaMask/core",
+   "number": 900032,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/core/pull/900032",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900033",
+   "repo": "MetaMask/core",
+   "number": 900033,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/core/pull/900033",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3,
+    "2026-09": 2
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900034",
+   "repo": "MetaMask/core",
+   "number": 900034,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/core/pull/900034",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Icons",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900035",
+   "repo": "MetaMask/core",
+   "number": 900035,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/core/pull/900035",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-08T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900038",
+   "repo": "MetaMask/core",
+   "number": 900038,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/core/pull/900038",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-27T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900040",
+   "repo": "MetaMask/core",
+   "number": 900040,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/core/pull/900040",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-21T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900041",
+   "repo": "MetaMask/core",
+   "number": 900041,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/core/pull/900041",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-12T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3,
+    "2026-09": 1
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900044",
+   "repo": "MetaMask/core",
+   "number": 900044,
+   "title": "Align extension asset manifest",
+   "url": "https://github.com/MetaMask/core/pull/900044",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Tokens",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900046",
+   "repo": "MetaMask/core",
+   "number": 900046,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/core/pull/900046",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2,
+    "2026-09": 1
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900047",
+   "repo": "MetaMask/core",
+   "number": 900047,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/core/pull/900047",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900049",
+   "repo": "MetaMask/core",
+   "number": 900049,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/core/pull/900049",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900050",
+   "repo": "MetaMask/core",
+   "number": 900050,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/core/pull/900050",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-23T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900051",
+   "repo": "MetaMask/core",
+   "number": 900051,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/core/pull/900051",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-20T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900052",
+   "repo": "MetaMask/core",
+   "number": 900052,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/core/pull/900052",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-14T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 1
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900055",
+   "repo": "MetaMask/core",
+   "number": 900055,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/core/pull/900055",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-26T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900052",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900052,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900052",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-09T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900055",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900055,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900055",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900056",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900056,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900056",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-21T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900057",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900057,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900057",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-08T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900059",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900059,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900059",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-04T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3,
+    "2026-09": 2
+   },
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900060",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900060,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900060",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-14T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900061",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900061,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900061",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-26T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900062",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900062,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900062",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900064",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900064,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900064",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-10T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900066",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900066,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900066",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-26T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3
+   },
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900067",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900067,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900067",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-23T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "team-assets",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900070",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900070,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900070",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-09T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3
+   },
+   "labels": [
+    "team-assets",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900071",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900071,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900071",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-08T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900072",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900072,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900072",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-04T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900073",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900073,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900073",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-26T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900076",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900076,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900076",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-22T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Icons",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900077",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900077,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900077",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-04T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900078",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900078,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900078",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3
+   },
+   "labels": [
+    "CI",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900081",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900081,
+   "title": "Fix sprite sheet padding",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900081",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 1
+   },
+   "labels": [
+    "Tokens",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900082",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900082,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900082",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-25T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Chores",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900084",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900084,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900084",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900086",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900086,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900086",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-20T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 1,
+    "2026-09": 1
+   },
+   "labels": [
+    "Gas",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900088",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900088,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900088",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900091",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900091,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900091",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4,
+    "2026-09": 1
+   },
+   "labels": [
+    "Sprites",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900093",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900093,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900093",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-18T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 1,
+    "2026-09": 1
+   },
+   "labels": [
+    "Assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900095",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900095,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900095",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Chores",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900097",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900097,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900097",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900100",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900100,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900100",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900027",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900027,
+   "title": "Remove deprecated asset entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900027",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-08T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900029",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900029,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900029",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-06T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900032",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900032,
+   "title": "Remove deprecated asset entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900032",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-27T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900035",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900035,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900035",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2,
+    "2026-09": 1
+   },
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900038",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900038,
+   "title": "Remove deprecated asset entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900038",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "CI",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900041",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900041,
+   "title": "Remove deprecated asset entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900041",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900042",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900042,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900042",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-12T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900045",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900045,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900045",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-08-03T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3
+   },
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900047",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900047,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900047",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-17T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900050",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900050,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900050",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-08-19T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900052",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900052,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900052",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Gas",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900054",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900054,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900054",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 4
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900057",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900057,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900057",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-09T12:30:00Z",
+   "reviewMonths": [
+    "2026-08"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 2
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900059",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900059,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900059",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-08-15T12:30:00Z",
+   "reviewMonths": [
+    "2026-08",
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-08": 3,
+    "2026-09": 1
+   },
+   "labels": [
+    "Gas",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900057",
+   "repo": "MetaMask/core",
+   "number": 900057,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/core/pull/900057",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-06T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Assets",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900058",
+   "repo": "MetaMask/core",
+   "number": 900058,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/core/pull/900058",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-08T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900059",
+   "repo": "MetaMask/core",
+   "number": 900059,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/core/pull/900059",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900062",
+   "repo": "MetaMask/core",
+   "number": 900062,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/core/pull/900062",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "CI",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900063",
+   "repo": "MetaMask/core",
+   "number": 900063,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/core/pull/900063",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-15T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900066",
+   "repo": "MetaMask/core",
+   "number": 900066,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/core/pull/900066",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-12T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900068",
+   "repo": "MetaMask/core",
+   "number": 900068,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/core/pull/900068",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-17T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900071",
+   "repo": "MetaMask/core",
+   "number": 900071,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/core/pull/900071",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900074",
+   "repo": "MetaMask/core",
+   "number": 900074,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/core/pull/900074",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900075",
+   "repo": "MetaMask/core",
+   "number": 900075,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/core/pull/900075",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900078",
+   "repo": "MetaMask/core",
+   "number": 900078,
+   "title": "Fix sprite sheet padding",
+   "url": "https://github.com/MetaMask/core/pull/900078",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 4
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900081",
+   "repo": "MetaMask/core",
+   "number": 900081,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/core/pull/900081",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-09",
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 4,
+    "2026-10": 1
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900083",
+   "repo": "MetaMask/core",
+   "number": 900083,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/core/pull/900083",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900085",
+   "repo": "MetaMask/core",
+   "number": 900085,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/core/pull/900085",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-09",
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3,
+    "2026-10": 2
+   },
+   "labels": [
+    "Chores",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900101",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900101,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900101",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-12T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900103",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900103,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900103",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-03T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900106",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900106,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900106",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "team-assets",
+    "Tokens",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900108",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900108,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900108",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-24T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Assets",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900109",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900109,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900109",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-09T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "CI",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900112",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900112,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900112",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-24T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "team-assets",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900114",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900114,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900114",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-27T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900115",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900115,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900115",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-14T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900117",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900117,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900117",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-10T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900119",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900119,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900119",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900120",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900120,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900120",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Sprites",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900122",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900122,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900122",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-19T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "NFT",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900123",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900123,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900123",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-16T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1
+   },
+   "labels": [
+    "team-assets",
+    "Gas",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900126",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900126,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900126",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-10T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900128",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900128,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900128",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-23T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1
+   },
+   "labels": [
+    "Gas",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900130",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900130,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900130",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1
+   },
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900131",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900131,
+   "title": "Fix sprite sheet padding",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900131",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-08T12:30:00Z",
+   "reviewMonths": [
+    "2026-09",
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1,
+    "2026-10": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900132",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900132,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900132",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 4
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900134",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900134,
+   "title": "Align extension asset manifest",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900134",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-11T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 4
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900135",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900135,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900135",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-21T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900137",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900137,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900137",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1
+   },
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900140",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900140,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900140",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-20T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900141",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900141,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900141",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-13T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 1
+   },
+   "labels": [
+    "Sprites",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900062",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900062,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900062",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-09T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900064",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900064,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900064",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-09T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900065",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900065,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900065",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-11T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "team-assets",
+    "CI",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900066",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900066,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900066",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-09T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900068",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900068,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900068",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-09-15T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900070",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900070,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900070",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-09-05T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900072",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900072,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900072",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-21T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "Chores",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900075",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900075,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900075",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-09",
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2,
+    "2026-10": 2
+   },
+   "labels": [
+    "CI",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900076",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900076,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900076",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-09T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "Gas",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900077",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900077,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900077",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 2
+   },
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900078",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900078,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900078",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-09",
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 4,
+    "2026-10": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900079",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900079,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900079",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-09-10T12:30:00Z",
+   "reviewMonths": [
+    "2026-09"
+   ],
+   "reviewCountsByMonth": {
+    "2026-09": 3
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900088",
+   "repo": "MetaMask/core",
+   "number": 900088,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/core/pull/900088",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900091",
+   "repo": "MetaMask/core",
+   "number": 900091,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/core/pull/900091",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-02T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "Chores",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900094",
+   "repo": "MetaMask/core",
+   "number": 900094,
+   "title": "Align extension asset manifest",
+   "url": "https://github.com/MetaMask/core/pull/900094",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-12T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Gas",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900096",
+   "repo": "MetaMask/core",
+   "number": 900096,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/core/pull/900096",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "CI",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900098",
+   "repo": "MetaMask/core",
+   "number": 900098,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/core/pull/900098",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900099",
+   "repo": "MetaMask/core",
+   "number": 900099,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/core/pull/900099",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900100",
+   "repo": "MetaMask/core",
+   "number": 900100,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/core/pull/900100",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-11T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900101",
+   "repo": "MetaMask/core",
+   "number": 900101,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/core/pull/900101",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-04T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900104",
+   "repo": "MetaMask/core",
+   "number": 900104,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/core/pull/900104",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900105",
+   "repo": "MetaMask/core",
+   "number": 900105,
+   "title": "Update token list entries",
+   "url": "https://github.com/MetaMask/core/pull/900105",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-20T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "NFT",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900106",
+   "repo": "MetaMask/core",
+   "number": 900106,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/core/pull/900106",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 4
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900108",
+   "repo": "MetaMask/core",
+   "number": 900108,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/core/pull/900108",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900110",
+   "repo": "MetaMask/core",
+   "number": 900110,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/core/pull/900110",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900111",
+   "repo": "MetaMask/core",
+   "number": 900111,
+   "title": "Fix sprite sheet padding",
+   "url": "https://github.com/MetaMask/core/pull/900111",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900112",
+   "repo": "MetaMask/core",
+   "number": 900112,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/core/pull/900112",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "CI",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/core#900113",
+   "repo": "MetaMask/core",
+   "number": 900113,
+   "title": "Align extension asset manifest",
+   "url": "https://github.com/MetaMask/core/pull/900113",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "Chores",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900143",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900143,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900143",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-12T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900145",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900145,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900145",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-21T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900147",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900147,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900147",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-05T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900150",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900150,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900150",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-23T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "CI",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900153",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900153,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900153",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-04T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "team-assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900154",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900154,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900154",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "team-assets",
+    "Assets",
+    "CI"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900156",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900156,
+   "title": "Fix icon sizing on dark mode",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900156",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "team-assets",
+    "NFT",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900158",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900158,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900158",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900161",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900161,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900161",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-09T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900163",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900163,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900163",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-06T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900164",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900164,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900164",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-27T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Sprites",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900166",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900166,
+   "title": "Align extension asset manifest",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900166",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-07T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900167",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900167,
+   "title": "Improve token list lint rules",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900167",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "Icons",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900169",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900169,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900169",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-19T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900170",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900170,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900170",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-03T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900171",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900171,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900171",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-15T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900173",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900173,
+   "title": "Correct token symbol casing",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900173",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "Sprites",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900176",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900176,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900176",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-10T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "Gas",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900179",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900179,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900179",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-06T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900181",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900181,
+   "title": "Sync token lists with upstream",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900181",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-24T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 4
+   },
+   "labels": [
+    "Assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900183",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900183,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900183",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-19T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "NFT",
+    "Sprites"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900185",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900185,
+   "title": "Normalise asset folder naming",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900185",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900188",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900188,
+   "title": "Remove deprecated asset entries",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900188",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900189",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900189,
+   "title": "Update mobile asset snapshots",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900189",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "CI",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900191",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900191,
+   "title": "Refresh NFT metadata cache",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900191",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-23T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 4
+   },
+   "labels": [
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-mobile#900194",
+   "repo": "MetaMask/metamask-mobile",
+   "number": 900194,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-mobile/pull/900194",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 4
+   },
+   "labels": [
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900080",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900080,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900080",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900083",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900083,
+   "title": "Update collectibles fallback art",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900083",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-06T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900085",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900085,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900085",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-27T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "team-assets",
+    "Gas",
+    "Tokens"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900088",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900088,
+   "title": "Fix duplicated sprite ids",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900088",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-07T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "team-assets",
+    "Chores",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900090",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900090,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900090",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-23T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900093",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900093,
+   "title": "Add SWAP token overrides",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900093",
+   "ownership": "internal",
+   "ownershipReason": "team-author",
+   "state": "MERGED",
+   "mergedAt": "2026-10-07T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900095",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900095,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900095",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-14T12:30:00Z",
+   "reviewMonths": [],
+   "reviewCountsByMonth": {},
+   "labels": [
+    "team-assets",
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900097",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900097,
+   "title": "Adjust gas asset fee display",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900097",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "MERGED",
+   "mergedAt": "2026-10-17T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "team-assets",
+    "Chores"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900098",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900098,
+   "title": "Pin asset CDN hashes",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900098",
+   "ownership": "internal",
+   "ownershipReason": "team-label",
+   "state": "OPEN",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "team-assets",
+    "Gas"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900101",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900101,
+   "title": "Add missing chain icons",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900101",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-24T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 1
+   },
+   "labels": [
+    "Gas",
+    "NFT"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900102",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900102,
+   "title": "Bump asset icon versions",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900102",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-11T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "Icons"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900105",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900105,
+   "title": "Tidy up sprites build config",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900105",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "CLOSED",
+   "mergedAt": null,
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 3
+   },
+   "labels": [
+    "CI",
+    "Assets"
+   ]
+  },
+  {
+   "id": "MetaMask/metamask-extension#900106",
+   "repo": "MetaMask/metamask-extension",
+   "number": 900106,
+   "title": "Repair stale NFT thumbnails",
+   "url": "https://github.com/MetaMask/metamask-extension/pull/900106",
+   "ownership": "external",
+   "ownershipReason": "other",
+   "state": "MERGED",
+   "mergedAt": "2026-10-22T12:30:00Z",
+   "reviewMonths": [
+    "2026-10"
+   ],
+   "reviewCountsByMonth": {
+    "2026-10": 2
+   },
+   "labels": [
+    "Sprites"
+   ]
+  }
+ ]
+}
