@@ -182,8 +182,11 @@ aggregation dedupes by freshest snapshot per PR).
   guard only protects unmodified default-branch copies of a workflow — a
   repo writer can dispatch a guard-stripped branch copy — and a stolen
   classic repo-scope token grants every repository its owner can access.
-  Non-default refs are refused before the secret is touched. An auth
-  preflight fails loudly — naming the secret and the remedy — if it stops
+  Non-default refs are refused before the secret is touched. The guard's
+  policy shell is extracted to `scripts/run-token.sh` and unit-tested
+  (`tests/collector/run-token.test.ts`); the `pat-secret` input is required
+  so a caller that forgets `with:` fails at workflow load instead of
+  silently downgrading to `GITHUB_TOKEN`. An auth preflight fails loudly — naming the secret and the remedy — if it stops
   authenticating (PATs expire; rotate in Settings > Secrets, or unset it to
   fall back to `GITHUB_TOKEN`). The token is selected AFTER the collector
   tests so it is never ambient during `bun install`/`bun test`. No secret
