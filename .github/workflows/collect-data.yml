@@ -19,8 +19,11 @@
 # already pushed) and are NOT auto-retried more than hourly by the heartbeat.
 #
 # Optional secret DASHBOARD_GH_TOKEN (a PAT with repo scope) raises the rate
-# budget vs GITHUB_TOKEN; it is never written anywhere persistent. Note: data
-# PRs do NOT trigger ci-collector.yml (its paths filter only matches code) —
+# budget vs GITHUB_TOKEN and is exposed ONLY to runs on the reviewed
+# default ref (scheduled runs and dispatches from the default branch); any
+# other ref is refused before the PAT is used. It is never written anywhere
+# persistent, and an auth preflight fails loudly on expiry. Note: data PRs
+# do NOT trigger ci-collector.yml (its paths filter only matches code) —
 # the collector test step in THIS workflow is the gate for data runs.
 name: collect-data
 
@@ -50,9 +53,38 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      - name: Checkout (default branch — the reviewed code that runs)
+      - name: Resolve default branch (runtime-derived; safe on all triggers)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
+
+      - name: Select run token (PAT only on the reviewed default ref)
+        env:
+          REF: ${{ github.ref }}
+          PAT_SECRET: ${{ secrets.DASHBOARD_GH_TOKEN }}
+          BASE_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # A repo-scope PAT may only ever be exposed to runs whose workflow
+          # file and checkout are the reviewed default branch. Anything else
+          # (a workflow_dispatch of a feature branch would run that branch's
+          # workflow file) is refused here, BEFORE any PAT-bearing step.
+          if [ "$REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
+            echo "::error::refusing to run from a non-default ref ($REF); dispatch from $DEFAULT_BRANCH so only reviewed code executes"
+            exit 1
+          fi
+          if [ -n "$PAT_SECRET" ]; then
+            echo "RUN_TOKEN=$PAT_SECRET" >> "$GITHUB_ENV"
+            echo "run token: DASHBOARD_GH_TOKEN"
+          else
+            echo "RUN_TOKEN=$BASE_TOKEN" >> "$GITHUB_ENV"
+            echo "run token: GITHUB_TOKEN"
+          fi
+
+      - name: Checkout (always the reviewed default branch — the code that runs)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          ref: ${{ env.DEFAULT_BRANCH }}
           fetch-depth: 0
 
       - name: Pin bun version from .bun-version
@@ -61,6 +93,21 @@ jobs:
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Auth preflight (fail loudly on a broken secret)
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+        run: |
+          set -euo pipefail
+          # secrets.DASHBOARD_GH_TOKEN || github.token only falls back when
+          # the secret is ABSENT — an expired-but-present PAT yields 401s on
+          # every call with the fallback never engaging. Detect that here,
+          # named and with the remedy, instead of as inscrutable collector 401s.
+          if ! gh api /rate_limit >/dev/null 2>&1; then
+            echo "::error::run token failed authentication (gh api /rate_limit). If this is a scheduled run using DASHBOARD_GH_TOKEN, the secret has likely EXPIRED — rotate it (Settings > Secrets) or unset it to fall back to GITHUB_TOKEN."
+            exit 1
+          fi
+          gh api /rate_limit --jq '.resources.core | "rate budget: \(.remaining)/\(.limit)"'
 
       - name: Collector tests (gate before any data is written)
         run: |
@@ -92,6 +139,7 @@ jobs:
           echo "collecting $FROM_MONTH .. current month, fixed cutoff $RUN_CUTOFF"
 
       - name: Prepare data branch worktree (orphan, data-only)
+        id: prepare
         run: |
           set -euo pipefail
           if git fetch --no-tags origin "$DATA_BRANCH"; then
@@ -99,7 +147,8 @@ jobs:
             echo "DATA_BRANCH_EXISTING=1" >> "$GITHUB_ENV"
           else
             echo "no $DATA_BRANCH yet; creating an orphan data-only branch"
-            git worktree add --orphan="$DATA_BRANCH" /tmp/data-tree
+            # NB: --orphan takes NO value; the branch name comes via -b.
+            git worktree add --orphan -b "$DATA_BRANCH" /tmp/data-tree
           fi
           # The data branch must never carry anything outside data/ — refuse
           # loudly if it does (code on the data branch would both execute
@@ -112,7 +161,7 @@ jobs:
 
       - name: Collect (resumable; pauses at rate reserve — heartbeat resumes)
         env:
-          GH_TOKEN: ${{ secrets.DASHBOARD_GH_TOKEN || github.token }}
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
         run: |
           set -uo pipefail
           # Overlay data-branch state (checkpoints, manifest, completed
@@ -132,40 +181,38 @@ jobs:
           bun run scripts/collect.ts --from "$FROM_MONTH" --as-of "$RUN_CUTOFF"
           rc=$?
           echo "COLLECT_RC=$rc" >> "$GITHUB_ENV"
-          # Push progress immediately so checkpoints survive runner exits.
-          # This section must succeed or the run fails hard — a silently
-          # skipped checkpoint push would strand the walk.
-          set -e
-          rsync -a --delete data/ /tmp/data-tree/data/
-          git -C /tmp/data-tree add data
-          if ! git -C /tmp/data-tree diff --staged --quiet; then
-            git -C /tmp/data-tree commit -m "chore(data): collect (cutoff $RUN_CUTOFF)"
-            git -C /tmp/data-tree push origin "$DATA_BRANCH"
-          fi
           if [ "$rc" -ne 0 ] && [ "$rc" -ne 3 ]; then
-            # Hard failure: fail the run red (checkpoints are already pushed);
-            # never mask it as a green 'complete' run.
+            # Hard failure: fail the run red; the always() push step below
+            # still preserves the checkpoints. Never mask it as green.
             echo "::error::collect exited $rc — see logs; progress is preserved on $DATA_BRANCH"
             exit "$rc"
           fi
           exit 0
 
+      - name: Push checkpoints (survive runner exits)
+        # always(): pushes even when the collect step hard-failed (its
+        # checkpoints are the resume state — they must not be lost); gated on
+        # the worktree existing at all.
+        if: always() && steps.prepare.outcome == 'success'
+        uses: ./.github/actions/push-data
+        with:
+          message: "chore(data): collect (cutoff ${{ env.RUN_CUTOFF }})"
+
       - name: Aggregate dashboard.json at the fixed cutoff
         env:
-          GH_TOKEN: ${{ secrets.DASHBOARD_GH_TOKEN || github.token }}
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
         run: |
           set -euo pipefail
           bun run scripts/aggregate.ts --as-of "$RUN_CUTOFF" --out data/dashboard.json --prune
-          rsync -a --delete data/ /tmp/data-tree/data/
-          git -C /tmp/data-tree add data
-          if ! git -C /tmp/data-tree diff --staged --quiet; then
-            git -C /tmp/data-tree commit -m "chore(data): aggregate at cutoff $RUN_CUTOFF (window-pruned)"
-            git -C /tmp/data-tree push origin "$DATA_BRANCH"
-          fi
+
+      - name: Push aggregated data
+        uses: ./.github/actions/push-data
+        with:
+          message: "chore(data): aggregate at cutoff ${{ env.RUN_CUTOFF }} (window-pruned)"
 
       - name: Open or update the data PR
         env:
-          GH_TOKEN: ${{ secrets.DASHBOARD_GH_TOKEN || github.token }}
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
         run: |
           set -euo pipefail
           stopped=$(jq -r '.stopped' data/raw/.last-run.json)

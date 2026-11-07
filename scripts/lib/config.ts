@@ -24,6 +24,23 @@ export function validateConfig(cfg: unknown): CollectorConfig {
   if (typeof c.teamLabel !== "string" || !c.teamLabel) errors.push("teamLabel must be a non-empty string");
   if (!Number.isInteger(c.displayWindowMonths) || c.displayWindowMonths < 1) errors.push("displayWindowMonths must be a positive integer");
   if (!Array.isArray(c.reviewStates) || c.reviewStates.length === 0) errors.push("reviewStates must be a non-empty array");
+  // request.* must validate loudly too: a typo here (e.g. maxRetires) would
+  // silently disable retries/pacing and surface later as confusing API
+  // errors mid-walk instead of a startup config error.
+  const rq = c.request as Record<string, unknown> | undefined;
+  if (rq === undefined || typeof rq !== "object") {
+    errors.push("request must be an object");
+  } else {
+    for (const k of ["perPage", "maxRetries", "retryBaseDelayMs", "minDelayMs", "rateCheckInterval", "rateReserve"]) {
+      const v = rq[k];
+      if (!Number.isInteger(v) || (v as number) < 1) errors.push(`request.${k} must be a positive integer`);
+    }
+    for (const k of Object.keys(rq)) {
+      if (!["perPage", "maxRetries", "retryBaseDelayMs", "minDelayMs", "rateCheckInterval", "rateReserve"].includes(k)) {
+        errors.push(`request has unknown key '${k}'`);
+      }
+    }
+  }
   const overlap = (c.roster ?? []).filter((r) => (c.excludedReviewers ?? []).some((e) => e.toLowerCase() === r.toLowerCase()));
   if (overlap.length) errors.push(`roster and excludedReviewers overlap: ${overlap.join(", ")}`);
   if (errors.length) throw new Error(`Invalid collector config: ${errors.join("; ")}`);

@@ -154,10 +154,14 @@ aggregation dedupes by freshest snapshot per PR).
   checkpoints.
 - Auth: `GITHUB_TOKEN` (contents+pull-requests: write). Optional secret
   **`DASHBOARD_GH_TOKEN`** (classic PAT, repo scope) — if set, it is used
-  instead for its higher rate budget (its only purpose; data PRs don't
-  trigger code CI either way, since `ci-collector.yml` is path-scoped to
-  code and the in-workflow test step gates data runs). No secret values
-  live in this repo.
+  for its higher rate budget, but ONLY by runs on the reviewed default ref;
+  non-default refs are refused before the PAT is touched (a workflow_dispatch
+  of a feature branch would run that branch's workflow file). An auth
+  preflight in both workflows fails loudly — naming the secret and the
+  remedy — if it stops authenticating (classic PATs expire; rotate in
+  Settings > Secrets, or unset it to fall back to `GITHUB_TOKEN`). No secret
+  values live in this repo. Prefer a fine-grained PAT scoped to just this
+  repository when configuring it, to bound exfiltration blast radius.
 
 `ci-collector.yml` (PRs + pushes touching collector-owned paths):
 `bun install --frozen-lockfile` (shared root package.json), typecheck via
@@ -165,11 +169,14 @@ aggregation dedupes by freshest snapshot per PR).
 `ci-ui.yml`, owned by the frontend; filenames are deliberately distinct
 so the two roles never edit each other's CI.
 
-`collect-data-heartbeat.yml` (hourly): no-op unless the data-branch
-checkpoint reports pending partitions and the rate window has reset (for
-hard-failed runs, retries are bounded to ~1/hour), no collect-data run is
-active, and the checkpoint's `from` month validates as `YYYY-MM` — then it
-re-dispatches `collect-data` with the checkpoint's window start.
+`collect-data-heartbeat.yml` (hourly): thin orchestration around the
+TESTED decision core `scripts/lib/heartbeat.ts` (via `scripts/heartbeat.ts`):
+resume decision + freshness canary (dashboard.json older than ~7 days →
+`[STALE-DASHBOARD]` red). Checkpoint schema drift fails red instead of
+silently no-oping; hard-failure retries are bounded to ~1/hour. The PAT is
+only exposed to runs on the reviewed default ref (non-default refs are
+refused before the secret is used, in both workflows); an auth preflight
+fails loudly if the secret expires.
 
 ## Public-repo safety
 
@@ -181,6 +188,23 @@ private repositories. Workflow checkpoints (`data/raw/.inprogress/`,
 `data/raw/.last-run.json`) contain the same record shapes. Tokens are only
 ever provided per-run via Actions secrets/env and are never written to disk
 or logs.
+
+**Trust boundary (for every consumer of `data/`):** PR titles, label names,
+and logins are arbitrary strings authored by ANY GitHub user — they are
+stored verbatim and are untrusted input. Render them as text only (no
+`innerHTML`, no markdown-as-HTML, no interpolation into commands, URLs, or
+markup); the dashboard UI does exactly this. Future tooling must keep that
+rule.
+
+**Who merges data PRs:** the first mate merges the data PR from
+`data/auto-refresh` when its coverage comment shows the target months
+complete (expected cadence: monthly, within a few days of month end; more
+often during backfills). The heartbeat's freshness canary turns red
+(`[STALE-DASHBOARD]`) if `data/dashboard.json` on the default branch is
+older than ~7 days — check for an unmerged data PR, a failed collect run,
+or a broken heartbeat. `data/` is machine-owned (listed in `.ignore` for
+ripgrep/fd); data changes flow through the data branch, never direct
+commits to main.
 
 ```
 data/

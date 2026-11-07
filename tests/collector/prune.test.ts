@@ -73,3 +73,22 @@ describe("prunePartitions", () => {
     expect(pruned).toEqual([]);
   });
 });
+
+import { validateConfig } from "../../scripts/lib/config";
+import configJson from "../../config/collector.json";
+
+describe("validateConfig request block", () => {
+  test("accepts the real config", () => {
+    expect(() => validateConfig(configJson)).not.toThrow();
+  });
+
+  test("a typo'd request key fails loudly at startup, not mid-walk", () => {
+    const bad = { ...(configJson as object), request: { perPage: 100, maxRetries: 3, retryBaseDelayMs: 2000, minDelayMs: 150, rateCheckInterval: 15, rateReserve: 250, maxRetires: 3 } } as unknown;
+    expect(() => validateConfig(bad)).toThrow(/unknown key 'maxRetires'/);
+  });
+
+  test("non-integer pacing values are rejected", () => {
+    const bad = { ...(configJson as object), request: { perPage: 100, maxRetries: "3", retryBaseDelayMs: 2000, minDelayMs: 150, rateCheckInterval: 15, rateReserve: 250 } } as unknown;
+    expect(() => validateConfig(bad)).toThrow(/request\.maxRetries must be a positive integer/);
+  });
+});

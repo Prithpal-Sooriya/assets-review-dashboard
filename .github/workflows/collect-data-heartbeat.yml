@@ -1,19 +1,20 @@
 # Hourly heartbeat for dashboard data collection.
 #
-# No-op unless there is unfinished collection work: reads the last-run
-# checkpoint from the data branch and, if partitions are pending AND the
-# rate window has reset (or, for hard-failed runs, at least 55 minutes have
-# passed — bounding retries to ~1/hour) AND no collect-data run is already
-# active, re-dispatches collect-data with the same window start. This gives
-# the collector automatic bounded continuation without sleeping runners or
-# human re-runs (the collector pauses at the rate reserve; each dispatched
-# run consumes a fresh hourly budget window and resumes from committed
-# checkpoints).
+# Thin orchestration around a TESTED decision core (scripts/lib/heartbeat.ts
+# via scripts/heartbeat.ts): the resume decision and freshness canary are
+# unit-tested TypeScript on the reviewed default branch, so checkpoint
+# schema drift fails this run RED instead of silently no-oping green.
+# This workflow never sleeps and never collects; at most it re-dispatches
+# collect-data (which resumes from committed checkpoints) and raises the
+# one red that is never expected: a stale dashboard.
 #
-# Public-repo safe: the checkpoint contains only PR metadata (numbers,
-# titles, dates, labels, logins, review states/timestamps) from public
-# repositories — no credentials, no bodies, comments, or emails. The
-# checkpoint's `from` month is validated against ^YYYY-MM$ before use.
+# Freshness canary: data/dashboard.json on the default branch must be
+# younger than ~7 days, else [STALE-DASHBOARD] red with likely causes
+# (unmerged data PR / broken heartbeat / failed cron).
+#
+# Public-repo safe: everything read here is committed public data (PR
+# metadata only). The PAT-bearing path is guarded: runs must be on the
+# reviewed default ref, else they are refused before the secret is used.
 name: collect-data-heartbeat
 
 on:
@@ -34,60 +35,80 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Resume collection if pending and budget available
+      - name: Resolve default branch (runtime-derived; safe on all triggers)
         env:
-          GH_TOKEN: ${{ secrets.DASHBOARD_GH_TOKEN || github.token }}
-          DATA_BRANCH: data/auto-refresh
-          REPO: ${{ github.repository }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GH_TOKEN: ${{ github.token }}
+        run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
+
+      - name: Select run token (PAT only on the reviewed default ref)
+        env:
+          REF: ${{ github.ref }}
+          PAT_SECRET: ${{ secrets.DASHBOARD_GH_TOKEN }}
+          BASE_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          repo="$REPO"
-          # No data branch yet -> nothing to resume.
-          if ! gh api "repos/$repo/branches/$DATA_BRANCH" >/dev/null 2>&1; then
-            echo "no $DATA_BRANCH branch; nothing to resume"
-            exit 0
-          fi
-          # No checkpoint file -> nothing pending.
-          if ! gh api "repos/$repo/contents/data/raw/.last-run.json?ref=$DATA_BRANCH" >/tmp/lr-meta.json 2>/dev/null; then
-            echo "no last-run checkpoint on $DATA_BRANCH; nothing to resume"
-            exit 0
-          fi
-          jq -r '.content' /tmp/lr-meta.json | base64 -d > /tmp/last-run.json
-          stopped=$(jq -r '.stopped' /tmp/last-run.json)
-          pending=$(jq -r '.pending | length' /tmp/last-run.json)
-          if [ "$pending" -eq 0 ]; then
-            echo "no pending partitions; nothing to resume"
-            exit 0
-          fi
-          reset=$(jq -r '.resetEpoch // 0' /tmp/last-run.json)
-          ran_at=$(jq -r '.ranAt' /tmp/last-run.json)
-          now=$(date -u +%s)
-          if [ "$stopped" == "rate" ]; then
-            if [ "$reset" -gt 0 ] && [ "$((now - reset))" -lt 60 ]; then
-              echo "rate window has not reset yet (reset epoch $reset); skipping (next heartbeat will resume)"
-              exit 0
-            fi
-          else
-            # Hard-failed run (stopped=error): retry at most ~hourly, after
-            # the failed run has had time to publish its own checkpoint.
-            since=$(date -u -d "$ran_at" +%s 2>/dev/null || echo 0)
-            if [ "$((now - since))" -lt 3300 ]; then
-              echo "last run failed ${stopped} less than 55min ago; skipping (bounded retry)"
-              exit 0
-            fi
-          fi
-          # Don't stack runs: skip if one is already in progress or queued.
-          active=$(gh run list --repo "$repo" --workflow collect-data.yml --json status --jq '[.[] | select(.status == "in_progress" or .status == "queued")] | length')
-          if [ "$active" -gt 0 ]; then
-            echo "a collect-data run is already active/queued; skipping"
-            exit 0
-          fi
-          from_month=$(jq -r '.from' /tmp/last-run.json)
-          if ! [[ "$from_month" =~ ^[0-9]{4}-[0-9]{2}$ ]]; then
-            echo "::error::checkpoint 'from' is not a valid month: '$from_month'; refusing to dispatch"
+          # Same guard as collect-data.yml: a workflow_dispatch of a feature
+          # branch would run that branch's workflow file — refuse before the
+          # PAT is ever used.
+          if [ "$REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
+            echo "::error::refusing to run from a non-default ref ($REF); dispatch from $DEFAULT_BRANCH"
             exit 1
           fi
-          start_date="${from_month}-01"
-          echo "resuming: $pending pending partitions (stopped=$stopped), from $from_month; dispatching collect-data"
-          gh workflow run collect-data.yml --repo "$repo" --ref "$DEFAULT_BRANCH" -f start_date="$start_date"
+          if [ -n "$PAT_SECRET" ]; then
+            echo "RUN_TOKEN=$PAT_SECRET" >> "$GITHUB_ENV"
+          else
+            echo "RUN_TOKEN=$BASE_TOKEN" >> "$GITHUB_ENV"
+          fi
+
+      - name: Auth preflight (fail loudly on a broken secret)
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+        run: |
+          set -euo pipefail
+          if ! gh api /rate_limit >/dev/null 2>&1; then
+            echo "::error::run token failed authentication — DASHBOARD_GH_TOKEN has likely EXPIRED; rotate it or unset it to fall back to GITHUB_TOKEN."
+            exit 1
+          fi
+
+      - name: Checkout (always the reviewed default branch)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ env.DEFAULT_BRANCH }}
+
+      - name: Pin bun version from .bun-version
+        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Decision (tested resume core + freshness canary)
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+          REPO: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ env.DEFAULT_BRANCH }}
+          DATA_BRANCH: data/auto-refresh
+        run: |
+          set -euo pipefail
+          decision=$(bun run scripts/heartbeat.ts) || exit 1
+          echo "$decision"
+          case "$decision" in
+            noop\ *)
+              exit 0
+              ;;
+            dispatch\ *)
+              from_month="${decision#dispatch }"
+              # Don't stack runs: skip if one is already in progress or queued.
+              active=$(gh run list --workflow collect-data.yml --json status --jq '[.[] | select(.status == "in_progress" or .status == "queued")] | length')
+              if [ "$active" -gt 0 ]; then
+                echo "a collect-data run is already active/queued; skipping"
+                exit 0
+              fi
+              echo "dispatching collect-data from $from_month"
+              gh workflow run collect-data.yml --ref "$DEFAULT_BRANCH" -f start_date="${from_month}-01"
+              ;;
+            *)
+              echo "::error::unexpected heartbeat.ts output: $decision"
+              exit 1
+              ;;
+          esac

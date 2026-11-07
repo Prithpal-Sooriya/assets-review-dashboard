@@ -34,6 +34,53 @@ function argValue(name: string): string | undefined {
   return v;
 }
 
+interface RunArgs {
+  fromMonth?: string;
+  toMonth?: string;
+  repos?: string[];
+  dataDir: string;
+  configPath: string;
+}
+
+function readArgs(): RunArgs {
+  return {
+    fromMonth: argValue("from"),
+    toMonth: argValue("to"),
+    repos: argValue("repos")?.split(",").map((s) => s.trim()).filter(Boolean),
+    dataDir: resolveDataDir(argValue("data-dir")),
+    configPath: argValue("config") ?? "config/collector.json",
+  };
+}
+
+/** Atomic (tmp+rename) write of the run record — shared by the success and
+ * error paths so both shapes always come from one writer. */
+async function writeLastRun(dataDir: string, rec: Record<string, unknown>): Promise<void> {
+  const rawDir = path.join(dataDir, "raw");
+  await mkdir(rawDir, { recursive: true });
+  const file = path.join(rawDir, ".last-run.json");
+  const tmp = `${file}.tmp`;
+  await writeFile(tmp, `${JSON.stringify(rec, null, 2)}\n`, "utf8");
+  await rename(tmp, file);
+}
+
+/** Pending partitions for the requested window, from the manifest — the
+ * same computation for both run-record paths. */
+async function pendingFor(args: RunArgs, cfg: { repos: string[] }): Promise<string[]> {
+  if (!args.fromMonth) return [];
+  const store = new DiskStore(args.dataDir);
+  const manifest = (await store.readManifest()) ?? { schemaVersion: 1, partitions: {} };
+  const endMonth = args.toMonth ?? new Date().toISOString().slice(0, 7);
+  const pending: string[] = [];
+  for (const repo of args.repos ?? cfg.repos) {
+    for (const m of monthRange(args.fromMonth, endMonth)) {
+      if (manifest.partitions[partitionKey(repo, m)]?.status !== "complete") {
+        pending.push(partitionKey(repo, m));
+      }
+    }
+  }
+  return pending;
+}
+
 async function main(): Promise<number> {
   const fromMonth = argValue("from");
   if (!fromMonth) {
@@ -85,17 +132,10 @@ async function main(): Promise<number> {
   log(`rate budget at end: ${rate1.remaining}/${rate1.limit}; elapsed ${Math.round((Date.now() - started) / 1000)}s`);
 
   // Machine-readable run record (committed with checkpoints; drives the
-  // workflow's bounded auto-continuation). Atomic (tmp+rename): a crash
-  // between truncate and write must never leave a truncated checkpoint for
-  // the heartbeat to choke on.
-  const writeLastRun = async (rec: Record<string, unknown>) => {
-    await mkdir(path.join(dataDir, "raw"), { recursive: true });
-    const file = path.join(dataDir, "raw", ".last-run.json");
-    const tmp = `${file}.tmp`;
-    await writeFile(tmp, `${JSON.stringify(rec, null, 2)}\n`, "utf8");
-    await rename(tmp, file);
-  };
-  await writeLastRun({
+  // workflow's bounded auto-continuation). One writer (module-level
+  // writeLastRun) is shared with the error path — never two hand-synced
+  // copies of the schema.
+  await writeLastRun(dataDir, {
     ranAt: asOf ?? new Date().toISOString(),
     from: fromMonth,
     to: effectiveTo,
@@ -113,44 +153,23 @@ main()
     console.error(`collect failed: ${err instanceof Error ? err.message : String(err)}`);
     // The run record must reflect aborted runs too: a stale "pending: []"
     // from a previous successful run would tell the heartbeat there is
-    // nothing to resume and silently strand the real work.
+    // nothing to resume and silently strand the real work. Shares the
+    // writer and the pending computation with the success path. Usage
+    // errors (invalid --from/--to) leave the previous valid checkpoint
+    // untouched — pending work from before is still pending.
     try {
-      const dataDir = resolveDataDir(argValue("data-dir"));
-      const store = new DiskStore(dataDir);
-      const manifest = (await store.readManifest()) ?? { schemaVersion: 1, partitions: {} };
-      const endMonth = argValue("to") ?? new Date().toISOString().slice(0, 7);
-      const fromMonth = argValue("from");
-      const pending: string[] = [];
-      if (fromMonth) {
-        const reposArg = argValue("repos")?.split(",").map((s) => s.trim()).filter(Boolean);
-        const cfg = await loadConfig(argValue("config") ?? "config/collector.json");
-        for (const repo of reposArg ?? cfg.repos) {
-          for (const m of monthRange(fromMonth, endMonth)) {
-            if (manifest.partitions[partitionKey(repo, m)]?.status !== "complete") pending.push(partitionKey(repo, m));
-          }
-        }
+      const args = readArgs();
+      if (args.fromMonth && /^\d{4}-\d{2}$/.test(args.fromMonth)) {
+        const cfg = await loadConfig(args.configPath);
+        await writeLastRun(args.dataDir, {
+          ranAt: new Date().toISOString(),
+          from: args.fromMonth,
+          to: args.toMonth ?? new Date().toISOString().slice(0, 7),
+          stopped: "error",
+          pending: await pendingFor(args, cfg),
+          error: err instanceof Error ? err.message : String(err),
+        });
       }
-      const rawDir = path.join(dataDir, "raw");
-      await mkdir(rawDir, { recursive: true });
-      const file = path.join(rawDir, ".last-run.json");
-      const tmp = `${file}.tmp`;
-      await writeFile(
-        tmp,
-        `${JSON.stringify(
-          {
-            ranAt: new Date().toISOString(),
-            from: fromMonth ?? "unknown",
-            to: endMonth,
-            stopped: "error",
-            pending,
-            error: err instanceof Error ? err.message : String(err),
-          },
-          null,
-          2,
-        )}\n`,
-        "utf8",
-      );
-      await rename(tmp, file);
     } catch {
       // best-effort: the original error is what matters
     }
