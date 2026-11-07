@@ -184,9 +184,11 @@ aggregation dedupes by freshest snapshot per PR).
   classic repo-scope token grants every repository its owner can access.
   Non-default refs are refused before the secret is touched. The guard's
   policy shell is extracted to `scripts/run-token.sh` and unit-tested
-  (`tests/collector/run-token.test.ts`); the `pat-secret` input is required
-  so a caller that forgets `with:` fails at workflow load instead of
-  silently downgrading to `GITHUB_TOKEN`. An auth preflight fails loudly — naming the secret and the remedy — if it stops
+  (`tests/collector/run-token.test.ts`). Callers route the secret as
+  `secrets.DASHBOARD_GH_TOKEN || '__UNSET__'`: the script treats
+  `'__UNSET__'` as an unset secret (GITHUB_TOKEN fallback) and an empty
+  value as an unrouted input — failing closed — because the runner does
+  not enforce `required` for composite-action inputs at runtime. An auth preflight fails loudly — naming the secret and the remedy — if it stops
   authenticating (PATs expire; rotate in Settings > Secrets, or unset it to
   fall back to `GITHUB_TOKEN`). The token is selected AFTER the collector
   tests so it is never ambient during `bun install`/`bun test`. No secret

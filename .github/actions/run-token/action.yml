@@ -29,14 +29,17 @@ description: Guard non-default refs, select the run token (fine-grained PAT only
 inputs:
   pat-secret:
     description: |
-      DASHBOARD_GH_TOKEN value, passed by the caller as
-      `${{ secrets.DASHBOARD_GH_TOKEN }}` — composite actions cannot read
-      the secrets context directly (referencing it fails template
-      validation at job load, before any step runs). REQUIRED so a caller
-      that forgets `with:` fails at workflow load and in actionlint's
-      call-site input validation instead of silently downgrading to
-      GITHUB_TOKEN; the unset secret evaluates to an empty string, which
-      keeps the GITHUB_TOKEN fallback intact.
+      DASHBOARD_GH_TOKEN routed by the caller as
+      `${{ secrets.DASHBOARD_GH_TOKEN || '__UNSET__' }}` — composite
+      actions cannot read the secrets context directly (referencing it
+      fails template validation at job load). `required` is advisory at
+      runtime for composite actions (the runner enforces it only for
+      workflow_call reusable workflows), so the real tripwire is in the
+      script: '__UNSET__' means the secret is unset (GITHUB_TOKEN
+      fallback), while an empty value means the input was never routed
+      and the run fails closed. actionlint additionally validates
+      call-site inputs statically for every workflow ci-collector lints
+      (.github/workflows/**).
     required: true
 runs:
   using: composite

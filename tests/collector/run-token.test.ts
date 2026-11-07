@@ -89,8 +89,15 @@ describe("run-token.sh", () => {
     expect(r.stdout).toContain("rate budget: 4818/5000");
   });
 
-  test("empty secret selects GITHUB_TOKEN with a visible notice", async () => {
+  test("unrouted input (empty string) fails closed, not a silent downgrade", async () => {
     const r = await runScript({ REF: "refs/heads/main", PAT_SECRET: "", BASE_TOKEN: "github_base_tok", DEFAULT_BRANCH: "main" }, await stubGh());
+    expect(r.code).toBe(1);
+    expect(r.stdout).toContain("pat-secret input was not routed");
+    expect(r.envFile).toBe("");
+  });
+
+  test("__UNSET__ routes an unset secret to GITHUB_TOKEN with a visible notice", async () => {
+    const r = await runScript({ REF: "refs/heads/main", PAT_SECRET: "__UNSET__", BASE_TOKEN: "github_base_tok", DEFAULT_BRANCH: "main" }, await stubGh());
     expect(r.code).toBe(0);
     expect(r.envFile).toContain("RUN_TOKEN=github_base_tok");
     expect(r.envFile).toContain("RUN_TOKEN_KIND=GITHUB_TOKEN");
@@ -106,7 +113,7 @@ describe("run-token.sh", () => {
   });
 
   test("GITHUB_TOKEN preflight failure names GITHUB_TOKEN, not the secret", async () => {
-    const r = await runScript({ REF: "refs/heads/main", PAT_SECRET: "", BASE_TOKEN: "AUTH_FAIL_TOKEN", DEFAULT_BRANCH: "main" }, await stubGh());
+    const r = await runScript({ REF: "refs/heads/main", PAT_SECRET: "__UNSET__", BASE_TOKEN: "AUTH_FAIL_TOKEN", DEFAULT_BRANCH: "main" }, await stubGh());
     expect(r.code).toBe(1);
     expect(r.stdout).toContain("GITHUB_TOKEN failed authentication");
     expect(r.stdout).not.toContain("DASHBOARD_GH_TOKEN failed authentication");

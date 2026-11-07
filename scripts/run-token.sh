@@ -8,7 +8,10 @@
 #
 # Env contract (all required):
 #   REF             github.ref of this run; must be refs/heads/$DEFAULT_BRANCH
-#   PAT_SECRET      DASHBOARD_GH_TOKEN value; empty string = unset = GITHUB_TOKEN
+#   PAT_SECRET      DASHBOARD_GH_TOKEN routed by the caller as
+#                   secrets.DASHBOARD_GH_TOKEN || '__UNSET__': the PAT value,
+#                   '__UNSET__' (secret unset -> GITHUB_TOKEN), or '' (input
+#                   not routed -> fail closed)
 #   BASE_TOKEN      github.token
 #   DEFAULT_BRANCH  derived by the caller via `gh repo view`
 #   GITHUB_ENV      optional (set in Actions); RUN_TOKEN and RUN_TOKEN_KIND
@@ -24,30 +27,39 @@ if [ "$REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
 fi
 
 kind="" token=""
-if [ -n "$PAT_SECRET" ]; then
-  case "$PAT_SECRET" in
-    github_pat_*)
-      token="$PAT_SECRET" kind=DASHBOARD_GH_TOKEN
-      # Explicit masking: don't rely on the runner's value-based masking
-      # surviving the input routing.
-      echo "::add-mask::$PAT_SECRET"
-      echo "run token: DASHBOARD_GH_TOKEN (fine-grained PAT)"
-      ;;
-    ghp_*)
-      echo "::error::DASHBOARD_GH_TOKEN is a CLASSIC PAT (ghp_ prefix) — classic repo-scope tokens grant every repository their owner can access and cannot be contained by workflow guards. Replace it with a fine-grained PAT (github_pat_ prefix) scoped to this repository only, or unset the secret to fall back to GITHUB_TOKEN."
-      exit 1
-      ;;
-    *)
-      echo "::error::DASHBOARD_GH_TOKEN has an unrecognized format — expected a fine-grained PAT (github_pat_ prefix). Unset it to fall back to GITHUB_TOKEN."
-      exit 1
-      ;;
-  esac
-else
-  token="$BASE_TOKEN" kind=GITHUB_TOKEN
-  # Visible annotation, not a gray log line: a caller that omits the input
-  # fails at workflow load (required input), so empty here means unset.
-  echo "::notice::run token: GITHUB_TOKEN (DASHBOARD_GH_TOKEN unset)"
-fi
+case "$PAT_SECRET" in
+  "")
+    # Fail-closed tripwire: the runner does NOT enforce `required` for
+    # composite-action inputs (it does only for workflow_call reusable
+    # workflows), so an unrouted input arrives here as an empty string.
+    # Callers pass `${{ secrets.DASHBOARD_GH_TOKEN || '__UNSET__' }}`:
+    # an unset secret routes as __UNSET__ (GITHUB_TOKEN fallback below),
+    # while a forgotten `with:` hits this empty case and fails loudly.
+    echo "::error::pat-secret input was not routed — callers must pass: with: pat-secret: \${{ secrets.DASHBOARD_GH_TOKEN || '__UNSET__' }} (so an unset secret is distinguishable from a missing input)"
+    exit 1
+    ;;
+  __UNSET__)
+    token="$BASE_TOKEN" kind=GITHUB_TOKEN
+    # Visible annotation, not a gray log line: __UNSET__ genuinely means
+    # the secret is unset (the caller routed it explicitly).
+    echo "::notice::run token: GITHUB_TOKEN (DASHBOARD_GH_TOKEN unset)"
+    ;;
+  github_pat_*)
+    token="$PAT_SECRET" kind=DASHBOARD_GH_TOKEN
+    # Explicit masking: don't rely on the runner's value-based masking
+    # surviving the input routing.
+    echo "::add-mask::$PAT_SECRET"
+    echo "run token: DASHBOARD_GH_TOKEN (fine-grained PAT)"
+    ;;
+  ghp_*)
+    echo "::error::DASHBOARD_GH_TOKEN is a CLASSIC PAT (ghp_ prefix) — classic repo-scope tokens grant every repository their owner can access and cannot be contained by workflow guards. Replace it with a fine-grained PAT (github_pat_ prefix) scoped to this repository only, or unset it to fall back to GITHUB_TOKEN."
+    exit 1
+    ;;
+  *)
+    echo "::error::DASHBOARD_GH_TOKEN has an unrecognized format — expected a fine-grained PAT (github_pat_ prefix). Unset it to fall back to GITHUB_TOKEN."
+    exit 1
+    ;;
+esac
 
 export RUN_TOKEN="$token" RUN_TOKEN_KIND="$kind"
 if [ -n "${GITHUB_ENV:-}" ]; then
@@ -62,7 +74,7 @@ if ! GH_TOKEN="$token" gh api /rate_limit >/dev/null 2>&1; then
   if [ "$kind" = "DASHBOARD_GH_TOKEN" ]; then
     echo "::error::DASHBOARD_GH_TOKEN failed authentication — it has likely EXPIRED; rotate it (Settings > Secrets) or unset it to fall back to GITHUB_TOKEN."
   else
-    echo "::error::GITHUB_TOKEN failed authentication — the runner-provisioned token was rejected (check the workflow's GITHUB_TOKEN permissions and GitHub status); DASHBOARD_GH_TOKEN is unset, so there is no secret to rotate."
+    echo "::error::GITHUB_TOKEN failed authentication — the runner-provisioned token was rejected (check the workflow's GITHUB_TOKEN permissions and GitHub status); no DASHBOARD_GH_TOKEN is in use, so there is no secret to rotate."
   fi
   exit 1
 fi
