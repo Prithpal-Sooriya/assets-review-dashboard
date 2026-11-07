@@ -25,10 +25,14 @@
  * reloads and back/forward all work.
  */
 
+import { TODAY_HASH_PATH } from './today/urlstate'
+
 export type Page = 'daily' | 'historical'
 
-const DAILY_HASH = '/today' // the live share-link format for Daily (filters in the query)
-const HISTORICAL_HASH = '/history' // legacy alias kept for old bookmarks
+// The "#/today" hash is the live share-link format for Daily — single-sourced
+// from urlstate (which emits the links). "#/history" is a legacy alias kept
+// for old bookmarks.
+const HISTORICAL_HASH = '/history'
 const HISTORICAL_PATH = '/historical'
 
 /** Path-only part of a hash: "#/today?repo=X" → "/today". */
@@ -49,7 +53,7 @@ function normalizePath(pathname: string): string {
 /** Resolve the active page from a location. Pure — unit tested. */
 export function resolvePage(pathname: string, hash: string): Page {
   const h = hashPath(hash)
-  if (h === DAILY_HASH) return 'daily'
+  if (h === TODAY_HASH_PATH) return 'daily'
   if (h === HISTORICAL_HASH) return 'historical'
   return normalizePath(pathname) === HISTORICAL_PATH ? 'historical' : 'daily'
 }
@@ -63,7 +67,7 @@ export function resolvePage(pathname: string, hash: string): Page {
  */
 export function isRouteHash(hash: string): boolean {
   const h = hashPath(hash)
-  return h === DAILY_HASH || h === HISTORICAL_HASH
+  return h === TODAY_HASH_PATH || h === HISTORICAL_HASH
 }
 
 export interface UrlLocation {

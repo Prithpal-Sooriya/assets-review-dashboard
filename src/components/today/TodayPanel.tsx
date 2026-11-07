@@ -32,12 +32,12 @@ import { SinceBaselineCard } from './SinceBaselineCard'
  */
 export function TodayPanel() {
   const today = useTodayData()
-  const [urlState, setUrlState] = useState<TodayUrlState>(() => parseHash(window.location.hash).today)
+  const [urlState, setUrlState] = useState<TodayUrlState>(() => parseHash(window.location.hash))
   const [nowMs, setNowMs] = useState(() => Date.now())
 
   // Hash is the source of truth: back/forward and shared links both land here.
   useEffect(() => {
-    const onHash = () => setUrlState(parseHash(window.location.hash).today)
+    const onHash = () => setUrlState(parseHash(window.location.hash))
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])

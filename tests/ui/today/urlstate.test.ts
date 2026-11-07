@@ -6,23 +6,9 @@ import {
   parseHash,
 } from '../../../src/today/urlstate'
 
-describe('parseHash routing', () => {
-  test('no hash and #/history both route to History (existing links preserved)', () => {
-    expect(parseHash('').route).toBe('history')
-    expect(parseHash('#').route).toBe('history')
-    expect(parseHash('#/history').route).toBe('history')
-    expect(parseHash('#/anything-else').route).toBe('history')
-  })
-
-  test('#/today routes to Today', () => {
-    expect(parseHash('#/today').route).toBe('today')
-    expect(parseHash('#/today?view=awaiting').route).toBe('today')
-  })
-})
-
 describe('Today URL state round-trips', () => {
   test('defaults with no params', () => {
-    expect(parseHash('#/today').today).toEqual(DEFAULT_TODAY_STATE)
+    expect(parseHash('#/today')).toEqual(DEFAULT_TODAY_STATE)
   })
 
   test('every filter round-trips through build/parse', () => {
@@ -35,16 +21,16 @@ describe('Today URL state round-trips', () => {
     } as const
     const hash = buildTodayHash(state)
     expect(hash).toBe('#/today?view=awaiting&repo=MetaMask%2Fmetamask-extension&author=external&group=team&sort=newest')
-    expect(parseHash(hash).today).toEqual(state)
+    expect(parseHash(hash)).toEqual(state)
   })
 
   test('unknown repo values fall back to null (never invented)', () => {
-    expect(parseHash('#/today?repo=MetaMask%2Fnot-a-repo').today.repo).toBeNull()
-    expect(parseHash('#/today?repo=https%3A%2F%2Fevil').today.repo).toBeNull()
+    expect(parseHash('#/today?repo=MetaMask%2Fnot-a-repo').repo).toBeNull()
+    expect(parseHash('#/today?repo=https%3A%2F%2Fevil').repo).toBeNull()
   })
 
   test('invalid enum values fall back to defaults', () => {
-    const state = parseHash('#/today?view=bogus&sort=bogus&group=bogus&author=bogus').today
+    const state = parseHash('#/today?view=bogus&sort=bogus&group=bogus&author=bogus')
     expect(state).toEqual(DEFAULT_TODAY_STATE)
   })
 
