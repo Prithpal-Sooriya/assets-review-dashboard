@@ -16,11 +16,11 @@ export interface UiVariant {
   /** Playwright project name. */
   name: string
   /**
-   * Fixture embedded for the build via DASHBOARD_DATA_PATH. Every variant
-   * pins one explicitly: the '' fallback (no override) would resolve to
-   * data/dashboard.json first, and the collector commits real data there —
-   * an unpinned "demo" build would silently embed real data instead of the
-   * labelled synthetic fixture.
+   * Fixture embedded for the build via DASHBOARD_DATA_PATH — REQUIRED, never
+   * '' (build-fixtures.ts refuses; variants.test.ts enforces). Unpinned, the
+   * build would resolve to data/dashboard.json first, and the collector
+   * commits real data there: an unpinned "demo" build would silently embed
+   * real data instead of the labelled synthetic fixture.
    */
   fixture: string
   /** Vite outDir for the built variant. */
@@ -34,10 +34,8 @@ export interface UiVariant {
 export const UI_VARIANTS: UiVariant[] = [
   {
     name: 'demo',
-    // Pinned explicitly rather than relying on the no-override fallback:
-    // data/dashboard.json is committed on the default branch (collector
-    // output), so the fallback would embed REAL data here and break every
-    // sample-labelling assertion in dashboard.e2e.ts / today.e2e.ts.
+    // Pinned so the committed real data/dashboard.json can never leak into
+    // the demo build (see the fixture field comment above).
     fixture: 'src/data/demo-fixture.json',
     outDir: 'dist-variants/demo',
     port: 4173,
