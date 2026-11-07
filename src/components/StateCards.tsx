@@ -1,5 +1,9 @@
-import { formatISOTimestamp } from '../data/format'
+import { formatISOTimestamp, maskQuotedValues, oneLine, displayPath } from '../data/format'
 import type { LoadedDashboard } from '../data/loader'
+
+// displayPath/oneLine/maskQuotedValues live in src/data/format.ts — the single
+// source of truth for how data paths and error text render on a public page.
+// DataNotice and Footer import the same helpers.
 
 function StateCard({
   title,
@@ -18,28 +22,6 @@ function StateCard({
   )
 }
 
-/**
- * Public-facing display helpers. State cards can render on a public URL, so
- * they never show build-host detail: paths are reduced to a repo-relative
- * tail, long errors are collapsed to one line, and quoted data values inside
- * messages are masked (the message text itself stays diagnostic; the raw
- * detail belongs to build logs, not the page).
- */
-function displayPath(dataPath: string): string {
-  const parts = dataPath.split('/')
-  return parts.slice(-3).join('/')
-}
-
-function oneLine(text: string, max = 160): string {
-  const first = text.split('\n')[0] ?? ''
-  return first.length > max ? `${first.slice(0, max)}…` : first
-}
-
-function maskQuotedValues(message: string): string {
-  return message.replace(/(["'`])[^"'`]{1,120}\1/g, '$1…$1')
-}
-
-/** Data file missing entirely (no real data, no demo fixture). */
 export function MissingState({ loaded }: { loaded: LoadedDashboard }) {
   return (
     <StateCard title="No dashboard data available">
@@ -48,9 +30,9 @@ export function MissingState({ loaded }: { loaded: LoadedDashboard }) {
         <code>data/dashboard.json</code> at build time from the repository filesystem (never from
         the GitHub API).
       </p>
-      {loaded.loadError && <p>{maskQuotedValues(oneLine(loaded.loadError))}</p>}
+      {loaded.loadError && <p>{oneLine(maskQuotedValues(loaded.loadError))}</p>}
       <p>
-        Produce the data file with the collector (see docs/collection.md), commit it, and rebuild.
+        Produce the data file with the collector (see docs/deployment.md), commit it, and rebuild.
         A clearly-labelled demo fixture normally renders here for UI development.
       </p>
     </StateCard>
@@ -65,7 +47,7 @@ export function InvalidState({ loaded }: { loaded: LoadedDashboard }) {
         The embedded data file does not match the shared contract v1, so no metrics are shown —
         this page never renders numbers it cannot trust.
       </p>
-      {loaded.parseError && <p>{maskQuotedValues(oneLine(loaded.parseError))}</p>}
+      {loaded.parseError && <p>{oneLine(maskQuotedValues(loaded.parseError))}</p>}
       <p>
         {loaded.errors.length} validation error{loaded.errors.length === 1 ? '' : 's'} in{' '}
         <code>{displayPath(loaded.dataPath)}</code>:
@@ -73,12 +55,12 @@ export function InvalidState({ loaded }: { loaded: LoadedDashboard }) {
       <ul className="issue-list" style={{ color: 'var(--text)' }}>
         {loaded.errors.slice(0, 20).map((e, i) => (
           <li key={i}>
-            <code>{e.path}</code> — {maskQuotedValues(e.message)}
+            <code>{e.path}</code> — {oneLine(maskQuotedValues(e.message))}
           </li>
         ))}
       </ul>
       {loaded.errors.length > 20 && <p>…and {loaded.errors.length - 20} more.</p>}
-      <p>Regenerate data/dashboard.json with the collector (see docs/collection.md) and rebuild.</p>
+      <p>Regenerate data/dashboard.json with the collector (see docs/deployment.md) and rebuild.</p>
     </StateCard>
   )
 }

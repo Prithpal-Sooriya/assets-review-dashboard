@@ -21,7 +21,10 @@ function statusChip(entry: CoverageEntry | undefined): { label: string; cls: str
 export function CoveragePanel({ data, repos, windowMonths }: CoveragePanelProps) {
   const lookup = coverageLookup(data.coverage)
   const summary = coverageSummary(data.coverage, repos, windowMonths)
-  const problemEntries = data.coverage
+  // Derive from the same last-wins map the grid and summary use, so a
+  // duplicate repo|month entry can never make the grid say "Complete" while
+  // the list below flags the same month (and keys stay unique).
+  const problemEntries = [...lookup.entries()]
     .filter((c) => windowMonths.includes(c.month) && c.status !== 'complete')
     .sort((a, b) => a.month.localeCompare(b.month) || a.repo.localeCompare(b.repo))
 

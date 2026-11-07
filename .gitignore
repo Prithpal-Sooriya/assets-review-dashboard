@@ -1,10 +1,8 @@
 node_modules/
-# Built UI test variants — keep in sync with tests/ui/variants.ts (the single
-# source of truth for the variant matrix; gitignore cannot import it).
+# Production build output.
 dist/
-dist-real/
-dist-empty/
-dist-invalid/
+# Built UI test variants all live here (see tests/ui/variants.ts).
+dist-variants/
 test-results/
 playwright-report/
 .vercel/

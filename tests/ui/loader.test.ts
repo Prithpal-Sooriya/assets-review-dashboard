@@ -47,7 +47,9 @@ describe('loadDashboard', () => {
     const loaded = loadDashboard({ source: 'real', dataPath: 'data/dashboard.json', raw: invalidRaw, loadError: null })
     expect(loaded.status).toBe('invalid')
     expect(loaded.errors.length).toBeGreaterThanOrEqual(10)
-    expect(loaded.data).not.toBeNull()
+    // The honest LoadedDashboard union: unvalidated payloads are never
+    // exposed through `data` (only ok/empty carry a DashboardData).
+    expect(loaded.data).toBeNull()
   })
 
   test('malformed JSON yields the invalid state with parse error', () => {

@@ -10,7 +10,7 @@ import {
   reposInData,
   totalAggregate,
 } from './data/metrics'
-import { formatMonthKey } from './data/format'
+import { buildWindowLabel } from './data/format'
 import { Header } from './components/Header'
 import { DataNotice } from './components/DataNotice'
 import { FilterBar } from './components/FilterBar'
@@ -62,16 +62,9 @@ export default function App() {
     ? selectedMonth
     : (latestMonth(windowMonths) ?? '')
 
-  // Only read data.range when the window is empty but data is structurally
-  // valid; the invalid-state path renders from errors only, never from data.
-  // The caption counts months with data and calls out calendar gaps honestly.
-  const windowLabel = ok
-    ? `Window: ${formatMonthKey(windowMonths[0] ?? (typeof data?.range?.start === 'string' ? data.range.start : ''))} – ${formatMonthKey(
-        windowMonths[windowMonths.length - 1] ?? (typeof data?.range?.end === 'string' ? data.range.end : ''),
-      )} · ${windowMonths.length} month${windowMonths.length === 1 ? '' : 's'} with data${
-        gapCount > 0 ? ` · ${gapCount} calendar month${gapCount === 1 ? '' : 's'} without data in window` : ''
-      }`
-    : ''
+  // The window caption lives in buildWindowLabel (src/data/format.ts) with
+  // its own unit tests; the invalid-state path renders no caption at all.
+  const windowLabel = ok && data ? buildWindowLabel(windowMonths, data.range, gapCount) : ''
 
   const selectMonth = (month: string) => setSelectedMonth(month)
 

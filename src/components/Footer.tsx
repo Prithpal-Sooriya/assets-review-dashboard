@@ -1,7 +1,10 @@
-import { formatISOTimestamp } from '../data/format'
+import { formatISOTimestamp, displayPath } from '../data/format'
 import type { LoadedDashboard } from '../data/loader'
 
 export function Footer({ loaded }: { loaded: LoadedDashboard }) {
+  // `data` is non-null only in the ok/empty states (validated payloads — see
+  // the LoadedDashboard union), so these rows can never dereference an
+  // unvalidated object on the invalid/missing paths.
   const d = loaded.data
   return (
     <footer className="site-footer">
@@ -10,7 +13,7 @@ export function Footer({ loaded }: { loaded: LoadedDashboard }) {
           <dt>Data</dt>
           <dd>
             {loaded.isDemo ? 'Synthetic demo fixture' : 'Real collected data'} embedded at build
-            time from <code>{loaded.dataPath}</code>
+            time from <code>{displayPath(loaded.dataPath)}</code>
             {loaded.source === 'none' && ' (not found)'}
           </dd>
           {d && <dt>Generated</dt>}

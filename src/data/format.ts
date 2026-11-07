@@ -96,3 +96,56 @@ export function compareRepos(a: string, b: string): number {
   if (ia !== ib) return ia - ib
   return a.localeCompare(b)
 }
+
+/**
+ * Public-facing display helpers shared by StateCards, DataNotice and Footer
+ * (single source of truth — never render these three differently). State
+ * cards can appear on a public URL, so they never show build-host detail:
+ * paths are reduced to a repo-relative tail, long errors collapse to one
+ * line, and quoted data values inside messages are masked.
+ */
+export function displayPath(dataPath: string): string {
+  const parts = dataPath.split('/')
+  return parts.slice(-3).join('/')
+}
+
+export function oneLine(text: string, max = 160): string {
+  const first = text.split('\n')[0] ?? ''
+  return first.length > max ? `${first.slice(0, max)}…` : first
+}
+
+/**
+ * Mask quoted DATA values in a message. validate.ts quotes offending values
+ * with JSON.stringify (double quotes), so long double-quoted spans (arbitrary
+ * attacker-ish or data-derived content of any length) collapse to "…" while
+ * short quoted tokens (field names like "months", enum words) stay readable.
+ * Apostrophes are ordinary prose and never touched. Apply BEFORE oneLine so
+ * the 160-char cap can never cut off a closing quote and resurrect raw data.
+ */
+export function maskQuotedValues(message: string): string {
+  return message.replace(/"[^"]*"/g, (m) => (m.length > 18 ? '"…"' : m))
+}
+
+/**
+ * Caption for the rolling display window. Counts months WITH data and calls
+ * out calendar gaps honestly (a month with no months[] row for any repo is a
+ * collection gap, not a shorter window). `range` is only consulted when the
+ * window itself is empty (structurally-valid data, zero month rows).
+ */
+export function buildWindowLabel(
+  windowMonths: string[],
+  range: { start: unknown; end: unknown } | undefined,
+  gapCount: number,
+): string {
+  const monthWord = windowMonths.length === 1 ? 'month' : 'months'
+  const gapWord = gapCount === 1 ? 'calendar month' : 'calendar months'
+  const gapSuffix = gapCount > 0 ? ` · ${gapCount} ${gapWord} without data in window` : ''
+  if (windowMonths.length === 0) {
+    const start = typeof range?.start === 'string' ? range.start : ''
+    const end = typeof range?.end === 'string' ? range.end : ''
+    return `Window: ${formatMonthKey(start)} – ${formatMonthKey(end)} · 0 months with data${gapSuffix}`
+  }
+  const first = windowMonths[0] ?? ''
+  const last = windowMonths[windowMonths.length - 1] ?? ''
+  return `Window: ${formatMonthKey(first)} – ${formatMonthKey(last)} · ${windowMonths.length} ${monthWord} with data${gapSuffix}`
+}

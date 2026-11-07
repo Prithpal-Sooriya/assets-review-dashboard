@@ -130,24 +130,33 @@ export function comparePrs(a: PrEntry, b: PrEntry): number {
 
 export interface CoverageLookup {
   get(repo: string, month: string): CoverageEntry | undefined
-  missing: number
+  /** All unique repo|month entries, last duplicate wins (same semantics as get). */
+  entries(): IterableIterator<CoverageEntry>
+}
+
+function lastWinsCoverage(coverage: CoverageEntry[]): Map<string, CoverageEntry> {
+  const map = new Map<string, CoverageEntry>()
+  for (const c of coverage) map.set(`${c.repo}|${c.month}`, c)
+  return map
 }
 
 export function coverageLookup(coverage: CoverageEntry[]): CoverageLookup {
-  const map = new Map<string, CoverageEntry>()
-  for (const c of coverage) map.set(`${c.repo}|${c.month}`, c)
+  const map = lastWinsCoverage(coverage)
   return {
     get(repo: string, month: string) {
       return map.get(`${repo}|${month}`)
     },
-    missing: 0,
+    entries() {
+      return map.values()
+    },
   }
 }
 
-/** Months whose coverage is not 'complete' (rendered hatched / flagged). */
+/** Months whose coverage is not 'complete' (rendered hatched / flagged).
+ * Last duplicate wins, matching the grid/summary (coverageLookup semantics). */
 export function incompleteCoverageMonths(coverage: CoverageEntry[]): Set<string> {
   const out = new Set<string>()
-  for (const c of coverage) {
+  for (const c of lastWinsCoverage(coverage).values()) {
     if (c.status !== 'complete') out.add(c.month)
   }
   return out

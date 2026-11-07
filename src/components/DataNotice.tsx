@@ -1,4 +1,4 @@
-import { formatISOTimestamp } from '../data/format'
+import { formatISOTimestamp, displayPath } from '../data/format'
 import type { LoadedDashboard } from '../data/loader'
 
 /**
@@ -12,7 +12,7 @@ export function DataNotice({ loaded }: { loaded: LoadedDashboard }) {
         <span className="notice__label">Demo data</span>
         <div className="notice__body">
           <p>
-            This page renders a synthetic sample fixture (<code>{loaded.dataPath}</code>). All
+            This page renders a synthetic sample fixture (<code>{displayPath(loaded.dataPath)}</code>). All
             numbers and PRs are fabricated for development and must not be read as real
             team activity or findings.
           </p>
@@ -30,7 +30,7 @@ export function DataNotice({ loaded }: { loaded: LoadedDashboard }) {
         <span className="notice__label">Source</span>
         <div className="notice__body">
           <p>
-            Real data embedded at build time from <code>{loaded.dataPath}</code>, generated{' '}
+            Real data embedded at build time from <code>{displayPath(loaded.dataPath)}</code>, generated{' '}
             {formatISOTimestamp(loaded.data.generatedAt)} (methodology v
             {loaded.data.methodology.version}).
           </p>

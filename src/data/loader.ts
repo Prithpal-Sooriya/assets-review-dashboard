@@ -2,20 +2,49 @@ import { parseDashboardJson, validateDashboardData } from './validate'
 import type { DashboardData } from './types'
 
 export type DataSource = 'real' | 'demo' | 'none'
-export type LoadStatus = 'ok' | 'empty' | 'invalid' | 'missing'
 
-export interface LoadedDashboard {
-  status: LoadStatus
+export interface LoadIssue {
+  path: string
+  message: string
+}
+
+interface LoadedBase {
   source: DataSource
   /** True when the data is the synthetic demo fixture (or carries its marker). */
   isDemo: boolean
+  /** Repo-relative path of the embedded file (display only). */
   dataPath: string
+  /** Read failure detail when a candidate path existed but could not be read. */
   loadError: string | null
-  parseError: string | null
-  data: DashboardData | null
-  errors: { path: string; message: string }[]
-  warnings: { path: string; message: string }[]
+  errors: LoadIssue[]
+  warnings: LoadIssue[]
 }
+
+/**
+ * Honest union: `data` (a VALIDATED DashboardData) only exists once the
+ * payload passed validation. The invalid and missing states carry no data
+ * object, so no component can dereference an unvalidated payload by mistake —
+ * the compiler enforces what prose comments could not.
+ */
+export type LoadedDashboard =
+  | (LoadedBase & {
+      status: 'ok' | 'empty'
+      data: DashboardData
+      parseError: null
+    })
+  | (LoadedBase & {
+      status: 'invalid'
+      data: null
+      parseError: string | null
+    })
+  | (LoadedBase & {
+      status: 'missing'
+      isDemo: false
+      data: null
+      parseError: null
+    })
+
+export type LoadStatus = LoadedDashboard['status']
 
 const DEMO_NOTE_MARKER = 'DEMO SAMPLE DATA'
 
@@ -82,7 +111,7 @@ export function loadDashboard(input: {
       status: 'invalid',
       isDemo: input.source === 'demo' || detectDemoMarker(data),
       parseError: null,
-      data,
+      data: null,
       errors,
       warnings,
     }

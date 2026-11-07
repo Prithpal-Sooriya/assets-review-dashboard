@@ -1,10 +1,7 @@
 {
  "schemaVersion": 2,
  "generatedAt": "yesterday",
- "range": {
-  "start": "2026-11-01T00:00:00Z",
-  "end": "2026-07-01T00:00:00Z"
- },
+ "range": null,
  "methodology": {
   "version": "x",
   "notes": "not-a-list"

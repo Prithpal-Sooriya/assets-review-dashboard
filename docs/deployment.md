@@ -9,10 +9,11 @@ component.
 The Vite build resolves the `virtual:dashboard-data` module (see
 `vite.config.ts`) from the first path that exists:
 
-1. `$DASHBOARD_DATA_PATH` (absolute or repo-relative) — used by CI and local
-   test builds,
-2. `data/dashboard.json` — the collector's committed output (not present in
-   this branch; owned by the collector role),
+1. `$DASHBOARD_DATA_PATH` — a path **relative to the project root** that
+   resolves inside it (absolute paths, `..` traversal and symlink escapes are
+   rejected at build time). Used by CI and local test builds.
+2. `data/dashboard.json` — the collector's committed output (not present on
+   the UI branch; produced and owned by the collector role in this repo),
 3. `src/data/demo-fixture.json` — a clearly-labelled synthetic demo
    fixture.
 
@@ -33,10 +34,12 @@ the demo fixture and its banner intact.
 bun install
 bun run build                 # demo fixture → dist/
 bun run preview               # http://localhost:4173
-
-DASHBOARD_DATA_PATH=data/dashboard.json bunx vite build --outDir dist-real
-bunx vite preview --outDir dist-real --port 4174
 ```
+
+The e2e variant builds (real-shaped / empty / invalid fixtures) are produced by
+`bun run build:test-fixtures` into `dist-variants/` — no manual commands
+needed. Preview ports 4173-4176 must be free when running the suite
+(`--strictPort` fails fast on collisions; kill leftover preview servers).
 
 `bun run test:ui` builds all four variants (demo, real-shaped, empty, invalid —
 see `tests/ui/variants.ts`) and runs the Playwright suite against them.
@@ -66,64 +69,49 @@ Project setup (owner: the repo owner — do **not** create projects on other
 people's accounts):
 
 ```sh
-vercel link                 # once, in the repo root
-vercel build                # build .vercel/output from dist/
-vercel deploy --prebuilt    # PREVIEW deployment (protected — verified below)
-# production deploys: see the protection requirement below — do not run
-# `vercel deploy --prebuilt --prod` with real data until protection is
-# resolved; the build itself also refuses (see the guard note below).
+vercel link                        # once, in the repo root
+vercel build                       # builds .vercel/output from dist/
+vercel deploy --prebuilt           # preview deployment
+vercel deploy --prebuilt --prod    # production deployment (see below)
 ```
 
-### Private protection — REQUIRED before any real-data deployment
+### Visibility policy — public repo, public production (2026-11-08)
 
-The source repos are private, but **a private GitHub repo does not make a
-Vercel deployment private.** A logged-out request is the source of truth: a
-protected deployment answers `302` ("Protected by Vercel Authentication"); a
-public one serves the app with `200`.
+The repository and the production dashboard URL are **public by explicit
+owner decision** (recorded 2026-11-08): the dashboard shows team-level
+aggregates only (no individual reviewer metrics or names — enforced by tests),
+so publishing it publicly is acceptable. Real `data/dashboard.json` may be
+embedded in production builds.
 
-Before pointing any deployment at real `data/dashboard.json`, verify **both**
-environments empirically (curl the URLs without cookies) and record the
-result, date, and who checked:
+Historical context — the earlier posture (kept for the record):
 
-1. **Preview deployments** — a preview URL must return `302` (Vercel
-   Authentication) or a password wall, never `200`.
-2. **Production deployment** — the production alias must be gated the same
-   way. On the Hobby plan password protection for production is not available
-   (it is a Pro/Enterprise feature), so **do not deploy real data to a public
-   production URL on Hobby**; keep real data on protected preview URLs only,
-   or change the plan/domain deliberately.
+- Before 2026-11-08 the repo was treated as private and production was gated
+  behind a "no real data on the public production alias" rule (a build-time
+  `VERCEL_ENV=production` refusal plus preview-only real-data deploys). The
+  owner's decision to make the repository and production public made that
+  guard obsolete; it was removed rather than left as dead code that no longer
+  matches policy.
 
-#### Verification record (2026-11-08, prithpal-sooriyas-projects / hobby)
+What still holds regardless of visibility:
 
-- Project: `assets-dashboard-ui` (personal account, plan **hobby**).
-- Preview deployment
-  `https://assets-dashboard-os81g3sqh-prithpal-sooriyas-projects.vercel.app` —
-  logged-out curl: **`302` "Protected by Vercel Authentication"** — previews
-  are private.
-- Production deployment `https://assets-dashboard-ui.vercel.app` — logged-out
-  curl: **`200`, dashboard served** — production is **public** on this plan
-  (project protection unconfigured; production password protection requires a
-  paid plan).
-- The currently public production URL serves **only the clearly-labelled
-  demo fixture** (prominent "Demo data" banner; zero real activity data).
-- The project's **GitHub integration is disconnected** on purpose: merges to
-  the default branch can never auto-deploy to the public production alias.
-  All deployments are manual (`vercel build` + `vercel deploy --prebuilt`).
-
-**Real data must not be deployed to production** until one of these is true:
-- the project is on a plan with password protection/SSO and it is verified
-  enabled (paid upgrade — a deliberate owner decision, not to be done
-  silently), or
-- production is moved behind other enforced access control.
-
-Until then, real-data builds go to preview URLs only (verified private), or
-stay local.
-
-This is enforced in code, not just prose: `vite.config.ts` **fails any build
-that embeds real data for a Vercel production target** (`VERCEL_ENV=production`)
-unless `DASHBOARD_ALLOW_REAL_DATA=1` is set explicitly. Resolving protection is
-still the owner's deliberate decision; the guard just makes the routine
-monthly refresh unable to publish real data publicly by accident.
+- **Demo-labelling is mandatory.** A deployment embedding the synthetic demo
+  fixture must always show the "Demo data" banner; this is enforced by the
+  `DEMO SAMPLE DATA` marker, unit tests and e2e tests.
+- **Preview deployments stay behind Vercel Authentication** (verified 2026-11-08
+  on the hobby plan: logged-out curl → `302` "Protected by Vercel
+  Authentication"). If a logged-out request to a preview URL ever returns
+  `200`, stop and re-check project protection before relying on previews for
+  anything sensitive.
+- Production URLs: `https://assets-dashboard-ui.vercel.app` (and any custom
+  domain). Anyone can read a public production dashboard — that is the point.
+- The project's **GitHub integration is disconnected** on purpose: deploys are
+  deliberate (`vercel build` + `vercel deploy --prebuilt`), never automatic on
+  merge. Reconnecting it would auto-deploy every default-branch merge to the
+  public production alias — do not do that casually.
+- **Re-check after Vercel plan/account changes:** any plan change, project
+  transfer or protection setting change can alter what preview/production
+  URLs expose. A logged-out curl of each URL remains the source of truth
+  (`302` = protected, `200` = public); re-run it quarterly and after changes.
 
 ### Data refresh
 
@@ -132,23 +120,16 @@ The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
 1. The collector updates `data/dashboard.json` (after the month closes;
    PR-reviewed on the default branch).
 2. Merge the collector PR.
-3. Rebuild and deploy **to a preview URL only** (`vercel build && vercel
-   deploy --prebuilt`): previews are the verified-private surface. Do **not**
-   reconnect the Git integration (auto-deploy would target the public
-   production alias on every merge) and do **not** run `--prod` while the
-   production alias is public — the build-time guard in `vite.config.ts`
-   refuses exactly that combination unless protection was resolved and
-   `DASHBOARD_ALLOW_REAL_DATA=1` set.
+3. Rebuild and deploy: `vercel build && vercel deploy --prebuilt --prod`.
+   Preview deployments (`--prebuilt` without `--prod`) are available for
+   checking a refresh before promoting it, and stay behind Vercel
+   Authentication.
 
 There is no cron, webhook or runtime refresh by design: every number on the
 site traces to one reviewed commit.
 
-**If real data ever lands on a public URL anyway** (alias mistake, guard
-bypassed): redeploying does **not** unpublish it. Vercel keeps every
-deployment live at its unique `project-<hash>.vercel.app` URL. Delete the
-affected deployments explicitly (`vercel rm <deployment-url>` for each, or the
-dashboard) and treat the exposed data as disclosed.
-
-**Re-verify protection** (both preview and production, logged-out curl) after
-any Vercel plan change, project transfer, or protection setting change — and
-at least quarterly. Update the verification record above when you do.
+**If a deployment ever embeds something it should not have** (wrong data file,
+secret, pre-release numbers): redeploying does **not** unpublish it. Vercel
+keeps every deployment live at its unique `project-<hash>.vercel.app` URL.
+Delete the affected deployments explicitly (`vercel rm <deployment-url>` for
+each, or the dashboard) and treat the content as disclosed.

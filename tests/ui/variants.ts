@@ -6,11 +6,10 @@
  *    variant's production bundle with the fixture pinned via DASHBOARD_DATA_PATH,
  *  - playwright.config.ts        — derives the per-variant project and preview
  *    webServer (ports 4173+) for every entry here,
- *  - .gitignore                  — lists the generated dist-* directories
- *    (kept in sync manually; gitignore cannot import).
+ *  - .gitignore                  — a single dist-variants/ line covers every
+ *    variant outDir (they are all nested under it).
  *
- * Adding/renaming a variant: edit this table, then update the matching
- * dist-* line(s) in .gitignore. Nothing else needs to change.
+ * Adding/renaming a variant: edit this table — nothing else needs to change.
  */
 
 export interface UiVariant {
@@ -30,28 +29,28 @@ export const UI_VARIANTS: UiVariant[] = [
   {
     name: 'demo',
     fixture: '',
-    outDir: 'dist',
+    outDir: 'dist-variants/demo',
     port: 4173,
     testMatch: /dashboard\.e2e\.ts/,
   },
   {
     name: 'real',
     fixture: 'tests/ui/fixtures/sample-real.json',
-    outDir: 'dist-real',
+    outDir: 'dist-variants/real',
     port: 4174,
     testMatch: /real\.e2e\.ts/,
   },
   {
     name: 'empty',
     fixture: 'tests/ui/fixtures/empty.json',
-    outDir: 'dist-empty',
+    outDir: 'dist-variants/empty',
     port: 4175,
     testMatch: /empty\.e2e\.ts/,
   },
   {
     name: 'invalid',
     fixture: 'tests/ui/fixtures/invalid.json',
-    outDir: 'dist-invalid',
+    outDir: 'dist-variants/invalid',
     port: 4176,
     testMatch: /invalid\.e2e\.ts/,
   },

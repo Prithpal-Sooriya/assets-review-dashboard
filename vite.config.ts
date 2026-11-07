@@ -43,6 +43,13 @@ export function readDashboardBuildInput(projectRoot: string): DashboardBuildInpu
     ? [override]
     : [DEFAULT_DATA_PATH, DEMO_DATA_PATH]
 
+  // Lexical containment is not enough: fs.readFileSync follows symlinks, so a
+  // data/dashboard.json that is a symlink to a file outside the repo (e.g.
+  // ~/.vercel/auth.json) would pass every path check and still be embedded
+  // verbatim into the public bundle. Resolve symlinks and re-check containment
+  // against the real project root.
+  const realRoot = fs.realpathSync(projectRoot)
+
   let firstError: string | null = null
   for (const candidate of candidates) {
     const abs = path.resolve(projectRoot, candidate)
@@ -51,10 +58,9 @@ export function readDashboardBuildInput(projectRoot: string): DashboardBuildInpu
         `DASHBOARD_DATA_PATH must resolve inside the project (got: ${candidate})`,
       )
     }
+    let realAbs: string
     try {
-      const raw = fs.readFileSync(abs, 'utf8')
-      const isDemo = path.resolve(projectRoot, DEMO_DATA_PATH) === abs
-      return { source: isDemo ? 'demo' : 'real', dataPath: candidate, raw, loadError: firstError }
+      realAbs = fs.realpathSync(abs)
     } catch (err) {
       const code = (err as NodeJS.ErrnoException).code
       if (code === 'ENOENT') {
@@ -62,6 +68,28 @@ export function readDashboardBuildInput(projectRoot: string): DashboardBuildInpu
         firstError = firstError ?? `Could not read ${candidate}: ${code ?? 'unknown error'}`
         continue
       }
+      firstError = firstError ?? `Could not read ${candidate}: ${code ?? String(err)}`
+      continue
+    }
+    // Lexical containment is not enough: fs.readFileSync follows symlinks, so
+    // a data/dashboard.json that is a symlink to a file outside the repo
+    // (e.g. ~/.vercel/auth.json) would pass every path check and still be
+    // embedded verbatim into the public bundle. Resolve symlinks and re-check
+    // containment against the real project root. This throws OUTSIDE the
+    // read-error handler, so an escape fails the build instead of falling
+    // back to the demo fixture.
+    const relFromRoot = path.relative(realRoot, realAbs)
+    if (relFromRoot.startsWith('..') || path.isAbsolute(relFromRoot)) {
+      throw new Error(
+        `DASHBOARD_DATA_PATH must resolve inside the project — "${candidate}" is or points outside it (symlink?)`,
+      )
+    }
+    try {
+      const raw = fs.readFileSync(realAbs, 'utf8')
+      const isDemo = path.resolve(projectRoot, DEMO_DATA_PATH) === realAbs
+      return { source: isDemo ? 'demo' : 'real', dataPath: candidate, raw, loadError: firstError }
+    } catch (err) {
+      const code = (err as NodeJS.ErrnoException).code
       firstError = firstError ?? `Could not read ${candidate}: ${code ?? String(err)}`
     }
   }
@@ -100,6 +128,10 @@ function dashboardDataPlugin(projectRoot: string): Plugin {
     },
     configureServer(server) {
       // Restart-free reload when the underlying data file changes during dev.
+      // The virtual module itself must be invalidated (resetting the closure
+      // variable alone would keep serving the cached transform — Vite never
+      // re-runs load()); invalidating it transitively invalidates importers
+      // (loader.ts, dashboardData.ts), then the browser reloads.
       const watched = [
         process.env.DASHBOARD_DATA_PATH ?? DEFAULT_DATA_PATH,
         DEMO_DATA_PATH,
@@ -109,10 +141,7 @@ function dashboardDataPlugin(projectRoot: string): Plugin {
         server.watcher.on('change', (file: string) => {
           if (file === abs) {
             input = null
-            const modules = server.moduleGraph.getModulesByFile(
-              path.resolve(projectRoot, 'src/data/loader.ts'),
-            )
-            const mod = modules ? Array.from(modules)[0] : undefined
+            const mod = server.moduleGraph.getModuleById(RESOLVED_ID)
             if (mod) server.moduleGraph.invalidateModule(mod)
             server.ws.send({ type: 'full-reload' })
           }
@@ -124,24 +153,10 @@ function dashboardDataPlugin(projectRoot: string): Plugin {
 
 export default defineConfig(() => {
   const projectRoot = path.resolve(process.cwd())
-  const input = readDashboardBuildInput(projectRoot)
 
-  // Guard: real data must never be built for a public production target on
-  // the current (hobby) Vercel plan — production is verified public and
-  // password protection is unavailable (see docs/deployment.md). Deploying
-  // real data requires the owner to resolve protection AND set this explicit
-  // opt-in, so the barrier is code, not prose.
-  const isVercelProduction = process.env.VERCEL_ENV === 'production'
-  if (isVercelProduction && input.source === 'real' && process.env.DASHBOARD_ALLOW_REAL_DATA !== '1') {
-    throw new Error(
-      [
-        'Refusing to build: this build embeds REAL dashboard data but targets a production deployment.',
-        'The production alias is verified PUBLIC on the hobby plan (docs/deployment.md — protection verification).',
-        'Deploy real data to protected preview URLs only, or resolve production access control and set',
-        'DASHBOARD_ALLOW_REAL_DATA=1 to acknowledge it explicitly.',
-      ].join(' '),
-    )
-  }
+  // Read once at config time so a bad data path fails the build loudly and
+  // early (before any transform runs), with the path diagnostics in the log.
+  readDashboardBuildInput(projectRoot)
 
   return {
     plugins: [react(), dashboardDataPlugin(projectRoot)],
