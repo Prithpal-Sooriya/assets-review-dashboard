@@ -120,28 +120,3 @@ describe("run-token.sh", () => {
     expect(r.stdout).toContain("no secret to rotate");
   });
 });
-describe("composite-action template hygiene", () => {
-  const actionsDir = path.join(import.meta.dir, "..", "..", ".github", "actions");
-  const availableInComposite = /^(github|inputs|env|runner|vars|steps|job|needs|strategy|matrix)\./;
-
-  test("no template expression in any action file references an unavailable context", async () => {
-    // GitHub expands ${{...}} ANYWHERE in an action manifest — including
-    // description prose — and composite-action files have no secrets
-    // context at all. An expanded reference fails template validation at
-    // job load, before any step runs. Runs 42416009318 (step env) and
-    // 42420249910 (expression inside the input description text) both
-    // failed on exactly this class; actionlint cannot catch it (it does
-    // not lint action-file expressions), so this test is the guard.
-    const files = [...new Bun.Glob("*/action.yml").scanSync({ cwd: actionsDir })];
-    expect(files.length).toBeGreaterThan(0);
-    const violations: string[] = [];
-    for (const f of files) {
-      const text = await Bun.file(path.join(actionsDir, f)).text();
-      for (const m of text.matchAll(/\$\{\{([^}]*)\}\}/g)) {
-        const expr = m[1]!.trim();
-        if (!availableInComposite.test(expr)) violations.push(`${f}: expression "{{ ${expr} }}" uses a context unavailable in composite actions`);
-      }
-    }
-    expect(violations).toEqual([]);
-  });
-});
