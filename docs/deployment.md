@@ -79,7 +79,9 @@ vercel deploy --prebuilt --prod    # production deployment (see below)
 ### Visibility policy — public repo, public production (2026-11-07)
 
 The repository and the production dashboard URL are **public by explicit
-owner decision** (recorded 2026-11-07): the dashboard shows team-level
+owner decision** (recorded 2026-11-07; dates in this record were corrected
+from 2026-11-08 on 2026-11-07 — the original entries were written against a
+misread clock, the system UTC date was 2026-11-07): the dashboard shows team-level
 aggregates only (no individual reviewer metrics or names — enforced by tests),
 so publishing it publicly is acceptable. Real `data/dashboard.json` may be
 embedded in production builds.
@@ -97,16 +99,23 @@ What still holds regardless of visibility:
 
 - **Sample-data labelling is mandatory.** A deployment embedding the synthetic
   fixture must always show the "Sample data" strip (invented figures are never
-  presented as real GitHub data); this is enforced by the
-  `DEMO SAMPLE DATA` marker, unit tests and e2e tests.
+  presented as real GitHub data); presence and content are enforced by the
+  `DEMO SAMPLE DATA` marker, unit tests and e2e tests (including that the
+  real-source line never renders on sample builds). The strip is deliberately
+  discreet — a small tinted one-liner, not a banner — by owner decision
+  (2026-11-07): it must stay visible and accurate, not loud. ("demo" in code,
+  the detection marker and the fixture filename, and "sample" in user-facing
+  labels refer to the same synthetic fixture.)
 - **Preview deployments stay behind Vercel Authentication** (verified 2026-11-07
   on the hobby plan: logged-out curl → `302` "Protected by Vercel
-  Authentication").
-- Real-data builds state their source up front ("Source: public GitHub PRs
-  from MetaMask Mobile, Core, and Extension") alongside the collection
-  coverage section; sample-data builds never show that line. If a logged-out request to a preview URL ever returns
+  Authentication"). If a logged-out request to a preview URL ever returns
   `200`, stop and re-check project protection before relying on previews for
   anything sensitive.
+- Real-data builds state their source up front ("Source: public GitHub PRs
+  from MetaMask Mobile, Core, and Extension" — the repo scope fixed by the
+  shared contract v1; change this sentence, its docs mention and its e2e
+  assertion together if that scope ever changes) alongside the collection
+  coverage section; sample-data builds never show that line.
 - Production URLs: `https://assets-dashboard-ui.vercel.app` (and any custom
   domain). Anyone can read a public production dashboard — that is the point.
 - The project's **GitHub integration is disconnected** on purpose: deploys are
