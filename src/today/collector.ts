@@ -51,7 +51,7 @@ import {
 import { CycleBudget } from './ratelimit'
 import { scrubSecrets } from './token'
 import { isUsableBaseline } from './cache'
-import { normalizePull as normalizePullImpl } from './normalize'
+import { normalizePull } from './normalize'
 
 export type CycleStatus =
   | 'complete'
@@ -153,7 +153,7 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
     while (page <= MAX_PAGES_PER_REPO) {
       const allowance = budget.allow(deps.nowMs())
       if (!allowance.ok) {
-        if (allowance.reason === 'floor' || allowance.reason === 'wall') {
+        if (allowance.reason === 'floor') {
           partialReason = 'rate-limit'
           stopRetryAt = deps.nowMs() + 60_000
           stopMessage = 'Stopped early: rate-limit floor reached — remaining quota preserved for other users of this network.'
@@ -207,7 +207,7 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
 
       const items = Array.isArray(response.data) ? response.data : []
       for (const raw of items) {
-        const normalized = normalizePullSafe(repo, raw)
+        const normalized = normalizePull(repo, raw)
         if (normalized === null) {
           dropped += 1
           continue
@@ -318,14 +318,6 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
     retryAtMs: stopRetryAt,
     message: stopMessage,
     requestsUsed: budget.usedCount,
-  }
-}
-
-function normalizePullSafe(repo: string, raw: RawPull): TodayPr | null {
-  try {
-    return normalizePullImpl(repo, raw)
-  } catch {
-    return null
   }
 }
 

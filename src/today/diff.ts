@@ -68,6 +68,13 @@ function outcomeFor(
     }
     return 'unverified'
   }
+  // No bounded check ran. The most common needs-view departure is the PR
+  // staying OPEN while the review request was simply removed: the sweep
+  // still contains the PR, which is itself proof it is open — label it
+  // left-queue rather than unverified. Only a PR absent from the current
+  // sweep (not checked, not visible) stays unverified — disappearance is
+  // never silently equated with merging.
+  if (view === 'needs' && currentOpen.has(`${repo}#${number}`)) return 'left-queue'
   return 'unverified'
 }
 

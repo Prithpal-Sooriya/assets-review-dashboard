@@ -9,7 +9,6 @@ import {
   awaitingInfoOf,
   needsAssetsReview,
   prAgeDays,
-  requestedKindOf,
 } from './classify'
 import { KNOWN_REPO_ORDER } from '../data/format'
 import { prId, type TodayPr } from './normalize'
@@ -135,4 +134,3 @@ export function viewCounts(
   return { needs, awaiting }
 }
 
-export { prId, authorshipOf, awaitingInfoOf, requestedKindOf }

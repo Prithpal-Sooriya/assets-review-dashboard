@@ -119,6 +119,21 @@ describe('missing PRs are never silently merged', () => {
     expect(diffSnapshots(baseline, current).needs.left[0]?.outcome).toBe('left-queue')
   })
 
+  test('still-open-and-in-sweep PR with NO detail check still labels left-queue, not unverified', () => {
+    // The most common real departure: request removed, PR still open. The PR
+    // being in the current sweep is itself proof it is open — no detail
+    // check needed to say it left the needs queue without merging.
+    const current = snap({
+      prs: [pr({ number: 10 })], // open, no review request, no missingChecks
+      missingChecks: [],
+    })
+    expect(diffSnapshots(baseline, current).needs.left[0]?.outcome).toBe('left-queue')
+    // A PR absent from the sweep entirely (no check, not visible) is still
+    // unverified — disappearance is never silently equated with merging.
+    const vanished = snap({ prs: [], missingChecks: [] })
+    expect(diffSnapshots(baseline, vanished).needs.left[0]?.outcome).toBe('unverified')
+  })
+
   test('awaiting view stays unverified when an open team PR is somehow unqueued (roster drift)', () => {
     const base = snap({
       collectedAt: '2026-11-06T00:00:00Z',

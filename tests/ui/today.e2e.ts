@@ -353,6 +353,14 @@ test.describe('Today view — token flow', () => {
     await page.getByRole('button', { name: 'Use token' }).click()
     await expect(page.getByText('Token rejected')).toBeVisible()
     await expect(page.locator('.token-input')).toBeEnabled() // anonymous again, input usable
+    // The rejection triggers an immediate anonymous recollect: anonymous
+    // rows render, and the banner SURVIVES the success so the user keeps
+    // seeing why they are back on anonymous data (never a silent downgrade).
+    const table = page.locator('.today-table')
+    await expect(table).toBeVisible()
+    await expect(table.locator('tbody tr td a.pr-link')).toHaveCount(1) // #201 back in the needs queue
+    await expect(table).toContainText('#201')
+    await expect(page.getByText('Token rejected')).toBeVisible()
   })
 })
 

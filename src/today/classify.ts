@@ -40,16 +40,6 @@ export function assetsAuthored(pr: TodayPr): boolean {
   return authorshipOf(pr) === 'internal'
 }
 
-export type RequestedKind = 'team-and-members' | 'team' | 'members' | 'none-visible'
-
-export function requestedKindOf(pr: TodayPr): RequestedKind {
-  const team = hasTeamRequest(pr)
-  const members = hasMemberRequest(pr)
-  if (team && members) return 'team-and-members'
-  if (team) return 'team'
-  if (members) return 'members'
-  return 'none-visible'
-}
 
 /**
  * What (if anything) an Assets-authored PR is explicitly waiting on from

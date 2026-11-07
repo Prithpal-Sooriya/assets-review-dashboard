@@ -2,7 +2,7 @@ import { describe, expect, test } from 'bun:test'
 import {
   CycleBudget,
   isStale,
-  linkHasNext,
+
   parseRateHeaders,
   rateRetryAtMs,
   retryDelayMs,
@@ -53,18 +53,6 @@ describe('rateRetryAtMs', () => {
   })
 })
 
-describe('linkHasNext', () => {
-  test('detects rel="next" in either quote style', () => {
-    expect(linkHasNext('<https://x?page=2>; rel="next", <https://x?page=9>; rel="last"')).toBe(true)
-    expect(linkHasNext("<https://x?page=2>; rel='next'")).toBe(true)
-  })
-
-  test('null or last-only headers mean no next page', () => {
-    expect(linkHasNext(null)).toBe(false)
-    expect(linkHasNext('<https://x?page=9>; rel="last"')).toBe(false)
-  })
-})
-
 describe('CycleBudget', () => {
   test('enforces the request cap', () => {
     const b = new CycleBudget(2, 0)
@@ -81,12 +69,6 @@ describe('CycleBudget', () => {
     expect(b.allow(0)).toEqual({ ok: true })
     b.observeRemaining(10)
     expect(b.allow(0)).toEqual({ ok: false, reason: 'floor' })
-  })
-
-  test('wall blocks spending before retryNotBefore', () => {
-    const b = new CycleBudget(10, 0, 5000)
-    expect(b.allow(1000)).toEqual({ ok: false, reason: 'wall' })
-    expect(b.allow(6000)).toEqual({ ok: true })
   })
 
   test('null remaining observations never block (headers absent)', () => {

@@ -22,21 +22,33 @@ export function TodayTable({
   authMode: AuthMode
   onSort: (sort: TodayUrlState['sort']) => void
 }) {
-  const sortAria = (key: TodayUrlState['sort']): 'ascending' | 'descending' | 'none' =>
-    state.sort === key ? (key === 'newest' ? 'ascending' : 'descending') : 'none'
-  // 'oldest' sorts age descending (oldest = biggest age first).
+  // Actual sort directions: repo/author compare ascending; 'oldest' is age
+  // descending (biggest age first); 'newest' is age ascending. The aria-sort
+  // value and the arrow must match the real order.
+  const SORT_DIRECTION: Record<TodayUrlState['sort'], 'ascending' | 'descending'> = {
+    repo: 'ascending',
+    author: 'ascending',
+    oldest: 'descending',
+    newest: 'ascending',
+  }
 
   const sortButton = (key: TodayUrlState['sort'], label: string) => (
-    <th scope="col" aria-sort={sortAria(key)}>
+    <th scope="col" aria-sort={state.sort === key ? SORT_DIRECTION[key] : 'none'}>
       <button type="button" className="th-sort" onClick={() => onSort(key)}>
         {label}
-        {state.sort === key ? (key === 'newest' ? ' ↑' : ' ↓') : ''}
+        {state.sort === key ? (SORT_DIRECTION[key] === 'ascending' ? ' ↑' : ' ↓') : ''}
       </button>
     </th>
   )
 
   const ageHeader = (
-    <th scope="col" aria-sort={sortAria(state.sort === 'newest' ? 'newest' : 'oldest')} className="num">
+    <th
+      scope="col"
+      aria-sort={
+        state.sort === 'oldest' || state.sort === 'newest' ? SORT_DIRECTION[state.sort] : 'none'
+      }
+      className="num"
+    >
       <button
         type="button"
         className="th-sort"

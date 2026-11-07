@@ -22,6 +22,14 @@ const BANNER_CLASS: Record<TodayBanner['kind'], string> = {
   info: 'notice',
 }
 
+const BANNER_LABEL: Record<TodayBanner['kind'], string> = {
+  partial: 'Incomplete data',
+  'rate-limited': 'Rate limited',
+  'network-error': 'Connection problem',
+  'auth-rejected': 'Token rejected',
+  info: 'Note',
+}
+
 /**
  * Honest status header for Today: collection time, data age, auth mode,
  * coverage warnings. Says "no collection while the page is closed" rather
@@ -33,17 +41,7 @@ export function TodayStatus({ today, nowMs }: { today: TodayController; nowMs: n
     <div>
       {today.banner !== null && (
         <div className={BANNER_CLASS[today.banner.kind]} role={today.banner.kind === 'network-error' || today.banner.kind === 'auth-rejected' ? 'alert' : 'status'}>
-          <span className="notice__label">
-            {today.banner.kind === 'partial'
-              ? 'Incomplete data'
-              : today.banner.kind === 'rate-limited'
-                ? 'Rate limited'
-                : today.banner.kind === 'network-error'
-                  ? 'Connection problem'
-                  : today.banner.kind === 'auth-rejected'
-                    ? 'Token rejected'
-                    : 'Note'}
-          </span>
+          <span className="notice__label">{BANNER_LABEL[today.banner.kind]}</span>
           <div className="notice__body">
             <p>{today.banner.message}</p>
             {today.banner.retryAtMs !== null && (

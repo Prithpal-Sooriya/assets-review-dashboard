@@ -141,8 +141,14 @@ export async function githubGet<T>(
   return {
     data,
     rate: parseRateHeaders(response.headers),
-    linkNext: /rel="next"/.test(response.headers.get('link') ?? ''),
+    linkNext: linkHasNext(response.headers.get('link')),
   }
+}
+
+/** Does a Link header advertise a rel="next" page (quotes either style)? */
+export function linkHasNext(linkHeader: string | null): boolean {
+  if (linkHeader === null) return false
+  return /rel="next"/.test(linkHeader) || /rel='next'/.test(linkHeader)
 }
 
 /** Raw pull shape — only the public fields we normalize are declared. */

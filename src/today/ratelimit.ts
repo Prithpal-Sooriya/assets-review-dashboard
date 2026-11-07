@@ -54,18 +54,11 @@ export function rateRetryAtMs(
   return nowMs
 }
 
-/** Does a Link header advertise a rel="next" page? */
-export function linkHasNext(linkHeader: string | null): boolean {
-  if (linkHeader === null) return false
-  return /rel="next"/.test(linkHeader) || /rel='next'/.test(linkHeader)
-}
-
 /**
  * Budget guard for one collection cycle. Every request checks `allow()` and
  * reports `spend()`; the guard enforces:
  *  - a hard cap on requests per cycle,
- *  - a floor on X-RateLimit-Remaining so shared-IP quota is left for others,
- *  - an optional wall: after `retryNotBeforeMs` no further spending happens.
+ *  - a floor on X-RateLimit-Remaining so shared-IP quota is left for others.
  */
 export class CycleBudget {
   private used = 0
@@ -74,15 +67,10 @@ export class CycleBudget {
   constructor(
     private readonly cap: number,
     private readonly floor: number,
-    private readonly retryNotBeforeMs: number | null = null,
   ) {}
 
   get usedCount(): number {
     return this.used
-  }
-
-  get remainingObserved(): number | null {
-    return this.lastRemaining
   }
 
   /** Record headers of a completed request (updates the remaining floor). */
@@ -91,10 +79,7 @@ export class CycleBudget {
   }
 
   /** May the next request be sent? `reason` explains the first blocker. */
-  allow(nowMs: number): { ok: true } | { ok: false; reason: 'cap' | 'floor' | 'wall' } {
-    if (this.retryNotBeforeMs !== null && nowMs < this.retryNotBeforeMs) {
-      return { ok: false, reason: 'wall' }
-    }
+  allow(nowMs: number): { ok: true } | { ok: false; reason: 'cap' | 'floor' } {
     if (this.used >= this.cap) return { ok: false, reason: 'cap' }
     if (this.lastRemaining !== null && this.lastRemaining <= this.floor) {
       return { ok: false, reason: 'floor' }

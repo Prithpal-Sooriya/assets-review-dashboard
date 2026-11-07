@@ -10,7 +10,7 @@
  *  - It is cleared on reload (module state dies with the page).
  *  - Every auth change bumps an epoch so in-flight results collected under
  *    the previous auth can never be published as current.
- *  - Error text is scrubbed through scrubToken before display/serialization.
+ *  - Error text is scrubbed through scrubSecrets before display/serialization.
  */
 
 let memoryToken: string | null = null

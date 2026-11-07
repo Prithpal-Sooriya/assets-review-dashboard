@@ -24,13 +24,44 @@ import {
   CACHE_DB_VERSION,
   CACHE_KEY_BASELINE,
   CACHE_KEY_CURRENT,
+  CACHE_KEY_RETAINED,
   CACHE_STORE,
 } from './config'
-import { isTodaySnapshot, type TodaySnapshot } from './normalize'
+import { sanitizeSnapshot, TODAY_SCHEMA_VERSION, type TodaySnapshot } from './normalize'
 
 export interface CachePair {
   current: TodaySnapshot | null
   baseline: TodaySnapshot | null
+  /** Oldest retained complete snapshot within the retention window. */
+  retained: TodaySnapshot | null
+}
+
+/**
+ * Retention for the third slot: keep the OLDEST same-auth complete snapshot
+ * within the retention window (BASELINE_MAX_AGE_MS). It is NOT overwritten
+ * by each save — that is what makes a rotation candidate ≥12h old exist for
+ * a user who keeps the page open for days (current is always ~3h old there,
+ * so without retention the 12h rotate gate could never fire).
+ */
+export function rollRetained(
+  prev: CachePair,
+  next: { collectedAt: string; authMode: TodaySnapshot['authMode'] },
+): TodaySnapshot | null {
+  const nextAt = Date.parse(next.collectedAt)
+  const sameAuth = (snap: TodaySnapshot | null): boolean =>
+    snap !== null && snap.authMode === next.authMode
+  const ageMs = (snap: TodaySnapshot): number => {
+    const t = Date.parse(snap.collectedAt)
+    return Number.isNaN(t) ? Number.POSITIVE_INFINITY : nextAt - t
+  }
+  const r = prev.retained
+  const c = prev.current
+  const kept = r !== null && sameAuth(r) && ageMs(r) <= BASELINE_MAX_AGE_MS ? r : null
+  const candidate = c !== null && sameAuth(c) ? c : null
+  // Keep the OLDEST: the retained slot must accumulate age (that is the
+  // whole point — a candidate old enough for the 12h rotate gate).
+  if (kept !== null && candidate !== null && ageMs(kept) >= ageMs(candidate)) return kept
+  return candidate ?? kept
 }
 
 /**
@@ -39,36 +70,86 @@ export interface CachePair {
  *  - promote the previous current when it is at least BASELINE_MIN_AGE_MS old
  *    (the "since yesterday" case after the page was closed ~a day), or
  *  - when the existing baseline has drifted beyond BASELINE_MAX_AGE_MS and
- *    the previous current is at least BASELINE_ROTATE_MIN_AGE_MS old, rotate
- *    to it so continuous users eventually get a fresher (still old, still
- *    honestly timestamped) baseline;
+ *    a same-auth candidate (retained, or the previous current) is at least
+ *    BASELINE_ROTATE_MIN_AGE_MS old, rotate to the oldest such candidate so
+ *    continuous users eventually get a fresher (still old, still honestly
+ *    timestamped) baseline instead of one frozen at first-ever collection;
  *  - otherwise keep the existing baseline.
+ *
+ * Candidates from a DIFFERENT auth mode than the incoming snapshot are never
+ * kept or promoted: visibility differs between anonymous and token
+ * collection, so a cross-auth baseline would fabricate queue changes (and
+ * would leave token-only team-request data on disk past its session).
  */
 export function rollBaseline(
   prev: CachePair,
-  nextComplete: TodaySnapshot,
+  next: { collectedAt: string; authMode: TodaySnapshot['authMode'] },
 ): TodaySnapshot | null {
-  const nextAt = Date.parse(nextComplete.collectedAt)
+  const nextAt = Date.parse(next.collectedAt)
   const ageOf = (snap: TodaySnapshot | null): number | null => {
     if (snap === null) return null
     const t = Date.parse(snap.collectedAt)
     return Number.isNaN(t) ? null : nextAt - t
   }
+  const sameAuth = (snap: TodaySnapshot | null): boolean =>
+    snap !== null && snap.authMode === next.authMode
   const currentAge = ageOf(prev.current)
   const baselineAge = ageOf(prev.baseline)
 
-  if (currentAge !== null && currentAge >= BASELINE_MIN_AGE_MS) {
+  if (currentAge !== null && currentAge >= BASELINE_MIN_AGE_MS && sameAuth(prev.current)) {
     return prev.current
   }
-  if (
-    baselineAge !== null &&
-    baselineAge > BASELINE_MAX_AGE_MS &&
-    currentAge !== null &&
-    currentAge >= BASELINE_ROTATE_MIN_AGE_MS
-  ) {
-    return prev.current
+  if (baselineAge !== null && baselineAge > BASELINE_MAX_AGE_MS) {
+    // Continuous-user rotation: the retained slot holds the oldest
+    // same-auth complete snapshot within the window, so it is the candidate
+    // that can satisfy the 12h rotate gate even when `current` is always
+    // ~3h old. Prefer the oldest qualifying candidate still inside the
+    // retention window — rotating to something equally ancient is pointless.
+    const candidates: TodaySnapshot[] = [prev.retained, prev.current].filter(
+      (s): s is TodaySnapshot => {
+        if (s === null || !sameAuth(s)) return false
+        const age = ageOf(s) ?? 0
+        return age >= BASELINE_ROTATE_MIN_AGE_MS && age <= BASELINE_MAX_AGE_MS
+      },
+    )
+    if (candidates.length > 0) {
+      return candidates.reduce((oldest, s) =>
+        (ageOf(s) ?? 0) > (ageOf(oldest) ?? 0) ? s : oldest,
+      )
+    }
   }
-  return prev.baseline
+  return sameAuth(prev.baseline) ? prev.baseline : null
+}
+
+/**
+ * The baseline the NEXT saveComplete will produce, computed BEFORE the
+ * collection runs. Missing-PR state checks must run against this exact
+ * baseline: it is the one SinceYesterdayCard will diff once the save lands,
+ * so checking against the pre-rotation baseline would verify departures the
+ * UI never shows (and miss the ones it does).
+ *
+ * When no old-enough candidate exists, the upcoming save seeds the baseline
+ * slot with itself — an empty diff, so no checks are needed; that case is
+ * represented as an empty-queue snapshot.
+ */
+export function baselineForNextSave(
+  prev: CachePair,
+  next: { collectedAt: string; authMode: TodaySnapshot['authMode'] },
+): TodaySnapshot | null {
+  const rotated = rollBaseline(prev, next)
+  if (rotated !== null) return rotated
+  return {
+    schemaVersion: TODAY_SCHEMA_VERSION,
+    collectedAt: next.collectedAt,
+    authMode: next.authMode,
+    repos: [],
+    complete: true,
+    partialReason: null,
+    rate: null,
+    droppedMalformed: 0,
+    missingChecks: [],
+    prs: [],
+  }
 }
 
 /** Minimal async surface over IndexedDB; injectable for tests. */
@@ -117,10 +198,19 @@ export class TodayCache {
   private dbPromise: Promise<IDbDatabaseLike> | null
   private memory = new Map<string, TodaySnapshot>()
   readonly persistent: boolean
+  /** Flipped when any IndexedDB transaction fails or aborts: persistence
+   * for this session is degraded (memory tier still works). The UI surfaces
+   * this instead of silently claiming durable caching. */
+  private degradedFlag = false
 
   constructor(idb: IdbLike | null) {
     this.persistent = idb !== null
     this.dbPromise = idb !== null ? this.openDb(idb) : null
+  }
+
+  /** False once any cache transaction has failed or aborted this session. */
+  get operational(): boolean {
+    return !this.degradedFlag
   }
 
   private openDb(idb: IdbLike): Promise<IDbDatabaseLike> {
@@ -162,18 +252,22 @@ export class TodayCache {
     }
     return new Promise<T | null>((resolve) => {
       let result: T | null = null
-      let failed = false
       const tx = db.transaction(CACHE_STORE, mode)
       tx.oncomplete = () => resolve(result)
-      tx.onerror = () => resolve(null)
-      tx.onabort = () => resolve(null)
+      tx.onerror = () => {
+        this.degradedFlag = true
+        resolve(null)
+      }
+      tx.onabort = () => {
+        this.degradedFlag = true
+        resolve(null)
+      }
       op(tx.objectStore(CACHE_STORE))
         .then((value) => {
           result = value
         })
         .catch(() => {
-          failed = true
-          void failed
+          this.degradedFlag = true
           resolve(null)
         })
     })
@@ -184,7 +278,20 @@ export class TodayCache {
       requestToPromise(store.get(key)),
     )
     const raw = fromDb !== null ? fromDb : (this.memory.get(key) ?? null)
-    return isTodaySnapshot(raw) ? raw : null
+    // Untrusted input (IndexedDB or memory): revalidate every PR before it
+    // can reach an <a href>.
+    return sanitizeSnapshot(raw)
+  }
+
+  /** Write a slot, or DELETE it when the value is null (stale data must
+   * not survive in IndexedDB under the old key). */
+  private async writeSlot(key: string, snap: TodaySnapshot | null): Promise<void> {
+    if (snap === null) {
+      this.memory.delete(key)
+      await this.withStore('readwrite', (store) => requestToPromise(store.delete(key)))
+      return
+    }
+    await this.writeKey(key, snap)
   }
 
   private async writeKey(key: string, snap: TodaySnapshot): Promise<void> {
@@ -197,23 +304,26 @@ export class TodayCache {
       return {
         current: this.readMemory(CACHE_KEY_CURRENT),
         baseline: this.readMemory(CACHE_KEY_BASELINE),
+        retained: this.readMemory(CACHE_KEY_RETAINED),
       }
     }
-    const [current, baseline] = await Promise.all([
+    const [current, baseline, retained] = await Promise.all([
       this.readKey(CACHE_KEY_CURRENT),
       this.readKey(CACHE_KEY_BASELINE),
+      this.readKey(CACHE_KEY_RETAINED),
     ])
-    return { current, baseline }
+    return { current, baseline, retained }
   }
 
   private readMemory(key: string): TodaySnapshot | null {
     const raw = this.memory.get(key) ?? null
-    return isTodaySnapshot(raw) ? raw : null
+    return sanitizeSnapshot(raw)
   }
 
   /**
    * Persist a newly collected COMPLETE snapshot: rotate the baseline first
-   * (using the previous pair), then overwrite current.
+   * (using the previous pair), then overwrite current, then update the
+   * retained slot (oldest same-auth complete snapshot within the window).
    */
   async saveComplete(next: TodaySnapshot): Promise<CachePair> {
     if (!next.complete) throw new Error('refusing to cache an incomplete snapshot')
@@ -224,9 +334,11 @@ export class TodayCache {
     // isUsableBaseline gate keeps the UI from presenting a too-young
     // baseline as a "since yesterday" comparison.
     const baseline = rotated ?? next
+    const retained = rollRetained(prev, next)
     await this.writeKey(CACHE_KEY_BASELINE, baseline)
+    await this.writeSlot(CACHE_KEY_RETAINED, retained)
     await this.writeKey(CACHE_KEY_CURRENT, next)
-    return { current: next, baseline }
+    return { current: next, baseline, retained }
   }
 
   /** Auth-mode change or token change: drop all cached snapshots. */

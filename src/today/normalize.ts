@@ -161,6 +161,94 @@ export function prId(pr: TodayPr): string {
   return `${pr.repo}#${pr.number}`
 }
 
+const CHECK_STATES: ReadonlySet<string> = new Set(['MERGED', 'CLOSED', 'OPEN', 'unknown'])
+const PARTIAL_REASONS: ReadonlySet<string> = new Set([
+  'page-cap',
+  'rate-limit',
+  'repo-missing',
+  'aborted',
+])
+
+function sanitizePr(value: unknown): TodayPr | null {
+  if (typeof value !== 'object' || value === null) return null
+  const v = value as Partial<TodayPr>
+  if (typeof v.repo !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(v.repo)) return null
+  if (typeof v.number !== 'number' || !Number.isInteger(v.number) || v.number < 1) return null
+  const title = cleanString(v.title, 300)
+  const url = cleanPullUrl(v.url)
+  const author = cleanString(v.author, 100) ?? 'unknown'
+  const createdAt = cleanString(v.createdAt, 40)
+  const updatedAt = cleanString(v.updatedAt, 40)
+  if (title === null || url === null || createdAt === null || updatedAt === null) return null
+  if (Number.isNaN(Date.parse(createdAt)) || Number.isNaN(Date.parse(updatedAt))) return null
+  const cleanList = (x: unknown): string[] =>
+    Array.isArray(x)
+      ? x.map((e) => cleanString(e, 100)).filter((e): e is string => e !== null).slice(0, MAX_LIST)
+      : []
+  return {
+    repo: v.repo,
+    number: v.number,
+    title,
+    url,
+    author,
+    draft: v.draft === true,
+    createdAt,
+    updatedAt,
+    labels: cleanList(v.labels).slice(0, MAX_LABELS),
+    requestedTeams: cleanList(v.requestedTeams),
+    requestedReviewers: cleanList(v.requestedReviewers),
+  }
+}
+
+function sanitizeMissingCheck(value: unknown): MissingPrCheck | null {
+  if (typeof value !== 'object' || value === null) return null
+  const v = value as Partial<MissingPrCheck>
+  if (typeof v.repo !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(v.repo)) return null
+  if (typeof v.number !== 'number' || !Number.isInteger(v.number) || v.number < 1) return null
+  if (typeof v.state !== 'string' || !CHECK_STATES.has(v.state)) return null
+  return { repo: v.repo, number: v.number, state: v.state as MissingPrCheck['state'] }
+}
+
+/**
+ * Revalidate an UNTRUSTED snapshot (IndexedDB record or cross-tab broadcast)
+ * end-to-end: top-level shape plus every PR's URL, dates and identity fields.
+ * Malformed PRs/checks are dropped (counted into droppedMalformed), so a
+ * planted javascript:/phishing href can never reach an <a href>. Returns null
+ * when the record is unusable at the top level.
+ */
+export function sanitizeSnapshot(value: unknown): TodaySnapshot | null {
+  if (!isTodaySnapshot(value)) return null
+  const prs: TodayPr[] = []
+  let dropped = value.droppedMalformed
+  for (const raw of value.prs) {
+    const clean = sanitizePr(raw)
+    if (clean === null) {
+      dropped += 1
+      continue
+    }
+    prs.push(clean)
+  }
+  const missingChecks = value.missingChecks
+    .map(sanitizeMissingCheck)
+    .filter((c): c is MissingPrCheck => c !== null)
+  const partialReason =
+    value.partialReason === null || PARTIAL_REASONS.has(value.partialReason)
+      ? (value.partialReason as TodaySnapshot['partialReason'])
+      : 'aborted'
+  return {
+    schemaVersion: value.schemaVersion,
+    collectedAt: value.collectedAt,
+    authMode: value.authMode,
+    repos: value.repos,
+    complete: value.complete,
+    partialReason,
+    rate: value.rate,
+    droppedMalformed: dropped,
+    missingChecks,
+    prs,
+  }
+}
+
 /** Defensive revalidation of a record read back from IndexedDB. */
 export function isTodaySnapshot(value: unknown): value is TodaySnapshot {
   if (typeof value !== 'object' || value === null) return false

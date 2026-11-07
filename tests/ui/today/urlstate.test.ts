@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import {
   applyHash,
-  buildHistoryHash,
   buildTodayHash,
   DEFAULT_TODAY_STATE,
   parseHash,
@@ -54,9 +53,6 @@ describe('Today URL state round-trips', () => {
     expect(hash).toBe('#/today?view=needs')
   })
 
-  test('History hash is stable', () => {
-    expect(buildHistoryHash()).toBe('#/history')
-  })
 })
 
 describe('applyHash', () => {

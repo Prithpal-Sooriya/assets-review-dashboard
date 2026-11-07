@@ -13,7 +13,6 @@ import {
   needsAssetsReview,
   nextActionOf,
   prAgeDays,
-  requestedKindOf,
 } from '../../../src/today/classify'
 import type { TodayPr } from '../../../src/today/normalize'
 
@@ -104,14 +103,6 @@ describe('awaitingInfoOf — unknown teams stay unknown', () => {
     expect(awaitingInfoOf(p).otherReviewers).toEqual(['outsider'])
   })
 
-  test('requestedKindOf distinguishes team/member/both/none', () => {
-    expect(requestedKindOf(pr({ requestedTeams: [ASSETS_TEAM_SLUG] }))).toBe('team')
-    expect(requestedKindOf(pr({ requestedReviewers: [ASSETS_ROSTER[5]!] }))).toBe('members')
-    expect(
-      requestedKindOf(pr({ requestedTeams: [ASSETS_TEAM_SLUG], requestedReviewers: [ASSETS_ROSTER[5]!] })),
-    ).toBe('team-and-members')
-    expect(requestedKindOf(pr())).toBe('none-visible')
-  })
 })
 
 describe('nextActionOf — simple, honest states', () => {

@@ -1,7 +1,9 @@
 import { describe, expect, test } from 'bun:test'
 import {
+  baselineForNextSave,
   isUsableBaseline,
   rollBaseline,
+  rollRetained,
   TodayCache,
   type CachePair,
   type IdbLike,
@@ -122,33 +124,150 @@ function snap(overrides: Partial<TodaySnapshot> = {}): TodaySnapshot {
 }
 
 const H = 60 * 60 * 1000
+
+function pair(current: TodaySnapshot | null, baseline: TodaySnapshot | null, retained: TodaySnapshot | null = null): CachePair {
+  return { current, baseline, retained }
+}
 const at = (hoursAgo: number) => new Date(Date.parse('2026-11-08T12:00:00Z') - hoursAgo * H).toISOString()
 
 describe('rollBaseline — pure rotation logic', () => {
   const next = snap({ collectedAt: at(0) })
 
   test('empty cache: no rotation candidate', () => {
-    expect(rollBaseline({ current: null, baseline: null }, next)).toBeNull()
+    expect(rollBaseline(pair(null, null), next)).toBeNull()
   })
 
   test('young previous current (3h) keeps the existing baseline', () => {
-    const prev: CachePair = { current: snap({ collectedAt: at(3) }), baseline: snap({ collectedAt: at(30) }) }
+    const prev: CachePair = pair(snap({ collectedAt: at(3) }), snap({ collectedAt: at(30) }))
     expect(rollBaseline(prev, next)).toBe(prev.baseline)
   })
 
   test('previous current ≥ 20h old is promoted to baseline', () => {
-    const prev: CachePair = { current: snap({ collectedAt: at(21) }), baseline: snap({ collectedAt: at(30) }) }
+    const prev: CachePair = pair(snap({ collectedAt: at(21) }), snap({ collectedAt: at(30) }))
     expect(rollBaseline(prev, next)).toBe(prev.current)
   })
 
   test('baseline beyond 48h rotates to a ≥ 12h current', () => {
-    const prev: CachePair = { current: snap({ collectedAt: at(13) }), baseline: snap({ collectedAt: at(50) }) }
+    const prev: CachePair = pair(snap({ collectedAt: at(13) }), snap({ collectedAt: at(50) }))
     expect(rollBaseline(prev, next)).toBe(prev.current)
   })
 
   test('stale baseline with a too-young current is kept (no honest candidate)', () => {
-    const prev: CachePair = { current: snap({ collectedAt: at(5) }), baseline: snap({ collectedAt: at(50) }) }
+    const prev: CachePair = pair(snap({ collectedAt: at(5) }), snap({ collectedAt: at(50) }))
     expect(rollBaseline(prev, next)).toBe(prev.baseline)
+  })
+
+  test('cross-auth cache slots are never kept or promoted', () => {
+    // A token-derived baseline must not become an anonymous session's
+    // baseline (visibility differs → fabricated queue changes; and it would
+    // keep token-only data on disk past its session).
+    const prev: CachePair = pair(
+      snap({ collectedAt: at(21), authMode: 'token' }),
+      snap({ collectedAt: at(50), authMode: 'token' }),
+    )
+    expect(rollBaseline(prev, { ...next, authMode: 'anonymous' })).toBeNull()
+    // Mixed slots: the anonymous current is promotable, the token baseline is not kept.
+    const mixed: CachePair = pair(
+      snap({ collectedAt: at(21), authMode: 'anonymous' }),
+      snap({ collectedAt: at(30), authMode: 'token' }),
+    )
+    expect(rollBaseline(mixed, { ...next, authMode: 'anonymous' })).toBe(mixed.current)
+  })
+
+  test('continuous user: baseline eventually rotates via the retained slot', () => {
+    // A user who keeps the page open saves every 3h; `current` is always
+    // ~3h old, so without a retained slot the 12h rotate gate could never
+    // fire and the baseline would stay frozen at first-ever collection.
+    // Simulate: seed at t0, then 3h saves; retained keeps t0 (oldest, within
+    // 48h) until it ages out, then follows the window.
+    const t0 = snap({ collectedAt: at(63) })
+    const early = snap({ collectedAt: at(60) }) // 3h after t0 — becomes retained
+    const now = snap({ collectedAt: at(0) }) // 63h after t0
+
+    // Baseline is t0 (63h old → beyond the 48h window), retained is `early`
+    // (60h old — also beyond the window), current is `now` (3h old, too
+    // young): no candidate inside the window → keep the old baseline.
+    const tooOldRetained: CachePair = pair(now, t0, early)
+    expect(rollBaseline(tooOldRetained, now)).toBe(t0)
+
+    // Retained inside the window and >= 12h old → rotation fires.
+    const midRetained: CachePair = pair(now, t0, snap({ collectedAt: at(13) }))
+    expect(rollBaseline(midRetained, now)).toBe(midRetained.retained)
+
+    // Current itself qualifies (>= 12h, within window) when retained does not.
+    const oldCurrent: CachePair = pair(snap({ collectedAt: at(15) }), t0, null)
+    expect(rollBaseline(oldCurrent, now)).toBe(oldCurrent.current)
+  })
+})
+
+describe('rollRetained — oldest same-auth complete snapshot within the window', () => {
+  const next = { collectedAt: at(0), authMode: 'anonymous' as const }
+
+  test('keeps the older retained snapshot; a newer current never displaces it', () => {
+    const prev: CachePair = pair(snap({ collectedAt: at(3) }), snap({ collectedAt: at(30) }), snap({ collectedAt: at(20) }))
+    expect(rollRetained(prev, next)).toBe(prev.retained) // 20h old beats the 3h current
+  })
+
+  test('empty retained slot adopts the previous current', () => {
+    const prev: CachePair = pair(snap({ collectedAt: at(3) }), snap({ collectedAt: at(30) }), null)
+    expect(rollRetained(prev, next)).toBe(prev.current)
+  })
+
+  test('retained beyond the retention window rolls to the previous current', () => {
+    const prev: CachePair = pair(snap({ collectedAt: at(3) }), snap({ collectedAt: at(60) }), snap({ collectedAt: at(55) }))
+    expect(rollRetained(prev, next)).toBe(prev.current) // 55h > 48h window
+  })
+
+  test('cross-auth retained/current are never retained for the next session', () => {
+    const prev: CachePair = pair(
+      snap({ collectedAt: at(3), authMode: 'token' }),
+      snap({ collectedAt: at(30) }),
+      snap({ collectedAt: at(20), authMode: 'token' }),
+    )
+    expect(rollRetained(prev, { ...next, authMode: 'anonymous' })).toBeNull()
+  })
+
+  test('end-to-end save sequence: rotation actually fires for a continuous user', async () => {
+    const idb = new MockIdb()
+    const cache = new TodayCache(idb)
+    // t0 seed; then saves at 60h..0h (3h apart) like a page open for ~2.5 days.
+    await cache.saveComplete(snap({ collectedAt: at(63) }))
+    for (let h = 60; h >= 0; h -= 3) {
+      await cache.saveComplete(snap({ collectedAt: at(h) }))
+    }
+    const loaded = await cache.load()
+    // The baseline must not still be the t0 snapshot (63h old): the retained
+    // slot (a snapshot 12-48h old at some save) rotated it forward.
+    expect(loaded.baseline?.collectedAt).not.toBe(at(63))
+    const baselineAge = (Date.parse(at(0)) - Date.parse(loaded.baseline?.collectedAt ?? '')) / H
+    expect(baselineAge).toBeGreaterThan(0)
+    expect(baselineAge).toBeLessThanOrEqual(48)
+  })
+})
+
+describe('baselineForNextSave — the baseline missing-PR checks must run against', () => {
+  const next = { collectedAt: at(0), authMode: 'anonymous' as const }
+
+  test('mirrors rollBaseline when a rotation candidate exists', () => {
+    const prev: CachePair = pair(snap({ collectedAt: at(21) }), snap({ collectedAt: at(30) }))
+    expect(baselineForNextSave(prev, next)).toBe(prev.current)
+  })
+
+  test('no candidate: the next save seeds with itself — an empty diff, no checks needed', () => {
+    const preview = baselineForNextSave(pair(null, null), next)
+    expect(preview).not.toBeNull()
+    expect(preview?.prs).toEqual([])
+    expect(preview?.collectedAt).toBe(next.collectedAt)
+    // diff against the snapshot about to be saved = empty everywhere
+  })
+
+  test('cross-auth cache: empty preview — token slots never checked against anonymous saves', () => {
+    const prev: CachePair = pair(
+      snap({ collectedAt: at(21), authMode: 'token' }),
+      snap({ collectedAt: at(50), authMode: 'token' }),
+    )
+    const preview = baselineForNextSave(prev, { ...next, authMode: 'anonymous' })
+    expect(preview?.prs).toEqual([])
   })
 })
 
@@ -194,7 +313,7 @@ describe('TodayCache — persistence', () => {
     expect(seeded.baseline).toEqual(first) // seed: no old-enough baseline yet
     expect(seeded.current).toEqual(first)
 
-    const second = snap({ collectedAt: at(0), prs: [{ repo: 'MetaMask/core', number: 5, title: 'x', url: 'u', author: 'a', draft: false, createdAt: at(1), updatedAt: at(1), labels: [], requestedTeams: [], requestedReviewers: [] }] })
+    const second = snap({ collectedAt: at(0), prs: [{ repo: 'MetaMask/core', number: 5, title: 'x', url: 'https://github.com/MetaMask/core/pull/5', author: 'a', draft: false, createdAt: at(1), updatedAt: at(1), labels: [], requestedTeams: [], requestedReviewers: [] }] })
     const pair = await cache.saveComplete(second)
     expect(pair.current).toEqual(second)
     expect(pair.baseline).toEqual(first) // first is 24h old → promoted on the NEXT save
@@ -215,12 +334,15 @@ describe('TodayCache — persistence', () => {
     expect(loaded.current).toEqual(good)
   })
 
-  test('clearAll wipes both slots (auth change)', async () => {
+  test('clearAll wipes all three slots — token-derived data never survives (auth change)', async () => {
     const idb = new MockIdb()
     const cache = new TodayCache(idb)
-    await cache.saveComplete(snap({ collectedAt: at(0) }))
+    await cache.saveComplete(snap({ collectedAt: at(3), authMode: 'token' }))
+    await cache.saveComplete(snap({ collectedAt: at(0), authMode: 'token' }))
+    // Second save populated the retained slot; all three slots are non-null.
+    expect((await cache.load()).retained).not.toBeNull()
     await cache.clearAll()
-    expect(await cache.load()).toEqual({ current: null, baseline: null })
+    expect(await cache.load()).toEqual(pair(null, null, null))
     expect(idb.puts.length).toBeGreaterThan(0)
   })
 
@@ -232,7 +354,7 @@ describe('TodayCache — persistence', () => {
       rate: { limit: 60, remaining: 55, reset: '2026-11-08T13:00:00Z' },
     })
     await cache.saveComplete(withRate)
-    expect(idb.puts.length).toBe(2) // baseline + current
+    expect(idb.puts.map((p) => p.key).sort()).toEqual(['baseline', 'current']) // seed save: retained slot is empty (deleted, not put)
     for (const put of idb.puts) {
       const serialized = JSON.stringify(put.value)
       expect(serialized).not.toContain('authorization')

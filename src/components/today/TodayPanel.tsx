@@ -9,6 +9,7 @@ import {
   parseHash,
   type TodayUrlState,
 } from '../../today/urlstate'
+import { TODAY_REPOS } from '../../today/config'
 import type { AuthMode } from '../../today/normalize'
 import { TokenCard } from './TokenCard'
 import { TodayStatus } from './TodayStatus'
@@ -112,7 +113,7 @@ export function TodayPanel() {
             >
               All repos
             </button>
-            {(['MetaMask/core', 'MetaMask/metamask-mobile', 'MetaMask/metamask-extension'] as const).map(
+            {TODAY_REPOS.map(
               (repo) => (
                 <button
                   key={repo}

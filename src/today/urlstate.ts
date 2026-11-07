@@ -8,6 +8,8 @@
  * defaults rather than being invented or crashing.
  */
 
+import { TODAY_REPOS } from './config'
+
 export type Route = 'today' | 'history'
 
 export type TodayView = 'needs' | 'awaiting'
@@ -31,11 +33,9 @@ export const DEFAULT_TODAY_STATE: TodayUrlState = {
   sort: 'oldest',
 }
 
-export const KNOWN_REPOS: readonly string[] = [
-  'MetaMask/core',
-  'MetaMask/metamask-mobile',
-  'MetaMask/metamask-extension',
-]
+// Single source of truth: the collector sweeps exactly what the URL state
+// and filter buttons accept, so both derive from config's TODAY_REPOS.
+export const KNOWN_REPOS: readonly string[] = TODAY_REPOS
 
 const VIEW_VALUES: readonly TodayView[] = ['needs', 'awaiting']
 const SORT_VALUES: readonly TodaySort[] = ['oldest', 'newest', 'repo', 'author']
@@ -75,10 +75,6 @@ export function buildTodayHash(state: TodayUrlState): string {
   if (state.group !== DEFAULT_TODAY_STATE.group) params.set('group', state.group)
   if (state.sort !== DEFAULT_TODAY_STATE.sort) params.set('sort', state.sort)
   return `#/today?${params.toString()}`
-}
-
-export function buildHistoryHash(): string {
-  return '#/history'
 }
 
 /**

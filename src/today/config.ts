@@ -108,6 +108,9 @@ export const CACHE_DB_VERSION = 1
 export const CACHE_STORE = 'snapshots'
 export const CACHE_KEY_CURRENT = 'current'
 export const CACHE_KEY_BASELINE = 'baseline'
+/** Oldest retained complete snapshot within the retention window — the
+ * rotation candidate for continuous users (see rollBaseline). */
+export const CACHE_KEY_RETAINED = 'retained'
 
 /** Web Locks / BroadcastChannel names for cross-tab coordination. */
 export const COLLECT_LOCK_NAME = 'assets-today-collect'
