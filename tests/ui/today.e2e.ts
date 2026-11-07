@@ -236,7 +236,7 @@ test.describe('Navigation — Daily and Historical pages', () => {
   test('in-page fragment anchors never flip the page (regression)', async ({ page }) => {
     const historicalMarker = page.locator('.stat').first()
     await mockGitHub(page)
-    // Historical held by the legacy hash at the root path — following a
+    // Historical held by the #/history hash at the root path — following a
     // plain fragment anchor (e.g. a future skip link, or a shared URL with a
     // fragment) must keep the Historical page, not flip to Daily.
     await page.goto('/#/history')
@@ -253,7 +253,25 @@ test.describe('Navigation — Daily and Historical pages', () => {
     await expect(page.locator('.today-meta')).toBeVisible()
   })
 
-  test('legacy #/today and #/history deep links still work (old bookmarks)', async ({ page }) => {
+  test('back from a hash entry to a hashless URL restores the page', async ({ page }) => {
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    // Adverse round-2 repro: /historical (Historical) → #/today (Daily) →
+    // Back must return to Historical, not strand the Daily view on the
+    // /historical URL.
+    await page.goto('/historical')
+    await expect(historicalMarker).toBeVisible()
+    await page.evaluate(() => {
+      window.location.hash = '#/today'
+    })
+    await expect(page.locator('.today-meta')).toBeVisible()
+    await page.goBack()
+    await expect(historicalMarker).toBeVisible()
+    await expect(page.locator('.today-meta')).toHaveCount(0)
+    await expect(page).toHaveURL(/\/historical$/)
+  })
+
+  test('hash deep links still work: #/today (live share format) and #/history (legacy)', async ({ page }) => {
     const dailyMarker = page.locator('.today-meta')
     const historicalMarker = page.locator('.stat').first()
     await mockGitHub(page)
@@ -265,7 +283,7 @@ test.describe('Navigation — Daily and Historical pages', () => {
     await expect(dailyMarker).toHaveCount(0)
   })
 
-  test('legacy shared Daily filter links apply their state', async ({ page }) => {
+  test('shared Daily filter links apply their state', async ({ page }) => {
     await mockGitHub(page)
     await page.goto('/#/today?view=awaiting&sort=newest')
     await expect(page.locator('.today-meta')).toBeVisible()

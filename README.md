@@ -23,6 +23,14 @@ today; treat them as a current feature, not just old bookmarks. `#/history`
 is a read-only legacy alias from the hash-routed era, kept so old links keep
 working.
 
+> **Terminology:** the UI says "Daily", but the implementation still uses
+> "today" identifiers — the module lives in `src/today/` (`TodayPanel`,
+> `useTodayData`), CSS hooks are `.today-*`, tests are `today.e2e.ts`, and the
+> share-link hash is `#/today?…` (frozen: share links exist in the wild). If
+> you grep for "daily" you will miss most of the implementation — search for
+> "today" in the code. The hash format must never be renamed or dropped; the
+> module rename is deliberate churn-avoidance, not an oversight.
+
 ## Local development
 
 ```sh

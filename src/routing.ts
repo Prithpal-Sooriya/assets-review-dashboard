@@ -27,8 +27,8 @@
 
 export type Page = 'daily' | 'historical'
 
-const LEGACY_DAILY_HASH = '/today'
-const LEGACY_HISTORICAL_HASH = '/history'
+const DAILY_HASH = '/today' // the live share-link format for Daily (filters in the query)
+const HISTORICAL_HASH = '/history' // legacy alias kept for old bookmarks
 const HISTORICAL_PATH = '/historical'
 
 /** Path-only part of a hash: "#/today?repo=X" → "/today". */
@@ -49,8 +49,8 @@ function normalizePath(pathname: string): string {
 /** Resolve the active page from a location. Pure — unit tested. */
 export function resolvePage(pathname: string, hash: string): Page {
   const h = hashPath(hash)
-  if (h === LEGACY_DAILY_HASH) return 'daily'
-  if (h === LEGACY_HISTORICAL_HASH) return 'historical'
+  if (h === DAILY_HASH) return 'daily'
+  if (h === HISTORICAL_HASH) return 'historical'
   return normalizePath(pathname) === HISTORICAL_PATH ? 'historical' : 'daily'
 }
 
@@ -63,7 +63,34 @@ export function resolvePage(pathname: string, hash: string): Page {
  */
 export function isRouteHash(hash: string): boolean {
   const h = hashPath(hash)
-  return h === LEGACY_DAILY_HASH || h === LEGACY_HISTORICAL_HASH
+  return h === DAILY_HASH || h === HISTORICAL_HASH
+}
+
+export interface UrlLocation {
+  pathname: string
+  hash: string
+}
+
+/**
+ * Whether App should re-resolve the page after a same-document URL change.
+ * Browsers fire popstate for EVERY same-document URL change — hash edits and
+ * in-page anchors included, not just back/forward — so the raw event cannot
+ * be trusted. Re-resolve only on an explicit page navigation:
+ *   - the new hash names a page route ("#/today", "#/history"), or
+ *   - the path changed (/ ↔ /historical), or
+ *   - a previously-present hash disappeared (back/forward returning to a
+ *     hashless URL — following an in-page anchor can never remove the hash,
+ *     so a removal always means a history traversal or a manual URL edit,
+ *     both of which should honor the path again).
+ * A plain fragment anchor ("#main") matches none of these, so following one
+ * never flips the page. Pure — unit tested; the e2e suite covers the wiring.
+ */
+export function shouldResyncOnUrlChange(prev: UrlLocation, next: UrlLocation): boolean {
+  return (
+    isRouteHash(next.hash) ||
+    next.pathname !== prev.pathname ||
+    (next.hash === '' && prev.hash !== '')
+  )
 }
 
 /** Canonical href for a page — what the nav links point at. */

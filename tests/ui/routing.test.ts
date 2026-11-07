@@ -1,11 +1,12 @@
 import { describe, expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
-import { isRouteHash, pageHref, resolvePage, type Page } from '../../src/routing'
+import { isRouteHash, pageHref, resolvePage, shouldResyncOnUrlChange, type Page, type UrlLocation } from '../../src/routing'
 
 /**
- * Page routing: Daily lives at /, Historical at /historical, and the legacy
- * hash routes (#/today, #/history) are preserved on any path so old
- * bookmarks and shared filter links keep working.
+ * Page routing: Daily lives at /, Historical at /historical. Hash routes are
+ * honored on any path: #/today?… is the LIVE share-link format for Daily
+ * (filter state lives in the hash query and the app emits these URLs today),
+ * #/history is a read-only legacy alias for old bookmarks.
  */
 describe('resolvePage', () => {
   test('root path (no hash) is Daily — the landing page', () => {
@@ -21,13 +22,13 @@ describe('resolvePage', () => {
     expect(resolvePage('/index.html', '')).toBe('daily')
   })
 
-  test('legacy #/today shows Daily on any path, with or without filters', () => {
+  test('#/today shows Daily on any path (live share-link format), with or without filters', () => {
     expect(resolvePage('/', '#/today')).toBe('daily')
     expect(resolvePage('/historical', '#/today')).toBe('daily')
     expect(resolvePage('/', '#/today?view=awaiting&repo=MetaMask%2Fcore&sort=newest')).toBe('daily')
   })
 
-  test('legacy #/history shows Historical on any path (old bookmarks)', () => {
+  test('#/history shows Historical on any path (legacy alias for old bookmarks)', () => {
     expect(resolvePage('/', '#/history')).toBe('historical')
     expect(resolvePage('/historical', '#/history')).toBe('historical')
   })
@@ -66,6 +67,38 @@ describe('isRouteHash', () => {
     expect(isRouteHash('#')).toBe(false)
     expect(isRouteHash('#/')).toBe(false)
     expect(isRouteHash('#/anything-old')).toBe(false)
+  })
+})
+
+describe('shouldResyncOnUrlChange', () => {
+  const loc = (pathname: string, hash = ''): UrlLocation => ({ pathname, hash })
+
+  test('route-shaped hash changes re-resolve (explicit page navigation)', () => {
+    expect(shouldResyncOnUrlChange(loc('/'), loc('/', '#/today'))).toBe(true)
+    expect(shouldResyncOnUrlChange(loc('/'), loc('/', '#/history'))).toBe(true)
+    expect(shouldResyncOnUrlChange(loc('/historical'), loc('/historical', '#/today?repo=MetaMask%2Fcore'))).toBe(true)
+  })
+
+  test('plain fragment anchors never re-resolve on the same path', () => {
+    // Historical held by the #/history hash at / must survive an anchor hop.
+    expect(shouldResyncOnUrlChange(loc('/', '#/history'), loc('/', '#main'))).toBe(false)
+    expect(shouldResyncOnUrlChange(loc('/'), loc('/', '#main'))).toBe(false)
+    expect(shouldResyncOnUrlChange(loc('/historical', '#/today'), loc('/historical', '#main'))).toBe(false)
+  })
+
+  test('path changes re-resolve (back/forward between / and /historical)', () => {
+    expect(shouldResyncOnUrlChange(loc('/'), loc('/historical'))).toBe(true)
+    expect(shouldResyncOnUrlChange(loc('/historical'), loc('/'))).toBe(true)
+  })
+
+  test('a disappearing hash re-resolves — back to a hashless URL', () => {
+    // Adverse round-2 repro: /historical (Historical) → #/today (Daily) →
+    // Back → hashless /historical must restore Historical. An in-page anchor
+    // can never REMOVE the hash, so a removal is always a traversal/manual
+    // edit and should honor the path again.
+    expect(shouldResyncOnUrlChange(loc('/historical', '#/today'), loc('/historical', ''))).toBe(true)
+    expect(shouldResyncOnUrlChange(loc('/', '#main'), loc('/'))).toBe(true)
+    expect(shouldResyncOnUrlChange(loc('/'), loc('/'))).toBe(false)
   })
 })
 

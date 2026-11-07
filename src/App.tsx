@@ -24,7 +24,7 @@ import { MethodologyCard, WarningsCard } from './components/NotesCards'
 import { EmptyState, InvalidState, MissingState } from './components/StateCards'
 import { Footer } from './components/Footer'
 import { TodayPanel } from './components/today/TodayPanel'
-import { isRouteHash, resolvePage, type Page } from './routing'
+import { resolvePage, shouldResyncOnUrlChange, type Page, type UrlLocation } from './routing'
 
 export default function App() {
   const [repoFilter, setRepoFilter] = useState<string | null>(null)
@@ -36,20 +36,17 @@ export default function App() {
     typeof window === 'undefined' ? 'daily' : resolvePage(window.location.pathname, window.location.hash),
   )
   useEffect(() => {
-    // Browsers fire popstate for EVERY same-document URL change — hash edits
-    // and in-page anchors included, not just back/forward — so both handlers
-    // share one guard: re-resolve only on an explicit page navigation, i.e. a
-    // route-shaped hash (#/today, #/history) or a path change (/ ↔
-    // /historical). A plain fragment anchor (#main) must never flip the page
-    // (e.g. Historical held by #/history at / would otherwise flip to Daily).
-    // Filter updates use history.replaceState, which fires neither event.
-    let lastPathname = window.location.pathname
-    const sync = () => {
-      lastPathname = window.location.pathname
-      setPage(resolvePage(window.location.pathname, window.location.hash))
-    }
+    // Same-document URL changes: browsers fire popstate for every one of them
+    // (hash edits and in-page anchors included, not just back/forward), so
+    // both handlers share the guard in routing.ts — re-resolve only on an
+    // explicit page navigation. Filter updates use history.replaceState,
+    // which fires neither event — filters change state, not the page.
+    const sync = () => setPage(resolvePage(window.location.pathname, window.location.hash))
+    let last: UrlLocation = { pathname: window.location.pathname, hash: window.location.hash }
     const onUrlChange = () => {
-      if (isRouteHash(window.location.hash) || window.location.pathname !== lastPathname) sync()
+      const next: UrlLocation = { pathname: window.location.pathname, hash: window.location.hash }
+      if (shouldResyncOnUrlChange(last, next)) sync()
+      last = next
     }
     window.addEventListener('popstate', onUrlChange)
     window.addEventListener('hashchange', onUrlChange)
