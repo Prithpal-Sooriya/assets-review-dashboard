@@ -16,7 +16,7 @@ import { UI_VARIANTS } from './variants'
  */
 
 for (const variant of UI_VARIANTS) {
-  if (!variant.fixture) {
+  if (!variant.fixture.trim()) {
     process.stderr.write(
       `variant "${variant.name}" must pin a fixture (DASHBOARD_DATA_PATH) — ` +
         `an unpinned build would fall back to data/dashboard.json and embed real data\n`,
@@ -24,6 +24,8 @@ for (const variant of UI_VARIANTS) {
     process.exit(1)
   }
   const env: Record<string, string | undefined> = { ...process.env }
+  // Pinned fixture deliberately OVERRIDES any DASHBOARD_DATA_PATH inherited
+  // from the environment — the variant table is the source of truth.
   env.DASHBOARD_DATA_PATH = variant.fixture
   process.stdout.write(`▸ building variant "${variant.name}" → ${variant.outDir}\n`)
   const result = spawnSync('bunx', ['vite', 'build', '--outDir', variant.outDir], {
