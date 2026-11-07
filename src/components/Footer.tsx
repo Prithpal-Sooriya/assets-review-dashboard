@@ -12,7 +12,7 @@ export function Footer({ loaded }: { loaded: LoadedDashboard }) {
         <dl>
           <dt>Data</dt>
           <dd>
-            {loaded.isDemo ? 'Synthetic demo fixture' : 'Real collected data'} embedded at build
+            {loaded.isDemo ? 'Sample data (synthetic fixture)' : 'Real collected data'} embedded at build
             time from <code>{displayPath(loaded.dataPath)}</code>
             {loaded.source === 'none' && ' (not found)'}
           </dd>

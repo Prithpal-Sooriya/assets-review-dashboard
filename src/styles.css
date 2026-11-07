@@ -210,10 +210,26 @@ select {
   background: var(--surface);
 }
 
-.notice--demo {
-  border-color: var(--amber-bar);
+/* Discreet sample-data strip (owner decision 2026-11-07): always visible and
+   accurate, never loud — small, tinted, one line. Invented figures must be
+   labelled, but the label stays out of the way. */
+.notice--sample {
+  border: none;
+  border-left: 3px solid var(--amber-bar);
+  border-radius: 0 6px 6px 0;
+  padding: 6px 10px;
+  margin: 14px 0 0;
   background: var(--amber-soft);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.notice--sample .notice__label {
   color: var(--amber-text);
+}
+
+.notice--sample code {
+  font-size: 0.8rem;
 }
 
 .notice--warn {
