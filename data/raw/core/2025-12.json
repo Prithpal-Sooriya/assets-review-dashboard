@@ -1,0 +1,4070 @@
+{
+  "schemaVersion": 1,
+  "repo": "MetaMask/core",
+  "month": "2025-12",
+  "completeness": "monthEnd",
+  "collectedAt": "2026-11-07T19:57:43.809Z",
+  "prCount": 212,
+  "prs": [
+    {
+      "number": 5903,
+      "title": "Add DeepWiki badge",
+      "url": "https://github.com/MetaMask/core/pull/5903",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2025-06-03T13:54:12Z",
+      "updatedAt": "2025-12-01T14:43:00Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6203,
+      "title": "chore: Eliminate `handleAny`",
+      "url": "https://github.com/MetaMask/core/pull/6203",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-07-28T20:40:24Z",
+      "updatedAt": "2025-12-09T20:49:38Z",
+      "closedAt": "2025-08-05T21:46:37Z",
+      "mergedAt": null,
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6393,
+      "title": "WIP - Add Slow, VerySlow, and latency",
+      "url": "https://github.com/MetaMask/core/pull/6393",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-08-26T22:20:52Z",
+      "updatedAt": "2025-12-01T14:41:13Z",
+      "closedAt": "2025-12-01T14:41:13Z",
+      "mergedAt": null,
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6681,
+      "title": "Change owner of delegation-controller to @MetaMask/delegationController",
+      "url": "https://github.com/MetaMask/core/pull/6681",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-09-23T04:07:37Z",
+      "updatedAt": "2025-12-04T04:16:44Z",
+      "closedAt": "2025-12-03T21:14:02Z",
+      "mergedAt": "2025-12-03T21:14:02Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [
+        "team-delegation"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7067,
+      "title": "chore: change `Monad Testnet` to infura network",
+      "url": "https://github.com/MetaMask/core/pull/7067",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-06T04:35:54Z",
+      "updatedAt": "2025-12-01T08:07:01Z",
+      "closedAt": "2025-12-01T08:06:59Z",
+      "mergedAt": "2025-12-01T08:06:58Z",
+      "authorLogin": "stanleyyconsensys",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3523659976,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-01T08:02:24Z",
+          "authorLogin": "sahar-fehri"
+        }
+      ]
+    },
+    {
+      "number": 7080,
+      "title": "feat(analytics-controller): update controller and adapter interface for mobile integration [Phase 1.4]",
+      "url": "https://github.com/MetaMask/core/pull/7080",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-06T20:50:38Z",
+      "updatedAt": "2025-12-13T00:08:25Z",
+      "closedAt": "2025-12-12T22:19:54Z",
+      "mergedAt": "2025-12-12T22:19:54Z",
+      "authorLogin": "NicolasMassart",
+      "labels": [
+        "team-mobile-platform",
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7091,
+      "title": "Ramps Controller Foundation",
+      "url": "https://github.com/MetaMask/core/pull/7091",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-11-07T16:12:29Z",
+      "updatedAt": "2025-12-15T15:11:49Z",
+      "closedAt": "2025-12-15T15:11:49Z",
+      "mergedAt": null,
+      "authorLogin": "pkowalski",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7111,
+      "title": "fix: Refresh EIP-1559 compatibility on network switch",
+      "url": "https://github.com/MetaMask/core/pull/7111",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-11T10:19:12Z",
+      "updatedAt": "2025-12-09T09:54:53Z",
+      "closedAt": "2025-12-09T09:54:53Z",
+      "mergedAt": null,
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7153,
+      "title": "Release 679.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7153",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-13T14:49:28Z",
+      "updatedAt": "2025-12-15T15:21:31Z",
+      "closedAt": "2025-11-13T15:29:13Z",
+      "mergedAt": "2025-11-13T15:29:13Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7195,
+      "title": "chore: Add Expiry Extraction Utilities to gator-permissions-controller",
+      "url": "https://github.com/MetaMask/core/pull/7195",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-19T21:37:12Z",
+      "updatedAt": "2025-12-08T22:24:15Z",
+      "closedAt": "2025-12-02T19:44:49Z",
+      "mergedAt": "2025-12-02T19:44:49Z",
+      "authorLogin": "hanzel98",
+      "labels": [
+        "no-changelog",
+        "team-delegation"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7206,
+      "title": "chore: Remove unused `tsconfig` files",
+      "url": "https://github.com/MetaMask/core/pull/7206",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-20T13:23:29Z",
+      "updatedAt": "2025-12-02T14:16:46Z",
+      "closedAt": "2025-12-02T14:16:46Z",
+      "mergedAt": null,
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7209,
+      "title": "Move peer deps for controller/service packages to direct deps",
+      "url": "https://github.com/MetaMask/core/pull/7209",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-20T16:57:57Z",
+      "updatedAt": "2025-12-01T14:45:21Z",
+      "closedAt": "2025-11-21T17:41:46Z",
+      "mergedAt": "2025-11-21T17:41:46Z",
+      "authorLogin": "mcmire",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7228,
+      "title": "fix: set swap resetApproval param and include in tx fee calculations",
+      "url": "https://github.com/MetaMask/core/pull/7228",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-24T22:34:37Z",
+      "updatedAt": "2025-12-02T19:08:56Z",
+      "closedAt": "2025-12-02T19:08:55Z",
+      "mergedAt": "2025-12-02T19:08:54Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7235,
+      "title": "chore: refresh gator permissions map after revocation state change",
+      "url": "https://github.com/MetaMask/core/pull/7235",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-25T13:34:44Z",
+      "updatedAt": "2025-12-01T09:53:39Z",
+      "closedAt": "2025-12-01T09:53:38Z",
+      "mergedAt": "2025-12-01T09:53:38Z",
+      "authorLogin": "MoMannn",
+      "labels": [
+        "team-delegation"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7254,
+      "title": "feat: add nft support for monad",
+      "url": "https://github.com/MetaMask/core/pull/7254",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-27T13:33:44Z",
+      "updatedAt": "2025-12-08T15:08:54Z",
+      "closedAt": "2025-12-08T15:08:52Z",
+      "mergedAt": "2025-12-08T15:08:52Z",
+      "authorLogin": "khanti42",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3552459807,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-08T14:49:08Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3552497186,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-08T14:57:10Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7260,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to 26bff79d1c862b8b3bb53c556cc6a4731420c291",
+      "url": "https://github.com/MetaMask/core/pull/7260",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-11-28T06:24:38Z",
+      "updatedAt": "2025-12-03T06:26:35Z",
+      "closedAt": "2025-12-03T06:26:34Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7262,
+      "title": "feat: skip delegation in relay quotes if token transfer",
+      "url": "https://github.com/MetaMask/core/pull/7262",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-28T11:23:15Z",
+      "updatedAt": "2025-12-03T12:46:30Z",
+      "closedAt": "2025-12-03T12:46:29Z",
+      "mergedAt": "2025-12-03T12:46:29Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7268,
+      "title": "chore: Re-enable ESLint rules and suppress errors",
+      "url": "https://github.com/MetaMask/core/pull/7268",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-28T21:19:03Z",
+      "updatedAt": "2025-12-04T22:40:14Z",
+      "closedAt": "2025-12-04T22:40:13Z",
+      "mergedAt": "2025-12-04T22:40:13Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7269,
+      "title": "feat: add token minimum balance calculation and response type",
+      "url": "https://github.com/MetaMask/core/pull/7269",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-30T07:56:29Z",
+      "updatedAt": "2025-12-01T07:01:04Z",
+      "closedAt": "2025-12-01T07:01:02Z",
+      "mergedAt": "2025-12-01T07:01:02Z",
+      "authorLogin": "tuna1207",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7271,
+      "title": "feat: add override functionality to remote feature flags",
+      "url": "https://github.com/MetaMask/core/pull/7271",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-30T21:53:05Z",
+      "updatedAt": "2025-12-15T15:44:23Z",
+      "closedAt": "2025-12-15T15:33:00Z",
+      "mergedAt": "2025-12-15T15:33:00Z",
+      "authorLogin": "asalsys",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7272,
+      "title": "chore: add `MegaETH Testnet v2`",
+      "url": "https://github.com/MetaMask/core/pull/7272",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T07:08:57Z",
+      "updatedAt": "2025-12-10T02:50:45Z",
+      "closedAt": "2025-12-10T02:50:44Z",
+      "mergedAt": "2025-12-10T02:50:44Z",
+      "authorLogin": "stanleyyconsensys",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7273,
+      "title": "Release/701.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7273",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T07:13:00Z",
+      "updatedAt": "2025-12-01T07:23:36Z",
+      "closedAt": "2025-12-01T07:23:35Z",
+      "mergedAt": "2025-12-01T07:23:35Z",
+      "authorLogin": "tuna1207",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7274,
+      "title": "Release/702.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7274",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T10:00:55Z",
+      "updatedAt": "2025-12-01T10:28:31Z",
+      "closedAt": "2025-12-01T10:28:29Z",
+      "mergedAt": "2025-12-01T10:28:29Z",
+      "authorLogin": "MoMannn",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7275,
+      "title": "refactor: improve push notification received utils",
+      "url": "https://github.com/MetaMask/core/pull/7275",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T10:57:32Z",
+      "updatedAt": "2025-12-01T11:36:00Z",
+      "closedAt": "2025-12-01T11:35:58Z",
+      "mergedAt": "2025-12-01T11:35:58Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3524389031,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-01T11:00:26Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3524391199,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-01T11:01:07Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3524441863,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-01T11:13:26Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7276,
+      "title": "fix: rm 2pd for currency rate values",
+      "url": "https://github.com/MetaMask/core/pull/7276",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T11:49:20Z",
+      "updatedAt": "2025-12-01T12:56:01Z",
+      "closedAt": "2025-12-01T12:56:00Z",
+      "mergedAt": "2025-12-01T12:56:00Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3524673174,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-01T12:12:55Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7278,
+      "title": "chore: port fetchTokens from swaps controller",
+      "url": "https://github.com/MetaMask/core/pull/7278",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T14:03:36Z",
+      "updatedAt": "2025-12-01T14:41:33Z",
+      "closedAt": "2025-12-01T14:41:31Z",
+      "mergedAt": "2025-12-01T14:41:31Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7279,
+      "title": "fix(TokenBalancesController): fetch balances on account change",
+      "url": "https://github.com/MetaMask/core/pull/7279",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T14:55:34Z",
+      "updatedAt": "2025-12-01T22:14:03Z",
+      "closedAt": "2025-12-01T22:14:02Z",
+      "mergedAt": "2025-12-01T22:14:02Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3526664685,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-01T19:40:53Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3526732506,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-01T20:00:34Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3527184057,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-01T21:44:14Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3527188289,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-01T21:45:10Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7280,
+      "title": "chore: Use stricter TypeScript configuration for linting",
+      "url": "https://github.com/MetaMask/core/pull/7280",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T17:17:47Z",
+      "updatedAt": "2025-12-02T14:15:16Z",
+      "closedAt": "2025-12-02T14:15:14Z",
+      "mergedAt": "2025-12-02T14:15:14Z",
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7281,
+      "title": "fix: relay upgrade on same chain",
+      "url": "https://github.com/MetaMask/core/pull/7281",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-01T17:33:22Z",
+      "updatedAt": "2025-12-02T04:36:21Z",
+      "closedAt": "2025-12-02T04:36:20Z",
+      "mergedAt": "2025-12-02T04:36:20Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7282,
+      "title": "feat: overwrite existing 7702 upgrade",
+      "url": "https://github.com/MetaMask/core/pull/7282",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T05:13:37Z",
+      "updatedAt": "2025-12-02T12:31:53Z",
+      "closedAt": "2025-12-02T12:31:52Z",
+      "mergedAt": "2025-12-02T12:31:52Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7283,
+      "title": "feat: link rewards to subscription",
+      "url": "https://github.com/MetaMask/core/pull/7283",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T06:08:34Z",
+      "updatedAt": "2025-12-02T08:54:05Z",
+      "closedAt": "2025-12-02T08:54:04Z",
+      "mergedAt": "2025-12-02T08:54:04Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7286,
+      "title": "chore: add megaeth in popular networks",
+      "url": "https://github.com/MetaMask/core/pull/7286",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T10:51:34Z",
+      "updatedAt": "2025-12-03T11:03:40Z",
+      "closedAt": "2025-12-03T11:03:39Z",
+      "mergedAt": "2025-12-03T11:03:39Z",
+      "authorLogin": "khanti42",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3534324792,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-03T10:27:57Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3534411618,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-03T10:44:20Z",
+          "authorLogin": "sahar-fehri"
+        }
+      ]
+    },
+    {
+      "number": 7287,
+      "title": "chore: add MegaETH multicall3 address",
+      "url": "https://github.com/MetaMask/core/pull/7287",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T11:33:13Z",
+      "updatedAt": "2025-12-03T09:07:09Z",
+      "closedAt": "2025-12-03T09:07:07Z",
+      "mergedAt": "2025-12-03T09:07:07Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3531164747,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-02T16:48:20Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3533900410,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-03T08:58:35Z",
+          "authorLogin": "sahar-fehri"
+        }
+      ]
+    },
+    {
+      "number": 7289,
+      "title": "Release 703.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7289",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T12:35:02Z",
+      "updatedAt": "2025-12-02T13:04:59Z",
+      "closedAt": "2025-12-02T13:04:58Z",
+      "mergedAt": "2025-12-02T13:04:57Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7290,
+      "title": "chore: use multicall for rpc token detection",
+      "url": "https://github.com/MetaMask/core/pull/7290",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-02T13:16:59Z",
+      "updatedAt": "2025-12-08T19:44:01Z",
+      "closedAt": "2025-12-08T19:44:00Z",
+      "mergedAt": null,
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7291,
+      "title": "Release 704.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7291",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T14:03:41Z",
+      "updatedAt": "2025-12-02T19:19:27Z",
+      "closedAt": "2025-12-02T19:19:26Z",
+      "mergedAt": "2025-12-02T19:19:26Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3531121999,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-02T16:37:58Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7292,
+      "title": "chore: Update `typescript-eslint`",
+      "url": "https://github.com/MetaMask/core/pull/7292",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T14:29:32Z",
+      "updatedAt": "2025-12-02T20:08:09Z",
+      "closedAt": "2025-12-02T20:08:07Z",
+      "mergedAt": "2025-12-02T20:08:07Z",
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7293,
+      "title": "network-controller: Mention addition of degraded status in changelog",
+      "url": "https://github.com/MetaMask/core/pull/7293",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T16:27:02Z",
+      "updatedAt": "2025-12-02T20:52:13Z",
+      "closedAt": "2025-12-02T20:52:12Z",
+      "mergedAt": "2025-12-02T20:52:12Z",
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7294,
+      "title": "fix: include usd_amount_source property in swaps QuotesRequested event",
+      "url": "https://github.com/MetaMask/core/pull/7294",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T16:53:58Z",
+      "updatedAt": "2025-12-02T18:51:28Z",
+      "closedAt": "2025-12-02T18:51:27Z",
+      "mergedAt": "2025-12-02T18:51:26Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7295,
+      "title": "Release/705.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7295",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T19:27:56Z",
+      "updatedAt": "2025-12-03T17:06:24Z",
+      "closedAt": "2025-12-03T16:59:43Z",
+      "mergedAt": "2025-12-03T16:59:43Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7296,
+      "title": "chore: Re-enable `@typescript-eslint/no-unnecessary-type-assertions`",
+      "url": "https://github.com/MetaMask/core/pull/7296",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T20:49:34Z",
+      "updatedAt": "2025-12-03T14:46:54Z",
+      "closedAt": "2025-12-03T14:46:52Z",
+      "mergedAt": "2025-12-03T14:46:52Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7297,
+      "title": "chore: Improve `makeRequest` test utility function",
+      "url": "https://github.com/MetaMask/core/pull/7297",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-02T22:44:50Z",
+      "updatedAt": "2025-12-02T23:02:16Z",
+      "closedAt": "2025-12-02T23:02:15Z",
+      "mergedAt": "2025-12-02T23:02:15Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7298,
+      "title": "feat: include `rewardSubscriptionId` for crypto subscriptions",
+      "url": "https://github.com/MetaMask/core/pull/7298",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T01:58:43Z",
+      "updatedAt": "2025-12-03T08:14:52Z",
+      "closedAt": "2025-12-03T08:14:51Z",
+      "mergedAt": "2025-12-03T08:14:51Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7299,
+      "title": "feat: add permission decoding logic for `erc20-token-revocation` permission type",
+      "url": "https://github.com/MetaMask/core/pull/7299",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T02:03:48Z",
+      "updatedAt": "2025-12-04T21:49:53Z",
+      "closedAt": "2025-12-04T21:49:52Z",
+      "mergedAt": "2025-12-04T21:49:51Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [
+        "team-delegation"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7300,
+      "title": "feat: update toprf-secure-backup to 0.11 and getNodeDetails",
+      "url": "https://github.com/MetaMask/core/pull/7300",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T04:34:55Z",
+      "updatedAt": "2025-12-03T08:42:24Z",
+      "closedAt": "2025-12-03T08:42:23Z",
+      "mergedAt": "2025-12-03T08:42:23Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "team-onboarding",
+        "area-onboarding"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7301,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to 7c0ab4db1e9c1d5673fe7958e8959f1842edbebd",
+      "url": "https://github.com/MetaMask/core/pull/7301",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-03T06:26:30Z",
+      "updatedAt": "2025-12-04T06:30:10Z",
+      "closedAt": "2025-12-04T06:30:08Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7302,
+      "title": "Release/706.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7302",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T09:13:29Z",
+      "updatedAt": "2025-12-03T17:53:31Z",
+      "closedAt": "2025-12-03T17:53:30Z",
+      "mergedAt": "2025-12-03T17:53:29Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "team-onboarding",
+        "area-onboarding",
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7303,
+      "title": "feat: Add `PermissionController:getCaveat` action",
+      "url": "https://github.com/MetaMask/core/pull/7303",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T14:37:13Z",
+      "updatedAt": "2025-12-03T14:51:30Z",
+      "closedAt": "2025-12-03T14:51:28Z",
+      "mergedAt": "2025-12-03T14:51:28Z",
+      "authorLogin": "FrederikBolding",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7304,
+      "title": "feat: add Tron accountChanged event support",
+      "url": "https://github.com/MetaMask/core/pull/7304",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T15:26:09Z",
+      "updatedAt": "2025-12-04T15:44:40Z",
+      "closedAt": "2025-12-04T15:44:38Z",
+      "mergedAt": "2025-12-04T15:44:38Z",
+      "authorLogin": "0xEdouardEth",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7305,
+      "title": "chore: Update ESLint config packages to v15",
+      "url": "https://github.com/MetaMask/core/pull/7305",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T18:00:27Z",
+      "updatedAt": "2025-12-03T20:45:05Z",
+      "closedAt": "2025-12-03T20:45:02Z",
+      "mergedAt": "2025-12-03T20:45:02Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7306,
+      "title": "fix(gasless): use quote gas fees for Max native swap with STX off",
+      "url": "https://github.com/MetaMask/core/pull/7306",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T19:48:21Z",
+      "updatedAt": "2025-12-03T21:16:07Z",
+      "closedAt": "2025-12-03T21:16:06Z",
+      "mergedAt": "2025-12-03T21:16:06Z",
+      "authorLogin": "rarquevaux",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7307,
+      "title": "Release/707.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7307",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-03T21:50:47Z",
+      "updatedAt": "2025-12-03T22:34:33Z",
+      "closedAt": "2025-12-03T22:34:31Z",
+      "mergedAt": "2025-12-03T22:34:31Z",
+      "authorLogin": "rarquevaux",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7308,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to 2bfc139f3dbd91c5ae27700eade2b7c8cfacc135",
+      "url": "https://github.com/MetaMask/core/pull/7308",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-04T06:30:04Z",
+      "updatedAt": "2025-12-05T06:29:38Z",
+      "closedAt": "2025-12-05T06:29:37Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7309,
+      "title": "Release/708.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7309",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T08:10:24Z",
+      "updatedAt": "2025-12-04T13:11:51Z",
+      "closedAt": "2025-12-04T13:11:49Z",
+      "mergedAt": "2025-12-04T13:11:49Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7310,
+      "title": "fix: not sorting correctly on trending tokens",
+      "url": "https://github.com/MetaMask/core/pull/7310",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T09:15:29Z",
+      "updatedAt": "2025-12-04T09:51:36Z",
+      "closedAt": "2025-12-04T09:51:35Z",
+      "mergedAt": "2025-12-04T09:51:35Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3539011561,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-04T09:46:40Z",
+          "authorLogin": "sahar-fehri"
+        }
+      ]
+    },
+    {
+      "number": 7311,
+      "title": "chore: renamed rewards linking params",
+      "url": "https://github.com/MetaMask/core/pull/7311",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T11:34:24Z",
+      "updatedAt": "2025-12-04T12:49:45Z",
+      "closedAt": "2025-12-04T12:49:43Z",
+      "mergedAt": "2025-12-04T12:49:43Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7312,
+      "title": "Release/709.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7312",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T12:59:02Z",
+      "updatedAt": "2025-12-04T13:40:31Z",
+      "closedAt": "2025-12-04T13:40:29Z",
+      "mergedAt": "2025-12-04T13:40:29Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7313,
+      "title": "fix: improve relay fees",
+      "url": "https://github.com/MetaMask/core/pull/7313",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T13:38:26Z",
+      "updatedAt": "2025-12-04T17:14:06Z",
+      "closedAt": "2025-12-04T17:14:04Z",
+      "mergedAt": "2025-12-04T17:14:04Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7314,
+      "title": "chore: Re-enable `@typescript-eslint/prefer-optional-chain`",
+      "url": "https://github.com/MetaMask/core/pull/7314",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T14:34:45Z",
+      "updatedAt": "2025-12-04T19:02:05Z",
+      "closedAt": "2025-12-04T19:02:03Z",
+      "mergedAt": "2025-12-04T19:02:03Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7315,
+      "title": "Feat/ramps controller",
+      "url": "https://github.com/MetaMask/core/pull/7315",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-12-04T16:16:12Z",
+      "updatedAt": "2025-12-04T17:49:48Z",
+      "closedAt": "2025-12-04T17:49:48Z",
+      "mergedAt": null,
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7316,
+      "title": "feat(ramps): adds ramps controller with geolocation state",
+      "url": "https://github.com/MetaMask/core/pull/7316",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T17:46:19Z",
+      "updatedAt": "2025-12-12T17:29:20Z",
+      "closedAt": "2025-12-12T17:29:19Z",
+      "mergedAt": "2025-12-12T17:29:19Z",
+      "authorLogin": "georgeweiler",
+      "labels": [
+        "team-ramp"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7317,
+      "title": "chore: Re-enable `@typescript-eslint/prefer-reduce-type-parameter`",
+      "url": "https://github.com/MetaMask/core/pull/7317",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T19:06:54Z",
+      "updatedAt": "2025-12-04T20:13:14Z",
+      "closedAt": "2025-12-04T20:13:10Z",
+      "mergedAt": "2025-12-04T20:13:10Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7318,
+      "title": "feat:add `erc20-token-revocation` permission to controller state",
+      "url": "https://github.com/MetaMask/core/pull/7318",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-04T19:43:36Z",
+      "updatedAt": "2025-12-07T19:55:24Z",
+      "closedAt": "2025-12-07T19:55:23Z",
+      "mergedAt": "2025-12-07T19:55:23Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7319,
+      "title": "feat: add rewardAccountId to GetSubscriptionsResponse data",
+      "url": "https://github.com/MetaMask/core/pull/7319",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T05:20:19Z",
+      "updatedAt": "2025-12-05T06:07:05Z",
+      "closedAt": "2025-12-05T06:07:04Z",
+      "mergedAt": "2025-12-05T06:07:04Z",
+      "authorLogin": "tuna1207",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7320,
+      "title": "Release/710.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7320",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T06:18:18Z",
+      "updatedAt": "2025-12-05T06:47:00Z",
+      "closedAt": "2025-12-05T06:46:59Z",
+      "mergedAt": "2025-12-05T06:46:58Z",
+      "authorLogin": "tuna1207",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7321,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to 82f1952b76b32a8670887e9cd820076d94a1437b",
+      "url": "https://github.com/MetaMask/core/pull/7321",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-05T06:29:33Z",
+      "updatedAt": "2025-12-08T06:31:25Z",
+      "closedAt": "2025-12-08T06:31:23Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7322,
+      "title": "Release/711.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7322",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T09:50:52Z",
+      "updatedAt": "2025-12-05T12:09:20Z",
+      "closedAt": "2025-12-05T12:09:18Z",
+      "mergedAt": "2025-12-05T12:09:18Z",
+      "authorLogin": "0xEdouardEth",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7323,
+      "title": "fix: relay network fee on EIP-7702 deposits",
+      "url": "https://github.com/MetaMask/core/pull/7323",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T10:56:06Z",
+      "updatedAt": "2025-12-05T11:39:51Z",
+      "closedAt": "2025-12-05T11:39:50Z",
+      "mergedAt": "2025-12-05T11:39:50Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7324,
+      "title": "fix: add decimal bounds to currency rates",
+      "url": "https://github.com/MetaMask/core/pull/7324",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T11:56:30Z",
+      "updatedAt": "2025-12-11T07:44:17Z",
+      "closedAt": "2025-12-05T13:23:08Z",
+      "mergedAt": "2025-12-05T13:23:08Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3544437181,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-05T11:57:52Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3544437262,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-05T11:57:53Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3544440330,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-05T11:58:34Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3544443127,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-05T11:59:20Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3544549486,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-05T12:26:52Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3544550317,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-05T12:27:06Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3544555843,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-05T12:28:26Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3544725047,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-05T13:14:39Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3544726205,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-05T13:15:02Z",
+          "authorLogin": "sahar-fehri"
+        }
+      ]
+    },
+    {
+      "number": 7325,
+      "title": "Release 712.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7325",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T12:35:16Z",
+      "updatedAt": "2025-12-05T13:11:07Z",
+      "closedAt": "2025-12-05T13:11:05Z",
+      "mergedAt": "2025-12-05T13:11:05Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7326,
+      "title": "refactor: deprecate transaction `history` and `sendFlowHistory` properties",
+      "url": "https://github.com/MetaMask/core/pull/7326",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T14:28:25Z",
+      "updatedAt": "2025-12-18T10:40:19Z",
+      "closedAt": "2025-12-18T10:40:18Z",
+      "mergedAt": "2025-12-18T10:40:17Z",
+      "authorLogin": "vinistevam",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7327,
+      "title": "Release/713.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7327",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-05T16:19:05Z",
+      "updatedAt": "2025-12-05T16:37:16Z",
+      "closedAt": "2025-12-05T16:37:15Z",
+      "mergedAt": "2025-12-05T16:37:15Z",
+      "authorLogin": "0xEdouardEth",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7328,
+      "title": "feat: add `KeyringController:accountAdded` event + use keyring events in `AccountsController`",
+      "url": "https://github.com/MetaMask/core/pull/7328",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2025-12-05T18:56:07Z",
+      "updatedAt": "2025-12-12T14:33:12Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7329,
+      "title": "feat: transaction timeout",
+      "url": "https://github.com/MetaMask/core/pull/7329",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-07T14:07:38Z",
+      "updatedAt": "2025-12-09T11:43:15Z",
+      "closedAt": "2025-12-09T11:43:14Z",
+      "mergedAt": "2025-12-09T11:43:14Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7330,
+      "title": "Release/714.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7330",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T05:04:45Z",
+      "updatedAt": "2025-12-09T09:58:49Z",
+      "closedAt": "2025-12-09T09:58:48Z",
+      "mergedAt": "2025-12-09T09:58:48Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3554581064,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-08T23:42:43Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556026611,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-09T08:12:15Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7331,
+      "title": "fix: Include `WalletContext` in EIP-7715 requests",
+      "url": "https://github.com/MetaMask/core/pull/7331",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T05:30:06Z",
+      "updatedAt": "2025-12-08T17:36:40Z",
+      "closedAt": "2025-12-08T17:36:39Z",
+      "mergedAt": "2025-12-08T17:36:39Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7332,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to c35066415caac3dbf23c2ba296220f31f8f29888",
+      "url": "https://github.com/MetaMask/core/pull/7332",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-08T06:31:19Z",
+      "updatedAt": "2025-12-09T06:28:02Z",
+      "closedAt": "2025-12-09T06:28:01Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7333,
+      "title": "fix: update monad testnet network client id",
+      "url": "https://github.com/MetaMask/core/pull/7333",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2025-12-08T07:42:14Z",
+      "updatedAt": "2025-12-08T14:40:21Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "stanleyyconsensys",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7334,
+      "title": "chore(keyring-controller): fix new lint errors",
+      "url": "https://github.com/MetaMask/core/pull/7334",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T10:48:36Z",
+      "updatedAt": "2025-12-08T13:46:30Z",
+      "closedAt": "2025-12-08T13:46:29Z",
+      "mergedAt": "2025-12-08T13:46:28Z",
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7400,
+      "title": "chore: transaction controller linting",
+      "url": "https://github.com/MetaMask/core/pull/7400",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T16:05:22Z",
+      "updatedAt": "2025-12-09T11:24:05Z",
+      "closedAt": "2025-12-09T08:38:38Z",
+      "mergedAt": "2025-12-09T08:38:38Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations",
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7401,
+      "title": "chore: transaction pay controller linting",
+      "url": "https://github.com/MetaMask/core/pull/7401",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T16:28:12Z",
+      "updatedAt": "2025-12-09T11:27:27Z",
+      "closedAt": "2025-12-09T11:27:25Z",
+      "mergedAt": "2025-12-09T11:27:25Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations",
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7402,
+      "title": "test(keyring-controller): fix test types/lint",
+      "url": "https://github.com/MetaMask/core/pull/7402",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T16:37:35Z",
+      "updatedAt": "2025-12-09T11:46:39Z",
+      "closedAt": "2025-12-09T11:46:37Z",
+      "mergedAt": "2025-12-09T11:46:37Z",
+      "authorLogin": "ccharly",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7403,
+      "title": "fix: use suggested fee per gas to calculate swap gas fees",
+      "url": "https://github.com/MetaMask/core/pull/7403",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T17:18:07Z",
+      "updatedAt": "2025-12-08T20:00:36Z",
+      "closedAt": "2025-12-08T20:00:35Z",
+      "mergedAt": "2025-12-08T20:00:35Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7405,
+      "title": "feat: estimate gas batch action",
+      "url": "https://github.com/MetaMask/core/pull/7405",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T23:17:51Z",
+      "updatedAt": "2025-12-09T15:15:59Z",
+      "closedAt": "2025-12-09T15:15:58Z",
+      "mergedAt": "2025-12-09T15:15:58Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7406,
+      "title": "fix: incorrect medium fee per gas used for swap txs",
+      "url": "https://github.com/MetaMask/core/pull/7406",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-08T23:59:52Z",
+      "updatedAt": "2025-12-09T21:37:31Z",
+      "closedAt": "2025-12-09T21:37:30Z",
+      "mergedAt": "2025-12-09T21:37:30Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7407,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to 1036dfdb18a0630f32340908b26e32a1fe4aaa42",
+      "url": "https://github.com/MetaMask/core/pull/7407",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-09T06:27:57Z",
+      "updatedAt": "2025-12-16T06:30:17Z",
+      "closedAt": "2025-12-16T06:30:15Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7408,
+      "title": "feat: improve token detection",
+      "url": "https://github.com/MetaMask/core/pull/7408",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T08:08:17Z",
+      "updatedAt": "2025-12-11T14:03:02Z",
+      "closedAt": "2025-12-11T14:03:01Z",
+      "mergedAt": "2025-12-11T14:03:00Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3562490963,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T13:13:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3562499758,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T13:15:18Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3562505081,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T13:16:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3562506313,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T13:16:43Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3562612652,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T13:43:10Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3567412472,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T13:20:20Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3567414110,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T13:20:41Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3567419115,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T13:21:50Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3567434800,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T13:25:04Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3567445028,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-11T13:27:02Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3567446924,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T13:27:31Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7409,
+      "title": "ci: Replace use of `github-tools` workflows with versioned actions",
+      "url": "https://github.com/MetaMask/core/pull/7409",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T09:38:04Z",
+      "updatedAt": "2025-12-09T09:50:19Z",
+      "closedAt": "2025-12-09T09:50:18Z",
+      "mergedAt": "2025-12-09T09:50:18Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7410,
+      "title": "fix: Prevent `transactionApproved` event to be emitted when keyring throws during signing",
+      "url": "https://github.com/MetaMask/core/pull/7410",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T09:50:02Z",
+      "updatedAt": "2025-12-09T10:37:37Z",
+      "closedAt": "2025-12-09T10:37:35Z",
+      "mergedAt": "2025-12-09T10:37:35Z",
+      "authorLogin": "OGPoyraz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7411,
+      "title": "fix: O(n) API calls to bulk-scan",
+      "url": "https://github.com/MetaMask/core/pull/7411",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T10:13:42Z",
+      "updatedAt": "2025-12-09T16:09:04Z",
+      "closedAt": "2025-12-09T13:07:44Z",
+      "mergedAt": "2025-12-09T13:07:43Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3556957651,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:37:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556964803,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:39:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556968038,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:39:59Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556975922,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:41:47Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556975953,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:41:47Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3556986285,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:44:43Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556989221,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:45:33Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3556991411,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:46:08Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3556993238,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:46:40Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3557000244,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:48:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3557043654,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T11:59:54Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3557196173,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T12:38:10Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3557219676,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T12:42:59Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3557224906,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T12:43:48Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3557225357,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T12:43:55Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3557303898,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T13:00:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3557315183,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-09T13:02:45Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3557318235,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-09T13:03:22Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7412,
+      "title": "Warn on missing erc721 metadata",
+      "url": "https://github.com/MetaMask/core/pull/7412",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T10:52:52Z",
+      "updatedAt": "2025-12-10T09:59:04Z",
+      "closedAt": "2025-12-10T09:59:03Z",
+      "mergedAt": "2025-12-10T09:59:03Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3559801336,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T21:27:13Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3561619897,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-10T09:45:37Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7414,
+      "title": "chore(lint): Fix suppressed ESLint errors in `storage-service` package",
+      "url": "https://github.com/MetaMask/core/pull/7414",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T13:16:42Z",
+      "updatedAt": "2025-12-09T14:31:08Z",
+      "closedAt": "2025-12-09T14:31:06Z",
+      "mergedAt": "2025-12-09T14:31:06Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7415,
+      "title": "feat: Adding requestId field to dapp confirmations",
+      "url": "https://github.com/MetaMask/core/pull/7415",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T13:36:09Z",
+      "updatedAt": "2025-12-15T15:18:57Z",
+      "closedAt": "2025-12-15T09:40:45Z",
+      "mergedAt": "2025-12-15T09:40:45Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7416,
+      "title": "chore(lint): Fix `@typescript-eslint/no-unbound-method` errors in tests by reordering ESLint config",
+      "url": "https://github.com/MetaMask/core/pull/7416",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T13:39:02Z",
+      "updatedAt": "2025-12-09T14:12:45Z",
+      "closedAt": "2025-12-09T14:12:44Z",
+      "mergedAt": "2025-12-09T14:12:44Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7417,
+      "title": "chore(lint): Fix suppressed ESLint errors in `sample-controllers` package",
+      "url": "https://github.com/MetaMask/core/pull/7417",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T14:41:58Z",
+      "updatedAt": "2025-12-10T13:14:10Z",
+      "closedAt": "2025-12-10T13:14:08Z",
+      "mergedAt": "2025-12-10T13:14:08Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7418,
+      "title": "feat: specific transaction publish error message",
+      "url": "https://github.com/MetaMask/core/pull/7418",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T16:52:47Z",
+      "updatedAt": "2025-12-10T09:31:47Z",
+      "closedAt": "2025-12-10T09:31:46Z",
+      "mergedAt": "2025-12-10T09:31:46Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7419,
+      "title": "Remove breaking designation from version bumps in changelog",
+      "url": "https://github.com/MetaMask/core/pull/7419",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T20:11:44Z",
+      "updatedAt": "2025-12-10T05:48:24Z",
+      "closedAt": "2025-12-10T05:48:23Z",
+      "mergedAt": "2025-12-10T05:48:23Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7420,
+      "title": "Fix getNetworkClientById to be less strict about network client ID",
+      "url": "https://github.com/MetaMask/core/pull/7420",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-09T20:29:50Z",
+      "updatedAt": "2025-12-10T16:04:00Z",
+      "closedAt": "2025-12-10T16:03:59Z",
+      "mergedAt": null,
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7421,
+      "title": "chore: Fix suppressed lint errors in `@metamask/messenger`",
+      "url": "https://github.com/MetaMask/core/pull/7421",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T20:45:39Z",
+      "updatedAt": "2025-12-10T13:13:54Z",
+      "closedAt": "2025-12-10T13:13:52Z",
+      "mergedAt": "2025-12-10T13:13:52Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7422,
+      "title": "Release/715.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7422",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T21:53:28Z",
+      "updatedAt": "2025-12-10T11:48:50Z",
+      "closedAt": "2025-12-10T11:48:48Z",
+      "mergedAt": "2025-12-10T11:48:48Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7423,
+      "title": "fix: notification resubscriptions doesn't impact feature announcements",
+      "url": "https://github.com/MetaMask/core/pull/7423",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T22:07:36Z",
+      "updatedAt": "2025-12-10T09:59:04Z",
+      "closedAt": "2025-12-10T09:59:03Z",
+      "mergedAt": "2025-12-10T09:59:03Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3559962261,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T22:13:27Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3559972486,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T22:16:14Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3559974209,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-09T22:16:55Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3561617289,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T09:44:54Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3561617585,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-10T09:44:59Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3561633374,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-10T09:49:00Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7424,
+      "title": "fix: fix stale reference for multichain assets state",
+      "url": "https://github.com/MetaMask/core/pull/7424",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-09T23:51:12Z",
+      "updatedAt": "2025-12-10T16:53:05Z",
+      "closedAt": "2025-12-10T16:53:04Z",
+      "mergedAt": "2025-12-10T16:53:04Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3563134077,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-10T15:27:57Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7426,
+      "title": "feat: pass fee limit through to tron snap",
+      "url": "https://github.com/MetaMask/core/pull/7426",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T05:41:29Z",
+      "updatedAt": "2025-12-10T14:30:24Z",
+      "closedAt": "2025-12-10T14:30:22Z",
+      "mergedAt": "2025-12-10T14:30:22Z",
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7427,
+      "title": "chore: Deprecate error reporting service",
+      "url": "https://github.com/MetaMask/core/pull/7427",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T09:24:13Z",
+      "updatedAt": "2025-12-12T09:49:31Z",
+      "closedAt": "2025-12-12T09:49:29Z",
+      "mergedAt": "2025-12-12T09:49:29Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7428,
+      "title": "chore(lint): Fix suppressed ESLint errors in `remote-feature-flag-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7428",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T11:13:48Z",
+      "updatedAt": "2025-12-11T13:27:27Z",
+      "closedAt": "2025-12-11T13:27:26Z",
+      "mergedAt": "2025-12-11T13:27:26Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7429,
+      "title": "fix: cleanup log when fetching balances",
+      "url": "https://github.com/MetaMask/core/pull/7429",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T12:02:28Z",
+      "updatedAt": "2025-12-10T18:12:08Z",
+      "closedAt": "2025-12-10T18:12:06Z",
+      "mergedAt": "2025-12-10T18:12:06Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3563149397,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-10T15:30:40Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3563866912,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-10T18:07:12Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7430,
+      "title": "Release 716.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7430",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T12:29:50Z",
+      "updatedAt": "2025-12-10T13:56:04Z",
+      "closedAt": "2025-12-10T13:56:03Z",
+      "mergedAt": "2025-12-10T13:56:03Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7431,
+      "title": "chore(lint): Fix suppressed ESLint errors in `rate-limit-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7431",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T12:43:10Z",
+      "updatedAt": "2025-12-10T13:27:57Z",
+      "closedAt": "2025-12-10T13:27:56Z",
+      "mergedAt": "2025-12-10T13:27:56Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7432,
+      "title": "chore(lint): Fix suppressed ESLint errors in `profile-metrics-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7432",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T13:02:21Z",
+      "updatedAt": "2025-12-10T14:32:14Z",
+      "closedAt": "2025-12-10T14:32:13Z",
+      "mergedAt": "2025-12-10T14:32:12Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7433,
+      "title": "chore(lint): Fix suppressed ESLint errors in `preferences-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7433",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T13:31:09Z",
+      "updatedAt": "2025-12-10T14:18:10Z",
+      "closedAt": "2025-12-10T14:18:08Z",
+      "mergedAt": "2025-12-10T14:18:08Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7434,
+      "title": "fix(multichain-account-service): harden EVM account discovery in case of bad RPC response",
+      "url": "https://github.com/MetaMask/core/pull/7434",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T14:10:55Z",
+      "updatedAt": "2025-12-10T15:31:43Z",
+      "closedAt": "2025-12-10T15:31:41Z",
+      "mergedAt": "2025-12-10T15:31:41Z",
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7435,
+      "title": "chore(lint): Fix suppressed ESLint errors in `polling-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7435",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T14:56:38Z",
+      "updatedAt": "2025-12-12T08:43:12Z",
+      "closedAt": "2025-12-12T08:43:11Z",
+      "mergedAt": "2025-12-12T08:43:11Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7436,
+      "title": "feat: allow aborting nft detection and fetching only one page",
+      "url": "https://github.com/MetaMask/core/pull/7436",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T15:31:34Z",
+      "updatedAt": "2025-12-10T16:45:11Z",
+      "closedAt": "2025-12-10T16:45:09Z",
+      "mergedAt": "2025-12-10T16:45:09Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3563496376,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-10T16:40:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7437,
+      "title": "Release/717.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7437",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T16:19:04Z",
+      "updatedAt": "2025-12-10T17:05:33Z",
+      "closedAt": "2025-12-10T17:05:31Z",
+      "mergedAt": "2025-12-10T17:05:31Z",
+      "authorLogin": "ccharly",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3563576455,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-10T16:59:20Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7438,
+      "title": "Release/718.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7438",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-12-10T17:25:20Z",
+      "updatedAt": "2025-12-11T09:20:03Z",
+      "closedAt": "2025-12-11T09:19:42Z",
+      "mergedAt": null,
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7439,
+      "title": "chore: updated team names for web3auth",
+      "url": "https://github.com/MetaMask/core/pull/7439",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-10T18:04:51Z",
+      "updatedAt": "2025-12-10T18:19:33Z",
+      "closedAt": "2025-12-10T18:19:32Z",
+      "mergedAt": "2025-12-10T18:19:32Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "no-changelog",
+        "team-onboarding",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7441,
+      "title": "revert: \"chore: change `Monad Testnet` to infura network (#7067)\"",
+      "url": "https://github.com/MetaMask/core/pull/7441",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T05:52:55Z",
+      "updatedAt": "2025-12-11T09:41:20Z",
+      "closedAt": "2025-12-11T09:41:19Z",
+      "mergedAt": "2025-12-11T09:41:19Z",
+      "authorLogin": "stanleyyconsensys",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3566550614,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-11T09:36:49Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7443,
+      "title": "chore(lint): Fix suppressed ESLint errors in `base-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7443",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T09:53:57Z",
+      "updatedAt": "2025-12-11T13:16:47Z",
+      "closedAt": "2025-12-11T13:16:45Z",
+      "mergedAt": "2025-12-11T13:16:45Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7444,
+      "title": "Release/718.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7444",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T10:18:02Z",
+      "updatedAt": "2025-12-11T13:14:11Z",
+      "closedAt": "2025-12-11T13:14:09Z",
+      "mergedAt": "2025-12-11T13:14:09Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3566734758,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T10:22:25Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3566735139,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-11T10:22:31Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7445,
+      "title": "chore(lint): Fix suppressed ESLint errors in `network-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7445",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T11:45:09Z",
+      "updatedAt": "2025-12-15T09:50:35Z",
+      "closedAt": "2025-12-15T09:50:33Z",
+      "mergedAt": "2025-12-15T09:50:33Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7446,
+      "title": "fix: include authorizations in nonce calculation",
+      "url": "https://github.com/MetaMask/core/pull/7446",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T13:44:11Z",
+      "updatedAt": "2025-12-15T19:23:49Z",
+      "closedAt": "2025-12-15T19:23:48Z",
+      "mergedAt": "2025-12-15T19:23:48Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7447,
+      "title": "feat(multichain-account-service): add `discovery.enabled` config",
+      "url": "https://github.com/MetaMask/core/pull/7447",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T14:21:46Z",
+      "updatedAt": "2025-12-15T11:57:13Z",
+      "closedAt": "2025-12-15T11:57:12Z",
+      "mergedAt": "2025-12-15T11:57:12Z",
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7448,
+      "title": "chore: adds non-evm staking",
+      "url": "https://github.com/MetaMask/core/pull/7448",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T14:24:09Z",
+      "updatedAt": "2025-12-18T15:56:49Z",
+      "closedAt": "2025-12-18T15:56:47Z",
+      "mergedAt": "2025-12-18T15:56:47Z",
+      "authorLogin": "zone-live",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7449,
+      "title": "Release/719.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7449",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T14:51:21Z",
+      "updatedAt": "2025-12-11T16:30:14Z",
+      "closedAt": "2025-12-11T16:30:12Z",
+      "mergedAt": "2025-12-11T16:30:12Z",
+      "authorLogin": "andrepimenta",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7450,
+      "title": "refactor: `ProfileMetricsController` does not poll when user opted out",
+      "url": "https://github.com/MetaMask/core/pull/7450",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T16:45:34Z",
+      "updatedAt": "2025-12-11T17:10:01Z",
+      "closedAt": "2025-12-11T17:10:00Z",
+      "mergedAt": "2025-12-11T17:09:59Z",
+      "authorLogin": "mikesposito",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7451,
+      "title": "Release 720.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7451",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T17:20:00Z",
+      "updatedAt": "2025-12-11T17:34:37Z",
+      "closedAt": "2025-12-11T17:34:35Z",
+      "mergedAt": "2025-12-11T17:34:35Z",
+      "authorLogin": "mikesposito",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7452,
+      "title": "chore(lint): Fix suppressed ESLint errors in `controller-utils` package",
+      "url": "https://github.com/MetaMask/core/pull/7452",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T17:42:27Z",
+      "updatedAt": "2025-12-12T10:41:51Z",
+      "closedAt": "2025-12-12T10:41:50Z",
+      "mergedAt": "2025-12-12T10:41:50Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7454,
+      "title": "chore: Fix suppressed lint errors in `accounts-controller`",
+      "url": "https://github.com/MetaMask/core/pull/7454",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-11T23:26:29Z",
+      "updatedAt": "2025-12-12T13:27:14Z",
+      "closedAt": "2025-12-12T13:27:13Z",
+      "mergedAt": "2025-12-12T13:27:13Z",
+      "authorLogin": "Gudahtt",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7455,
+      "title": "Chore/w3a controllers linting",
+      "url": "https://github.com/MetaMask/core/pull/7455",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T06:58:39Z",
+      "updatedAt": "2025-12-12T07:56:43Z",
+      "closedAt": "2025-12-12T07:56:42Z",
+      "mergedAt": "2025-12-12T07:56:42Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "no-changelog",
+        "team-onboarding",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7456,
+      "title": "feat: claim drafts",
+      "url": "https://github.com/MetaMask/core/pull/7456",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T08:35:48Z",
+      "updatedAt": "2025-12-13T05:53:53Z",
+      "closedAt": "2025-12-13T05:53:52Z",
+      "mergedAt": "2025-12-13T05:53:52Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7457,
+      "title": "chore(lint): Fix suppressed ESLint errors in `permission-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7457",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T11:43:00Z",
+      "updatedAt": "2025-12-15T09:56:05Z",
+      "closedAt": "2025-12-15T09:56:04Z",
+      "mergedAt": "2025-12-15T09:56:04Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7458,
+      "title": "chore(lint): Fix suppressed ESLint errors in `eth-block-tracker` package",
+      "url": "https://github.com/MetaMask/core/pull/7458",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T12:02:40Z",
+      "updatedAt": "2025-12-12T13:12:05Z",
+      "closedAt": "2025-12-12T13:12:04Z",
+      "mergedAt": "2025-12-12T13:12:04Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7459,
+      "title": "chore(lint): Fix suppressed ESLint errors in `json-rpc-engine` package",
+      "url": "https://github.com/MetaMask/core/pull/7459",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T12:32:15Z",
+      "updatedAt": "2025-12-12T13:11:15Z",
+      "closedAt": "2025-12-12T13:11:14Z",
+      "mergedAt": "2025-12-12T13:11:14Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7460,
+      "title": "chore(lint): Fix suppressed ESLint errors in `build-utils` package",
+      "url": "https://github.com/MetaMask/core/pull/7460",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T12:56:43Z",
+      "updatedAt": "2025-12-12T13:10:03Z",
+      "closedAt": "2025-12-12T13:10:02Z",
+      "mergedAt": "2025-12-12T13:10:02Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7461,
+      "title": "chore(lint): Fix suppressed ESLint errors in `keyring-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7461",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T13:06:58Z",
+      "updatedAt": "2025-12-12T13:32:55Z",
+      "closedAt": "2025-12-12T13:32:53Z",
+      "mergedAt": "2025-12-12T13:32:53Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7462,
+      "title": "chore(lint): Fix suppressed ESLint errors in `composable-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7462",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T13:19:59Z",
+      "updatedAt": "2025-12-12T13:42:25Z",
+      "closedAt": "2025-12-12T13:42:24Z",
+      "mergedAt": "2025-12-12T13:42:24Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7463,
+      "title": "chore(lint): Fix suppressed ESLint errors in `json-rpc-middleware-stream` package",
+      "url": "https://github.com/MetaMask/core/pull/7463",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T13:28:36Z",
+      "updatedAt": "2025-12-12T13:57:31Z",
+      "closedAt": "2025-12-12T13:57:29Z",
+      "mergedAt": "2025-12-12T13:57:29Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7464,
+      "title": "feat: simplify transaction timeout",
+      "url": "https://github.com/MetaMask/core/pull/7464",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T13:34:44Z",
+      "updatedAt": "2025-12-19T14:59:04Z",
+      "closedAt": "2025-12-19T14:59:03Z",
+      "mergedAt": "2025-12-19T14:59:03Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7465,
+      "title": "fix: add chainId support prices",
+      "url": "https://github.com/MetaMask/core/pull/7465",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T13:56:51Z",
+      "updatedAt": "2025-12-15T18:33:28Z",
+      "closedAt": "2025-12-12T17:00:08Z",
+      "mergedAt": "2025-12-12T17:00:08Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3571928805,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T13:58:17Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3571947013,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T14:03:30Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3571952364,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T14:04:51Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3571954246,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T14:05:22Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3572063101,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-12T14:33:28Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3572407702,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-12T15:42:27Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7466,
+      "title": "fix: add excludeLabels param to trending api",
+      "url": "https://github.com/MetaMask/core/pull/7466",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T17:16:02Z",
+      "updatedAt": "2025-12-12T18:45:03Z",
+      "closedAt": "2025-12-12T18:45:01Z",
+      "mergedAt": "2025-12-12T18:45:01Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3572916650,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T17:34:55Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3573058440,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-12T18:20:48Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7468,
+      "title": "Fix/improve core logic",
+      "url": "https://github.com/MetaMask/core/pull/7468",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-12-12T18:23:09Z",
+      "updatedAt": "2025-12-15T10:20:31Z",
+      "closedAt": "2025-12-15T10:20:31Z",
+      "mergedAt": null,
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7469,
+      "title": "fix: improve add tokens through polling",
+      "url": "https://github.com/MetaMask/core/pull/7469",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T18:26:22Z",
+      "updatedAt": "2025-12-15T09:43:23Z",
+      "closedAt": "2025-12-15T09:43:22Z",
+      "mergedAt": "2025-12-15T09:43:22Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3573113563,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T18:37:00Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3573115249,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T18:37:29Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3573116990,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-12T18:38:02Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3577186374,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T09:19:12Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7470,
+      "title": "Release/721.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7470",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T18:43:18Z",
+      "updatedAt": "2025-12-12T20:48:25Z",
+      "closedAt": "2025-12-12T20:48:24Z",
+      "mergedAt": "2025-12-12T20:48:24Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7471,
+      "title": "fix: include all accounts on initial sync",
+      "url": "https://github.com/MetaMask/core/pull/7471",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T20:15:47Z",
+      "updatedAt": "2025-12-12T20:38:52Z",
+      "closedAt": "2025-12-12T20:38:50Z",
+      "mergedAt": "2025-12-12T20:38:50Z",
+      "authorLogin": "mikesposito",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7472,
+      "title": "Release 722.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7472",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-12T20:56:23Z",
+      "updatedAt": "2025-12-12T21:46:56Z",
+      "closedAt": "2025-12-12T21:46:55Z",
+      "mergedAt": "2025-12-12T21:46:55Z",
+      "authorLogin": "mikesposito",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7473,
+      "title": "chore(deps): bump actions/upload-artifact from 5 to 6",
+      "url": "https://github.com/MetaMask/core/pull/7473",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T06:30:44Z",
+      "updatedAt": "2025-12-15T09:43:06Z",
+      "closedAt": "2025-12-15T09:43:05Z",
+      "mergedAt": "2025-12-15T09:43:05Z",
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7474,
+      "title": "chore(deps): bump actions/download-artifact from 6 to 7",
+      "url": "https://github.com/MetaMask/core/pull/7474",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T06:30:49Z",
+      "updatedAt": "2025-12-15T09:43:23Z",
+      "closedAt": "2025-12-15T09:43:22Z",
+      "mergedAt": "2025-12-15T09:43:22Z",
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7475,
+      "title": "chore(lint): Fix suppressed ESLint errors in `eth-json-rpc-middleware` package",
+      "url": "https://github.com/MetaMask/core/pull/7475",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T09:37:37Z",
+      "updatedAt": "2025-12-15T10:03:24Z",
+      "closedAt": "2025-12-15T10:03:22Z",
+      "mergedAt": "2025-12-15T10:03:22Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7476,
+      "title": "chore(lint): Fix suppressed ESLint errors in `eip-7702-internal-rpc-middleware` package",
+      "url": "https://github.com/MetaMask/core/pull/7476",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T09:49:52Z",
+      "updatedAt": "2025-12-15T10:40:32Z",
+      "closedAt": "2025-12-15T10:40:30Z",
+      "mergedAt": "2025-12-15T10:40:30Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7477,
+      "title": "chore: Notification controller return types",
+      "url": "https://github.com/MetaMask/core/pull/7477",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:02:47Z",
+      "updatedAt": "2025-12-15T12:58:31Z",
+      "closedAt": "2025-12-15T12:58:30Z",
+      "mergedAt": "2025-12-15T12:58:30Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577625198,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T11:08:36Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3577853652,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:17:46Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3577934069,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:34:21Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3578012560,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:50:48Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578014531,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:51:21Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7478,
+      "title": "chore: Notification controller eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7478",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:03:27Z",
+      "updatedAt": "2025-12-15T12:58:31Z",
+      "closedAt": "2025-12-15T12:58:30Z",
+      "mergedAt": "2025-12-15T12:58:29Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577452850,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:25:27Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3577859344,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:19:17Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3577935009,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:34:29Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3578014472,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:51:20Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578015320,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:51:34Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7479,
+      "title": "chore: Notification controller eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7479",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:03:46Z",
+      "updatedAt": "2025-12-15T16:45:04Z",
+      "closedAt": "2025-12-15T16:45:02Z",
+      "mergedAt": "2025-12-15T16:45:02Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577454429,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:25:53Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3577863034,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:20:19Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3577935895,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:34:39Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3578015922,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:51:38Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578016732,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:51:48Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3579151904,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T16:39:14Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7480,
+      "title": "chore: Notification services eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7480",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:04:26Z",
+      "updatedAt": "2025-12-15T12:59:11Z",
+      "closedAt": "2025-12-15T12:59:10Z",
+      "mergedAt": "2025-12-15T12:59:10Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577639355,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T11:12:32Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3577865982,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:21:03Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3577936585,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:34:48Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3578017779,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:52:03Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3578019834,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:52:38Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7481,
+      "title": "chore: Notification services controller lint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7481",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:04:29Z",
+      "updatedAt": "2025-12-15T14:41:28Z",
+      "closedAt": "2025-12-15T14:41:26Z",
+      "mergedAt": "2025-12-15T14:41:26Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577460226,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:26:47Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578018988,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:52:24Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3578021240,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:53:02Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578538257,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T14:36:42Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7482,
+      "title": "chore: Notification services eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7482",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:05:11Z",
+      "updatedAt": "2025-12-15T12:59:11Z",
+      "closedAt": "2025-12-15T12:59:10Z",
+      "mergedAt": "2025-12-15T12:59:10Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577464041,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:27:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578022336,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:53:22Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578022524,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:53:24Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7483,
+      "title": "chore: Notification controller eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7483",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:07:18Z",
+      "updatedAt": "2025-12-15T14:01:23Z",
+      "closedAt": "2025-12-15T14:01:21Z",
+      "mergedAt": "2025-12-15T14:01:21Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577465997,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:27:49Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578024121,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:53:50Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578025231,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:54:02Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3578330574,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T13:56:20Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7484,
+      "title": "chore: Notification controller eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7484",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:07:50Z",
+      "updatedAt": "2025-12-15T20:42:55Z",
+      "closedAt": "2025-12-15T15:09:31Z",
+      "mergedAt": "2025-12-15T15:09:31Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3578028529,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:54:54Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578683928,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T15:03:46Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7485,
+      "title": "chore: Notification services eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7485",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:08:48Z",
+      "updatedAt": "2025-12-15T13:38:28Z",
+      "closedAt": "2025-12-15T13:38:27Z",
+      "mergedAt": "2025-12-15T13:38:27Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577468480,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:28:31Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578030585,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:55:29Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578206545,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T13:29:45Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3578221261,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T13:33:33Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7486,
+      "title": "chore: Notification controller eslint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7486",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:10:19Z",
+      "updatedAt": "2025-12-15T14:55:33Z",
+      "closedAt": "2025-12-15T14:55:31Z",
+      "mergedAt": "2025-12-15T14:55:31Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3577506483,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T10:37:20Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3577659661,
+          "state": "COMMENTED",
+          "submittedAt": "2025-12-15T11:18:50Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578027094,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:54:30Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3578031836,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T12:55:51Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3578607015,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T14:50:27Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7487,
+      "title": "chore: Notification services controller lint cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7487",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:13:50Z",
+      "updatedAt": "2025-12-15T13:12:15Z",
+      "closedAt": "2025-12-15T13:12:14Z",
+      "mergedAt": "2025-12-15T13:12:14Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3578033363,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:56:11Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7488,
+      "title": "Release 723.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7488",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:27:14Z",
+      "updatedAt": "2025-12-15T10:51:06Z",
+      "closedAt": "2025-12-15T10:51:05Z",
+      "mergedAt": "2025-12-15T10:51:05Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7489,
+      "title": "chore(lint): Fix suppressed ESLint errors in `permission-log-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7489",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T10:53:29Z",
+      "updatedAt": "2025-12-15T11:06:50Z",
+      "closedAt": "2025-12-15T11:06:48Z",
+      "mergedAt": "2025-12-15T11:06:48Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7490,
+      "title": "chore(lint): Fix suppressed ESLint errors in `core-backend` package",
+      "url": "https://github.com/MetaMask/core/pull/7490",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T11:17:03Z",
+      "updatedAt": "2025-12-15T11:47:25Z",
+      "closedAt": "2025-12-15T11:47:24Z",
+      "mergedAt": "2025-12-15T11:47:24Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7491,
+      "title": "chore(lint): Fix suppressed ESLint errors in `multichain-network-controller` package",
+      "url": "https://github.com/MetaMask/core/pull/7491",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T11:32:55Z",
+      "updatedAt": "2025-12-15T11:48:35Z",
+      "closedAt": "2025-12-15T11:48:34Z",
+      "mergedAt": "2025-12-15T11:48:33Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7492,
+      "title": "fix: should not update balances when app is locked",
+      "url": "https://github.com/MetaMask/core/pull/7492",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T11:46:50Z",
+      "updatedAt": "2025-12-15T14:39:42Z",
+      "closedAt": "2025-12-15T14:39:40Z",
+      "mergedAt": "2025-12-15T14:39:40Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3578048576,
+          "state": "DISMISSED",
+          "submittedAt": "2025-12-15T13:00:18Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578527485,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T14:34:35Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7493,
+      "title": "chore(lint): Fix suppressed ESLint errors in `error-reporting-service` package",
+      "url": "https://github.com/MetaMask/core/pull/7493",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T11:49:27Z",
+      "updatedAt": "2025-12-15T12:07:33Z",
+      "closedAt": "2025-12-15T12:07:32Z",
+      "mergedAt": "2025-12-15T12:07:32Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7494,
+      "title": "Release/724.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7494",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T12:00:44Z",
+      "updatedAt": "2025-12-15T15:05:53Z",
+      "closedAt": "2025-12-15T15:05:51Z",
+      "mergedAt": "2025-12-15T15:05:51Z",
+      "authorLogin": "jpuri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7495,
+      "title": "chore(lint): Fix suppressed ESLint errors in root",
+      "url": "https://github.com/MetaMask/core/pull/7495",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T12:14:38Z",
+      "updatedAt": "2025-12-15T14:12:47Z",
+      "closedAt": "2025-12-15T14:12:46Z",
+      "mergedAt": "2025-12-15T14:12:46Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7496,
+      "title": "export selectAllAssets",
+      "url": "https://github.com/MetaMask/core/pull/7496",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T12:20:41Z",
+      "updatedAt": "2025-12-15T13:05:17Z",
+      "closedAt": "2025-12-15T13:05:16Z",
+      "mergedAt": "2025-12-15T13:05:16Z",
+      "authorLogin": "bergarces",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3578041846,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:58:27Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3578044374,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-15T12:59:09Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7497,
+      "title": "chore(lint): Fix suppressed ESLint errors in `eth-json-rpc-provider` package",
+      "url": "https://github.com/MetaMask/core/pull/7497",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T12:37:22Z",
+      "updatedAt": "2025-12-15T12:49:08Z",
+      "closedAt": "2025-12-15T12:49:07Z",
+      "mergedAt": "2025-12-15T12:49:07Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7499,
+      "title": "fix: remove duplicate type",
+      "url": "https://github.com/MetaMask/core/pull/7499",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T16:01:21Z",
+      "updatedAt": "2025-12-15T23:46:40Z",
+      "closedAt": "2025-12-15T16:39:27Z",
+      "mergedAt": "2025-12-15T16:39:27Z",
+      "authorLogin": "asalsys",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7500,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7500",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-15T16:50:47Z",
+      "updatedAt": "2025-12-15T17:09:26Z",
+      "closedAt": "2025-12-15T17:05:53Z",
+      "mergedAt": null,
+      "authorLogin": "asalsys",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7501,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7501",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-15T17:16:09Z",
+      "updatedAt": "2025-12-16T00:46:02Z",
+      "closedAt": "2025-12-16T00:41:43Z",
+      "mergedAt": null,
+      "authorLogin": "asalsys",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7502,
+      "title": "feat(ramps): rename onRamp* controller & service to ramps*",
+      "url": "https://github.com/MetaMask/core/pull/7502",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-15T18:18:26Z",
+      "updatedAt": "2025-12-16T20:39:26Z",
+      "closedAt": "2025-12-16T20:39:25Z",
+      "mergedAt": "2025-12-16T20:39:25Z",
+      "authorLogin": "georgeweiler",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7504,
+      "title": "edit changelog",
+      "url": "https://github.com/MetaMask/core/pull/7504",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-15T23:50:13Z",
+      "updatedAt": "2025-12-17T22:48:16Z",
+      "closedAt": "2025-12-17T22:48:15Z",
+      "mergedAt": null,
+      "authorLogin": "asalsys",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7505,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7505",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-16T00:47:14Z",
+      "updatedAt": "2025-12-16T00:58:22Z",
+      "closedAt": "2025-12-16T00:58:18Z",
+      "mergedAt": null,
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7506,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7506",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-16T01:11:36Z",
+      "updatedAt": "2025-12-16T01:12:23Z",
+      "closedAt": "2025-12-16T01:12:19Z",
+      "mergedAt": null,
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7507,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7507",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-16T01:14:51Z",
+      "updatedAt": "2025-12-16T01:19:26Z",
+      "closedAt": "2025-12-16T01:19:22Z",
+      "mergedAt": null,
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7508,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7508",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-16T01:23:20Z",
+      "updatedAt": "2025-12-16T01:26:13Z",
+      "closedAt": "2025-12-16T01:26:07Z",
+      "mergedAt": null,
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7509,
+      "title": "Release/725.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7509",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T01:27:52Z",
+      "updatedAt": "2025-12-16T17:14:42Z",
+      "closedAt": "2025-12-16T17:02:49Z",
+      "mergedAt": "2025-12-16T17:02:49Z",
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7510,
+      "title": "Release/726.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7510",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T03:37:59Z",
+      "updatedAt": "2025-12-16T17:22:14Z",
+      "closedAt": "2025-12-16T17:22:12Z",
+      "mergedAt": "2025-12-16T17:22:12Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7511,
+      "title": "feat: Make A/B tests independent",
+      "url": "https://github.com/MetaMask/core/pull/7511",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T03:47:52Z",
+      "updatedAt": "2025-12-19T22:15:50Z",
+      "closedAt": "2025-12-19T21:45:49Z",
+      "mergedAt": "2025-12-19T21:45:49Z",
+      "authorLogin": "MarioAslau",
+      "labels": [
+        "team-mobile-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7512,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to e61f0587f2597395c3100e33b0bfc23a5e6c863d",
+      "url": "https://github.com/MetaMask/core/pull/7512",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-16T06:30:12Z",
+      "updatedAt": "2025-12-19T06:27:29Z",
+      "closedAt": "2025-12-19T06:27:25Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7513,
+      "title": "feat(seedless-onboarding-controller): add soft delete APIs for secret data items",
+      "url": "https://github.com/MetaMask/core/pull/7513",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2025-12-16T06:35:31Z",
+      "updatedAt": "2025-12-16T06:37:03Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "huggingbot",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7514,
+      "title": "ci: Skip merge queue if pull request is up-to-date",
+      "url": "https://github.com/MetaMask/core/pull/7514",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T12:46:34Z",
+      "updatedAt": "2025-12-17T18:34:00Z",
+      "closedAt": "2025-12-17T18:33:59Z",
+      "mergedAt": "2025-12-17T18:33:59Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7515,
+      "title": "Release/726.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7515",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T17:13:11Z",
+      "updatedAt": "2025-12-16T17:28:23Z",
+      "closedAt": "2025-12-16T17:28:22Z",
+      "mergedAt": "2025-12-16T17:28:22Z",
+      "authorLogin": "ccharly",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3584176661,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-16T17:21:24Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7516,
+      "title": "Revert \"Release/726.0.0 (#7515)\"",
+      "url": "https://github.com/MetaMask/core/pull/7516",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T17:49:42Z",
+      "updatedAt": "2025-12-16T18:03:52Z",
+      "closedAt": "2025-12-16T18:03:50Z",
+      "mergedAt": "2025-12-16T18:03:50Z",
+      "authorLogin": "ccharly",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7517,
+      "title": "Release/727.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7517",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T18:09:21Z",
+      "updatedAt": "2025-12-16T19:57:51Z",
+      "closedAt": "2025-12-16T18:37:20Z",
+      "mergedAt": "2025-12-16T18:37:20Z",
+      "authorLogin": "ccharly",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3584463667,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-16T18:32:31Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7518,
+      "title": "Release/726.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7518",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-16T19:17:11Z",
+      "updatedAt": "2025-12-16T19:18:22Z",
+      "closedAt": "2025-12-16T19:18:16Z",
+      "mergedAt": null,
+      "authorLogin": "asalsys",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7519,
+      "title": "Release/728.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7519",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T19:19:51Z",
+      "updatedAt": "2025-12-17T06:05:25Z",
+      "closedAt": "2025-12-17T06:05:24Z",
+      "mergedAt": "2025-12-17T06:05:23Z",
+      "authorLogin": "asalsys",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7520,
+      "title": "chore: Transfer `token-search-discovery-controller` ownership",
+      "url": "https://github.com/MetaMask/core/pull/7520",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T19:25:06Z",
+      "updatedAt": "2025-12-16T19:34:04Z",
+      "closedAt": "2025-12-16T19:34:02Z",
+      "mergedAt": "2025-12-16T19:34:02Z",
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7521,
+      "title": "make new variables optional",
+      "url": "https://github.com/MetaMask/core/pull/7521",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-16T20:55:56Z",
+      "updatedAt": "2025-12-16T21:53:42Z",
+      "closedAt": "2025-12-16T21:53:40Z",
+      "mergedAt": "2025-12-16T21:53:40Z",
+      "authorLogin": "asalsys",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7523,
+      "title": "feat: added 'updatedAt' field to claimDraft",
+      "url": "https://github.com/MetaMask/core/pull/7523",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T06:24:07Z",
+      "updatedAt": "2025-12-17T07:29:37Z",
+      "closedAt": "2025-12-17T07:29:36Z",
+      "mergedAt": "2025-12-17T07:29:36Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7524,
+      "title": "Release/729.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7524",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T07:35:39Z",
+      "updatedAt": "2025-12-17T08:13:54Z",
+      "closedAt": "2025-12-17T08:13:52Z",
+      "mergedAt": "2025-12-17T08:13:52Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7526,
+      "title": "Feat: Analytics controller first release",
+      "url": "https://github.com/MetaMask/core/pull/7526",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-17T15:35:56Z",
+      "updatedAt": "2025-12-17T16:40:35Z",
+      "closedAt": "2025-12-17T16:40:35Z",
+      "mergedAt": null,
+      "authorLogin": "NicolasMassart",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7527,
+      "title": "Update Release 730.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7527",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-17T15:45:04Z",
+      "updatedAt": "2025-12-17T17:24:06Z",
+      "closedAt": "2025-12-17T17:23:52Z",
+      "mergedAt": null,
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7528,
+      "title": "Release 731.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7528",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-12-17T17:09:49Z",
+      "updatedAt": "2025-12-17T19:25:03Z",
+      "closedAt": "2025-12-17T17:33:48Z",
+      "mergedAt": null,
+      "authorLogin": "NicolasMassart",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7529,
+      "title": "Release 730.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7529",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T17:37:45Z",
+      "updatedAt": "2025-12-17T17:49:35Z",
+      "closedAt": "2025-12-17T17:49:33Z",
+      "mergedAt": "2025-12-17T17:49:33Z",
+      "authorLogin": "NicolasMassart",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7530,
+      "title": "chore(ramps-controller): fix changelog formatting",
+      "url": "https://github.com/MetaMask/core/pull/7530",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T18:46:45Z",
+      "updatedAt": "2025-12-17T19:30:23Z",
+      "closedAt": "2025-12-17T19:30:22Z",
+      "mergedAt": "2025-12-17T19:30:22Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7531,
+      "title": "Release/731.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7531",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T19:50:37Z",
+      "updatedAt": "2025-12-17T19:56:23Z",
+      "closedAt": "2025-12-17T19:56:22Z",
+      "mergedAt": "2025-12-17T19:56:22Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7532,
+      "title": "fix: Fix `get1559CompatibilityWithNetworkClientId`",
+      "url": "https://github.com/MetaMask/core/pull/7532",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T20:52:24Z",
+      "updatedAt": "2025-12-17T21:38:16Z",
+      "closedAt": "2025-12-17T21:38:14Z",
+      "mergedAt": "2025-12-17T21:38:14Z",
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7534,
+      "title": "Release 732.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7534",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-17T21:43:42Z",
+      "updatedAt": "2025-12-17T22:42:56Z",
+      "closedAt": "2025-12-17T22:42:55Z",
+      "mergedAt": "2025-12-17T22:42:55Z",
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7535,
+      "title": "feat: static relay status url",
+      "url": "https://github.com/MetaMask/core/pull/7535",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-18T00:39:04Z",
+      "updatedAt": "2025-12-18T09:30:35Z",
+      "closedAt": "2025-12-18T09:30:34Z",
+      "mergedAt": "2025-12-18T09:30:34Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7536,
+      "title": "feat(ramps-controller): add request caching with TTL, deduplication, and abort support",
+      "url": "https://github.com/MetaMask/core/pull/7536",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-18T03:44:53Z",
+      "updatedAt": "2025-12-19T04:57:34Z",
+      "closedAt": "2025-12-19T04:57:33Z",
+      "mergedAt": "2025-12-19T04:57:33Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7537,
+      "title": "feat: add Bip122AccountChangedNotifications to KnownSessionProperties",
+      "url": "https://github.com/MetaMask/core/pull/7537",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-18T13:32:25Z",
+      "updatedAt": "2025-12-18T14:36:20Z",
+      "closedAt": "2025-12-18T14:36:19Z",
+      "mergedAt": "2025-12-18T14:36:19Z",
+      "authorLogin": "baptiste-marchand",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7538,
+      "title": "ci: Replace local check merge queue action with `github-tools` version",
+      "url": "https://github.com/MetaMask/core/pull/7538",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-18T13:51:43Z",
+      "updatedAt": "2025-12-18T15:24:05Z",
+      "closedAt": "2025-12-18T15:24:03Z",
+      "mergedAt": "2025-12-18T15:24:03Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7540,
+      "title": "chore(deps): bump metamask/github-tools/.github/workflows/add-item-to-project.yml from 56a094ccb23085b708eacbfbcc0b4fdf024491c0 to 603848896b81e41539ea7688e5481839fde39a7f",
+      "url": "https://github.com/MetaMask/core/pull/7540",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-19T06:27:21Z",
+      "updatedAt": "2025-12-22T11:37:25Z",
+      "closedAt": "2025-12-22T11:37:24Z",
+      "mergedAt": null,
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7541,
+      "title": "Release 733.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7541",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-19T11:28:12Z",
+      "updatedAt": "2025-12-19T11:42:35Z",
+      "closedAt": "2025-12-19T11:42:34Z",
+      "mergedAt": "2025-12-19T11:42:34Z",
+      "authorLogin": "Mrtenz",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7543,
+      "title": "chore: update price api support",
+      "url": "https://github.com/MetaMask/core/pull/7543",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-19T13:22:09Z",
+      "updatedAt": "2025-12-19T15:40:21Z",
+      "closedAt": "2025-12-19T15:40:20Z",
+      "mergedAt": "2025-12-19T15:40:19Z",
+      "authorLogin": "bergarces",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3599008597,
+          "state": "APPROVED",
+          "submittedAt": "2025-12-19T15:23:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7544,
+      "title": "ci: Remove unused \"Add Wallet Framework Issues/PRs to Project Board\" workflow",
+      "url": "https://github.com/MetaMask/core/pull/7544",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-19T13:26:59Z",
+      "updatedAt": "2025-12-19T15:06:47Z",
+      "closedAt": "2025-12-19T15:06:46Z",
+      "mergedAt": "2025-12-19T15:06:46Z",
+      "authorLogin": "Mrtenz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7545,
+      "title": "fix: add useExternalService as option in assetSelector",
+      "url": "https://github.com/MetaMask/core/pull/7545",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2025-12-19T13:49:59Z",
+      "updatedAt": "2025-12-19T14:19:36Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7546,
+      "title": "Release/734.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7546",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-12-19T21:59:33Z",
+      "updatedAt": "2025-12-19T22:22:19Z",
+      "closedAt": "2025-12-19T22:22:17Z",
+      "mergedAt": "2025-12-19T22:22:17Z",
+      "authorLogin": "MarioAslau",
+      "labels": [],
+      "reviews": []
+    }
+  ]
+}
