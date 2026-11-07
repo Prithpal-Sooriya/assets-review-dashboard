@@ -66,6 +66,63 @@ export function formatInt(n: number): string {
   return intFormatter.format(n)
 }
 
+/** Hard cap so a corrupt range can never loop the month walk. */
+const COVERAGE_WINDOW_MONTHS_CAP = 1200
+
+/**
+ * Every month key of the collection window. `range.end` is an EXCLUSIVE
+ * instant: its month is included iff any moment of it lies within the range —
+ * i.e. unless the end is exactly midnight UTC on the 1st, in which case that
+ * month contributes zero days and the window stops with the previous month
+ * (…→ 2026-11-01T00:00:00Z ends with Oct 2026, not Nov 2026). A mid-month
+ * cutoff (2026-11-07T…) keeps its partial month, per methodology. The
+ * coverage panel renders this full window so months with no collected data
+ * stay visible instead of being silently dropped; `months[]`/display-window
+ * scope the timeline and the month drill-down only.
+ *
+ * The 1200-month cap is a guard against unbounded rendering on absurd
+ * (≥100-year) ranges — corrupt input that validation flags anyway; it cannot
+ * trigger for any realistic collection window.
+ */
+export function coverageWindowMonths(range: { start: string; end: string }): string[] {
+  const start = monthKeyOfISO(range.start)
+  if (start === null || !isValidMonthKey(start)) return []
+  // range.end is EXCLUSIVE: an end that lands exactly on midnight UTC of the
+  // 1st contributes zero days of its own month, so the window stops with the
+  // previous month (…→ 2026-11-01T00:00:00Z ends with Oct 2026, not Nov 2026).
+  const endInstant = new Date(range.end)
+  if (Number.isNaN(endInstant.getTime())) return []
+  const endOnFirstMidnight =
+    endInstant.getUTCDate() === 1 &&
+    endInstant.getUTCHours() === 0 &&
+    endInstant.getUTCMinutes() === 0 &&
+    endInstant.getUTCSeconds() === 0 &&
+    endInstant.getUTCMilliseconds() === 0
+  const effectiveEnd = new Date(
+    endOnFirstMidnight ? endInstant.getTime() - 1 : endInstant.getTime(),
+  )
+  const end = monthKeyOfISO(effectiveEnd.toISOString())
+  if (end === null || !isValidMonthKey(end)) return []
+  if (end < start) return []
+  const months: string[] = []
+  let year = Number(start.slice(0, 4))
+  let month = Number(start.slice(5, 7))
+  const endYear = Number(end.slice(0, 4))
+  const endMonth = Number(end.slice(5, 7))
+  while (
+    (year < endYear || (year === endYear && month <= endMonth)) &&
+    months.length < COVERAGE_WINDOW_MONTHS_CAP
+  ) {
+    months.push(`${year}-${String(month).padStart(2, '0')}`)
+    month += 1
+    if (month === 13) {
+      month = 1
+      year += 1
+    }
+  }
+  return months
+}
+
 export function isValidISOTimestamp(value: unknown): value is string {
   if (typeof value !== 'string') return false
   const d = new Date(value)

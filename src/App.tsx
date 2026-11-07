@@ -107,7 +107,7 @@ export default function App() {
                 repoFilter={repoFilter}
               />
             )}
-            <CoveragePanel data={data} repos={repos} windowMonths={windowMonths} />
+            <CoveragePanel data={data} repos={repos} />
           </>
         )}
         <WarningsCard loaded={loaded} />
