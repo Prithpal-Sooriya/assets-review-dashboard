@@ -6,17 +6,27 @@ import { UI_VARIANTS } from './variants'
  * Playwright can run each e2e spec against built output — the same build path
  * (virtual:dashboard-data embedding) used by real deployments.
  *
+ * Every variant must pin its fixture via DASHBOARD_DATA_PATH: with real
+ * data/dashboard.json committed on the default branch, an unpinned build would
+ * silently embed REAL data (that is how the demo variant broke when the
+ * collector landed). tests/ui/variants.test.ts enforces the pinning.
+ *
  * Run via `bun run build:test-fixtures`. Cross-platform: no shell env-var
  * prefixes; DASHBOARD_DATA_PATH is passed through child-process env directly.
  */
 
 for (const variant of UI_VARIANTS) {
-  const env: Record<string, string | undefined> = { ...process.env }
-  if (variant.fixture) {
-    env.DASHBOARD_DATA_PATH = variant.fixture
-  } else {
-    delete env.DASHBOARD_DATA_PATH // demo variant: fixture fallback, no override
+  if (!variant.fixture.trim()) {
+    process.stderr.write(
+      `variant "${variant.name}" must pin a fixture (DASHBOARD_DATA_PATH) — ` +
+        `an unpinned build would fall back to data/dashboard.json and embed real data\n`,
+    )
+    process.exit(1)
   }
+  const env: Record<string, string | undefined> = { ...process.env }
+  // Pinned fixture deliberately OVERRIDES any DASHBOARD_DATA_PATH inherited
+  // from the environment — the variant table is the source of truth.
+  env.DASHBOARD_DATA_PATH = variant.fixture
   process.stdout.write(`▸ building variant "${variant.name}" → ${variant.outDir}\n`)
   const result = spawnSync('bunx', ['vite', 'build', '--outDir', variant.outDir], {
     stdio: 'inherit',

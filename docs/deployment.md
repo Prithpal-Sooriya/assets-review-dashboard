@@ -12,8 +12,9 @@ The Vite build resolves the `virtual:dashboard-data` module (see
 1. `$DASHBOARD_DATA_PATH` — a path **relative to the project root** that
    resolves inside it (absolute paths, `..` traversal and symlink escapes are
    rejected at build time). Used by CI and local test builds.
-2. `data/dashboard.json` — the collector's committed output (not present on
-   the UI branch; produced and owned by the collector role in this repo),
+2. `data/dashboard.json` — the collector's committed output (committed on
+   the default branch by the collector role in this repo; production builds
+   embed it, UI test variants pin their own fixtures explicitly),
 3. `src/data/demo-fixture.json` — a clearly-labelled synthetic demo
    fixture.
 
@@ -33,13 +34,17 @@ the sample fixture and its "Sample data" labelling intact.
 
 ```sh
 bun install
-bun run build                 # demo fixture → dist/
+bun run build                 # data/dashboard.json → dist/ (demo fixture
+                              # only when no real data file is committed)
 bun run preview               # http://localhost:4173
 ```
 
-The e2e variant builds (real-shaped / empty / invalid fixtures) are produced by
-`bun run build:test-fixtures` into `dist-variants/` — no manual commands
-needed. Preview ports 4173-4176 must be free when running the suite
+The e2e variant builds are produced by `bun run build:test-fixtures` into
+`dist-variants/` — no manual commands needed. Every variant pins its fixture
+explicitly via `DASHBOARD_DATA_PATH` (`tests/ui/variants.ts`); in particular
+the demo variant pins `src/data/demo-fixture.json`, so a committed real
+`data/dashboard.json` can never leak into a test build. Preview ports
+4173-4176 must be free when running the suite
 (`--strictPort` fails fast on collisions; kill leftover preview servers).
 
 `bun run test:ui` builds all four variants (demo, real-shaped, empty, invalid —
@@ -127,6 +132,23 @@ What still holds regardless of visibility:
   URLs expose. A logged-out curl of each URL remains the source of truth
   (`302` = protected, `200` = public); re-run it quarterly and after changes.
 
+### Deploy records and the production tree
+
+- **Per-deploy records** (exact commit, tree composition, deployment id,
+  URLs, verification, coverage at deploy time) live in [`docs/deploys/`](./deploys/),
+  one file per production deploy ([`TEMPLATE.md`](./deploys/TEMPLATE.md) for
+  the next one). Latest: [2026-11-07 — first real-data
+  deploy](./deploys/2026-11-07.md), pinned by the tag `deploy/2026-11-07`.
+- **Temporary rule (remove once [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
+  is settled):** the production tree is not bare `main`. The first real-data
+  deploy ran `main` **minus PR #3** (client-only Today dashboard with in-browser
+  PAT handling), excluded while that separate session's deploy status is
+  settled. **Deploying bare `main` would ship PR #3 — coordinate first.**
+- The Vercel project has **no git integration**: every deploy is a CLI
+  `--prebuilt` build, so nothing auto-deploys on push. The manual deploy
+  command (`vercel build --prod && vercel deploy --prebuilt --prod`) builds
+  **whatever tree is checked out** — confirm the tree before running it.
+
 ### Data refresh
 
 The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
@@ -138,6 +160,18 @@ The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
    Preview deployments (`--prebuilt` without `--prod`) are available for
    checking a refresh before promoting it, and stay behind Vercel
    Authentication.
+
+**Pre-deploy checklist** (each refresh):
+
+- [ ] **Confirm the tree being built** — production must not ship PR #3's
+      Today dashboard / PAT handling until [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
+      is settled (see *Deploy records and the production tree* above).
+- [ ] **Coverage disclosure:** months with no collected data are currently
+      dropped from the coverage grid — the summary counts only the displayed
+      window's repo-months, not the full contract window
+      ([issue #7](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/7)).
+      Fix it, or record in the deploy record that the limitation was
+      consciously accepted.
 
 There is no cron, webhook or runtime refresh by design: every number on the
 site traces to one reviewed commit.
