@@ -167,8 +167,9 @@ The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
       Today dashboard / PAT handling until [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
       is settled (see *Deploy records and the production tree* above).
 - [ ] **Coverage disclosure:** months with no collected data are currently
-      dropped from the coverage grid (the summary reads "N/18" over the
-      displayed window, not "N/39" over the contract window) — [issue #7](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/7).
+      dropped from the coverage grid — the summary counts only the displayed
+      window's repo-months, not the full contract window
+      ([issue #7](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/7)).
       Fix it, or record in the deploy record that the limitation was
       consciously accepted.
 
