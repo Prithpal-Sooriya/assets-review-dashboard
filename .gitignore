@@ -1,0 +1,12 @@
+node_modules/
+# Production build output.
+dist/
+# Built UI test variants all live here (see tests/ui/variants.ts).
+dist-variants/
+test-results/
+playwright-report/
+.vercel/
+.env*
+!.env.example
+*.log
+.DS_Store

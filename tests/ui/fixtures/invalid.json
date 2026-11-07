@@ -1,0 +1,49 @@
+{
+ "schemaVersion": 2,
+ "generatedAt": "yesterday",
+ "range": null,
+ "methodology": {
+  "version": "x",
+  "notes": "not-a-list"
+ },
+ "coverage": [
+  {
+   "repo": "MetaMask/core",
+   "month": "2026-13",
+   "status": "maybe"
+  }
+ ],
+ "months": [
+  {
+   "month": "2026-07",
+   "repo": "MetaMask/core",
+   "internalReviewedPrs": -5,
+   "externalReviewedPrs": 3,
+   "reviewSubmissions": 4,
+   "reviewedUnmergedPrs": 1,
+   "mergedInternalPrs": 2,
+   "mergedExternalReviewedPrs": 0
+  }
+ ],
+ "prs": [
+  {
+   "id": "wrong",
+   "repo": "MetaMask/core",
+   "number": 0,
+   "title": 7,
+   "url": "http://insecure.example/pr/1",
+   "ownership": "somehow",
+   "ownershipReason": "team-label",
+   "state": "merged",
+   "mergedAt": "nope",
+   "reviewMonths": [
+    "2026-07",
+    "July 2026"
+   ],
+   "reviewCountsByMonth": {
+    "2026-07": "many"
+   },
+   "labels": "none"
+  }
+ ]
+}
