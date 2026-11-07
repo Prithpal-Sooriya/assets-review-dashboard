@@ -136,13 +136,14 @@ What still holds regardless of visibility:
 
 - **Per-deploy records** (exact commit, tree composition, deployment id,
   URLs, verification, coverage at deploy time) live in [`docs/deploys/`](./deploys/),
-  one file per production deploy. Latest: [2026-11-07 — first real-data
-  deploy](./deploys/2026-11-07.md).
-- **The production tree is not bare `main`.** The first real-data deploy ran
-  `main` **minus PR #3** (client-only Today dashboard with in-browser PAT
-  handling), excluded while that separate session's deploy status is settled
-  ([issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)).
-  **Deploying bare `main` would ship PR #3 — coordinate first.**
+  one file per production deploy ([`TEMPLATE.md`](./deploys/TEMPLATE.md) for
+  the next one). Latest: [2026-11-07 — first real-data
+  deploy](./deploys/2026-11-07.md), pinned by the tag `deploy/2026-11-07`.
+- **Temporary rule (remove once [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
+  is settled):** the production tree is not bare `main`. The first real-data
+  deploy ran `main` **minus PR #3** (client-only Today dashboard with in-browser
+  PAT handling), excluded while that separate session's deploy status is
+  settled. **Deploying bare `main` would ship PR #3 — coordinate first.**
 - The Vercel project has **no git integration**: every deploy is a CLI
   `--prebuilt` build, so nothing auto-deploys on push. The manual deploy
   command (`vercel build --prod && vercel deploy --prebuilt --prod`) builds

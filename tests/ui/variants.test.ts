@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { existsSync } from 'node:fs'
+import { join } from 'node:path'
 import { UI_VARIANTS } from './variants'
 
 /**
@@ -12,18 +13,22 @@ import { UI_VARIANTS } from './variants'
  * collector landed. build-fixtures.ts refuses to build an unpinned variant;
  * this test keeps that contract visible in the unit suite.
  */
+
+/** Fixture paths are repo-root-relative; resolve them regardless of cwd. */
+const repoRoot = join(import.meta.dir, '..', '..')
+const fixturePath = (fixture: string) => join(repoRoot, fixture)
+
 describe('UI_VARIANTS fixture pinning', () => {
-  test('every variant pins a non-empty fixture', () => {
+  test('every variant pins a non-empty (non-whitespace) fixture', () => {
     for (const variant of UI_VARIANTS) {
-      expect(variant.fixture).not.toBe('')
-      expect(variant.fixture.length).toBeGreaterThan(0)
+      expect(variant.fixture.trim().length).toBeGreaterThan(0)
     }
   })
 
   test('every pinned fixture exists on disk', () => {
     for (const variant of UI_VARIANTS) {
       expect(
-        existsSync(variant.fixture),
+        existsSync(fixturePath(variant.fixture)),
         `fixture for variant "${variant.name}" is missing: ${variant.fixture}`,
       ).toBe(true)
     }
