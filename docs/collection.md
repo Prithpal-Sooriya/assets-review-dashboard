@@ -131,15 +131,36 @@ aggregation dedupes by freshest snapshot per PR).
   month; the cutoff is fixed at run start (deterministic aggregate).
 - Runs `bun test tests/collector/` first, on the reviewed default-branch
   code that performs the collection — no data is written on failure.
-- Writes only to an **orphan, data-only branch** `data/auto-refresh`
-  (**never the default branch**, no force-push): the workflow prepares a
-  git worktree of that branch, mirrors `data/` into it with rsync, and
-  pushes. The data branch deliberately carries no code — nothing unreviewed
-  executes in the token-bearing job, its own pushes fire no `on: push`
-  workflows (no workflow files exist on it), merging its data PR never
-  touches source files, and there are no merges/conflicts to reconcile. A
-  guard refuses to continue if the branch ever carries anything outside
-  `data/`.
+- Writes only to `data/auto-refresh` — a branch **descending from the
+  default branch** whose committed diff vs it is guarded to be **data-only**
+  (**never the default branch**, no force-push, merge commits only): the
+  workflow prepares a git worktree of that branch, converges it by merging
+  the default branch in, mirrors `data/` into it with rsync, and pushes.
+  Merge semantics are precise: `-X ours` resolves only **conflicting**
+  `data/**` paths to the branch's newer collected state (hand edits to
+  collected data on main are superseded); **non-conflicting** main-side
+  changes are adopted — non-data files end up identical to the default
+  branch, and hand-added new data files are preserved. GitHub refuses PRs
+  between branches with no common history, so an orphan data branch cannot
+  open a PR — hence the main ancestry. Nothing on the data branch executes
+  in the token-bearing job (the job always checks out and runs the
+  default branch's code; the branch's non-data files are only ever main's
+  own reviewed content), and a guard refuses to continue if the branch's
+  changed paths vs the default branch ever diverge outside `data/` — so
+  merging the data PR only ever applies data changes. The guard
+  (`scripts/check-data-branch.ts`, unit-tested in
+  `tests/collector/data-branch-guard.test.ts`) also rejects a top-level
+  `data` symlink and **fails closed**: a git error is a refusal, never a
+  pass.
+- **Data PRs must be squash-merged.** The guard certifies the branch TIP's
+  diff, not its history: squash-merging means only the tip's data-only
+  tree lands on main, so transient commits on the data branch (e.g. a
+  malicious commit later reverted before a run) can never enter main's
+  ancestry.
+- The data branch carries the default branch's `.github/workflows` files
+  (required by the data-only invariant — deleting them would itself be a
+  non-data divergence). Push-inertness is enforced for the current CI
+  workflows (see `data-pr-guard.yml` below).
 - Hard collector failures (exit 1) fail the run red immediately with the
   checkpoints already pushed; paused runs finish red with a greppable
   `[EXPECTED-AUTO-RESUME]` annotation (not actionable).
@@ -175,6 +196,38 @@ the operational workflows and composite actions):
 `tsconfig.collector.json`, then `bun test tests/collector/`. UI CI is
 `ci-ui.yml`, owned by the frontend; filenames are deliberately distinct
 so the two roles never edit each other's CI.
+
+`data-pr-guard.yml` runs on every PR (to main) touching `data/**`: it
+fetches the PR head as git objects and certifies it with the default
+branch's own guard script — no branch code is executed (the checkout is
+the default branch's tree). This mechanically closes the TOCTOU window
+between a collect-data push and the human merge: a tampered data-PR head
+shows red checks on every head push. Data-branch pushes are inert for CI
+by enforcement for the current workflows (both CI push triggers pin
+`branches: [main]`, and a data-only push matches no `src/**`/`scripts/**`
+paths); any future workflow using `on: push` must keep a branch filter
+(review convention).
+
+### Data branch repair
+
+If `data/auto-refresh` is ever corrupted, diverged outside `data/`, or
+unmergeable: close any open data PR, delete the branch (repo admin:
+`git push origin --delete data/auto-refresh`), and re-dispatch
+`collect-data` — the first run recreates it from the default branch and
+resumes from the checkpoints committed there (the data is re-derivable,
+so losing the branch loses nothing that cannot be recollected). A
+refusing run never pushes anything, so a bad branch can never make
+progress silently.
+
+Hand DELETIONS of collector-owned raw data files on main propagate like
+any other main-side data change (the convergence merge adopts them, rsync
+mirrors them) — the next aggregate then fails loudly, naming the
+partition. Recovery: flip that partition's manifest status to `pending`
+(e.g. in a data PR) so the next run recollects it.
+
+Hand edits to *collected* data files on main are superseded by the next
+data PR (the data branch is the system of record); hand-added NEW data
+files are preserved (non-conflicting main-side additions are adopted).
 
 `collect-data-heartbeat.yml` (hourly): thin orchestration around the
 TESTED decision core `scripts/lib/heartbeat.ts` (via `scripts/heartbeat.ts`):

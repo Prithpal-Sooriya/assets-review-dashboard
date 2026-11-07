@@ -8,7 +8,7 @@
 #     collect-data.yml creates it at /tmp/data-tree)
 #   - checkout-persisted git push credentials (the runner's default)
 name: push-data
-description: Commit data/ to the orphan data branch and push
+description: Commit data/ to the data branch (main-descendant, data-only diff) and push
 inputs:
   message:
     description: Commit message
@@ -29,6 +29,7 @@ runs:
         MESSAGE: ${{ inputs.message }}
         DATA_BRANCH: ${{ inputs.data-branch }}
         WORKTREE: ${{ inputs.worktree-path }}
+        DEFAULT_BRANCH: ${{ env.DEFAULT_BRANCH }}
       run: |
         set -euo pipefail
         rsync -a --delete data/ "$WORKTREE/data/"
@@ -37,7 +38,19 @@ runs:
           git -C "$WORKTREE" -c user.name=dashboard-bot \
             -c user.email=dashboard-bot@users.noreply.github.com \
             commit -m "$MESSAGE"
-          git -C "$WORKTREE" push origin "$DATA_BRANCH"
         else
-          echo "no data changes to push"
+          echo "no data changes to commit"
+        fi
+        # Re-guard the exact tip about to leave the runner: the prepare-step
+        # guard certified the branch before collection; this re-check (fail
+        # closed) closes any gap between then and now.
+        bun run scripts/check-data-branch.ts "$WORKTREE" "origin/$DEFAULT_BRANCH"
+        # Always push (plain, never force): a no-op when up to date, and it
+        # carries the prepare step's convergence merge even in a run where
+        # this step had nothing new to commit. A non-fast-forward push fails
+        # loudly (e.g. a concurrent writer) instead of silently dropping
+        # progress — the next run re-syncs from the remote tip.
+        if ! git -C "$WORKTREE" push origin "$DATA_BRANCH"; then
+          echo "::error::push of $DATA_BRANCH failed — most likely a concurrent writer pushed it (plain non-force push rejected). Nothing is lost: the next run re-syncs from the remote tip and re-pushes; re-dispatch collect-data."
+          exit 1
         fi

@@ -39,6 +39,30 @@ import {
   startOfMonthIso,
 } from "./config";
 
+/**
+ * Manifest-complete partitions in the display window must have their raw
+ * data files present. A missing file means a silently dropped month on the
+ * dashboard — e.g. a hand deletion of a collector-owned file on main that
+ * propagated through the data branch. The aggregate fails loudly on these
+ * (recovery: docs/collection.md "Data branch repair").
+ */
+export async function findMissingCompletePartitions(
+  manifest: Manifest,
+  repos: string[],
+  months: string[],
+  hasFile: (repo: string, month: string) => Promise<boolean>,
+): Promise<string[]> {
+  const missing: string[] = [];
+  for (const repo of repos) {
+    for (const m of months) {
+      if (manifest.partitions[`${repo}|${m}`]?.status === "complete" && !(await hasFile(repo, m))) {
+        missing.push(`${repo}|${m}`);
+      }
+    }
+  }
+  return missing;
+}
+
 export interface AggregateInput {
   config: CollectorConfig;
   /** ISO UTC instant: generatedAt, the range end bound, and the partition
