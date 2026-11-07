@@ -166,12 +166,15 @@ The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
 - [ ] **Confirm the tree being built** — production must not ship PR #3's
       Today dashboard / PAT handling until [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
       is settled (see *Deploy records and the production tree* above).
-- [ ] **Coverage disclosure:** months with no collected data are currently
-      dropped from the coverage grid — the summary counts only the displayed
-      window's repo-months, not the full contract window
-      ([issue #7](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/7)).
-      Fix it, or record in the deploy record that the limitation was
-      consciously accepted.
+- [ ] **Coverage disclosure:** the coverage panel must span the **full
+      collection window** — the summary denominator counts every repo-month in
+      `data.range`, the grid shows all months (no-data months as Pending, or
+      Missing when the collector wrote no coverage entry), and every
+      non-complete repo-month is listed. The timeline separately scopes to
+      months with data and says so in its caption
+      ([issue #7](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/7);
+      fixed by the full-window coverage panel change — was: out-of-window
+      months silently dropped).
 
 There is no cron, webhook or runtime refresh by design: every number on the
 site traces to one reviewed commit.

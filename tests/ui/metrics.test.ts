@@ -13,7 +13,7 @@ import {
   reposInData,
   totalAggregate,
 } from '../../src/data/metrics'
-import { formatMonthKey, monthKeyOfISO, repoDisplayName } from '../../src/data/format'
+import { coverageWindowMonths, formatMonthKey, monthKeyOfISO, repoDisplayName } from '../../src/data/format'
 
 const demo: DashboardData = JSON.parse(
   readFileSync(new URL('../../src/data/demo-fixture.json', import.meta.url), 'utf8'),
@@ -121,6 +121,35 @@ describe('coverage helpers', () => {
     expect(partial.has('2025-12')).toBe(true)
     expect(partial.has('2026-11')).toBe(true)
     expect(partial.has('2025-11')).toBe(false)
+  })
+})
+
+describe('coverageWindowMonths (full collection window for the coverage panel)', () => {
+  test('enumerates range.start..range.end inclusive, crossing year boundaries', () => {
+    // The real dataset's range: 13 months, 2025-11 .. 2026-11
+    const months = coverageWindowMonths({ start: '2025-11-01T00:00:00.000Z', end: '2026-11-07T13:30:26.843Z' })
+    expect(months).toHaveLength(13)
+    expect(months[0]).toBe('2025-11')
+    expect(months[months.length - 1]).toBe('2026-11')
+    expect(months).toEqual([...months].sort())
+  })
+
+  test('single-month and same-month ranges', () => {
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-07-31T00:00:00Z' })).toEqual(['2026-07'])
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-01T00:00:00Z' })).toEqual([
+      '2026-07', '2026-08', '2026-09', '2026-10', '2026-11',
+    ])
+  })
+
+  test('out-of-order or invalid ranges yield an empty window (no runaway loops)', () => {
+    expect(coverageWindowMonths({ start: '2026-11-01T00:00:00Z', end: '2025-11-01T00:00:00Z' })).toEqual([])
+    expect(coverageWindowMonths({ start: 'not-a-date', end: '2026-11-01T00:00:00Z' })).toEqual([])
+    expect(coverageWindowMonths({ start: '2025-11-01T00:00:00Z', end: '' })).toEqual([])
+  })
+
+  test('a pathological multi-year range is capped, never unbounded', () => {
+    const months = coverageWindowMonths({ start: '1900-01-01T00:00:00Z', end: '2900-01-01T00:00:00Z' })
+    expect(months.length).toBeLessThanOrEqual(1200)
   })
 })
 

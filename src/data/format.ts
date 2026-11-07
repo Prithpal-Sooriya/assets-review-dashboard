@@ -66,6 +66,43 @@ export function formatInt(n: number): string {
   return intFormatter.format(n)
 }
 
+/** Hard cap so a corrupt range can never loop the month walk. */
+const COVERAGE_WINDOW_MONTHS_CAP = 1200
+
+/**
+ * Every month key in the collection window, `range.start` through `range.end`
+ * inclusive — the end month counts even when the cutoff lands mid-month
+ * (the current month is partial, not absent). The coverage panel renders this
+ * full window so months with no collected data stay visible instead of being
+ * silently dropped; `months[]`/display-window scope the timeline and the
+ * month drill-down only.
+ */
+export function coverageWindowMonths(range: { start: string; end: string }): string[] {
+  const start = monthKeyOfISO(range.start)
+  const end = monthKeyOfISO(range.end)
+  if (start === null || end === null || !isValidMonthKey(start) || !isValidMonthKey(end)) {
+    return []
+  }
+  if (end < start) return []
+  const months: string[] = []
+  let year = Number(start.slice(0, 4))
+  let month = Number(start.slice(5, 7))
+  const endYear = Number(end.slice(0, 4))
+  const endMonth = Number(end.slice(5, 7))
+  while (
+    (year < endYear || (year === endYear && month <= endMonth)) &&
+    months.length < COVERAGE_WINDOW_MONTHS_CAP
+  ) {
+    months.push(`${year}-${String(month).padStart(2, '0')}`)
+    month += 1
+    if (month === 13) {
+      month = 1
+      year += 1
+    }
+  }
+  return months
+}
+
 export function isValidISOTimestamp(value: unknown): value is string {
   if (typeof value !== 'string') return false
   const d = new Date(value)
