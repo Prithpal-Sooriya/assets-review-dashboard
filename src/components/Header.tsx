@@ -1,9 +1,9 @@
 import { useTheme } from '../theme'
 import { formatISOTimestamp } from '../data/format'
 import type { LoadedDashboard } from '../data/loader'
-import type { Route } from '../today/urlstate'
+import { pageHref, type Page } from '../routing'
 
-export function Header({ loaded, route = 'history' }: { loaded: LoadedDashboard; route?: Route }) {
+export function Header({ loaded, page }: { loaded: LoadedDashboard; page: Page }) {
   const { theme, toggle } = useTheme()
   const next = theme === 'dark' ? 'light' : 'dark'
   return (
@@ -12,8 +12,8 @@ export function Header({ loaded, route = 'history' }: { loaded: LoadedDashboard;
         <div className="site-header__titles">
           <h1 className="site-title">Assets review workload</h1>
           <p className="site-subtitle">
-            {route === 'today'
-              ? 'Today · open PRs needing review · client-only collection from public GitHub data'
+            {page === 'daily'
+              ? 'Daily · open PRs needing Assets review · collected live in your browser from public GitHub data'
               : 'Historical team-level view · MetaMask Core, Mobile and Extension · internal metrics only, no individual data'}
           </p>
         </div>
@@ -35,11 +35,11 @@ export function Header({ loaded, route = 'history' }: { loaded: LoadedDashboard;
       </div>
       <nav className="site-nav" aria-label="Dashboard views">
         <div className="container site-nav__inner">
-          <a className="site-nav__link" href="#/today" aria-current={route === 'today' ? 'page' : undefined}>
-            Today
+          <a className="site-nav__link" href={pageHref('daily')} aria-current={page === 'daily' ? 'page' : undefined}>
+            Daily
           </a>
-          <a className="site-nav__link" href="#/history" aria-current={route === 'history' ? 'page' : undefined}>
-            History
+          <a className="site-nav__link" href={pageHref('historical')} aria-current={page === 'historical' ? 'page' : undefined}>
+            Historical
           </a>
         </div>
       </nav>

@@ -8,7 +8,7 @@ const windowMonths = displayWindow(orderedMonthKeys(real.months)).shown
 const totals = totalAggregate(aggregateMonths(real.months, null, windowMonths))
 
 test('real-shaped data renders without any demo labelling', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/historical')
   await expect(page.locator('.notice--sample')).toHaveCount(0)
   await expect(page.locator('.site-header .chip')).toContainText('Data as of 31 Oct 2026, 08:00 UTC')
   await expect(page.locator('.notice')).toContainText('Source: public GitHub PRs from MetaMask Mobile, Core, and Extension')
@@ -18,7 +18,7 @@ test('real-shaped data renders without any demo labelling', async ({ page }) => 
 })
 
 test('window, totals and coverage reflect the fixture', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/historical')
   await expect(page.getByText('Window: Jul 2026 – Oct 2026 · 4 months with data')).toBeVisible()
   const reviewed = (totals.internalReviewedPrs + totals.externalReviewedPrs).toLocaleString('en-US')
   await expect(page.locator('.stat', { hasText: 'Reviewed PRs' }).locator('.stat__value')).toHaveText(reviewed)
@@ -26,7 +26,7 @@ test('window, totals and coverage reflect the fixture', async ({ page }) => {
 })
 
 test('coverage panel spans the full collection window (regression: issue #7)', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/historical')
   await expect(page.getByRole('heading', { name: 'Data coverage' })).toBeVisible()
   // Timeline stays scoped to months with data (fixture months[] = Jul–Oct),
   // asserted in the test above; the coverage panel spans the FULL range.
@@ -60,7 +60,7 @@ test('coverage panel spans the full collection window (regression: issue #7)', a
 })
 
 test('methodology notes are shown verbatim', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/historical')
   await expect(page.getByRole('heading', { name: 'Methodology & limitations' })).toBeVisible()
   await expect(page.getByText('Sample dataset for automated UI tests; synthetic values, not real activity.')).toBeVisible()
 })

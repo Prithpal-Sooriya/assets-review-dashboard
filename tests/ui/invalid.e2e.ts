@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test('contract-violating data refuses to render numbers', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/historical')
   const alert = page.getByRole('alert')
   await expect(alert).toBeVisible()
   await expect(alert.getByRole('heading', { name: 'Dashboard data failed validation' })).toBeVisible()
@@ -14,7 +14,7 @@ test('contract-violating data refuses to render numbers', async ({ page }) => {
 })
 
 test('specific validation errors are listed with paths', async ({ page }) => {
-  await page.goto('/')
+  await page.goto('/historical')
   const alert = page.getByRole('alert')
   await expect(alert.getByText('$.schemaVersion', { exact: false })).toBeVisible()
   await expect(alert.getByText('$.months[0].internalReviewedPrs', { exact: false })).toBeVisible()

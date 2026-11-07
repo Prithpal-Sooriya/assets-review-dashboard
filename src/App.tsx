@@ -24,19 +24,36 @@ import { MethodologyCard, WarningsCard } from './components/NotesCards'
 import { EmptyState, InvalidState, MissingState } from './components/StateCards'
 import { Footer } from './components/Footer'
 import { TodayPanel } from './components/today/TodayPanel'
-import { parseHash, type Route } from './today/urlstate'
+import { resolvePage, shouldResyncOnUrlChange, type Page, type UrlLocation } from './routing'
 
 export default function App() {
   const [repoFilter, setRepoFilter] = useState<string | null>(null)
-  // Hash routing: no hash or #/history keeps the original History behaviour
-  // (existing links stay valid); #/today shows the client-only Today view.
-  const [route, setRoute] = useState<Route>(() =>
-    typeof window === 'undefined' ? 'history' : parseHash(window.location.hash).route,
+  // Page routing: Daily lives at / (the landing page), Historical at
+  // /historical. Route-shaped hashes are honored on any path: #/today is the
+  // LIVE share-link format for Daily (filter state lives in its query) and
+  // #/history is a legacy alias — see src/routing.ts (unit-tested there).
+  const [page, setPage] = useState<Page>(() =>
+    typeof window === 'undefined' ? 'daily' : resolvePage(window.location.pathname, window.location.hash),
   )
   useEffect(() => {
-    const onHash = () => setRoute(parseHash(window.location.hash).route)
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
+    // Same-document URL changes: browsers fire popstate for every one of them
+    // (hash edits and in-page anchors included, not just back/forward), so
+    // both handlers share the guard in routing.ts — re-resolve only on an
+    // explicit page navigation. Filter updates use history.replaceState,
+    // which fires neither event — filters change state, not the page.
+    const sync = () => setPage(resolvePage(window.location.pathname, window.location.hash))
+    let last: UrlLocation = { pathname: window.location.pathname, hash: window.location.hash }
+    const onUrlChange = () => {
+      const next: UrlLocation = { pathname: window.location.pathname, hash: window.location.hash }
+      if (shouldResyncOnUrlChange(last, next)) sync()
+      last = next
+    }
+    window.addEventListener('popstate', onUrlChange)
+    window.addEventListener('hashchange', onUrlChange)
+    return () => {
+      window.removeEventListener('popstate', onUrlChange)
+      window.removeEventListener('hashchange', onUrlChange)
+    }
   }, [])
   const loaded = dashboard
 
@@ -80,10 +97,10 @@ export default function App() {
 
   const selectMonth = (month: string) => setSelectedMonth(month)
 
-  if (route === 'today') {
+  if (page === 'daily') {
     return (
       <>
-        <Header loaded={loaded} route="today" />
+        <Header loaded={loaded} page="daily" />
         <main className="container" id="main">
           <TodayPanel />
         </main>
@@ -94,7 +111,7 @@ export default function App() {
 
   return (
     <>
-      <Header loaded={loaded} route="history" />
+      <Header loaded={loaded} page="historical" />
       <main className="container" id="main">
         <DataNotice loaded={loaded} />
         {!ok && (

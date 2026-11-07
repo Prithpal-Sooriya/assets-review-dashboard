@@ -16,7 +16,8 @@ import { TodayTable } from './TodayTable'
 import { SinceBaselineCard } from './SinceBaselineCard'
 
 /**
- * Today dashboard: client-only collection from public GitHub REST data.
+ * Daily page (the "Daily review queue"): client-only collection from public
+ * GitHub REST data, mounted at / (legacy #/today hash links still land here).
  *
  * Views:
  *  - "Needs Assets review" — explicit outstanding review requests to the
@@ -31,12 +32,12 @@ import { SinceBaselineCard } from './SinceBaselineCard'
  */
 export function TodayPanel() {
   const today = useTodayData()
-  const [urlState, setUrlState] = useState<TodayUrlState>(() => parseHash(window.location.hash).today)
+  const [urlState, setUrlState] = useState<TodayUrlState>(() => parseHash(window.location.hash))
   const [nowMs, setNowMs] = useState(() => Date.now())
 
   // Hash is the source of truth: back/forward and shared links both land here.
   useEffect(() => {
-    const onHash = () => setUrlState(parseHash(window.location.hash).today)
+    const onHash = () => setUrlState(parseHash(window.location.hash))
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [])
@@ -70,11 +71,20 @@ export function TodayPanel() {
 
   return (
     <>
+      <section className="section" aria-labelledby="daily-queue-heading">
+        <h2 className="section__title" id="daily-queue-heading">Daily review queue</h2>
+        <p className="section__desc">
+          What needs Assets review right now: open PRs across MetaMask Core, Mobile and Extension
+          with an explicit outstanding review request to the team or one of its members, plus
+          team-authored PRs waiting on other teams or outside reviewers. Collected live in this
+          browser from public GitHub data — see the status card below for how fresh it is.
+        </p>
+      </section>
       <TodayStatus today={today} nowMs={nowMs} />
 
       {display === null && !today.collecting && (
         <div className="state-card notice notice--error" role="alert" style={{ display: 'block' }}>
-          <h2 style={{ color: 'var(--danger)' }}>No Today data available</h2>
+          <h2 style={{ color: 'var(--danger)' }}>No Daily data available</h2>
           <p>
             Nothing has been collected yet and there is no cached snapshot in this browser. The
             dashboard collects from api.github.com while this page is open; check the banner above
@@ -83,9 +93,9 @@ export function TodayPanel() {
         </div>
       )}
 
-      <section className="section" aria-label="Today views">
+      <section className="section" aria-label="Daily views">
         <div className="section__tools">
-          <div className="segmented" role="group" aria-label="Today view">
+          <div className="segmented" role="group" aria-label="Daily view">
             <button
               type="button"
               className="btn"

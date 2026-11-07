@@ -1,4 +1,5 @@
 import { test, expect, type Page, type Route } from '@playwright/test'
+import { AxeBuilder } from '@axe-core/playwright'
 
 /**
  * Today-view e2e against the demo build with api.github.com fully mocked via
@@ -163,31 +164,157 @@ async function gotoToday(page: Page, hash = '#/today') {
 
 /* ------------------------------------------------------------------ */
 
-test.describe('Today view — routing and History regression', () => {
-  test('no hash lands on History; Today reachable via nav and deep link', async ({ page }) => {
+test.describe('Navigation — Daily and Historical pages', () => {
+  test('root lands on Daily; nav tabs switch between the two pages', async ({ page }) => {
+    const dailyMarker = page.locator('.today-meta')
+    const historicalMarker = page.locator('.stat').first()
     await mockGitHub(page)
     await page.goto('/')
     await expect(page.getByRole('heading', { level: 1, name: 'Assets review workload' })).toBeVisible()
-    // History content, not Today.
-    await expect(page.locator('.stat').first()).toBeVisible()
-    await expect(page.locator('.today-meta')).toHaveCount(0)
+    // Daily content (review queue), not Historical.
+    await expect(dailyMarker).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Daily review queue' })).toBeVisible()
+    await expect(historicalMarker).toHaveCount(0)
 
-    await page.getByRole('link', { name: 'Today' }).click()
-    await expect(page.locator('.today-meta')).toBeVisible()
-    expect(page.url()).toContain('#/today')
+    await page.getByRole('link', { name: 'Historical' }).click()
+    await expect(historicalMarker).toBeVisible()
+    expect(page.url()).toContain('/historical')
+    await expect(dailyMarker).toHaveCount(0)
 
-    await page.getByRole('link', { name: 'History' }).click()
-    await expect(page.locator('.stat').first()).toBeVisible()
-    expect(page.url()).toContain('#/history')
+    await page.getByRole('link', { name: 'Daily' }).click()
+    await expect(dailyMarker).toBeVisible()
+    expect(page.url()).not.toContain('/historical')
   })
 
-  test('legacy History deep links still work unchanged', async ({ page }) => {
-    await mockGitHub(page) // in case a stray Today mount happens
-    await page.goto('/#/')
+  test('/historical works on direct load and reload (SPA rewrite)', async ({ page }) => {
+    const dailyMarker = page.locator('.today-meta')
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page) // in case a stray Daily mount happens
+    await page.goto('/historical')
+    await expect(historicalMarker).toBeVisible()
+    await expect(dailyMarker).toHaveCount(0)
+    await page.reload()
+    await expect(historicalMarker).toBeVisible()
+    await expect(dailyMarker).toHaveCount(0)
+    expect(page.url()).toContain('/historical')
+  })
+
+  test('browser back and forward restore the previous page', async ({ page }) => {
+    const dailyMarker = page.locator('.today-meta')
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    await page.goto('/')
+    await expect(dailyMarker).toBeVisible()
+    await page.getByRole('link', { name: 'Historical' }).click()
+    await expect(historicalMarker).toBeVisible()
+    await page.goBack()
+    await expect(dailyMarker).toBeVisible()
+    await page.goForward()
+    await expect(historicalMarker).toBeVisible()
+  })
+
+  test('active tab is marked for assistive tech and keyboard operable', async ({ page }) => {
+    const daily = page.getByRole('link', { name: 'Daily' })
+    const historical = page.getByRole('link', { name: 'Historical' })
+    await mockGitHub(page)
+    await page.goto('/')
+    await expect(daily).toHaveAttribute('aria-current', 'page')
+    // Inactive tab must not carry the attribute at all (a value-based
+    // negation like not.toHaveAttribute('aria-current', 'x') would pass even
+    // if the inactive tab wrongly said aria-current="page").
+    await expect(historical).not.toHaveAttribute('aria-current')
+    // Keyboard: Tab reaches the nav links, Enter activates the focused one.
+    await daily.focus()
+    await page.keyboard.press('Tab') // focus moves to Historical
+    await expect(historical).toBeFocused()
+    await page.keyboard.press('Enter')
     await expect(page.locator('.stat').first()).toBeVisible()
-    await page.goto('/#/anything-old')
-    await expect(page.locator('.stat').first()).toBeVisible()
+    await expect(historical).toHaveAttribute('aria-current', 'page')
+    await expect(daily).not.toHaveAttribute('aria-current')
+  })
+
+  test('in-page fragment anchors never flip the page (regression)', async ({ page }) => {
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    // Historical held by the #/history hash at the root path — following a
+    // plain fragment anchor (e.g. a future skip link, or a shared URL with a
+    // fragment) must keep the Historical page, not flip to Daily.
+    await page.goto('/#/history')
+    await expect(historicalMarker).toBeVisible()
+    await page.evaluate(() => {
+      window.location.hash = '#main'
+    })
+    await expect(historicalMarker).toBeVisible()
     await expect(page.locator('.today-meta')).toHaveCount(0)
+    // A route-shaped hash still switches pages from any path.
+    await page.evaluate(() => {
+      window.location.hash = '#/today'
+    })
+    await expect(page.locator('.today-meta')).toBeVisible()
+  })
+
+  test('back from a hash entry to a hashless URL restores the page', async ({ page }) => {
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    // Adverse round-2 repro: /historical (Historical) → #/today (Daily) →
+    // Back must return to Historical, not strand the Daily view on the
+    // /historical URL.
+    await page.goto('/historical')
+    await expect(historicalMarker).toBeVisible()
+    await page.evaluate(() => {
+      window.location.hash = '#/today'
+    })
+    await expect(page.locator('.today-meta')).toBeVisible()
+    await page.goBack()
+    await expect(historicalMarker).toBeVisible()
+    await expect(page.locator('.today-meta')).toHaveCount(0)
+    await expect(page).toHaveURL(/\/historical$/)
+  })
+
+  test('hash deep links still work: #/today (live share format) and #/history (legacy)', async ({ page }) => {
+    const dailyMarker = page.locator('.today-meta')
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    await page.goto('/#/today')
+    await expect(dailyMarker).toBeVisible()
+    expect(page.url()).toContain('#/today')
+    await page.goto('/#/history')
+    await expect(historicalMarker).toBeVisible()
+    await expect(dailyMarker).toHaveCount(0)
+  })
+
+  test('shared Daily filter links apply their state', async ({ page }) => {
+    await mockGitHub(page)
+    await page.goto('/#/today?view=awaiting&sort=newest')
+    await expect(page.locator('.today-meta')).toBeVisible()
+    await expect(page.getByRole('button', { name: /Assets PRs awaiting others/ })).toHaveAttribute('aria-pressed', 'true')
+    await expect(page.getByRole('button', { name: 'Newest first' })).toHaveAttribute('aria-pressed', 'true')
+    // Changing a filter keeps the URL shareable (hash query round-trip).
+    await page.getByRole('button', { name: 'Oldest first' }).click()
+    expect(page.url()).toContain('#/today')
+  })
+
+  test('unknown or empty hashes defer to the path', async ({ page }) => {
+    const dailyMarker = page.locator('.today-meta')
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    await page.goto('/#/')
+    await expect(dailyMarker).toBeVisible() // root path → Daily
+    await page.goto('/#/anything-old')
+    await expect(dailyMarker).toBeVisible()
+    await page.goto('/historical#/anything-old')
+    await expect(historicalMarker).toBeVisible() // /historical path → Historical
+  })
+
+  test('Daily landing page has no detectable accessibility violations (axe)', async ({ page }) => {
+    await mockGitHub(page)
+    await page.goto('/')
+    // Daily view with the nav tabs, status chips and queue table.
+    const results = await new AxeBuilder({ page })
+      .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'])
+      .analyze()
+    const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
+    expect(serious).toEqual([])
   })
 })
 
@@ -373,7 +500,7 @@ test.describe('Today view — failure handling', () => {
     // Seed a 4h-old COMPLETE cached snapshot: stale enough that mounting
     // triggers a refresh, recent enough to be worth showing.
     const staleAt = new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
-    await page.goto('/') // IndexedDB needs a real origin (about:blank denies it)
+    await page.goto('/historical') // IndexedDB needs a real origin (about:blank denies it); Historical avoids mounting the Daily collector before the seed
     await page.evaluate(async (collectedAt: string) => {
       const seed = {
         schemaVersion: 1,
@@ -440,7 +567,7 @@ test.describe('Today view — since-baseline diff (missing ≠ merged)', () => {
     // (will verify MERGED) and #998 (will verify OPEN → left the queue).
     const counts = await mockGitHub(page)
     const baselineAt = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString()
-    await page.goto('/') // IndexedDB needs a real origin (about:blank denies it)
+    await page.goto('/historical') // IndexedDB needs a real origin (about:blank denies it); Historical avoids mounting the Daily collector before the seed
     await page.evaluate(async (collectedAt: string) => {
       const seed = {
         schemaVersion: 1,
