@@ -19,13 +19,14 @@ function partition(
 /** Core scenario set (repo: MetaMask/core, all months complete). */
 function corePartitions(): RawPartition[] {
   const jan = partition("MetaMask/core", "2026-01", "monthEnd", "2026-02-01T00:00:00Z", [
-    // PR1 external, reviewed Jan+Feb, merged Feb -> mergedExternalReviewedPrs Feb
+    // PR1 external, reviewed Jan+Feb, merged Feb. Stale Jan snapshot
+    // (pre-merge); the fresher Feb snapshot below supplies both review
+    // months. Walk-valid: a Feb merge/review bumps updated_at into Feb.
     pr(1, {
       authorLogin: "carol",
       updatedAt: "2026-01-10T00:00:00Z",
-      mergedAt: "2026-02-25T00:00:00Z",
-      state: "MERGED",
-      reviews: [review(11, "alice", "APPROVED", "2026-01-10T10:00:00Z"), review(12, "bob", "COMMENTED", "2026-02-20T10:00:00Z")],
+      state: "OPEN",
+      reviews: [review(11, "alice", "APPROVED", "2026-01-10T10:00:00Z")],
     }),
     // PR2 internal via label only (author not on roster), still OPEN
     pr(2, {
@@ -85,6 +86,14 @@ function corePartitions(): RawPartition[] {
       state: "MERGED",
       reviews: [review(19, "excluded1", "APPROVED", "2026-02-09T10:00:00Z")],
     }),
+    // PR1 freshest snapshot: merged Feb with Jan+Feb reviews
+    pr(1, {
+      authorLogin: "carol",
+      updatedAt: "2026-02-25T00:00:00Z",
+      mergedAt: "2026-02-25T09:00:00Z",
+      state: "MERGED",
+      reviews: [review(11, "alice", "APPROVED", "2026-01-10T10:00:00Z"), review(12, "bob", "COMMENTED", "2026-02-20T10:00:00Z")],
+    }),
     // PR9 freshest snapshot: merged Feb, extra bob review Feb
     pr(9, {
       authorLogin: "carol",
@@ -110,11 +119,20 @@ function corePartitions(): RawPartition[] {
       updatedAt: "2026-03-02T00:00:00Z",
       reviews: [review(22, "alice", "DISMISSED", "2026-03-02T10:00:00Z")],
     }),
-    // PR8 external, review submitted AFTER asOf cutoff -> defensively excluded
+    // PR8 external, review submitted DURING the walk (after this partition's
+    // own cutoff 2026-03-15T11:00, before the global asOf 12:00) -> defensively
+    // excluded: the partition only guarantees capture strictly before its
+    // own walk start (per-record cutoff, not the global asOf)
     pr(8, {
       authorLogin: "heidi",
       updatedAt: "2026-03-03T00:00:00Z",
-      reviews: [review(23, "bob", "COMMENTED", "2026-03-20T10:00:00Z")],
+      reviews: [review(23, "bob", "COMMENTED", "2026-03-15T11:30:00Z")],
+    }),
+    // PR12 external, review submitted after the asOf cutoff entirely
+    pr(12, {
+      authorLogin: "ivan",
+      updatedAt: "2026-03-03T00:00:00Z",
+      reviews: [review(24, "bob", "COMMENTED", "2026-03-20T10:00:00Z")],
     }),
   ]);
   return [jan, feb, mar];
@@ -122,9 +140,9 @@ function corePartitions(): RawPartition[] {
 
 function coreManifest(): Manifest {
   return manifestOf({
-    "MetaMask/core|2026-01": completeEntry("2026-02-01T00:00:00Z", 6),
-    "MetaMask/core|2026-02": completeEntry("2026-03-01T00:00:00Z", 3),
-    "MetaMask/core|2026-03": completeEntry("2026-03-15T11:00:00Z", 3, "asOfCutoff"),
+    "MetaMask/core|2026-01": completeEntry("2026-02-01T00:00:00Z", 7),
+    "MetaMask/core|2026-02": completeEntry("2026-03-01T00:00:00Z", 4),
+    "MetaMask/core|2026-03": completeEntry("2026-03-15T11:00:00Z", 4, "asOfCutoff"),
     // extension: Feb+Mar complete, Jan pending -> Jan row must be omitted
     "MetaMask/metamask-extension|2026-02": completeEntry("2026-03-01T00:00:00Z", 1),
     "MetaMask/metamask-extension|2026-03": completeEntry("2026-03-15T11:00:00Z", 0, "asOfCutoff"),

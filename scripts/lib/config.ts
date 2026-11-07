@@ -59,7 +59,9 @@ export function startOfMonthIso(month: string): string {
 /** month + delta months. */
 export function addMonths(month: string, delta: number): string {
   assertMonth(month);
-  const [y, m] = month.split("-").map(Number);
+  const parts = month.split("-");
+  const y = Number(parts[0]);
+  const m = Number(parts[1]);
   const total = y * 12 + (m - 1) + delta;
   const ny = Math.floor(total / 12);
   const nm = (total % 12) + 1;

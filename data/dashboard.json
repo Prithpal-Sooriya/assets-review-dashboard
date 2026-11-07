@@ -1,0 +1,6639 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-07T13:06:51.314Z",
+  "range": {
+    "start": "2025-11-01T00:00:00.000Z",
+    "end": "2026-11-07T13:06:51.314Z"
+  },
+  "methodology": {
+    "version": "1.0.0",
+    "notes": [
+      "Ownership is label/roster attribution at collection time (team-assets label, else supplied author roster), not historically proven organization membership.",
+      "Fixed supplied roster is applied across the whole window; the join date of dawnseeker8 is unknown, so they are included for the entire window (never an invented date).",
+      "amandaye0h and amitabh94 are excluded from reviewer membership; their PRs are still counted as external reviewed work.",
+      "Review months are derived from review submittedAt (UTC), never from the PR merged date.",
+      "Submitted review events include APPROVED, CHANGES_REQUESTED, COMMENTED and DISMISSED (historically submitted, later dismissed); PENDING reviews and self-reviews are excluded.",
+      "Reviews submitted after a PR was merged (post-merge comment reviews) count as submissions in their submission month but never satisfy the at/before-merge condition.",
+      "reviewedUnmergedPrs reflects the current PR state at generation time (snapshot), not the historical month-end state.",
+      "The current month is partial and covers data through the range end cutoff only; completeness means coverage through that cutoff, not that the month has ended.",
+      "A month row is only emitted when partition coverage for that repo is complete from the month through the cutoff; otherwise the month is omitted and the gap is visible in coverage.",
+      "Discovery walks PRs ordered by updated_at and relies on review submissions updating PR updated_at; this assumption was validated empirically and cross-checked with reviewed-by search (see docs/collection.md)."
+    ]
+  },
+  "coverage": [
+    {
+      "repo": "MetaMask/core",
+      "month": "2025-11",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2025-12",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-01",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-02",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-03",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-04",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-05",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-06",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-07",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-08",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-09",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-10",
+      "status": "complete"
+    },
+    {
+      "repo": "MetaMask/core",
+      "month": "2026-11",
+      "status": "complete"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2025-11",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2025-12",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-01",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-02",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-03",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-04",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-05",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-06",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-07",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-08",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-09",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-10",
+      "status": "complete"
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "month": "2026-11",
+      "status": "complete"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2025-11",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2025-12",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-01",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-02",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-03",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-04",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-05",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-06",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-07",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-08",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-09",
+      "status": "pending",
+      "detail": "not collected"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-10",
+      "status": "complete"
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "month": "2026-11",
+      "status": "complete"
+    }
+  ],
+  "months": [
+    {
+      "month": "2026-10",
+      "repo": "MetaMask/core",
+      "internalReviewedPrs": 22,
+      "externalReviewedPrs": 21,
+      "reviewSubmissions": 106,
+      "reviewedUnmergedPrs": 2,
+      "mergedInternalPrs": 26,
+      "mergedExternalReviewedPrs": 20
+    },
+    {
+      "month": "2026-10",
+      "repo": "MetaMask/metamask-extension",
+      "internalReviewedPrs": 19,
+      "externalReviewedPrs": 25,
+      "reviewSubmissions": 98,
+      "reviewedUnmergedPrs": 3,
+      "mergedInternalPrs": 35,
+      "mergedExternalReviewedPrs": 24
+    },
+    {
+      "month": "2026-10",
+      "repo": "MetaMask/metamask-mobile",
+      "internalReviewedPrs": 64,
+      "externalReviewedPrs": 44,
+      "reviewSubmissions": 185,
+      "reviewedUnmergedPrs": 4,
+      "mergedInternalPrs": 68,
+      "mergedExternalReviewedPrs": 41
+    },
+    {
+      "month": "2026-11",
+      "repo": "MetaMask/core",
+      "internalReviewedPrs": 7,
+      "externalReviewedPrs": 4,
+      "reviewSubmissions": 35,
+      "reviewedUnmergedPrs": 2,
+      "mergedInternalPrs": 10,
+      "mergedExternalReviewedPrs": 3
+    },
+    {
+      "month": "2026-11",
+      "repo": "MetaMask/metamask-extension",
+      "internalReviewedPrs": 5,
+      "externalReviewedPrs": 4,
+      "reviewSubmissions": 17,
+      "reviewedUnmergedPrs": 2,
+      "mergedInternalPrs": 6,
+      "mergedExternalReviewedPrs": 3
+    },
+    {
+      "month": "2026-11",
+      "repo": "MetaMask/metamask-mobile",
+      "internalReviewedPrs": 19,
+      "externalReviewedPrs": 22,
+      "reviewSubmissions": 82,
+      "reviewedUnmergedPrs": 6,
+      "mergedInternalPrs": 26,
+      "mergedExternalReviewedPrs": 20
+    }
+  ],
+  "prs": [
+    {
+      "id": "MetaMask/core#8237",
+      "repo": "MetaMask/core",
+      "number": 8237,
+      "title": "fix: auto-remove NFTs from state when backend reclassifies them as spam",
+      "url": "https://github.com/MetaMask/core/pull/8237",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T09:13:49Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10230",
+      "repo": "MetaMask/core",
+      "number": 10230,
+      "title": "feat(assets-controller): add transient per-account loading state for user-visible fetches",
+      "url": "https://github.com/MetaMask/core/pull/10230",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T12:40:51Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 5
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10648",
+      "repo": "MetaMask/core",
+      "number": 10648,
+      "title": "Release/1310.0.0",
+      "url": "https://github.com/MetaMask/core/pull/10648",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T10:13:49Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10672",
+      "repo": "MetaMask/core",
+      "number": 10672,
+      "title": "fix(assets-controller): use core-backend in RPC data source",
+      "url": "https://github.com/MetaMask/core/pull/10672",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T09:11:58Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 7
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10694",
+      "repo": "MetaMask/core",
+      "number": 10694,
+      "title": "feat(money-account-controller)!: add MPC keyring support",
+      "url": "https://github.com/MetaMask/core/pull/10694",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T13:21:28Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10754",
+      "repo": "MetaMask/core",
+      "number": 10754,
+      "title": "fix(core-backend): remove AccountActivity in BackendWebSocketService",
+      "url": "https://github.com/MetaMask/core/pull/10754",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T09:18:44Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10763",
+      "repo": "MetaMask/core",
+      "number": 10763,
+      "title": "fix(network-enablement-controller): preserve network selection when auto-enabled network is added",
+      "url": "https://github.com/MetaMask/core/pull/10763",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:01:00Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10781",
+      "repo": "MetaMask/core",
+      "number": 10781,
+      "title": "test(assets-controller): extract reusable asset surface fixtures",
+      "url": "https://github.com/MetaMask/core/pull/10781",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T09:55:17Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#10782",
+      "repo": "MetaMask/core",
+      "number": 10782,
+      "title": "fix(assets-controller): remove staked balance in fast source",
+      "url": "https://github.com/MetaMask/core/pull/10782",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-16T08:57:20Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10785",
+      "repo": "MetaMask/core",
+      "number": 10785,
+      "title": "chore(dev-deps): bump `oxfmt` from `^0.44.0` to `^0.72.0`",
+      "url": "https://github.com/MetaMask/core/pull/10785",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T14:55:35Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#10788",
+      "repo": "MetaMask/core",
+      "number": 10788,
+      "title": "Release/1326.0.0",
+      "url": "https://github.com/MetaMask/core/pull/10788",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T14:32:42Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10797",
+      "repo": "MetaMask/core",
+      "number": 10797,
+      "title": "feat(core-backend): gate BackendWebSocketService on basic functionality",
+      "url": "https://github.com/MetaMask/core/pull/10797",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T14:02:56Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 10
+      },
+      "labels": [
+        "needs-dev-review"
+      ]
+    },
+    {
+      "id": "MetaMask/core#10809",
+      "repo": "MetaMask/core",
+      "number": 10809,
+      "title": "fix: balance selectors to use token decimals precision instead of 5",
+      "url": "https://github.com/MetaMask/core/pull/10809",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10819",
+      "repo": "MetaMask/core",
+      "number": 10819,
+      "title": "feat(assets-controller): add balance state in snaps request",
+      "url": "https://github.com/MetaMask/core/pull/10819",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-16T18:52:23Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10857",
+      "repo": "MetaMask/core",
+      "number": 10857,
+      "title": "Release/1339.0.0",
+      "url": "https://github.com/MetaMask/core/pull/10857",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-16T09:12:21Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10876",
+      "repo": "MetaMask/core",
+      "number": 10876,
+      "title": "Release/1341.0.0",
+      "url": "https://github.com/MetaMask/core/pull/10876",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T08:49:27Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10884",
+      "repo": "MetaMask/core",
+      "number": 10884,
+      "title": "feat:  add Launchpad TDP WS service and extract shared Channel Sub manager",
+      "url": "https://github.com/MetaMask/core/pull/10884",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T15:57:29Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 13
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10885",
+      "repo": "MetaMask/core",
+      "number": 10885,
+      "title": "feat(wallet): initialize AssetsController by default and bootstrap it on first UI open",
+      "url": "https://github.com/MetaMask/core/pull/10885",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10",
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 5,
+        "2026-11": 14
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#10892",
+      "repo": "MetaMask/core",
+      "number": 10892,
+      "title": "fix(assets-controller): remove assetsForPriceUpdate",
+      "url": "https://github.com/MetaMask/core/pull/10892",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T14:22:32Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 13
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#10916",
+      "repo": "MetaMask/core",
+      "number": 10916,
+      "title": "chore: move test helpers out of src into tests",
+      "url": "https://github.com/MetaMask/core/pull/10916",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T19:44:16Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#10979",
+      "repo": "MetaMask/core",
+      "number": 10979,
+      "title": "test: run assets-controllers on Vitest",
+      "url": "https://github.com/MetaMask/core/pull/10979",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T16:52:31Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#10997",
+      "repo": "MetaMask/core",
+      "number": 10997,
+      "title": "feat(wallet): initialize NetworkEnablementController by default",
+      "url": "https://github.com/MetaMask/core/pull/10997",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T10:16:21Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 7
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11009",
+      "repo": "MetaMask/core",
+      "number": 11009,
+      "title": "test: run advanced-chart-core on Vitest",
+      "url": "https://github.com/MetaMask/core/pull/11009",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T16:10:08Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11038",
+      "repo": "MetaMask/core",
+      "number": 11038,
+      "title": "test: run assets-controller on Vitest",
+      "url": "https://github.com/MetaMask/core/pull/11038",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T18:46:08Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11039",
+      "repo": "MetaMask/core",
+      "number": 11039,
+      "title": "test: run core-backend on Vitest",
+      "url": "https://github.com/MetaMask/core/pull/11039",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T14:43:46Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11040",
+      "repo": "MetaMask/core",
+      "number": 11040,
+      "title": "test: run network-enablement-controller on Vitest",
+      "url": "https://github.com/MetaMask/core/pull/11040",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T14:33:22Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11055",
+      "repo": "MetaMask/core",
+      "number": 11055,
+      "title": "chore(deps): update dependency nock to v15",
+      "url": "https://github.com/MetaMask/core/pull/11055",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T19:02:31Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11064",
+      "repo": "MetaMask/core",
+      "number": 11064,
+      "title": "test: stub globals and use fake timers instead of replacing them directly",
+      "url": "https://github.com/MetaMask/core/pull/11064",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T16:05:01Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11066",
+      "repo": "MetaMask/core",
+      "number": 11066,
+      "title": "test: drop mock reset hooks that duplicate the shared config",
+      "url": "https://github.com/MetaMask/core/pull/11066",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T12:34:44Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11078",
+      "repo": "MetaMask/core",
+      "number": 11078,
+      "title": "perf(assets-controller): add hand-rolled aggregate3 codecs",
+      "url": "https://github.com/MetaMask/core/pull/11078",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T16:03:27Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "area-performance"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11084",
+      "repo": "MetaMask/core",
+      "number": 11084,
+      "title": "Release/1362.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11084",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T18:39:02Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11106",
+      "repo": "MetaMask/core",
+      "number": 11106,
+      "title": "feat(assets-controllers): store the source of each NFT",
+      "url": "https://github.com/MetaMask/core/pull/11106",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T16:29:37Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11115",
+      "repo": "MetaMask/core",
+      "number": 11115,
+      "title": "Release/1365.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11115",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T12:19:51Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11128",
+      "repo": "MetaMask/core",
+      "number": 11128,
+      "title": "test(assets-controller): make nock tests independent of node-fetch",
+      "url": "https://github.com/MetaMask/core/pull/11128",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T17:00:25Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11132",
+      "repo": "MetaMask/core",
+      "number": 11132,
+      "title": "test: make nock tests independent of node-fetch in network, assets and transaction controllers",
+      "url": "https://github.com/MetaMask/core/pull/11132",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T13:23:13Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11137",
+      "repo": "MetaMask/core",
+      "number": 11137,
+      "title": "feat(social): carry comment language and request translation",
+      "url": "https://github.com/MetaMask/core/pull/11137",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T17:49:52Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11138",
+      "repo": "MetaMask/core",
+      "number": 11138,
+      "title": "test: use the nock default export instead of named imports",
+      "url": "https://github.com/MetaMask/core/pull/11138",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T19:14:54Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11150",
+      "repo": "MetaMask/core",
+      "number": 11150,
+      "title": "Release/1371.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11150",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T09:42:10Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11159",
+      "repo": "MetaMask/core",
+      "number": 11159,
+      "title": "feat(social-controllers): add unblockProfile to SocialService",
+      "url": "https://github.com/MetaMask/core/pull/11159",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T16:02:15Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11171",
+      "repo": "MetaMask/core",
+      "number": 11171,
+      "title": "test: assert only the native fetch error messages on nock 15",
+      "url": "https://github.com/MetaMask/core/pull/11171",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T21:43:18Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11172",
+      "repo": "MetaMask/core",
+      "number": 11172,
+      "title": "test: remove the nock 13 compatibility code from the nock test helpers",
+      "url": "https://github.com/MetaMask/core/pull/11172",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T08:32:09Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11176",
+      "repo": "MetaMask/core",
+      "number": 11176,
+      "title": "Release/1375.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11176",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T23:08:47Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11192",
+      "repo": "MetaMask/core",
+      "number": 11192,
+      "title": "Release/1375.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11192",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T09:56:21Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11194",
+      "repo": "MetaMask/core",
+      "number": 11194,
+      "title": "feat(core-backend): add /v5/multiaccount/transactions",
+      "url": "https://github.com/MetaMask/core/pull/11194",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T16:13:42Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11196",
+      "repo": "MetaMask/core",
+      "number": 11196,
+      "title": "Release/1376.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11196",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T12:07:02Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11201",
+      "repo": "MetaMask/core",
+      "number": 11201,
+      "title": "feat(assets-controller): add 5m and 4h changes to FungibleAssetPrice",
+      "url": "https://github.com/MetaMask/core/pull/11201",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T15:59:03Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11203",
+      "repo": "MetaMask/core",
+      "number": 11203,
+      "title": "Release/1377.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11203",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T21:19:43Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11210",
+      "repo": "MetaMask/core",
+      "number": 11210,
+      "title": "Release/1378.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11210",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T10:03:56Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11221",
+      "repo": "MetaMask/core",
+      "number": 11221,
+      "title": "[0g] use SLIP-44 coin type 16661",
+      "url": "https://github.com/MetaMask/core/pull/11221",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T08:35:57Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11247",
+      "repo": "MetaMask/core",
+      "number": 11247,
+      "title": "Expose more assets-controllers methods through messengers",
+      "url": "https://github.com/MetaMask/core/pull/11247",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T23:12:43Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11249",
+      "repo": "MetaMask/core",
+      "number": 11249,
+      "title": "feat(core-backend): switch OHLCV streams to ohlcv.v1",
+      "url": "https://github.com/MetaMask/core/pull/11249",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T15:34:05Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11251",
+      "repo": "MetaMask/core",
+      "number": 11251,
+      "title": "fix(assets-controller): exempt launchpad tokens from spam filtering",
+      "url": "https://github.com/MetaMask/core/pull/11251",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T21:13:33Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11266",
+      "repo": "MetaMask/core",
+      "number": 11266,
+      "title": "refactor(network-controller)!: remove legacy per-endpoint failoverUrls",
+      "url": "https://github.com/MetaMask/core/pull/11266",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T09:52:13Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "no-changelog"
+      ]
+    },
+    {
+      "id": "MetaMask/core#11274",
+      "repo": "MetaMask/core",
+      "number": 11274,
+      "title": "feat(assets-controllers): send x-mm-service-profile header in searchTokens",
+      "url": "https://github.com/MetaMask/core/pull/11274",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T09:01:57Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11285",
+      "repo": "MetaMask/core",
+      "number": 11285,
+      "title": "Release 1389.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11285",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T13:12:47Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11300",
+      "repo": "MetaMask/core",
+      "number": 11300,
+      "title": "Release 1392.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11300",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T20:11:25Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11302",
+      "repo": "MetaMask/core",
+      "number": 11302,
+      "title": "feat(social-controllers): add GIF passthrough methods",
+      "url": "https://github.com/MetaMask/core/pull/11302",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T17:42:10Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11303",
+      "repo": "MetaMask/core",
+      "number": 11303,
+      "title": "fix(assets-controller): refresh chain lists when a network is added",
+      "url": "https://github.com/MetaMask/core/pull/11303",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 7
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11319",
+      "repo": "MetaMask/core",
+      "number": 11319,
+      "title": "fix(assets-controller): include asset state in state logs",
+      "url": "https://github.com/MetaMask/core/pull/11319",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T12:49:30Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11326",
+      "repo": "MetaMask/core",
+      "number": 11326,
+      "title": "Release 1397.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11326",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T14:56:20Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11368",
+      "repo": "MetaMask/core",
+      "number": 11368,
+      "title": "fix: test hide log buttons",
+      "url": "https://github.com/MetaMask/core/pull/11368",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T14:24:13Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11370",
+      "repo": "MetaMask/core",
+      "number": 11370,
+      "title": "Release 1401.0.0",
+      "url": "https://github.com/MetaMask/core/pull/11370",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T15:10:40Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/metamask-extension#43016",
+      "repo": "MetaMask/metamask-extension",
+      "number": 43016,
+      "title": "docs: add tokensChainsCache removal report",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/43016",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "CLOSED",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-06"
+      ],
+      "reviewCountsByMonth": {
+        "2026-06": 1
+      },
+      "labels": [
+        "stale",
+        "team-assets",
+        "size-M",
+        "risk:high"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#45499",
+      "repo": "MetaMask/metamask-extension",
+      "number": 45499,
+      "title": "test: add HyperEVM unsupported crypto graceful handling E2E",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/45499",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T02:35:14Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-M",
+        "team-be-trade",
+        "risk:low",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#45885",
+      "repo": "MetaMask/metamask-extension",
+      "number": 45885,
+      "title": "test: e2e cover Tokens native row on non-zero native networks",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/45885",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T10:31:04Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "risk:medium",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46292",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46292,
+      "title": "feat: add advanced charts to tdp",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46292",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-09"
+      ],
+      "reviewCountsByMonth": {
+        "2026-09": 5
+      },
+      "labels": [
+        "team-assets",
+        "size-XL"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46298",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46298,
+      "title": "chore(assets): remove TokenListController init and usage",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46298",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T14:00:43Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46299",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46299,
+      "title": "chore(assets): remove MultichainBalancesController",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46299",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T12:30:44Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46301",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46301,
+      "title": "chore(assets): remove MultichainAssetsRatesController",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46301",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T16:42:49Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46302",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46302,
+      "title": "chore(assets): remove MultichainAssetsController",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46302",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "CLOSED",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-assets",
+        "size-L"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46303",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46303,
+      "title": "chore(assets): remove TokenBalancesController",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46303",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-24T10:31:02Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46304",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46304,
+      "title": "chore(assets): remove TokenRatesController",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46304",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T14:48:09Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 7
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46612",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46612,
+      "title": "feat: track homepage critical user flows",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46612",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T19:58:39Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "release-13.53.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46728",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46728,
+      "title": "refactor(assets): use unified asset selectors in the UI",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46728",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T09:51:15Z",
+      "reviewMonths": [
+        "2026-09"
+      ],
+      "reviewCountsByMonth": {
+        "2026-09": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "risk:high",
+        "release-13.52.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46729",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46729,
+      "title": "test(assets): update unified asset UI coverage",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46729",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T15:53:02Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "risk:high",
+        "release-13.52.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46730",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46730,
+      "title": "test(assets): cover unified compatibility selectors",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46730",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T08:34:49Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.53.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46731",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46731,
+      "title": "test(assets): cover unified multichain and currency selectors",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46731",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T14:27:01Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.53.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46732",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46732,
+      "title": "test(assets): migrate fixtures to unified AssetsController state",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46732",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T13:10:37Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46733",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46733,
+      "title": "test(bridge): migrate mock store to unified assets",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46733",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:33Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46734",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46734,
+      "title": "test(bridge): use unified asset state in selectors (swaps-owned only)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46734",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:36Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46735",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46735,
+      "title": "test(assets): migrate unowned unified-selector fixtures (combined no-CODEOWNERS slice)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46735",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:38Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-XL",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46736",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46736,
+      "title": "test(assets): migrate asset selector fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46736",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T09:45:08Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46737",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46737,
+      "title": "test(assets): migrate grouped asset selectors",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46737",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T09:45:10Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46738",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46738,
+      "title": "test(assets): migrate bridge/multichain owned fixtures (snaps/accounts/swaps)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46738",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:40Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46739",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46739,
+      "title": "test(assets): migrate confirmation/hardware-wallet owned fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46739",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:42Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46740",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46740,
+      "title": "test(assets): migrate gator-permissions owned fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46740",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:44Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46741",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46741,
+      "title": "test(assets): migrate swaps awaiting-swap owned fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46741",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:50:46Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46792",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46792,
+      "title": "refactor(networks): migrate the add network form to the design system",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46792",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T08:26:11Z",
+      "reviewMonths": [
+        "2026-09",
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-09": 4,
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "risk:high",
+        "team-extension-ux",
+        "release-13.52.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46805",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46805,
+      "title": "fix: removed majority of arc specific logic since has been moved to bridge-api",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46805",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T11:26:23Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-L",
+        "risk:medium",
+        "team-emerging-opportunities",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46830",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46830,
+      "title": "feat: instrument advanced chart interactions and empty state",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46830",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-L"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46840",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46840,
+      "title": "fix: show Arc USDC balance and details from native asset cp-13.52.0",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46840",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T08:31:56Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-M",
+        "risk:high",
+        "team-emerging-opportunities",
+        "release-13.53.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46923",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46923,
+      "title": "feat: musd-1449 add money account CTA to token row",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46923",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T11:27:36Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-earn",
+        "size-XL",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46928",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46928,
+      "title": "fix: start with \"All networks\" not Sepolia or Arc",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46928",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T19:54:32Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 5
+      },
+      "labels": [
+        "team-extension-platform",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46934",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46934,
+      "title": "feat(perps): update controller to 20.0.0 cp-13.52.0",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46934",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:39:41Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "size-XL",
+        "team-perps",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46989",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46989,
+      "title": "chore: Bump LavaMoat",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46989",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T15:46:54Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-S",
+        "team-core-platform",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46990",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46990,
+      "title": "test(bridge): migrate mock store to unified assets",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46990",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:06Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-L"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46991",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46991,
+      "title": "test(bridge): use unified asset state in selectors (swaps-owned only)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46991",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:09Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-L"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46992",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46992,
+      "title": "test(assets): migrate unowned unified-selector fixtures (combined no-CODEOWNERS slice)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46992",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:11Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-XL"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46993",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46993,
+      "title": "test(assets): migrate bridge/multichain owned fixtures (snaps/accounts/swaps)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46993",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:13Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46994",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46994,
+      "title": "test(assets): migrate confirmation/hardware-wallet owned fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46994",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:15Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-L"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46995",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46995,
+      "title": "test(assets): migrate gator-permissions owned fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46995",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:16Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-S"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#46996",
+      "repo": "MetaMask/metamask-extension",
+      "number": 46996,
+      "title": "test(assets): migrate swaps awaiting-swap owned fixtures",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/46996",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:51:18Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-S"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47006",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47006,
+      "title": "chore: align chart color",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47006",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T18:46:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-S",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47027",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47027,
+      "title": "feat: move import NFT from a modal to a full page",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47027",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T15:29:37Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 5
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-XL",
+        "team-extension-ux",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47031",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47031,
+      "title": "chore(assets-controller): bump to 19.0.0",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47031",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T09:30:09Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 6
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-L",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47037",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47037,
+      "title": "fix(contacts): match add contact network border to other fields",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47037",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T10:31:18Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-XS",
+        "team-extension-ux",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47044",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47044,
+      "title": "fix(nfts): point the import NFT media banner to Basic Functionality",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47044",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T15:56:43Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47056",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47056,
+      "title": "feat: [musd-1450] show earn banner in asset details",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47056",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T14:52:38Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-earn",
+        "size-XL",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47068",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47068,
+      "title": "feat(websocket): gate the backend WebSocket on basic functionality",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47068",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T13:52:28Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 6
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "team-emerging-opportunities",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47069",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47069,
+      "title": "chore: Wire up latest `wallet`",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47069",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T09:21:35Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-XL",
+        "team-core-platform",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47077",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47077,
+      "title": "chore: remove Bitcoin account label tags everywhere but multichain account address list",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47077",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T08:45:15Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47082",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47082,
+      "title": "fix(analytics): report Token View for native sticky swap",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47082",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T13:10:30Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47105",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47105,
+      "title": "feat(assets): show a skeleton during the first asset load",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47105",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T15:56:43Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "size-M",
+        "team-extension-ux",
+        "release-13.54.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47109",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47109,
+      "title": "fix(assets): chart Bitcoin deeplinks against the route",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47109",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T14:18:45Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47153",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47153,
+      "title": "chore: Migrate most functions in ui/store/actions.ts to call root messenger actions",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47153",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T14:38:09Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "size-XL",
+        "team-core-platform",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47162",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47162,
+      "title": "chore(assets-controller): bump assets-controller",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47162",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T12:36:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-XS",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47205",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47205,
+      "title": "feat(networks): list Chainlist dropdown networks with logos first",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47205",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T18:33:05Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-S",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47248",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47248,
+      "title": "feat(assets): show skeleton rows while the token list loads",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47248",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T20:15:14Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "release-13.55.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47269",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47269,
+      "title": "feat(assets): construct AssetsController via @metamask/wallet",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47269",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "size-XL",
+        "team-emerging-opportunities"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47292",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47292,
+      "title": "feat(perf): measure initial Home screen readiness",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47292",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-extension-platform",
+        "INVALID-PR-TEMPLATE",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47320",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47320,
+      "title": "fix(nfts): show NFTs when switching from a non-EVM network to All networks",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47320",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T16:58:16Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47376",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47376,
+      "title": "fix: align asset header to build asset icon from static CDN url",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47376",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T07:20:53Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-networks",
+        "size-XS",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47386",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47386,
+      "title": "test(e2e): cover send and swap max amount parity",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47386",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T17:59:20Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "size-L",
+        "team-emerging-opportunities"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47400",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47400,
+      "title": "chore(assets-controller): bump assets controller to 20.0.0",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47400",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T09:05:54Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-S",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47436",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47436,
+      "title": "feat: wire removeNft into NftDetectionController and pass explicit NFT source",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47436",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T17:13:26Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47452",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47452,
+      "title": "chore: extract home network filter logic into a hook",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47452",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T14:20:44Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-L",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47458",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47458,
+      "title": "chore: remove Discover link from the balance header",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47458",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T20:38:43Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47483",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47483,
+      "title": "chore: extract token list data logic into a hook",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47483",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T16:23:51Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-XL",
+        "release-13.56.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47489",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47489,
+      "title": "chore(assets-controller): bump assets controller to 20.0.2",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47489",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T17:29:30Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-XS"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47494",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47494,
+      "title": "fix(networks): leave a non-EVM filter when basic functionality is off",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47494",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T13:36:29Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "type-bug",
+        "team-core-extension-ux",
+        "size-S"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47552",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47552,
+      "title": "fix(assets): place the token ticker under the token name",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47552",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T12:39:13Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47590",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47590,
+      "title": "fix: refresh asset list with non-evm accounts",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47590",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T11:24:42Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-networks",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47609",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47609,
+      "title": "chore: bump assets-controller to ^20.2.2, assets-controllers to ^113.1.1 and core-backend to ^14.0.0",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47609",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T12:16:49Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": [
+        "size-S",
+        "team-emerging-opportunities"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47634",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47634,
+      "title": "refactor: extract asset chart body",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47634",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T14:32:14Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47655",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47655,
+      "title": "feat: send x-mm-service-profile on token search (assets-controllers ^113.2.0)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47655",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T18:43:07Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-S"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47656",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47656,
+      "title": "fix(assets): show copied message in token header contract address copy",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47656",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-S"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-extension#47697",
+      "repo": "MetaMask/metamask-extension",
+      "number": 47697,
+      "title": "chore: bump assets-controller to ^20.2.3",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47697",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T16:36:06Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-XS"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#34099",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 34099,
+      "title": "chore: remove always-on code fences (snaps, keyring-snaps, multi-srp, bitcoin, solana, tron)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34099",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-mobile-platform",
+        "skip-sonar-cloud",
+        "size-XL"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#35846",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 35846,
+      "title": "refactor(assets): repoint Earn consumers to AssetsController",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/35846",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T07:57:11Z",
+      "reviewMonths": [
+        "2026-09",
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-09": 1,
+        "2026-10": 1
+      },
+      "labels": [
+        "area-performance",
+        "team-assets",
+        "skip-sonar-cloud",
+        "size-L",
+        "risk:medium",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#35847",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 35847,
+      "title": "refactor(assets): remove the 8 deprecated per-asset controllers from the Engine",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/35847",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-16T12:22:03Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "area-performance",
+        "team-assets",
+        "skip-sonar-cloud",
+        "size-XL",
+        "skip-smart-e2e-selection",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#35848",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 35848,
+      "title": "feat(migrations): strip orphaned deprecated-controller state from persisted store",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/35848",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T14:11:19Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "area-performance",
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#36603",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 36603,
+      "title": "feat: add timeRanges on line chart",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/36603",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T17:20:27Z",
+      "reviewMonths": [
+        "2026-09",
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-09": 1,
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "risk:high",
+        "release-8.15.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#36808",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 36808,
+      "title": "test: add AI-assisted performance locator POC",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/36808",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T12:50:24Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-qa",
+        "size-XL",
+        "risk:medium",
+        "run-performance-tests",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#36896",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 36896,
+      "title": "fix(price-alerts): fully round the price alert type toggle",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/36896",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-09-25T15:08:26Z",
+      "reviewMonths": [
+        "2026-09"
+      ],
+      "reviewCountsByMonth": {
+        "2026-09": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "risk:low",
+        "release-8.15.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37031",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37031,
+      "title": "feat: fetch fresh Tron assets on the token details page",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37031",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T13:36:32Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "team-networks",
+        "size-M",
+        "risk:high",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37094",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37094,
+      "title": "feat: MUSD-1442 Money: Wire up A/B Test for Token Details Balance Section CTA",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37094",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T16:25:39Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-earn",
+        "size-M",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37122",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37122,
+      "title": "feat(assets): add selector for assetsMemecoinTdpV1 feature flag",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37122",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-01T13:57:55Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-M",
+        "risk:high",
+        "release-8.15.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37136",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37136,
+      "title": "feat(assets): scaffold meme-token details page switch",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37136",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "CLOSED",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "risk:high"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37145",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37145,
+      "title": "chore: port recurring api interface to new interface",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37145",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T20:47:52Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-swaps-and-bridge",
+        "size-XL",
+        "risk:high",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37168",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37168,
+      "title": "build(price-alerts): default to prod API cp-8.15.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37168",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T19:46:32Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-XS",
+        "release-8.15.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37180",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37180,
+      "title": "feat: show the social feed on PEPE token details",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37180",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T18:16:25Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.16.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37199",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37199,
+      "title": "refactor(bridge): remove Arc-specific token overrides",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37199",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T15:16:55Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-swaps-and-bridge",
+        "size-L",
+        "risk-medium",
+        "team-emerging-opportunities",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37243",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37243,
+      "title": "fix: reset swap page before navigation cp-8.15.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37243",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T19:02:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "skip-sonar-cloud",
+        "team-swaps-and-bridge",
+        "size-L",
+        "release-8.15.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37253",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37253,
+      "title": "fix: update clipboard message for token contract copying",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37253",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T18:22:25Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37270",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37270,
+      "title": "feat: compute live price PnL metrics",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37270",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T11:39:27Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-M",
+        "release-8.16.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37276",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37276,
+      "title": "feat(assets): unify the meme token details page",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37276",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T12:53:23Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.16.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37293",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37293,
+      "title": "refactor(security): use design-system Tag for trust badges",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37293",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-07T21:16:11Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-design-system",
+        "size-M",
+        "release-8.16.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37294",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37294,
+      "title": "feat(home): Liquid Glass surfaces on home behind homeBrandRefreshSurfaces",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37294",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T15:51:47Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37327",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37327,
+      "title": "feat(ASSETS-4068): load one social position by id",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37327",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:07:58Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37328",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37328,
+      "title": "feat(ASSETS-4069): compute spot unrealized PnL",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37328",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T14:09:58Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37335",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37335,
+      "title": "fix(assets): restore crypto movers pill icon spacing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37335",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T14:41:48Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.16.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37336",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37336,
+      "title": "fix(perps): open trade sheet over spot token details cp-8.15.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37336",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-08T13:37:42Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-perps",
+        "size-S",
+        "release-8.15.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37349",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37349,
+      "title": "feat: wire stat bar and market data in TDP V1",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37349",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T09:20:42Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37354",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37354,
+      "title": "feat(tokens): add trader position header to token details",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37354",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T13:27:34Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37356",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37356,
+      "title": "chore: revert 'build: update price-alert build URLs (#37043)'",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37356",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T08:29:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XS",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37370",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37370,
+      "title": "feat(token-details): launchpad routing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37370",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T10:21:21Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37371",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37371,
+      "title": "refactor(assets): load token data through TanStack Query",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37371",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T14:10:22Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37372",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37372,
+      "title": "feat(assets): prefetch token details queries",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37372",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T11:29:30Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37394",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37394,
+      "title": "fix(token-details): mark security section titles as headers",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37394",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T11:01:22Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37410",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37410,
+      "title": "feat: security tab TDP v1 new layout",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37410",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T17:55:20Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37413",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37413,
+      "title": "fix(accounts): include Money Account, Perps and Predict in aggregate balances",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37413",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T16:01:58Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37414",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37414,
+      "title": "feat(homepage): animate wallet balance updates",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37414",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T18:17:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37421",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37421,
+      "title": "feat(ASSETS-4071): poll the position and format unrealized PnL",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37421",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-09T15:09:35Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37443",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37443,
+      "title": "feat(token-details): clarify the meme token details layout",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37443",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T10:48:21Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37453",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37453,
+      "title": "feat: gate Robinhood RWA stocks on ASSETS4098ShowRobinhoodRwa cp-8.16.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37453",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T16:45:53Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.16.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37455",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37455,
+      "title": "feat(ASSETS-4072): show position PnL in token details footer",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37455",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-12T21:36:48Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37486",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37486,
+      "title": "chore(assets-controller): bump to 19.0.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37486",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T12:24:18Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-S",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37494",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37494,
+      "title": "feat(tokens): add expanded position P&L details",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37494",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T09:39:35Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-M",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37495",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37495,
+      "title": "feat(ASSETS-4077): load open-position PnL for the selected wallet",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37495",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-13T12:57:25Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37516",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37516,
+      "title": "feat(token-details): connect Social feed and position sharing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37516",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T11:11:57Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37528",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37528,
+      "title": "feat(tron): read tron assets metadata from trx balance and handle null values",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37528",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-16T15:27:50Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-networks",
+        "size-XL",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37532",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37532,
+      "title": "feat(perps): add percent-change price alerts",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37532",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T11:25:51Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-perps",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37539",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37539,
+      "title": "refactor(glass): shared brand refresh components in components-temp",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37539",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T19:11:15Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37547",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37547,
+      "title": "feat(websocket): gate the backend WebSocket on basic functionality",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37547",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T09:25:06Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37553",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37553,
+      "title": "feat: TDP memecoin analytics (ASSETS-4024)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37553",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T12:19:35Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 5
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37558",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37558,
+      "title": "feat: change memecoin TDP tab order to feed, overview, security",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37558",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-14T19:08:59Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37570",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37570,
+      "title": "chore: remove bitcoin account type label everywhere but multichain account name list",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37570",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T14:48:02Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-M",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37621",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37621,
+      "title": "feat: enhance Homepage device capability handling and section mounting logic",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37621",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T16:03:56Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37622",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37622,
+      "title": "feat(token-details): load one wallet's open-position PnL and share it",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37622",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-15T15:38:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "skip-sonar-cloud",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37664",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37664,
+      "title": "feat: Assets 4137 mobile social holders tab",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37664",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-18T11:02:35Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "skip-sonar-cloud",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37669",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37669,
+      "title": "refactor: use assets loading state for balance skeletons",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37669",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T12:24:44Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-core-extension-ux",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37675",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37675,
+      "title": "fix(assets): tighten the Blockaid attribution spacing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37675",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T10:17:57Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XS",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37678",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37678,
+      "title": "fix(assets): align token and market details section spacing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37678",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T11:41:02Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37723",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37723,
+      "title": "chore(assets-controller): bump assets-controller",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37723",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-19T12:22:30Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-XS",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37727",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37727,
+      "title": "feat(predict-next): create keys and A2T for kalshi integration",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37727",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T17:13:08Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "skip-sonar-cloud",
+        "size-XL",
+        "team-predict",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37757",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37757,
+      "title": "refactor(predict): move formatPriceWithSubscriptNotation to util/number (PRED-1393)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37757",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T13:19:59Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "size-XL",
+        "team-predict",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37762",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37762,
+      "title": "fix(activity): open redesigned details from transaction toast cp-8.17.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37762",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T18:13:22Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-L",
+        "release-8.17.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37789",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37789,
+      "title": "feat(token-details): ASSETS-4154 holders list on the Token Details Holders tab",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37789",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T16:24:21Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-assets",
+        "skip-sonar-cloud",
+        "size-XL",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37804",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37804,
+      "title": "fix(assets): even out token details stats row and chart spacing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37804",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T18:03:27Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37808",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37808,
+      "title": "fix(assets): shorten token details chart so tabs show above the fold",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37808",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T15:22:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XS"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37816",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37816,
+      "title": "feat: replace mocked data with real /v2/assets launchpad API",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37816",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T17:46:49Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 10
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37820",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37820,
+      "title": "fix(assets-controller): subscribeToBasicFunctionalityChange in AssetsController init",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37820",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-20T15:46:00Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-S",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37826",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37826,
+      "title": "feat(assets): move token details actions into a footer menu",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37826",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37831",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37831,
+      "title": "chore(assets): set wallet and token prices in Grotzec Hero at 48px",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37831",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T00:53:20Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-design-system",
+        "size-S",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37857",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37857,
+      "title": "fix(token-details): cleanup and sort out hermes narrow unit token age",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37857",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T08:31:11Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37858",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37858,
+      "title": "feat: token details limit orders",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37858",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T19:36:41Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-swaps-and-bridge",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37862",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37862,
+      "title": "fix(token-details): stats row data feed + chart spacing",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37862",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T11:37:29Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37907",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37907,
+      "title": "feat: drive V1 tab order and API host from remote config",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37907",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T08:48:45Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37913",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37913,
+      "title": "fix(assets): refine the token position footer",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37913",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T16:44:02Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37923",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37923,
+      "title": "fix(token-details): data availability changes",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37923",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-21T17:35:32Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37957",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37957,
+      "title": "feat(token-details): glass header and brand refresh surfaces behind tokenDetailsBrandRefresh",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37957",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T22:04:45Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-XL",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#37975",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 37975,
+      "title": "feat: replace Explore Macro tab with Perps tab (top traders + market list)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/37975",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-XL"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38000",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38000,
+      "title": "feat: route memecoin TDP price API calls to a configurable host",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38000",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T16:01:57Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38003",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38003,
+      "title": "test: cover animated amounts and exact Appium amount checks",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38003",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T09:46:34Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-qa",
+        "size-L",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38007",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38007,
+      "title": "fix: polish header spacing and glass icon presses",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38007",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T15:36:46Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-design-system",
+        "size-M",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38026",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38026,
+      "title": "fix: format swap quotes for 24-decimal tokens",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38026",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T13:49:53Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-swaps-and-bridge",
+        "size-S",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38031",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38031,
+      "title": "fix(token-details): keep the page at the tab bar on a short tab",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38031",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-22T13:50:45Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38042",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38042,
+      "title": "feat(token-details): glass header buttons and action tiles on the meme coin page WIP",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38042",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "CLOSED",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-XL",
+        "pr-not-ready-for-e2e"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38112",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38112,
+      "title": "fix: show Renounced as unknown (dash) when ownership is not asserted",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38112",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T08:51:06Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38138",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38138,
+      "title": "fix(token-details): hide Your position until a value exists",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38138",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-23T13:19:11Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38205",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38205,
+      "title": "fix: drive TDP v1 verdict from resultType and read mixed-row severity from feature.type",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38205",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T08:01:39Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38208",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38208,
+      "title": "fix(social): let owners edit their profile avatar",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38208",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T12:18:05Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38217",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38217,
+      "title": "fix(homepage): keep the tokens list when it is empty",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38217",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T16:34:11Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38228",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38228,
+      "title": "fix(assets): space token details below the action buttons",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38228",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T13:27:38Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XS",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38237",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38237,
+      "title": "fix(social): remove the back arrow from the first create profile step",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38237",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-26T16:37:34Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38238",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38238,
+      "title": "fix: match expanded position sheet surface on Memecoin TDP",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38238",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T08:16:03Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38272",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38272,
+      "title": "fix: derive TDP v1 Top 10 holders % from Blockaid wallet holders only",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38272",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T10:16:46Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38275",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38275,
+      "title": "refactor(social): SocialFeed takes fetchFeed query params",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38275",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T19:36:31Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-L",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38276",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38276,
+      "title": "feat(social): SocialFeed inline rows, host empty state, refresh and trace hooks",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38276",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T07:47:33Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-L",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38283",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38283,
+      "title": "feat: wire removeNft into NftDetectionController and pass explicit NFT source",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38283",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T23:18:20Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38284",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38284,
+      "title": "feat(social): gate social entry points behind Supplemental T&C",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38284",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T18:20:54Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-XL",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38286",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38286,
+      "title": "feat: show balance-specific empty states on the token feed",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38286",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T09:54:53Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38289",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38289,
+      "title": "feat(social): hide comment translation behind a versioned flag",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38289",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-27T13:48:38Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38304",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38304,
+      "title": "feat(social): add Trending filters on the pill rail",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38304",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T12:55:46Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-L",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38308",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38308,
+      "title": "chore(assets-controller): bump assets controller to 20.0.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38308",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T10:32:16Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38311",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38311,
+      "title": "fix(assets-controller): drop leftover lowercase mUSD entries",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38311",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T18:02:06Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38317",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38317,
+      "title": "fix: report home location for the control homepage Swap button",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38317",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T13:27:48Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38329",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38329,
+      "title": "feat(wallet): hide the home banner until new users have added funds",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38329",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T21:56:45Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38340",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38340,
+      "title": "feat(social): translate non-English feed comments",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38340",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T13:17:51Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38343",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38343,
+      "title": "fix(deps): bump qs to 6.16.1 for GHSA-6pq8-jhm2-2vcw cp-8.18.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38343",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T00:11:49Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-mobile-platform",
+        "size-XS",
+        "release-8.18.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38369",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38369,
+      "title": "feat(send): polish resizing behavior, spacing and cursor styling for Send and Price Alerts",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38369",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T07:56:56Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": [
+        "team-design-system",
+        "size-M",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38386",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38386,
+      "title": "feat(social): block and unblock a trader from their profile",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38386",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T13:30:10Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-XL",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38396",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38396,
+      "title": "feat(social): persist report, hide and block actions and filter blocked content",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38396",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-28T18:02:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "size-XL",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38446",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38446,
+      "title": "chore: upgrade design system packages (v77.0.0)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38446",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T17:12:37Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "team-design-system",
+        "skip-sonar-cloud",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38462",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38462,
+      "title": "fix: remove pass ticks from memecoin contract checks",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38462",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T10:18:37Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38465",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38465,
+      "title": "fix: hide show more/less when token description is not truncated",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38465",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T12:57:09Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38472",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38472,
+      "title": "fix: activity ERC20 metadata from assetsInfo",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38472",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T10:52:37Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 4
+      },
+      "labels": [
+        "size-M",
+        "team-emerging-opportunities",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38473",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38473,
+      "title": "fix(predict): stop PredictHome CV from assuming Feed arrival order",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38473",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T11:08:27Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-XS",
+        "team-predict",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38481",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38481,
+      "title": "fix(social): show the English text returned for a comment",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38481",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T13:28:48Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38484",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38484,
+      "title": "fix: align TDP 24h high/low decimals with the price header",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38484",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T15:59:12Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38486",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38486,
+      "title": "chore(assets-controller): bump assets controller to 20.0.2",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38486",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T04:06:34Z",
+      "reviewMonths": [
+        "2026-10",
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1,
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38487",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38487,
+      "title": "fix: relax line chart data thresholds for sparse/new tokens",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38487",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T08:51:49Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38490",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38490,
+      "title": "fix(social): hide post-trade promo and dead retry on failed trades",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38490",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T17:04:00Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-M",
+        "team-social-ai",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38491",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38491,
+      "title": "fix: read token performance windows from spot prices",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38491",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-29T15:36:47Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38497",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38497,
+      "title": "fix: place the token ticker under the token name",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38497",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T14:38:50Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38500",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38500,
+      "title": "feat: add search and Perps-style sorting to the Tokens screen",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38500",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T15:13:27Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 7
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38512",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38512,
+      "title": "chore: MUSD-1478 Remove Earn homepage section code and A/B test config for musd1313AbtestEarnSectionOnHomepage",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38512",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T15:48:05Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-earn",
+        "size-XL",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38551",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38551,
+      "title": "fix(social): seed trader avatars with the profile id",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38551",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T13:49:34Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-S",
+        "skip-e2e",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38555",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38555,
+      "title": "feat(social): tell banned users their account is disabled",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38555",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T08:06:07Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-L",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38556",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38556,
+      "title": "fix(social): fixes post composer position previews",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38556",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-30T18:25:16Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 1
+      },
+      "labels": [
+        "size-XL",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38574",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38574,
+      "title": "fix(social): drop profile onboarding from the back stack",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38574",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-10-31T07:20:19Z",
+      "reviewMonths": [
+        "2026-10"
+      ],
+      "reviewCountsByMonth": {
+        "2026-10": 2
+      },
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38603",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38603,
+      "title": "feat(assets): glass headers on asset screens",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38603",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T23:17:20Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-M",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38645",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38645,
+      "title": "feat(tokens): enable glass header on memecoin details",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38645",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-02T16:35:36Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-mobile-ux",
+        "size-M",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38686",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38686,
+      "title": "fix(social): use canonical profile id for profile and social API calls",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38686",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T09:31:42Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-M",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38693",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38693,
+      "title": "test: cover TokenDetailsV1 with component view tests",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38693",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T18:21:34Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38719",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38719,
+      "title": "fix: reword Volume flags explainer to drop raw Blockaid enum names",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38719",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T16:41:31Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38739",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38739,
+      "title": "feat(assets): subscribe candlestick streams on ohlcv.v1",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38739",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T11:49:23Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 4
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38749",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38749,
+      "title": "fix: render most recent limit order correctly in token detail page",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38749",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T15:57:49Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "skip-sonar-cloud",
+        "team-swaps-and-bridge",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38759",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38759,
+      "title": "feat: show trader position P&L footer on legacy TDP behind memecoin flag",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38759",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T10:04:26Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 13
+      },
+      "labels": [
+        "team-assets",
+        "skip-sonar-cloud",
+        "size-L",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38790",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38790,
+      "title": "fix(ui): skip the blur fallback on low-end iOS devices",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38790",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T16:41:35Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-mobile-ux",
+        "skip-sonar-cloud",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38803",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38803,
+      "title": "fix(social): hide Copy trade on own profile posts",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38803",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T08:33:51Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-L",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38810",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38810,
+      "title": "fix(social): render live position PnL in Inter",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38810",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-03T22:37:18Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38819",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38819,
+      "title": "chore: bump assets-controller to ^20.2.2, assets-controllers to ^113.1.1 and core-backend to ^14.0.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38819",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T09:32:57Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 5
+      },
+      "labels": [
+        "size-S",
+        "team-emerging-opportunities",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38851",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38851,
+      "title": "fix: dedupe contract address on memecoin TDP V1 and persist symbol on scroll",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38851",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T20:31:14Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38852",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38852,
+      "title": "chore: bump @metamask/assets-controllers to ^113.2.0 (x-mm-service-profile header on token search)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38852",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "CLOSED",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "no-changelog",
+        "size-XS"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38855",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38855,
+      "title": "feat(social): open the copied post's detail sheet from a notification",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38855",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T17:59:11Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38866",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38866,
+      "title": "fix(token-details): stop the verified badge overlapping the watchlist star",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38866",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-04T17:11:24Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38867",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38867,
+      "title": "fix(social): stop pending post confirmation loop",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38867",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T09:50:40Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38875",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38875,
+      "title": "feat(social): load composer GIFs through the social API",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38875",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T13:16:32Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-XL",
+        "release-8.20.0",
+        "social-v1"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38884",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38884,
+      "title": "fix(social): preserve casing on usernames",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38884",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T15:00:21Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-accounts-framework",
+        "skip-sonar-cloud",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38914",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38914,
+      "title": "fix: show P&L instead of PnL in user-facing copy",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38914",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T13:19:05Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-design-system",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38937",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38937,
+      "title": "chore: add predict files to codeowners",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38937",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T07:56:02Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "size-XS",
+        "team-predict",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38948",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38948,
+      "title": "fix: hide address and price on pending TDP to prevent subtitle flicker",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38948",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T11:27:12Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38986",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38986,
+      "title": "fix: include AssetsController in state logs cp-8.19.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38986",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T13:53:06Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.19.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#38991",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 38991,
+      "title": "fix: restore AssetsController Sentry tracing removed in cc59d6a",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/38991",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39003",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39003,
+      "title": "fix: align empty feeds on token, perps, and profile",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39003",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39008",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39008,
+      "title": "perf(social): stop the post composer re-rendering on every keystroke cp-8.20.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39008",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T14:29:34Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "area-performance",
+        "team-assets",
+        "size-M",
+        "team-social-ai",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39017",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39017,
+      "title": "fix(social): open profile and position sheet from token feed posts cp-8.20.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39017",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T09:18:45Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39020",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39020,
+      "title": "feat(perps): show market holders with the social leaderboard",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39020",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T00:23:40Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "size-L",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39023",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39023,
+      "title": "fix(token-details): make social Feed cards and Holders rows open Social onboarding (ASSETS-4289) cp-8.20.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39023",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T12:14:22Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39026",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39026,
+      "title": "perf(social): stop the hot token rail pinning the UI thread cp-8.20.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39026",
+      "ownership": "internal",
+      "ownershipReason": "team-author",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T15:02:27Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "area-performance",
+        "size-L",
+        "release-8.20.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39028",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39028,
+      "title": "chore: bump @metamask/assets-controller to 20.2.3 and drop state-logs exemption cp-8.20.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39028",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-05T22:18:38Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39062",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39062,
+      "title": "perf(social): pause live prices on hidden feed pages",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39062",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T10:00:13Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39068",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39068,
+      "title": "fix(token-details): tabs lose taps while the tab bar is pinned",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39068",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T13:31:01Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 3
+      },
+      "labels": [
+        "team-assets",
+        "size-L",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39070",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39070,
+      "title": "feat(predict): render Kalshi prediction feeds and search in Explore (PRED-1408)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39070",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T13:24:08Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-XL",
+        "team-predict",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39071",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39071,
+      "title": "chore(predict): consume predictionSettled from @metamask/client-utils 3.1.1",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39071",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T10:58:59Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-S",
+        "team-predict",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39074",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39074,
+      "title": "fix(predict-next): stop the Order background observation firing before the grace ends",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39074",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T09:09:16Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-S",
+        "team-predict",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39077",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39077,
+      "title": "feat(predict-next): render Kalshi Home Predictions discovery from the venue descriptor (PRED-1406)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39077",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T11:30:00Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "no-changelog",
+        "size-XL",
+        "team-predict",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39081",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39081,
+      "title": "chore(design): snap off-scale spacing values to the 4px scale (batch 4)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39081",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "team-design-system",
+        "size-S"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39100",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39100,
+      "title": "fix(social): land profile onboarding on the Social tab",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39100",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T18:22:56Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39113",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39113,
+      "title": "feat(predict): move Browser prediction autocomplete behind a Predict-owned search source (PRED-1386)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39113",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "OPEN",
+      "mergedAt": null,
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "no-changelog",
+        "size-XL",
+        "team-predict"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39116",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39116,
+      "title": "fix(social): hide wallet addresses on connection lists",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39116",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T16:19:06Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-S",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39160",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39160,
+      "title": "fix(social): match trader identicons to the profile",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39160",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-06T23:13:15Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "size-M",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    }
+  ]
+}

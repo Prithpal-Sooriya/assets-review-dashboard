@@ -63,7 +63,9 @@ async function main(): Promise<number> {
   const transport = createGhCliTransport({ ...cfg.request, log });
 
   // Search date range: whole month (inclusive of last day).
-  const [y, m] = month.split("-").map(Number);
+  const parts = month.split("-");
+  const y = Number(parts[0]);
+  const m = Number(parts[1]);
   const lastDay = new Date(Date.UTC(y, m, 0)).getUTCDate();
   const fromDate = `${month}-01`;
   const toDate = `${month}-${String(lastDay).padStart(2, "0")}`;

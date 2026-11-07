@@ -274,7 +274,7 @@ async function collectRepo(args: CollectRepoArgs): Promise<RepoCollectResult> {
       continue;
     }
     openMonths.push({ month: m, bucket: state.buckets[m] ?? {} });
-    state.buckets[m] = openMonths[openMonths.length - 1].bucket;
+    state.buckets[m] = openMonths[openMonths.length - 1]!.bucket;
   }
 
   const walkStartedIso = deps.now().toISOString(); // honest cutoff for asOfCutoff partitions
@@ -373,7 +373,7 @@ async function collectRepo(args: CollectRepoArgs): Promise<RepoCollectResult> {
         // as asOfCutoff through the walk start time.
         while (
           openMonths.length > 0 &&
-          Date.parse(updatedAt) < Date.parse(startOfMonthIso(openMonths[openMonths.length - 1].month))
+          Date.parse(updatedAt) < Date.parse(startOfMonthIso(openMonths[openMonths.length - 1]!.month))
         ) {
           const om = openMonths.pop()!;
           await closeMonth(om);

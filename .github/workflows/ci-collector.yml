@@ -1,5 +1,6 @@
-# Collector CI: typecheck + deterministic aggregation tests.
-# (UI CI lives in ci-ui.yml, owned by the frontend.)
+# Collector CI: typecheck + deterministic aggregation/collection tests.
+# (UI CI lives in ci-ui.yml, owned by the frontend. Filenames deliberately
+# distinct so the two roles never edit each other's CI.)
 name: ci-collector
 
 on:
@@ -8,8 +9,10 @@ on:
       - "scripts/**"
       - "tests/collector/**"
       - "config/**"
+      - "tsconfig.collector.json"
       - ".github/workflows/ci-collector.yml"
-      - "bun.lockb"
+      - "bun.lock"
+      - "package.json"
   push:
     branches:
       - main
@@ -17,8 +20,10 @@ on:
       - "scripts/**"
       - "tests/collector/**"
       - "config/**"
+      - "tsconfig.collector.json"
       - ".github/workflows/ci-collector.yml"
-      - "bun.lockb"
+      - "bun.lock"
+      - "package.json"
 
 permissions:
   contents: read
@@ -32,17 +37,9 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: 1.4.2
-      - name: Typecheck (scratch install — root package.json is frontend-owned)
-        run: |
-          set -euo pipefail
-          mkdir /tmp/tc && cd /tmp/tc
-          bun add --dev typescript @types/node @types/bun > /dev/null
-          ./node_modules/.bin/tsc --noEmit --strict --target es2022 --module preserve \
-            --moduleResolution bundler --typeRoots /tmp/tc/node_modules/@types \
-            --types node,bun --skipLibCheck \
-            "$GITHUB_WORKSPACE/scripts/collect.ts" \
-            "$GITHUB_WORKSPACE/scripts/aggregate.ts" \
-            "$GITHUB_WORKSPACE/scripts/validate-search.ts" \
-            "$GITHUB_WORKSPACE"/tests/collector/*.ts
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Typecheck (collector tsconfig)
+        run: bunx tsc -p tsconfig.collector.json --noEmit
       - name: Tests
         run: bun test tests/collector/

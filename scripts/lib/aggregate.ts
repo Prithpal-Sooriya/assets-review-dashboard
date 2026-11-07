@@ -41,7 +41,10 @@ import {
 
 export interface AggregateInput {
   config: CollectorConfig;
-  /** ISO UTC instant treated as both generatedAt and the range end cutoff. */
+  /** ISO UTC instant: generatedAt, the range end bound, and the partition
+   *  inclusion guard (partitions collected after it are ignored). Per-record
+   *  review cutoffs are each partition's own collectedAt — the honest
+   *  observability bound for that snapshot — not this value. */
   asOf: string;
   manifest: Manifest;
   partitions: RawPartition[];
@@ -76,8 +79,10 @@ function isInternal(cfg: CollectorConfig, record: RawPrRecord): boolean {
 }
 
 /** Qualifying review events for a record (all months, incl. pre-window evidence).
- *  Reviews submitted after the asOf cutoff are defensively excluded. */
-function qualifyingReviews(cfg: CollectorConfig, record: RawPrRecord, asOfMs: number): RawReview[] {
+ *  Reviews submitted at/after the record's partition cutoff (that walk's
+ *  start) are defensively excluded: a partition only guarantees capture of
+ *  events strictly before its own cutoff, so counts are exact for it. */
+function qualifyingReviews(cfg: CollectorConfig, record: RawPrRecord, cutoffMs: number): RawReview[] {
   const states = new Set(cfg.reviewStates);
   const roster = loginSetLowerCached(cfg);
   const authorLc = record.authorLogin?.toLowerCase();
@@ -86,7 +91,7 @@ function qualifyingReviews(cfg: CollectorConfig, record: RawPrRecord, asOfMs: nu
     if (!states.has(r.state)) return false; // e.g. PENDING
     if (!roster.has(r.authorLogin.toLowerCase())) return false; // non-roster / excluded
     if (authorLc && r.authorLogin.toLowerCase() === authorLc) return false; // self-review
-    if (Date.parse(r.submittedAt) >= asOfMs) return false; // after cutoff
+    if (Date.parse(r.submittedAt) >= cutoffMs) return false; // at/after partition cutoff
     return true;
   });
 }
@@ -136,7 +141,11 @@ export function aggregate(input: AggregateInput): DashboardData {
     repoRecords.set(repo, resolved);
     for (const rp of resolved) {
       const record = rp.record;
-      const qReviews = qualifyingReviews(cfg, record, asOfMs);
+      // Per-record honest cutoff: the walk start of the partition this
+      // snapshot came from (may be earlier than the global asOf when
+      // partitions were collected across multiple runs).
+      const cutoffMs = Date.parse(rp.partitionCollectedAt);
+      const qReviews = qualifyingReviews(cfg, record, cutoffMs);
       const countsByMonth = new Map<string, number>();
       for (const r of qReviews) {
         const m = monthOf(r.submittedAt!);
@@ -198,7 +207,8 @@ export function aggregate(input: AggregateInput): DashboardData {
       let mergedExternalReviewedPrs = 0;
       for (const rp of resolved) {
         const record = rp.record;
-        const qReviews = qualifyingReviews(cfg, record, asOfMs);
+        const cutoffMs = Date.parse(rp.partitionCollectedAt); // per-record honest cutoff
+        const qReviews = qualifyingReviews(cfg, record, cutoffMs);
         const inMonth = qReviews.filter((r) => {
           const t = Date.parse(r.submittedAt!);
           return t >= monthStartMs && t < monthEndMs && t < asOfMs;

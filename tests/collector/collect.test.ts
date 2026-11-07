@@ -191,8 +191,8 @@ describe("collectPartitions", () => {
     const report = await collectPartitions(cfg, depsFor(t, store), { fromMonth: "2026-03" });
     expect(report.stopped).toBe("done");
     expect(store.partitions).toHaveLength(1);
-    expect(store.partitions[0].month).toBe("2026-03");
-    expect(store.partitions[0].completeness).toBe("asOfCutoff");
+    expect(store.partitions[0]!.month).toBe("2026-03");
+    expect(store.partitions[0]!.completeness).toBe("asOfCutoff");
   });
 
   test("month-end complete months are skipped on re-run (no review fetches)", async () => {

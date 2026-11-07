@@ -31,19 +31,32 @@ async function main(): Promise<number> {
     ? Number(argValue("window-months"))
     : cfg.displayWindowMonths;
   if (!Number.isInteger(displayWindowMonths) || displayWindowMonths < 1) throw new Error("invalid --window-months");
-  const asOf = argValue("as-of") ?? new Date().toISOString();
-  if (!Number.isFinite(Date.parse(asOf))) throw new Error(`invalid --as-of: ${asOf}`);
   const outPath = argValue("out") ?? path.join(dataDir, "dashboard.json");
-
-  const currentMonth = monthOf(asOf);
-  const startMonth = addMonths(currentMonth, -displayWindowMonths);
-  assertMonth(startMonth);
-  const monthsList = monthRange(startMonth, currentMonth);
 
   const manifestFile = path.join(dataDir, "raw", "manifest.json");
   const manifest: Manifest = (await Bun.file(manifestFile).exists())
     ? (JSON.parse(await Bun.file(manifestFile).text()) as Manifest)
     : { schemaVersion: 1, partitions: {} };
+
+  // Honest default asOf: the newest walk start among complete partitions.
+  // Using "now" could silently claim coverage past what any walk observed;
+  // the aggregate's partition guard would also drop data collected after a
+  // hand-picked earlier instant. Explicit --as-of overrides (deterministic
+  // re-aggregation of a fixed dataset).
+  const defaultAsOf = () => {
+    let max = 0;
+    for (const st of Object.values(manifest.partitions)) {
+      if (st.status === "complete" && Date.parse(st.collectedAt) > max) max = Date.parse(st.collectedAt);
+    }
+    return max > 0 ? new Date(max).toISOString() : new Date().toISOString();
+  };
+  const asOf = argValue("as-of") ?? defaultAsOf();
+  if (!Number.isFinite(Date.parse(asOf))) throw new Error(`invalid --as-of: ${asOf}`);
+
+  const currentMonth = monthOf(asOf);
+  const startMonth = addMonths(currentMonth, -displayWindowMonths);
+  assertMonth(startMonth);
+  const monthsList = monthRange(startMonth, currentMonth);
 
   const partitions: RawPartition[] = [];
   for (const repo of cfg.repos) {
