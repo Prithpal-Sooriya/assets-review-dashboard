@@ -12,8 +12,9 @@ description: |
   BOOTSTRAP CONSTRAINT: usable only AFTER a checkout step — local actions
   resolve from the job workspace, which is empty before checkout (PR
   #20's first revision shipped this action as a pre-checkout step and
-  was rejected for it; tests/collector/local-action-order.test.ts
-  enforces the order). The collect workflows therefore resolve inline
+  was rejected for it; tests/collector/workflow-structure.test.ts
+  enforces the order — a proxy for, not proof of, the reviewed-code
+  trust). The collect workflows therefore resolve inline
   before their checkout; keep that inline block behavior-identical to
   this action. Local actions also execute from the triggering ref;
   acceptable here because this logic is ref-agnostic — the same

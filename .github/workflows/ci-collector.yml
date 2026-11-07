@@ -55,6 +55,12 @@ jobs:
         # silent-empty class as the DEFAULT_BRANCH incident.
         run: |
           v="$(cat .bun-version)"
+          case "$v" in
+            *[![:print:]]*)
+              echo "::error::.bun-version contains non-printable characters (possible env-file injection)"
+              exit 1
+              ;;
+          esac
           if [ -z "$v" ]; then
             echo "::error::.bun-version is missing or empty on the checked-out tree"
             exit 1

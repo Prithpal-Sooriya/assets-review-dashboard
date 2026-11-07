@@ -78,7 +78,8 @@ jobs:
           # would execute triggering-ref code before the reviewed
           # default-branch checkout. Keep behavior identical to the action
           # (data-pr-guard.yml invokes it post-checkout); the
-          # local-action-order test keeps this ordering honest.
+          # workflow-structure tests enforce the ordering — a proxy for,
+          # not proof of, the reviewed-code trust.
           branch="$(gh repo view "$GH_TARGET_REPO" --json defaultBranchRef --jq .defaultBranchRef.name)" || {
             echo "::error::gh repo view failed while resolving the default branch of $GH_TARGET_REPO"
             exit 1
@@ -101,6 +102,12 @@ jobs:
         # silent-empty class as the DEFAULT_BRANCH incident.
         run: |
           v="$(cat .bun-version)"
+          case "$v" in
+            *[![:print:]]*)
+              echo "::error::.bun-version contains non-printable characters (possible env-file injection)"
+              exit 1
+              ;;
+          esac
           if [ -z "$v" ]; then
             echo "::error::.bun-version is missing or empty on the checked-out tree"
             exit 1
