@@ -50,7 +50,22 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
       - name: Pin bun version from .bun-version
-        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+        # Assign-then-guard: echo-of-substitution masks cat's exit status
+        # and exports an empty BUN_VERSION from a green step — the same
+        # silent-empty class as the DEFAULT_BRANCH incident.
+        run: |
+          v="$(cat .bun-version)"
+          case "$v" in
+            *[![:print:]]*)
+              echo "::error::.bun-version contains non-printable characters (possible env-file injection)"
+              exit 1
+              ;;
+          esac
+          if [ -z "$v" ]; then
+            echo "::error::.bun-version is missing or empty on the checked-out tree"
+            exit 1
+          fi
+          echo "BUN_VERSION=$v" >> "$GITHUB_ENV"
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: ${{ env.BUN_VERSION }}

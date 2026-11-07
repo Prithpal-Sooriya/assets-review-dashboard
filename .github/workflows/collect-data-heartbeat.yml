@@ -36,10 +36,30 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Resolve default branch (runtime-derived; safe on all triggers)
+      - name: Resolve default branch (inline — local actions cannot run before checkout)
         env:
           GH_TOKEN: ${{ github.token }}
-        run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
+          GH_TARGET_REPO: ${{ github.repository }}
+        run: |
+          # Inline, NOT ./.github/actions/resolve-default-branch: this step
+          # runs BEFORE checkout, and a local action resolves from the job
+          # workspace — empty at this point (PR #20's first revision failed
+          # exactly so), and any mechanism materializing it pre-checkout
+          # would execute triggering-ref code before the reviewed
+          # default-branch checkout. Keep the commands identical to the
+          # action (data-pr-guard.yml invokes it post-checkout) — the
+          # workflow-structure tests enforce both that identity and the
+          # ordering; the ordering is a proxy for, not proof of, the
+          # reviewed-code trust.
+          branch="$(gh repo view "$GH_TARGET_REPO" --json defaultBranchRef --jq .defaultBranchRef.name)" || {
+            echo "::error::gh repo view failed while resolving the default branch of $GH_TARGET_REPO"
+            exit 1
+          }
+          if [ -z "$branch" ]; then
+            echo "::error::gh repo view returned an empty default branch for $GH_TARGET_REPO"
+            exit 1
+          fi
+          echo "DEFAULT_BRANCH=$branch" >> "$GITHUB_ENV"
 
       - name: Checkout (always the reviewed default branch)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -47,7 +67,22 @@ jobs:
           ref: ${{ env.DEFAULT_BRANCH }}
 
       - name: Pin bun version from .bun-version
-        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+        # Assign-then-guard: echo-of-substitution masks cat's exit status
+        # and exports an empty BUN_VERSION from a green step — the same
+        # silent-empty class as the DEFAULT_BRANCH incident.
+        run: |
+          v="$(cat .bun-version)"
+          case "$v" in
+            *[![:print:]]*)
+              echo "::error::.bun-version contains non-printable characters (possible env-file injection)"
+              exit 1
+              ;;
+          esac
+          if [ -z "$v" ]; then
+            echo "::error::.bun-version is missing or empty on the checked-out tree"
+            exit 1
+          fi
+          echo "BUN_VERSION=$v" >> "$GITHUB_ENV"
 
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:

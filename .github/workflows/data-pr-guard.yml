@@ -34,7 +34,24 @@ jobs:
           ref: ${{ github.event.pull_request.base.ref }}
           fetch-depth: 0
       - name: Pin bun version from .bun-version
-        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+        # Assign-then-guard: echo-of-substitution masks cat's exit status
+        # and exports an empty BUN_VERSION from a green step — the same
+        # silent-empty class as the DEFAULT_BRANCH incident.
+        run: |
+          v="$(cat .bun-version)"
+          case "$v" in
+            *[![:print:]]*)
+              echo "::error::.bun-version contains non-printable characters (possible env-file injection)"
+              exit 1
+              ;;
+          esac
+          if [ -z "$v" ]; then
+            echo "::error::.bun-version is missing or empty on the checked-out tree"
+            exit 1
+          fi
+          echo "BUN_VERSION=$v" >> "$GITHUB_ENV"
+      - name: Resolve default branch (shared action — same source as collect-data.yml)
+        uses: ./.github/actions/resolve-default-branch
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: ${{ env.BUN_VERSION }}
@@ -43,9 +60,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          # Runtime-derived default branch (API, not event payload) — same
-          # pattern as collect-data.yml.
-          DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)"
+          # DEFAULT_BRANCH was resolved by the shared action above — the
+          # same source collect-data.yml uses (no copy-pasted variant).
           git fetch --no-tags origin "refs/pull/${{ github.event.number }}/head"
           git worktree add --detach /tmp/pr-head FETCH_HEAD
           bun run scripts/check-data-branch.ts /tmp/pr-head "origin/$DEFAULT_BRANCH"

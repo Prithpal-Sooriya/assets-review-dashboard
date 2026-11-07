@@ -1,0 +1,40 @@
+name: Resolve default branch
+description: |
+  Writes DEFAULT_BRANCH to $GITHUB_ENV, derived at runtime from the
+  repository API (safe on every trigger — schedule events carry no
+  repository payload). The repository is passed POSITIONALLY: bare
+  `gh repo view` has no git remote to infer the repository from when
+  invoked before checkout, so it fails into an empty substitution and a
+  green step exports DEFAULT_BRANCH="" — run 42422208339 failed exactly
+  there. Both failure paths fail loud with ::error:: (a hard gh failure
+  and an empty resolution are annotated, not just one).
+
+  BOOTSTRAP CONSTRAINT: usable only AFTER a checkout step — local actions
+  resolve from the job workspace, which is empty before checkout (PR
+  #20's first revision shipped this action as a pre-checkout step and
+  was rejected for it; tests/collector/workflow-structure.test.ts
+  enforces the order — a proxy for, not proof of, the reviewed-code
+  trust). The collect workflows therefore resolve inline
+  before their checkout; keep that inline block command-identical to
+  this action (enforced by tests/collector/workflow-structure.test.ts;
+  comments may differ). Local actions also execute from the triggering ref;
+  acceptable here because this logic is ref-agnostic — the same
+  trade-off run-token documents.
+runs:
+  using: composite
+  steps:
+    - name: Resolve default branch (runtime-derived; safe on all triggers)
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        GH_TARGET_REPO: ${{ github.repository }}
+      run: |
+        branch="$(gh repo view "$GH_TARGET_REPO" --json defaultBranchRef --jq .defaultBranchRef.name)" || {
+          echo "::error::gh repo view failed while resolving the default branch of $GH_TARGET_REPO"
+          exit 1
+        }
+        if [ -z "$branch" ]; then
+          echo "::error::gh repo view returned an empty default branch for $GH_TARGET_REPO"
+          exit 1
+        fi
+        echo "DEFAULT_BRANCH=$branch" >> "$GITHUB_ENV"
