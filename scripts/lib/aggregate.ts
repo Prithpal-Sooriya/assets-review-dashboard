@@ -259,9 +259,7 @@ export function aggregate(input: AggregateInput): DashboardData {
         } else {
           coverage.push({ repo, month: m, status: "error", detail: "manifest complete but partition file missing" });
         }
-      } else if (st.status === "error") {
-        coverage.push({ repo, month: m, status: "error", detail: st.detail ?? "collection error" });
-      } else {
+      } else if (st.status === "pending") {
         coverage.push({ repo, month: m, status: "pending", detail: st.detail ?? "pending" });
       }
     }

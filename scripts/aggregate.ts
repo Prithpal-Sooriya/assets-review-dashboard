@@ -11,7 +11,7 @@ import { mkdir, rename, writeFile } from "node:fs/promises";
 import * as path from "node:path";
 import { loadConfig, addMonths, assertMonth, monthOf, monthRange, repoSlug } from "./lib/config";
 import { aggregate, validateDashboardData } from "./lib/aggregate";
-import { resolveDataDir } from "./lib/store";
+import { resolveDataDir, prunePartitions } from "./lib/store";
 import type { DashboardData, Manifest, RawPartition } from "./lib/types";
 
 function argValue(name: string): string | undefined {
@@ -85,6 +85,14 @@ async function main(): Promise<number> {
   const tmp = `${outPath}.tmp`;
   await writeFile(tmp, `${JSON.stringify(data, null, 2)}\n`, "utf8");
   await rename(tmp, outPath);
+
+  // --prune: bound the data branch's growth under the rolling window —
+  // delete partition files and manifest entries outside the aggregated
+  // window so closed months don't accumulate forever.
+  if (argValue("prune") !== undefined) {
+    const pruned = await prunePartitions(dataDir, new Set(monthsList), cfg.repos);
+    if (pruned.length > 0) console.log(`pruned ${pruned.length} out-of-window partitions: ${pruned.slice(0, 20).join(" ")}${pruned.length > 20 ? " …" : ""}`);
+  }
 
   const covCounts = data.coverage.reduce<Record<string, number>>((acc, c) => {
     acc[c.status] = (acc[c.status] ?? 0) + 1;

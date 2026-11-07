@@ -80,8 +80,11 @@ export interface RawPartition {
 
 export type PartitionStatus =
   | { status: "complete"; completeness: PartitionCompleteness; collectedAt: string; prCount: number }
-  | { status: "pending"; detail?: string }
-  | { status: "error"; detail?: string };
+  | { status: "pending"; detail?: string };
+// NOTE: no "error" partition status — hard collection failures leave months
+// as "pending" (or no entry), and the run record (data/raw/.last-run.json,
+// stopped: "error") carries the failure detail. Coverage-level "error"
+// (manifest complete but file missing) remains a live CoverageStatus.
 
 /** data/raw/manifest.json — the source of truth for coverage. */
 export interface Manifest {

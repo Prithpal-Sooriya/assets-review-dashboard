@@ -22,8 +22,13 @@ bun run scripts/validate-search.ts --month 2026-10          # cross-check vs sea
 
 `--as-of` fixes the run cutoff (default: now). `collect` exit codes: `0`
 complete, `3` stopped at rate-budget reserve (checkpointed, resume by
-re-running the same command), `1` usage error. Aggregation is deterministic
-for fixed partitions + fixed `--as-of`.
+re-running the same command), `1` usage error or hard failure (the CLI's
+catch path still writes a truthful `.last-run.json` with `stopped: "error"`
+and the pending list, so aborted runs can't masquerade as complete).
+Aggregation is deterministic for fixed partitions + fixed `--as-of`.
+`aggregate --prune` additionally deletes partition files and manifest
+entries outside the aggregated window, bounding the data branch's growth
+under the rolling display window.
 
 ## Collection design (completeness)
 
@@ -56,14 +61,18 @@ aggregation dedupes by freshest snapshot per PR).
   (bucketed PR records, closed months) — committed to the data branch so
   incomplete runs survive runner exits. Completed walks delete it.
 - `data/raw/manifest.json` records per repo-month status
-  (`complete`/`pending`/`error`) + completeness kind + counts. Aggregation
-  only trusts complete partitions and reports everything else in `coverage`.
+  (`complete`/`pending`) + completeness kind + counts. Aggregation only
+  trusts complete partitions and reports everything else in `coverage`
+  (there is deliberately no partition-level `error` status — hard failures
+  surface via `.last-run.json` and the red workflow run).
 - On graceful rate stops (budget reserve 250), open months are marked
   pending, state persisted, exit 3. Re-runs resume and never re-fetch
   cached PRs; month-end-complete months are skipped entirely; the current
   partial month is always refreshed to the newer cutoff.
-- `data/raw/.last-run.json` — machine-readable last-run report (pending
-  list, rate reset epoch) driving the workflow's auto-continuation.
+- `data/raw/.last-run.json` — machine-readable last-run report (stopped
+  state, pending list, rate reset epoch) driving the workflow's
+  auto-continuation; written atomically (tmp+rename) on both success and
+  hard failure.
 - A local lock (`data/raw/.lock`, mtime-based, 2h stale takeover) prevents
   concurrent local runs; it is never committed.
 
@@ -118,12 +127,24 @@ aggregation dedupes by freshest snapshot per PR).
   a run only collects the newly closed month + refreshes the current one.
 - **Manual** (`start_date` input, `YYYY-MM-DD`): window starts at that
   month; the cutoff is fixed at run start (deterministic aggregate).
-- Runs `bun test tests/collector/` first — no data is written on failure.
-- Commits to the long-lived branch `data/auto-refresh` (**never the default
-  branch**, no force-push). Existing data branches are reconciled by
-  merging the default branch in, preserving every unmerged checkpoint.
+- Runs `bun test tests/collector/` first, on the reviewed default-branch
+  code that performs the collection — no data is written on failure.
+- Writes only to an **orphan, data-only branch** `data/auto-refresh`
+  (**never the default branch**, no force-push): the workflow prepares a
+  git worktree of that branch, mirrors `data/` into it with rsync, and
+  pushes. The data branch deliberately carries no code — nothing unreviewed
+  executes in the token-bearing job, its own pushes fire no `on: push`
+  workflows (no workflow files exist on it), merging its data PR never
+  touches source files, and there are no merges/conflicts to reconcile. A
+  guard refuses to continue if the branch ever carries anything outside
+  `data/`.
+- Hard collector failures (exit 1) fail the run red immediately with the
+  checkpoints already pushed; paused runs finish red with a greppable
+  `[EXPECTED-AUTO-RESUME]` annotation (not actionable).
 - Opens or updates one data PR; each attempt appends a 🤖 comment with
-  coverage/status.
+  coverage/status derived from `.last-run.json`.
+- Actions are pinned to commit SHAs; the bun version is pinned once in
+  `.bun-version` (read by every workflow).
 - **Bounded continuation without sleep loops**: on exit 3 the workflow pushes
   the checkpoint, reports the reset time on the data PR, and finishes
   paused-red. The hourly `collect-data-heartbeat` workflow re-dispatches
@@ -133,17 +154,22 @@ aggregation dedupes by freshest snapshot per PR).
   checkpoints.
 - Auth: `GITHUB_TOKEN` (contents+pull-requests: write). Optional secret
   **`DASHBOARD_GH_TOKEN`** (classic PAT, repo scope) — if set, it is used
-  instead (higher rate budget; PRs it creates also trigger CI, which
-  GITHUB_TOKEN-created PRs do not). No secret values live in this repo.
+  instead for its higher rate budget (its only purpose; data PRs don't
+  trigger code CI either way, since `ci-collector.yml` is path-scoped to
+  code and the in-workflow test step gates data runs). No secret values
+  live in this repo.
 
 `ci-collector.yml` (PRs + pushes touching collector-owned paths):
-typecheck (scratch-installed typescript — root package.json is
-frontend-owned) + tests. UI CI is `ci-ui.yml`, owned by the frontend.
+`bun install --frozen-lockfile` (shared root package.json), typecheck via
+`tsconfig.collector.json`, then `bun test tests/collector/`. UI CI is
+`ci-ui.yml`, owned by the frontend; filenames are deliberately distinct
+so the two roles never edit each other's CI.
 
 `collect-data-heartbeat.yml` (hourly): no-op unless the data-branch
-checkpoint reports pending partitions and the rate window has reset, and no
-collect-data run is active — then it re-dispatches `collect-data` with the
-checkpoint's window start.
+checkpoint reports pending partitions and the rate window has reset (for
+hard-failed runs, retries are bounded to ~1/hour), no collect-data run is
+active, and the checkpoint's `from` month validates as `YYYY-MM` — then it
+re-dispatches `collect-data` with the checkpoint's window start.
 
 ## Public-repo safety
 
