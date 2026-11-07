@@ -29,7 +29,9 @@ async function statValue(page: Page, label: string): Promise<string> {
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/')
+  // Historical page content now lives at /historical (Daily is the root
+  // landing page) — see src/routing.ts.
+  await page.goto('/historical')
 })
 
 test('header and sample-data notice label synthetic data discreetly and accurately', async ({ page }) => {

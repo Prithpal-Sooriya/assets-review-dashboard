@@ -139,15 +139,28 @@ What still holds regardless of visibility:
   one file per production deploy ([`TEMPLATE.md`](./deploys/TEMPLATE.md) for
   the next one). Latest: [2026-11-07 — first real-data
   deploy](./deploys/2026-11-07.md), pinned by the tag `deploy/2026-11-07`.
-- **Temporary rule (remove once [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
-  is settled):** the production tree is not bare `main`. The first real-data
-  deploy ran `main` **minus PR #3** (client-only Today dashboard with in-browser
-  PAT handling), excluded while that separate session's deploy status is
-  settled. **Deploying bare `main` would ship PR #3 — coordinate first.**
+- **The production tree is merged `main` — the combined app** (Daily at `/`
+  and Historical at `/historical`, plus the preserved `#/today` / `#/history`
+  legacy hash links). The earlier temporary rule — excluding PR #3's Daily
+  dashboard from production pending [issue
+  #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6) —
+  is **superseded** (2026-11-07): daily publication is now authorized, the
+  first real-data deploy was historical-only only because that authorization
+  had not yet been given, and deploying a historical-only tree again would
+  regress the public site (root showing only history, no navigation, and a
+  404 at `/historical`). Issue #6 was closed when the combined app shipped.
 - The Vercel project has **no git integration**: every deploy is a CLI
   `--prebuilt` build, so nothing auto-deploys on push. The manual deploy
   command (`vercel build --prod && vercel deploy --prebuilt --prod`) builds
-  **whatever tree is checked out** — confirm the tree before running it.
+  **whatever tree is checked out** — confirm it is merged `main` before
+  running it.
+- **Two production URLs to verify after every deploy** (both must serve the
+  app, with the right page and an active nav tab):
+  - `/` → **Daily** (review queue; collects client-side from public GitHub
+    data — anonymous mode is honestly labelled incomplete for team requests),
+  - `/historical` → **Historical** (build-time embedded aggregate).
+  `vercel.json` rewrites `/historical` to the SPA shell so direct loads and
+  reloads work. Also spot-check a legacy link (`/#/history`, `/#/today?…`).
 
 ### Data refresh
 
@@ -163,9 +176,13 @@ The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
 
 **Pre-deploy checklist** (each refresh):
 
-- [ ] **Confirm the tree being built** — production must not ship PR #3's
-      Today dashboard / PAT handling until [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
-      is settled (see *Deploy records and the production tree* above).
+- [ ] **Confirm the tree being built is merged `main`** — the combined app
+      (Daily at `/`, Historical at `/historical`, legacy hash links intact).
+      Never deploy a historical-only tree; see *Deploy records and the
+      production tree* above.
+- [ ] **Both URLs verified after the deploy:** `/` shows the Daily review
+      queue with the Daily tab active; `/historical` shows the Historical
+      view with its tab active; a legacy `#/today?…` filter link still works.
 - [ ] **Coverage disclosure:** the coverage panel must span the **full
       collection window** — the summary denominator counts every repo-month in
       `data.range`, the grid shows all months (no-data months as Pending, or

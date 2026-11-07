@@ -543,7 +543,9 @@ a.pr-link:hover {
 }
 
 .chip--missing {
-  color: var(--text-faint);
+  /* text-muted: chips sit on tinted (surface-2 style) backgrounds where the
+     faint gray fails WCAG AA (4.42:1 < 4.5:1) — Daily-page axe scan. */
+  color: var(--text-muted);
 }
 
 /* ---------- details / lists ---------- */
@@ -804,7 +806,10 @@ ul.plain li + li {
 }
 
 .today-group-count {
-  color: var(--text-faint);
+  /* text-muted (not text-faint): this sits on --surface-2, where the faint
+     gray fails WCAG AA contrast (4.42:1 < 4.5:1) — caught by the Daily-page
+     axe scan; the other text-faint uses sit on white surfaces and pass. */
+  color: var(--text-muted);
   font-weight: 400;
 }
 
