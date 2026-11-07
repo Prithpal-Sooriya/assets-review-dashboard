@@ -9,8 +9,9 @@ const totals = totalAggregate(aggregateMonths(real.months, null, windowMonths))
 
 test('real-shaped data renders without any demo labelling', async ({ page }) => {
   await page.goto('/')
-  await expect(page.locator('.notice--demo')).toHaveCount(0)
+  await expect(page.locator('.notice--sample')).toHaveCount(0)
   await expect(page.locator('.site-header .chip')).toContainText('Data as of 31 Oct 2026, 08:00 UTC')
+  await expect(page.locator('.notice')).toContainText('Source: public GitHub PRs from MetaMask Mobile, Core, and Extension')
   // displayPath shows the repo-relative tail (last 3 segments) of the data path
   await expect(page.locator('.notice')).toContainText('ui/fixtures/sample-real.json')
   await expect(page.locator('.site-footer')).toContainText('Real collected data')

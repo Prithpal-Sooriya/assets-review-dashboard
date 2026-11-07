@@ -32,14 +32,16 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/')
 })
 
-test('header and demo banner clearly label synthetic data', async ({ page }) => {
+test('header and sample-data notice label synthetic data discreetly and accurately', async ({ page }) => {
   await expect(page.getByRole('heading', { level: 1, name: 'Assets review workload' })).toBeVisible()
-  const banner = page.locator('.notice--demo')
-  await expect(banner).toBeVisible()
-  await expect(banner).toContainText('Demo data')
-  await expect(banner).toContainText('synthetic sample fixture')
-  await expect(banner).toContainText('must not be read as real')
-  await expect(page.locator('.site-header .chip')).toContainText('Demo data')
+  const notice = page.locator('.notice--sample')
+  await expect(notice).toBeVisible()
+  await expect(notice).toContainText('Sample data')
+  await expect(notice).toContainText('Synthetic figures for development')
+  await expect(notice).toContainText('not real GitHub activity')
+  await expect(page.locator('.site-header .chip')).toContainText('Sample data')
+  // Never label invented figures as real: the real-source line must not appear.
+  await expect(page.locator('.notice')).not.toContainText('Source: public GitHub PRs')
 })
 
 test('overview stats match the fixture aggregates', async ({ page }) => {
@@ -170,7 +172,7 @@ test('mobile viewport has no horizontal overflow', async ({ page }) => {
 
 test('footer records provenance, schema and privacy stance', async ({ page }) => {
   const footer = page.locator('.site-footer')
-  await expect(footer).toContainText('Synthetic demo fixture')
+  await expect(footer).toContainText('Sample data (synthetic fixture)')
   await expect(footer).toContainText('src/data/demo-fixture.json')
   await expect(footer).toContainText('dashboard.json v1')
   await expect(footer).toContainText('no individual reviewer data')

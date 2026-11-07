@@ -210,10 +210,25 @@ select {
   background: var(--surface);
 }
 
-.notice--demo {
-  border-color: var(--amber-bar);
-  background: var(--amber-soft);
+/* Discreet sample-data strip: always visible, never loud. Invented figures
+   must be labelled, but the notice stays a quiet one-liner. */
+.notice--sample {
+  border: none;
+  border-left: 3px solid var(--amber-bar);
+  border-radius: 0 6px 6px 0;
+  padding: 6px 10px;
+  margin: 14px 0 0;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.notice--sample .notice__label {
   color: var(--amber-text);
+}
+
+.notice--sample code {
+  font-size: 0.8rem;
 }
 
 .notice--warn {

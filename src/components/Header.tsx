@@ -18,7 +18,7 @@ export function Header({ loaded }: { loaded: LoadedDashboard }) {
         <div className="site-header__actions">
           {loaded.status === 'ok' && loaded.data && (
             <span className="chip chip--complete" title={`Data generated at ${loaded.data.generatedAt}`}>
-              {loaded.isDemo ? 'Demo data' : `Data as of ${formatISOTimestamp(loaded.data.generatedAt)}`}
+              {loaded.isDemo ? 'Sample data' : `Data as of ${formatISOTimestamp(loaded.data.generatedAt)}`}
             </span>
           )}
           <button
