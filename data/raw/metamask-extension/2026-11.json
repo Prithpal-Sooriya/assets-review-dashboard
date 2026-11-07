@@ -3,8 +3,8 @@
   "repo": "MetaMask/metamask-extension",
   "month": "2026-11",
   "completeness": "asOfCutoff",
-  "collectedAt": "2026-11-07T17:38:15.198Z",
-  "prCount": 425,
+  "collectedAt": "2026-11-07T23:28:14.000Z",
+  "prCount": 426,
   "prs": [
     {
       "number": 11188,
@@ -4683,7 +4683,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-10-29T19:14:55Z",
-      "updatedAt": "2026-11-06T15:00:20Z",
+      "updatedAt": "2026-11-07T21:09:46Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "cryptodev-2s",
@@ -7898,6 +7898,22 @@
       "labels": [
         "team-core-extension-ux",
         "size-S"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47711,
+      "title": "fix: allow selecting card payment method on monthly shield plan",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47711",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-07T18:54:44Z",
+      "updatedAt": "2026-11-07T18:59:28Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "TONYSTARK-EDITH",
+      "labels": [
+        "external-contributor"
       ],
       "reviews": []
     }

@@ -1,9 +1,9 @@
 {
-  "ranAt": "2026-11-07T20:55:33.308Z",
+  "ranAt": "2026-11-07T23:28:14Z",
   "from": "2025-11",
   "to": "2026-11",
   "stopped": "done",
   "pending": [],
-  "rateRemaining": 3174,
-  "resetEpoch": 1794087037
+  "rateRemaining": 3240,
+  "resetEpoch": 1794097677
 }

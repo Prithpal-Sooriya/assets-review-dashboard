@@ -3,8 +3,8 @@
   "repo": "MetaMask/core",
   "month": "2026-11",
   "completeness": "asOfCutoff",
-  "collectedAt": "2026-11-07T19:57:43.809Z",
-  "prCount": 241,
+  "collectedAt": "2026-11-07T23:28:14.000Z",
+  "prCount": 242,
   "prs": [
     {
       "number": 736,
@@ -4121,6 +4121,20 @@
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "n3ps",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 11380,
+      "title": "feat(social-controllers): type feedItemId on feed items",
+      "url": "https://github.com/MetaMask/core/pull/11380",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-07T23:00:14Z",
+      "updatedAt": "2026-11-07T23:19:35Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "xavier-brochard",
       "labels": [],
       "reviews": []
     }

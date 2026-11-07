@@ -3,9 +3,28 @@
   "repo": "MetaMask/metamask-mobile",
   "month": "2026-11",
   "completeness": "asOfCutoff",
-  "collectedAt": "2026-11-07T15:34:41.902Z",
-  "prCount": 795,
+  "collectedAt": "2026-11-07T23:28:14.000Z",
+  "prCount": 800,
   "prs": [
+    {
+      "number": 31139,
+      "title": "fix: use pending block tag when fetching EIP-7702 authorization nonce",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/31139",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-06-05T11:46:16Z",
+      "updatedAt": "2026-11-07T15:47:20Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "team-confirmations",
+        "size-S",
+        "risk:low"
+      ],
+      "reviews": []
+    },
     {
       "number": 32290,
       "title": "refactor: route buy flow through V2 token selection",
@@ -14750,7 +14769,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-06T19:02:43Z",
-      "updatedAt": "2026-11-07T15:30:08Z",
+      "updatedAt": "2026-11-07T17:25:57Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "andrewjcohen",
@@ -14874,7 +14893,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-06T21:40:12Z",
-      "updatedAt": "2026-11-07T15:30:06Z",
+      "updatedAt": "2026-11-07T17:29:50Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "andrewjcohen",
@@ -15111,17 +15130,17 @@
     },
     {
       "number": 39176,
-      "title": "feat(social): add compact open graph tags to share links",
+      "title": "feat(social): share profiles and positions as Branch short links",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39176",
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-07T07:57:21Z",
-      "updatedAt": "2026-11-07T15:23:22Z",
+      "updatedAt": "2026-11-07T15:57:45Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "joaosantos15",
       "labels": [
-        "size-M",
+        "size-L",
         "team-social-ai"
       ],
       "reviews": []
@@ -15207,6 +15226,76 @@
       "labels": [
         "size-XS",
         "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39182,
+      "title": "fix(social-feed): apply realtime trending updates in place",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39182",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-07T18:19:36Z",
+      "updatedAt": "2026-11-07T19:18:47Z",
+      "closedAt": "2026-11-07T19:15:55Z",
+      "mergedAt": "2026-11-07T19:15:55Z",
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39183,
+      "title": "feat(social-feed): key all-feed rows on feedItemId",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39183",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-07T22:50:45Z",
+      "updatedAt": "2026-11-07T23:20:31Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-M",
+        "team-social-ai"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39184,
+      "title": "fix(social): show two decimals on profile PnL and volume",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39184",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-07T23:16:20Z",
+      "updatedAt": "2026-11-07T23:21:32Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "rizvihaider445",
+      "labels": [
+        "size-S",
+        "team-social-ai"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39185,
+      "title": "fix(social): keep profile stats and unrealized P&L live",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39185",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-07T23:19:26Z",
+      "updatedAt": "2026-11-07T23:23:39Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "salimtb",
+      "labels": [
+        "team-assets",
+        "size-M"
       ],
       "reviews": []
     }
