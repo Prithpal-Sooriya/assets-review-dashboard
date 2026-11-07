@@ -96,6 +96,7 @@ jobs:
           set -euo pipefail
           if git fetch --no-tags origin "$DATA_BRANCH"; then
             git worktree add -B "$DATA_BRANCH" /tmp/data-tree FETCH_HEAD
+            echo "DATA_BRANCH_EXISTING=1" >> "$GITHUB_ENV"
           else
             echo "no $DATA_BRANCH yet; creating an orphan data-only branch"
             git worktree add --orphan="$DATA_BRANCH" /tmp/data-tree
@@ -114,14 +115,20 @@ jobs:
           GH_TOKEN: ${{ secrets.DASHBOARD_GH_TOKEN || github.token }}
         run: |
           set -uo pipefail
-          # Seed the local data/ dir from the data branch (checkpoints,
-          # manifest, completed partitions) so the walk resumes instead of
-          # starting from scratch. The default-branch checkout's data/ is
-          # empty (or data-free); all data state lives on $DATA_BRANCH.
-          rsync -a --delete /tmp/data-tree/data/ data/ || {
-            echo "::error::failed to seed data/ from $DATA_BRANCH — refusing to start from scratch"
-            exit 1
-          }
+          # Overlay data-branch state (checkpoints, manifest, completed
+          # partitions) onto the checkout's data/ so the walk resumes instead
+          # of starting from scratch. --checksum (not mtime): freshly
+          # checked-out main files always carry "now" mtimes, so content must
+          # decide — and the data branch is the authoritative freshest state
+          # (data changes must flow through it, not direct commits to main).
+          # Only when the data branch exists — on the very first run the
+          # orphan worktree is empty and the checkout's own data/ is the seed.
+          if [ "${DATA_BRANCH_EXISTING:-0}" = "1" ]; then
+            rsync -a --checksum /tmp/data-tree/data/ data/ || {
+              echo "::error::failed to seed data/ from $DATA_BRANCH — refusing to start from scratch"
+              exit 1
+            }
+          fi
           bun run scripts/collect.ts --from "$FROM_MONTH" --as-of "$RUN_CUTOFF"
           rc=$?
           echo "COLLECT_RC=$rc" >> "$GITHUB_ENV"
