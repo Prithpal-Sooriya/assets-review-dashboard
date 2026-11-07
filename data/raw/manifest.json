@@ -10,13 +10,13 @@
     "MetaMask/metamask-mobile|2026-11": {
       "status": "complete",
       "completeness": "asOfCutoff",
-      "collectedAt": "2026-11-07T13:30:26.843Z",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
       "prCount": 795
     },
     "MetaMask/metamask-extension|2026-11": {
       "status": "complete",
       "completeness": "asOfCutoff",
-      "collectedAt": "2026-11-07T12:55:09.593Z",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
       "prCount": 425
     },
     "MetaMask/metamask-extension|2026-10": {
@@ -28,7 +28,7 @@
     "MetaMask/core|2026-11": {
       "status": "complete",
       "completeness": "asOfCutoff",
-      "collectedAt": "2026-11-07T13:06:51.314Z",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
       "prCount": 241
     },
     "MetaMask/core|2026-10": {
@@ -60,6 +60,180 @@
       "completeness": "monthEnd",
       "collectedAt": "2026-11-07T13:30:26.843Z",
       "prCount": 1857
+    },
+    "MetaMask/metamask-mobile|2026-05": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 906
+    },
+    "MetaMask/metamask-mobile|2026-04": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 1100
+    },
+    "MetaMask/metamask-mobile|2026-03": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 1137
+    },
+    "MetaMask/metamask-mobile|2026-02": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 1214
+    },
+    "MetaMask/metamask-mobile|2026-01": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 638
+    },
+    "MetaMask/metamask-mobile|2025-12": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 625
+    },
+    "MetaMask/metamask-mobile|2025-11": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T15:34:41.902Z",
+      "prCount": 1055
+    },
+    "MetaMask/metamask-extension|2026-09": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 843
+    },
+    "MetaMask/metamask-extension|2026-08": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 691
+    },
+    "MetaMask/metamask-extension|2026-07": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 901
+    },
+    "MetaMask/metamask-extension|2026-06": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 1000
+    },
+    "MetaMask/metamask-extension|2026-05": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 530
+    },
+    "MetaMask/metamask-extension|2026-04": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 620
+    },
+    "MetaMask/metamask-extension|2026-03": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 826
+    },
+    "MetaMask/metamask-extension|2026-02": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 554
+    },
+    "MetaMask/metamask-extension|2026-01": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 1078
+    },
+    "MetaMask/metamask-extension|2025-12": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 483
+    },
+    "MetaMask/metamask-extension|2025-11": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T17:38:15.198Z",
+      "prCount": 687
+    },
+    "MetaMask/core|2026-09": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 532
+    },
+    "MetaMask/core|2026-08": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 310
+    },
+    "MetaMask/core|2026-07": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 440
+    },
+    "MetaMask/core|2026-06": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 369
+    },
+    "MetaMask/core|2026-05": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 257
+    },
+    "MetaMask/core|2026-04": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 289
+    },
+    "MetaMask/core|2026-03": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 281
+    },
+    "MetaMask/core|2026-02": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 270
+    },
+    "MetaMask/core|2026-01": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 222
+    },
+    "MetaMask/core|2025-12": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 212
+    },
+    "MetaMask/core|2025-11": {
+      "status": "complete",
+      "completeness": "monthEnd",
+      "collectedAt": "2026-11-07T19:57:43.809Z",
+      "prCount": 231
     }
   }
 }
