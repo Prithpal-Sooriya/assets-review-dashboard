@@ -1,0 +1,234 @@
+# Dashboard data collection: monthly scheduled refresh + manual dispatch
+# (e.g. backfills). One combined workflow by design — the manual dispatch is
+# the same incremental, resumable collection as the monthly run.
+#
+# Flow: run the collector tests (gate, before any token beyond the default
+# GITHUB_TOKEN touches the environment), then collect/aggregate with the
+# repo's reviewed default-branch code, then commit ONLY data/** to an orphan
+# data branch and open/update a single data PR. The data branch deliberately
+# carries no code (orphan, data-only) so nothing unreviewed ever executes in
+# this token-bearing job, and merging the data PR never touches source files.
+# The default branch is NEVER pushed directly.
+#
+# Bounded continuation without sleep loops: the collector stops gracefully at
+# the rate budget reserve (exit 3) after checkpointing progress; this run
+# pushes the checkpoint, reports the reset time, and finishes paused-red (an
+# [EXPECTED-AUTO-RESUME] red — not actionable). The hourly heartbeat workflow
+# (collect-data-heartbeat.yml) re-dispatches this workflow once the rate
+# window resets — automatic, no human re-run, no sleeping runners. Hard
+# collector failures (exit 1) fail this run red immediately (checkpoints are
+# already pushed) and are NOT auto-retried more than hourly by the heartbeat.
+#
+# Token policy (see .github/actions/run-token — single source for both
+# workflows): runs are refused from any non-default ref BEFORE the optional
+# secret is touched, and DASHBOARD_GH_TOKEN must be a FINE-GRAINED PAT
+# (github_pat_ …) scoped to this repository only — classic repo-scope PATs
+# (ghp_ …) are refused outright because a workflow guard only protects
+# unmodified default-branch copies, not writer-supplied branch copies, and a
+# stolen classic repo-scope token grants every repository its owner can
+# access. Honest guarantee: the guard protects runs of THIS repo's reviewed
+# workflow files; containment against repo writers additionally requires the
+# fine-grained scope. The token is selected AFTER the collector tests so it
+# is never ambient during `bun install` / `bun test`. Data PRs do NOT trigger
+# ci-collector.yml (its paths filter only matches code) — the collector test
+# step in THIS workflow is the gate for data runs.
+name: collect-data
+
+on:
+  schedule:
+    - cron: "10 6 3 * *" # monthly, 3rd day, after month end
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "First month to collect (YYYY-MM-01). Default: 12 completed months back."
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: collect-data
+  cancel-in-progress: false
+
+env:
+  DATA_BRANCH: data/auto-refresh
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Resolve default branch (runtime-derived; safe on all triggers)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
+
+      - name: Checkout (always the reviewed default branch — the code that runs)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ env.DEFAULT_BRANCH }}
+          fetch-depth: 0
+
+      - name: Pin bun version from .bun-version
+        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Collector tests (gate before any data is written; runs with only the default GITHUB_TOKEN ambient)
+        run: |
+          set -euo pipefail
+          bun install --frozen-lockfile
+          bun test tests/collector/
+
+      - name: Select run token (guard + fine-grained-only + auth preflight)
+        uses: ./.github/actions/run-token
+
+      - name: Compute window and fixed run cutoff
+        env:
+          START_DATE_INPUT: ${{ inputs.start_date }}
+        run: |
+          set -euo pipefail
+          # Env-indirected, never interpolated into the shell. The month is
+          # validated as 01-12 with a bounded year — 2026-13-01 or 0000-01-01
+          # would otherwise survive to the engine and grind a full rate
+          # budget across ~24k bogus months before the job timeout.
+          START_DATE="$START_DATE_INPUT"
+          if [ -z "$START_DATE" ]; then
+            START_DATE="$(date -u -d '-12 months' +%Y-%m-01)"
+          fi
+          if ! [[ "$START_DATE" =~ ^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-01$ ]]; then
+            echo "::error::start_date must be a real first day of a month, like 2025-11-01; got '$START_DATE'"
+            exit 1
+          fi
+          RUN_CUTOFF="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          FROM_MONTH="${START_DATE%-01}"
+          {
+            echo "RUN_CUTOFF=$RUN_CUTOFF"
+            echo "FROM_MONTH=$FROM_MONTH"
+          } >> "$GITHUB_ENV"
+          echo "collecting $FROM_MONTH .. current month, fixed cutoff $RUN_CUTOFF"
+
+      - name: Prepare data branch worktree (orphan, data-only)
+        id: prepare
+        run: |
+          set -euo pipefail
+          if git fetch --no-tags origin "$DATA_BRANCH"; then
+            git worktree add -B "$DATA_BRANCH" /tmp/data-tree FETCH_HEAD
+            echo "DATA_BRANCH_EXISTING=1" >> "$GITHUB_ENV"
+          else
+            echo "no $DATA_BRANCH yet; creating an orphan data-only branch"
+            # NB: --orphan takes NO value; the branch name comes via -b.
+            git worktree add --orphan -b "$DATA_BRANCH" /tmp/data-tree
+          fi
+          # The data branch must never carry anything outside data/ — refuse
+          # loudly if it does (code on the data branch would both execute
+          # unreviewed here and fire on:push workflows on its own pushes).
+          bad="$(git -C /tmp/data-tree ls-files | grep -v '^data/' | head -n 5 || true)"
+          if [ -n "$bad" ]; then
+            echo "::error::$DATA_BRANCH carries non-data files (first: $bad); refusing to continue"
+            exit 1
+          fi
+
+      - name: Collect (resumable; pauses at rate reserve — heartbeat resumes)
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+        run: |
+          set -uo pipefail
+          # Overlay data-branch state (checkpoints, manifest, completed
+          # partitions) onto the checkout's data/ so the walk resumes instead
+          # of starting from scratch. --checksum (not mtime): freshly
+          # checked-out main files always carry "now" mtimes, so content must
+          # decide. --delete: the data branch is the authoritative store —
+          # files it no longer has (e.g. walk-state the engine cleared after
+          # completing a walk) must not resurrect from the checkout, or a
+          # later dispatch reuses stale cached reviews and bakes them into a
+          # partition stamped with a fresh cutoff. Only when the data branch
+          # exists — on the very first run the orphan worktree is empty and
+          # the checkout's own data/ is the seed.
+          if [ "${DATA_BRANCH_EXISTING:-0}" = "1" ]; then
+            rsync -a --checksum --delete /tmp/data-tree/data/ data/ || {
+              echo "::error::failed to seed data/ from $DATA_BRANCH — refusing to start from scratch"
+              exit 1
+            }
+          fi
+          bun run scripts/collect.ts --from "$FROM_MONTH" --as-of "$RUN_CUTOFF"
+          rc=$?
+          echo "COLLECT_RC=$rc" >> "$GITHUB_ENV"
+          if [ "$rc" -ne 0 ] && [ "$rc" -ne 3 ]; then
+            # Hard failure: fail the run red; the always() push step below
+            # still preserves the checkpoints. Never mask it as green.
+            echo "::error::collect exited $rc — see logs; progress is preserved on $DATA_BRANCH"
+            exit "$rc"
+          fi
+          exit 0
+
+      - name: Push checkpoints (survive runner exits)
+        # always(): pushes even when the collect step hard-failed (its
+        # checkpoints are the resume state — they must not be lost); gated on
+        # the worktree existing at all.
+        if: always() && steps.prepare.outcome == 'success'
+        uses: ./.github/actions/push-data
+        with:
+          message: "chore(data): collect (cutoff ${{ env.RUN_CUTOFF }})"
+
+      - name: Aggregate dashboard.json at the fixed cutoff
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+        run: |
+          set -euo pipefail
+          # --prune-keep-from = this run's requested window start: pruning
+          # must never delete months THIS run (or a paused backfill it
+          # resumes) is still collecting, or the resumed walk would skip
+          # months whose manifest entries were pruned away and stall. Months
+          # older than both the display window and the request are deleted.
+          bun run scripts/aggregate.ts --as-of "$RUN_CUTOFF" --out data/dashboard.json --prune --prune-keep-from "$FROM_MONTH"
+
+      - name: Push aggregated data
+        uses: ./.github/actions/push-data
+        with:
+          message: "chore(data): aggregate at cutoff ${{ env.RUN_CUTOFF }} (window-pruned)"
+
+      - name: Open or update the data PR
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+        run: |
+          set -euo pipefail
+          stopped=$(jq -r '.stopped' data/raw/.last-run.json)
+          case "$stopped" in
+            done)
+              status="complete"
+              ;;
+            rate)
+              pending=$(jq -r '.pending | join(", ")' data/raw/.last-run.json)
+              reset=$(jq -r '.resetEpoch' data/raw/.last-run.json)
+              reset_iso=$(date -u -d "@$reset" +%Y-%m-%dT%H:%M:%SZ)
+              status="PAUSED at rate reserve — pending: $pending; rate window resets $reset_iso; the hourly heartbeat resumes automatically"
+              ;;
+            *)
+              status="FAILED ($stopped) — pending: $(jq -r '.pending | join(", ")' data/raw/.last-run.json); see the red workflow run"
+              ;;
+          esac
+          coverage=$(jq -r '.coverage | group_by(.status) | map("\(.[0].status)=\(length)") | join(", ")' data/dashboard.json)
+          printf '## Dashboard data update\n\n- Collection status: %s\n- Cutoff: %s\n- Window: %s .. current month\n- Coverage: %s\n- Collector tests passed in this run before any data was written (on the reviewed default-branch code that performs the collection).\n- Bounded continuation: this run pauses at the rate reserve (checkpoints pushed); the hourly heartbeat re-dispatches after the window resets.\n- Raw provenance and completeness limitations: docs/collection.md\n' \
+            "$status" "$RUN_CUTOFF" "$FROM_MONTH" "$coverage" > /tmp/pr-body.md
+          existing=$(gh pr list --head "$DATA_BRANCH" --json number --jq 'length')
+          if [ "$existing" -eq 0 ]; then
+            gh pr create --base "$DEFAULT_BRANCH" --head "$DATA_BRANCH" \
+              --title "data: dashboard collection (auto)" \
+              --body-file /tmp/pr-body.md
+          else
+            gh pr comment "$DATA_BRANCH" --body-file /tmp/pr-body.md
+          fi
+
+      - name: Fail paused with a greppable, expected marker
+        if: env.COLLECT_RC == '3'
+        run: |
+          set -euo pipefail
+          reset=$(jq -r '.resetEpoch' data/raw/.last-run.json)
+          reset_iso=$(date -u -d "@$reset" +%Y-%m-%dT%H:%M:%SZ)
+          echo "::error::[EXPECTED-AUTO-RESUME] collection paused at the rate reserve; window resets $reset_iso; the hourly heartbeat will re-dispatch automatically. Not actionable — do not file a bug for this red."
+          exit 1

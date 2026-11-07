@@ -1,0 +1,43 @@
+# Composite action: sync data/ into the data-branch worktree and push.
+# Single source for the rsync -> add -> commit-if-changed -> push sequence
+# used after collection and after aggregation in collect-data.yml.
+#
+# Contract (what the caller must provide):
+#   - the DATA_BRANCH env var (collect-data.yml job env)
+#   - a data-branch git worktree at the path below (the Prepare step in
+#     collect-data.yml creates it at /tmp/data-tree)
+#   - checkout-persisted git push credentials (the runner's default)
+name: push-data
+description: Commit data/ to the orphan data branch and push
+inputs:
+  message:
+    description: Commit message
+    required: true
+  data-branch:
+    description: Data branch to push (must match the prepared worktree)
+    required: false
+    default: data/auto-refresh
+  worktree-path:
+    description: Path of the prepared data-branch worktree
+    required: false
+    default: /tmp/data-tree
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        MESSAGE: ${{ inputs.message }}
+        DATA_BRANCH: ${{ inputs.data-branch }}
+        WORKTREE: ${{ inputs.worktree-path }}
+      run: |
+        set -euo pipefail
+        rsync -a --delete data/ "$WORKTREE/data/"
+        git -C "$WORKTREE" add data
+        if ! git -C "$WORKTREE" diff --staged --quiet; then
+          git -C "$WORKTREE" -c user.name=dashboard-bot \
+            -c user.email=dashboard-bot@users.noreply.github.com \
+            commit -m "$MESSAGE"
+          git -C "$WORKTREE" push origin "$DATA_BRANCH"
+        else
+          echo "no data changes to push"
+        fi

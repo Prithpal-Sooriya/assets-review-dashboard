@@ -1,0 +1,3782 @@
+{
+  "repo": "MetaMask/metamask-mobile",
+  "floorMonth": "2025-11",
+  "closedMonths": [
+    "2026-11",
+    "2026-09",
+    "2026-08",
+    "2026-07",
+    "2026-06"
+  ],
+  "buckets": {
+    "2025-11": {},
+    "2025-12": {},
+    "2026-01": {},
+    "2026-02": {},
+    "2026-03": {},
+    "2026-04": {},
+    "2026-05": {
+      "20949": {
+        "number": 20949,
+        "title": "feat: replace BN with bigint",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/20949",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2025-10-08T15:15:55Z",
+        "updatedAt": "2026-05-29T01:15:01Z",
+        "closedAt": "2026-05-29T01:15:01Z",
+        "mergedAt": null,
+        "authorLogin": "sethkfman",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "skip-sonar-cloud",
+          "size-XL"
+        ],
+        "reviews": []
+      },
+      "25177": {
+        "number": 25177,
+        "title": "feat: migrate to build with GitHub action",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25177",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-01-26T12:31:36Z",
+        "updatedAt": "2026-05-27T01:12:34Z",
+        "closedAt": "2026-05-27T01:12:34Z",
+        "mergedAt": null,
+        "authorLogin": "tommasini",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-XL"
+        ],
+        "reviews": []
+      },
+      "25871": {
+        "number": 25871,
+        "title": "chore: consolidate navigation style - assets team",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25871",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-10T01:22:34Z",
+        "updatedAt": "2026-05-25T01:13:59Z",
+        "closedAt": "2026-05-25T01:13:59Z",
+        "mergedAt": null,
+        "authorLogin": "asalsys",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-XL"
+        ],
+        "reviews": []
+      },
+      "25872": {
+        "number": 25872,
+        "title": "chore: consolidate navigation style - ramp team",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25872",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-10T01:23:27Z",
+        "updatedAt": "2026-05-25T01:13:57Z",
+        "closedAt": "2026-05-25T01:13:57Z",
+        "mergedAt": null,
+        "authorLogin": "asalsys",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "25873": {
+        "number": 25873,
+        "title": "chore: consolidate navigation style - accounts team",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25873",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-02-10T01:23:49Z",
+        "updatedAt": "2026-05-25T01:13:54Z",
+        "closedAt": "2026-05-25T01:13:54Z",
+        "mergedAt": null,
+        "authorLogin": "asalsys",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-M"
+        ],
+        "reviews": []
+      },
+      "25876": {
+        "number": 25876,
+        "title": "chore: consolidate navigation style - platform team",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25876",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-10T01:25:23Z",
+        "updatedAt": "2026-05-25T01:13:52Z",
+        "closedAt": "2026-05-25T01:13:52Z",
+        "mergedAt": null,
+        "authorLogin": "asalsys",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-M"
+        ],
+        "reviews": []
+      },
+      "25877": {
+        "number": 25877,
+        "title": "chore: consolidate navigation style - ux team",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25877",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-02-10T01:25:48Z",
+        "updatedAt": "2026-05-29T01:14:55Z",
+        "closedAt": "2026-05-29T01:14:55Z",
+        "mergedAt": null,
+        "authorLogin": "asalsys",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "25881": {
+        "number": 25881,
+        "title": "chore: consolidate navigation style - rewards team",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25881",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-02-10T01:28:30Z",
+        "updatedAt": "2026-05-27T01:12:23Z",
+        "closedAt": "2026-05-27T01:12:23Z",
+        "mergedAt": null,
+        "authorLogin": "asalsys",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "25961": {
+        "number": 25961,
+        "title": "feat: Intercom SDK integration",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/25961",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-11T14:28:59Z",
+        "updatedAt": "2026-05-25T01:13:48Z",
+        "closedAt": "2026-05-25T01:13:48Z",
+        "mergedAt": null,
+        "authorLogin": "andrepimenta",
+        "labels": [
+          "stale"
+        ],
+        "reviews": []
+      },
+      "26060": {
+        "number": 26060,
+        "title": "test: uses commandQueueServer to fetch the amount of SRPs in runtime",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/26060",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-13T10:39:23Z",
+        "updatedAt": "2026-05-29T01:14:52Z",
+        "closedAt": "2026-05-29T01:14:52Z",
+        "mergedAt": null,
+        "authorLogin": "christopherferreira9",
+        "labels": [
+          "DO-NOT-MERGE",
+          "stale",
+          "team-qa",
+          "size-L"
+        ],
+        "reviews": []
+      },
+      "26093": {
+        "number": 26093,
+        "title": "fix: try to fix ios e2e",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/26093",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-13T20:49:53Z",
+        "updatedAt": "2026-05-25T01:13:45Z",
+        "closedAt": "2026-05-25T01:13:45Z",
+        "mergedAt": null,
+        "authorLogin": "tommasini",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-S",
+          "skip-smart-e2e-selection"
+        ],
+        "reviews": []
+      },
+      "26162": {
+        "number": 26162,
+        "title": "chore: code fencing on local",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/26162",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-17T13:46:56Z",
+        "updatedAt": "2026-05-27T01:12:19Z",
+        "closedAt": "2026-05-27T01:12:19Z",
+        "mergedAt": null,
+        "authorLogin": "tommasini",
+        "labels": [
+          "stale",
+          "team-mobile-platform",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "26164": {
+        "number": 26164,
+        "title": "feat: add client core mcp",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/26164",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-02-17T14:02:39Z",
+        "updatedAt": "2026-05-27T01:12:17Z",
+        "closedAt": "2026-05-27T01:12:17Z",
+        "mergedAt": null,
+        "authorLogin": "cryptotavares",
+        "labels": [
+          "stale"
+        ],
+        "reviews": []
+      },
+      "26206": {
+        "number": 26206,
+        "title": "chore: update tutorial skip button color",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/26206",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-18T05:44:59Z",
+        "updatedAt": "2026-05-29T01:14:49Z",
+        "closedAt": "2026-05-29T01:14:49Z",
+        "mergedAt": null,
+        "authorLogin": "geositta",
+        "labels": [
+          "stale",
+          "team-perps",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "26365": {
+        "number": 26365,
+        "title": "Earn mUSD header font",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/26365",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-02-20T17:42:04Z",
+        "updatedAt": "2026-05-29T01:14:45Z",
+        "closedAt": "2026-05-29T01:14:45Z",
+        "mergedAt": null,
+        "authorLogin": "georgewrmarshall",
+        "labels": [
+          "team-design-system",
+          "stale",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "27004": {
+        "number": 27004,
+        "title": "fix: fix new home page redesign",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/27004",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-03-04T16:14:04Z",
+        "updatedAt": "2026-05-25T23:31:34Z",
+        "closedAt": "2026-05-25T23:31:27Z",
+        "mergedAt": null,
+        "authorLogin": "salimtb",
+        "labels": [],
+        "reviews": []
+      },
+      "27294": {
+        "number": 27294,
+        "title": "feat: add address poisoning detection in recipient component",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/27294",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-03-10T21:01:04Z",
+        "updatedAt": "2026-05-26T20:54:31Z",
+        "closedAt": "2026-05-26T20:52:50Z",
+        "mergedAt": "2026-05-26T20:52:50Z",
+        "authorLogin": "AugmentedMode",
+        "labels": [
+          "team-product-safety",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "27460": {
+        "number": 27460,
+        "title": "feat(perps): myx write integrations",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/27460",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-03-13T01:54:32Z",
+        "updatedAt": "2026-05-29T13:48:01Z",
+        "closedAt": "2026-05-29T13:47:50Z",
+        "mergedAt": null,
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "DO-NOT-MERGE",
+          "team-perps",
+          "size-XL",
+          "risk-high"
+        ],
+        "reviews": []
+      },
+      "27594": {
+        "number": 27594,
+        "title": "fix: fix solana ws crash",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/27594",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-03-18T10:07:33Z",
+        "updatedAt": "2026-05-25T23:31:22Z",
+        "closedAt": "2026-05-25T23:31:15Z",
+        "mergedAt": null,
+        "authorLogin": "salimtb",
+        "labels": [
+          "team-assets",
+          "size-XS",
+          "risk-high"
+        ],
+        "reviews": []
+      },
+      "28909": {
+        "number": 28909,
+        "title": "fix(musd): suppress gas fee token toast for mUSD conversions (MUSD-1)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/28909",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-04-16T10:37:44Z",
+        "updatedAt": "2026-05-27T10:22:46Z",
+        "closedAt": "2026-05-27T10:21:00Z",
+        "mergedAt": "2026-05-27T10:21:00Z",
+        "authorLogin": "Kureev",
+        "labels": [
+          "team-earn",
+          "size-S",
+          "risk-low",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "28976": {
+        "number": 28976,
+        "title": "refactor(card): refactor SpendingLimit screen",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/28976",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-04-17T13:59:01Z",
+        "updatedAt": "2026-05-27T21:41:11Z",
+        "closedAt": "2026-05-27T21:41:02Z",
+        "mergedAt": null,
+        "authorLogin": "Brunonascdev",
+        "labels": [
+          "team-card",
+          "size-XL"
+        ],
+        "reviews": []
+      },
+      "29091": {
+        "number": 29091,
+        "title": "fix: 28589 resolve the ledger monad swap issue. cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29091",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-04-21T05:16:26Z",
+        "updatedAt": "2026-05-28T15:41:04Z",
+        "closedAt": "2026-05-28T15:39:15Z",
+        "mergedAt": "2026-05-28T15:39:15Z",
+        "authorLogin": "dawnseeker8",
+        "labels": [
+          "QA Passed",
+          "size-XS",
+          "team-be-trade",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "29128": {
+        "number": 29128,
+        "title": "fix: perf(accessibility): fix iOS accessibility in Bridge token selector c…",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29128",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-04-21T15:44:31Z",
+        "updatedAt": "2026-05-27T18:38:01Z",
+        "closedAt": "2026-05-27T18:35:43Z",
+        "mergedAt": "2026-05-27T18:35:43Z",
+        "authorLogin": "javiergarciavera",
+        "labels": [
+          "team-swaps-and-bridge",
+          "no-changelog",
+          "size-M",
+          "risk-medium",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "29223": {
+        "number": 29223,
+        "title": "ci(e2e): reuse native E2E builds across PRs via fingerprint lookup + fast-path repack",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29223",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-04-22T22:36:18Z",
+        "updatedAt": "2026-05-26T09:16:46Z",
+        "closedAt": "2026-05-26T09:16:35Z",
+        "mergedAt": null,
+        "authorLogin": "tommasini",
+        "labels": [
+          "team-mobile-platform",
+          "size-L",
+          "risk:high"
+        ],
+        "reviews": []
+      },
+      "29253": {
+        "number": 29253,
+        "title": "ci: reusable build e2e v3 test cross pr",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29253",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-04-23T12:33:21Z",
+        "updatedAt": "2026-05-26T09:20:00Z",
+        "closedAt": "2026-05-26T09:19:50Z",
+        "mergedAt": null,
+        "authorLogin": "tommasini",
+        "labels": [
+          "team-mobile-platform",
+          "size-XS",
+          "skip-smart-e2e-selection",
+          "risk:high"
+        ],
+        "reviews": []
+      },
+      "29324": {
+        "number": 29324,
+        "title": "refactor: speed up deeplinks handling on cold start [GE-207]",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29324",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-04-24T12:46:39Z",
+        "updatedAt": "2026-05-26T08:26:53Z",
+        "closedAt": "2026-05-26T08:25:06Z",
+        "mergedAt": "2026-05-26T08:25:06Z",
+        "authorLogin": "baptiste-marchand",
+        "labels": [
+          "size-L",
+          "team-engagement",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "29525": {
+        "number": 29525,
+        "title": "feat(transaction-controller): pass `isInternal: true` at internal call sites",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29525",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-04-29T21:10:21Z",
+        "updatedAt": "2026-05-29T14:55:58Z",
+        "closedAt": "2026-05-29T14:55:47Z",
+        "mergedAt": "2026-05-29T14:55:47Z",
+        "authorLogin": "matthewwalsh0",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-confirmations",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "29751": {
+        "number": 29751,
+        "title": "feat: tempo assets skip rpc getbalance",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29751",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-05T16:24:26Z",
+        "updatedAt": "2026-05-26T05:02:01Z",
+        "closedAt": "2026-05-26T05:01:53Z",
+        "mergedAt": null,
+        "authorLogin": "maxime-oe",
+        "labels": [
+          "team-networks",
+          "size-XS",
+          "pr-not-ready-for-e2e"
+        ],
+        "reviews": []
+      },
+      "29755": {
+        "number": 29755,
+        "title": "ci: non-blocking Play Store lint/bundletool on Android RC builds cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29755",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-05T18:37:20Z",
+        "updatedAt": "2026-05-26T21:51:51Z",
+        "closedAt": "2026-05-26T21:50:17Z",
+        "mergedAt": "2026-05-26T21:50:17Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "29766": {
+        "number": 29766,
+        "title": "refactor: migrate BaseAccountDetails and SmartAccountModal",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29766",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-05T22:23:12Z",
+        "updatedAt": "2026-05-26T20:46:28Z",
+        "closedAt": "2026-05-26T20:44:46Z",
+        "mergedAt": "2026-05-26T20:44:46Z",
+        "authorLogin": "gantunesr",
+        "labels": [
+          "team-accounts-framework",
+          "no-changelog",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "29843": {
+        "number": 29843,
+        "title": "chore: remove unused CustomSpendCap temp component",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29843",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-07T08:46:56Z",
+        "updatedAt": "2026-05-26T19:38:17Z",
+        "closedAt": "2026-05-26T19:36:37Z",
+        "mergedAt": "2026-05-26T19:36:37Z",
+        "authorLogin": "AndyMBridges",
+        "labels": [
+          "team-design-system",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "29857": {
+        "number": 29857,
+        "title": "fix(perps): prevent CLIENT_NOT_INITIALIZED during reconnection and fix compound error string",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29857",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-07T12:43:13Z",
+        "updatedAt": "2026-05-28T13:26:10Z",
+        "closedAt": "2026-05-28T13:25:58Z",
+        "mergedAt": null,
+        "authorLogin": "michalconsensys",
+        "labels": [
+          "team-perps",
+          "size-M"
+        ],
+        "reviews": []
+      },
+      "29888": {
+        "number": 29888,
+        "title": "feat(rewards): show vip menu",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29888",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-07T21:10:42Z",
+        "updatedAt": "2026-05-28T20:10:15Z",
+        "closedAt": "2026-05-12T23:28:48Z",
+        "mergedAt": "2026-05-12T23:28:48Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "skip-sonar-cloud",
+          "size-XL",
+          "team-rewards",
+          "skip-e2e",
+          "release-7.78.0",
+          "force-builds"
+        ],
+        "reviews": []
+      },
+      "29979": {
+        "number": 29979,
+        "title": "test: add system test for send flow",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/29979",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-11T13:54:26Z",
+        "updatedAt": "2026-05-27T13:22:29Z",
+        "closedAt": "2026-05-27T13:20:42Z",
+        "mergedAt": "2026-05-27T13:20:42Z",
+        "authorLogin": "pnarayanaswamy",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30001": {
+        "number": 30001,
+        "title": "ci: use MetaMask/action-checkout-and-setup for OTA changelog steps",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30001",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-05-11T18:52:47Z",
+        "updatedAt": "2026-05-27T17:57:47Z",
+        "closedAt": "2026-05-27T17:57:32Z",
+        "mergedAt": null,
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "30034": {
+        "number": 30034,
+        "title": "fix: re-enable AI PR analysis condition in workflow",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30034",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-12T10:29:25Z",
+        "updatedAt": "2026-05-29T11:36:27Z",
+        "closedAt": "2026-05-29T11:34:48Z",
+        "mergedAt": "2026-05-29T11:34:48Z",
+        "authorLogin": "cmd-ob",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "no changelog required",
+          "size-S",
+          "risk:low",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30037": {
+        "number": 30037,
+        "title": "feat: bump version of `tron-wallet-snap` to `1.25.5`",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30037",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-12T11:57:40Z",
+        "updatedAt": "2026-05-28T12:07:23Z",
+        "closedAt": "2026-05-28T12:07:14Z",
+        "mergedAt": null,
+        "authorLogin": "gabrieledm",
+        "labels": [
+          "team-networks",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "30200": {
+        "number": 30200,
+        "title": "chore: bump `@metamask/tron-wallet-snap` to `1.25.6`",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30200",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-14T17:20:56Z",
+        "updatedAt": "2026-05-28T13:17:26Z",
+        "closedAt": "2026-05-28T13:14:55Z",
+        "mergedAt": "2026-05-28T13:14:54Z",
+        "authorLogin": "ulissesferreira",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-networks",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30207": {
+        "number": 30207,
+        "title": "release: 7.78.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30207",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-14T20:16:34Z",
+        "updatedAt": "2026-05-22T14:15:53Z",
+        "closedAt": "2026-05-22T14:14:20Z",
+        "mergedAt": "2026-05-22T14:14:20Z",
+        "authorLogin": "metamaskbotv2[bot]",
+        "labels": [
+          "skip-sonar-cloud",
+          "team-bots",
+          "size-XL",
+          "release-7.78.0"
+        ],
+        "reviews": []
+      },
+      "30241": {
+        "number": 30241,
+        "title": "feat: implement Pay With Predict section",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30241",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-15T11:58:02Z",
+        "updatedAt": "2026-05-26T13:36:00Z",
+        "closedAt": "2026-05-26T13:34:17Z",
+        "mergedAt": "2026-05-26T13:34:17Z",
+        "authorLogin": "vinistevam",
+        "labels": [
+          "team-confirmations",
+          "no-changelog",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30246": {
+        "number": 30246,
+        "title": "feat: implement Homepage Perps pills empty state AB test logic and analytics",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30246",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-15T12:48:28Z",
+        "updatedAt": "2026-05-28T16:38:22Z",
+        "closedAt": "2026-05-28T16:36:00Z",
+        "mergedAt": "2026-05-28T16:36:00Z",
+        "authorLogin": "PatrykLucka",
+        "labels": [
+          "team-mobile-ux",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30249": {
+        "number": 30249,
+        "title": "refactor: migrate multichain account components to DS",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30249",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-15T13:28:11Z",
+        "updatedAt": "2026-05-26T20:31:46Z",
+        "closedAt": "2026-05-26T20:30:03Z",
+        "mergedAt": "2026-05-26T20:30:03Z",
+        "authorLogin": "gantunesr",
+        "labels": [
+          "team-accounts-framework",
+          "no-changelog",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30284": {
+        "number": 30284,
+        "title": "feat: batch sell wire up quote fetching",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30284",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-15T22:35:13Z",
+        "updatedAt": "2026-05-28T22:29:35Z",
+        "closedAt": "2026-05-28T22:27:56Z",
+        "mergedAt": "2026-05-28T22:27:56Z",
+        "authorLogin": "infiniteflower",
+        "labels": [
+          "team-swaps-and-bridge",
+          "size-XL",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30302": {
+        "number": 30302,
+        "title": "feat: add agent-device tooling for AI simulator control",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30302",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-18T11:39:26Z",
+        "updatedAt": "2026-05-25T14:11:50Z",
+        "closedAt": "2026-05-25T14:10:06Z",
+        "mergedAt": "2026-05-25T14:10:06Z",
+        "authorLogin": "NicolasMassart",
+        "labels": [
+          "Code Impact - Low",
+          "team-mobile-platform",
+          "area-devex",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30323": {
+        "number": 30323,
+        "title": "feat: add ambient price color A/B test for Token Details page",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30323",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-18T14:55:43Z",
+        "updatedAt": "2026-05-26T16:27:58Z",
+        "closedAt": "2026-05-26T16:25:19Z",
+        "mergedAt": "2026-05-26T16:25:19Z",
+        "authorLogin": "sahar-fehri",
+        "labels": [
+          "team-assets",
+          "skip-sonar-cloud",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4317206405,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-19T08:39:00Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4317333679,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-19T08:54:05Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4317355701,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-19T08:56:35Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4317360382,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-19T08:57:02Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4337500966,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-21T13:52:16Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4338077278,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-21T15:02:16Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4338145908,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-21T15:11:00Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4338356195,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-21T15:37:01Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4354923381,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-25T07:26:35Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4355365624,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-25T08:41:06Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4355771290,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-25T09:50:39Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4355844130,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-25T10:04:34Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4362263544,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-26T09:03:26Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4362342836,
+            "state": "CHANGES_REQUESTED",
+            "submittedAt": "2026-05-26T09:17:12Z",
+            "authorLogin": "juanmigdr"
+          },
+          {
+            "id": 4362975954,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T10:35:45Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4363015729,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T10:41:26Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4363318452,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-26T11:40:18Z",
+            "authorLogin": "juanmigdr"
+          },
+          {
+            "id": 4363365822,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-26T11:50:44Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30326": {
+        "number": 30326,
+        "title": "feat: update Telegram icon to official logo",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30326",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-18T15:24:59Z",
+        "updatedAt": "2026-05-28T18:10:54Z",
+        "closedAt": "2026-05-28T18:08:58Z",
+        "mergedAt": "2026-05-28T18:08:58Z",
+        "authorLogin": "brianacnguyen",
+        "labels": [
+          "No QA Needed",
+          "team-design-system",
+          "no changelog required",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30342": {
+        "number": 30342,
+        "title": "feat(predict): add crypto up/down feed card",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30342",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-18T20:45:42Z",
+        "updatedAt": "2026-05-26T14:01:45Z",
+        "closedAt": "2026-05-20T17:27:14Z",
+        "mergedAt": "2026-05-20T17:27:14Z",
+        "authorLogin": "ghgoodreau",
+        "labels": [
+          "size-XL",
+          "team-predict",
+          "release-7.79.0"
+        ],
+        "reviews": []
+      },
+      "30346": {
+        "number": 30346,
+        "title": "feat: Allow MM Connect deeplinks to be retried sequentially",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30346",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-18T21:36:28Z",
+        "updatedAt": "2026-05-26T22:29:32Z",
+        "closedAt": "2026-05-26T22:27:55Z",
+        "mergedAt": "2026-05-26T22:27:55Z",
+        "authorLogin": "jiexi",
+        "labels": [
+          "size-S",
+          "team-wallet-integrations",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30347": {
+        "number": 30347,
+        "title": "chore(rewards): update rewards VIP view",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30347",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-18T21:51:05Z",
+        "updatedAt": "2026-05-28T20:08:50Z",
+        "closedAt": "2026-05-19T16:34:29Z",
+        "mergedAt": "2026-05-19T16:34:29Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "size-L",
+          "team-rewards",
+          "release-7.79.0"
+        ],
+        "reviews": []
+      },
+      "30349": {
+        "number": 30349,
+        "title": "test: Sync Feature Flag Registry - 2026-05-19 01:47 UTC",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30349",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T01:47:54Z",
+        "updatedAt": "2026-05-28T08:00:59Z",
+        "closedAt": "2026-05-28T07:59:14Z",
+        "mergedAt": "2026-05-28T07:59:14Z",
+        "authorLogin": "github-actions[bot]",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-XL",
+          "skip-smart-e2e-selection",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30353": {
+        "number": 30353,
+        "title": "fix: disable native stack animation for PayWithModal in Perps routes",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30353",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T08:03:06Z",
+        "updatedAt": "2026-05-25T11:42:47Z",
+        "closedAt": "2026-05-25T11:40:27Z",
+        "mergedAt": "2026-05-25T11:40:27Z",
+        "authorLogin": "OGPoyraz",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-confirmations",
+          "no-changelog",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30354": {
+        "number": 30354,
+        "title": "feat: gasless hw swap hooks",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30354",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T08:22:36Z",
+        "updatedAt": "2026-05-29T14:39:54Z",
+        "closedAt": "2026-05-29T14:37:57Z",
+        "mergedAt": "2026-05-29T14:37:57Z",
+        "authorLogin": "montelaidev",
+        "labels": [
+          "team-accounts-framework",
+          "size-XL",
+          "risk:medium",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30368": {
+        "number": 30368,
+        "title": "refactor: Integrate wallet library",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30368",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T11:59:44Z",
+        "updatedAt": "2026-05-29T10:24:04Z",
+        "closedAt": "2026-05-29T10:21:41Z",
+        "mergedAt": "2026-05-29T10:21:41Z",
+        "authorLogin": "FrederikBolding",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "skip-sonar-cloud",
+          "size-L",
+          "team-core-platform",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30369": {
+        "number": 30369,
+        "title": "fix(build): set IS_DEVICE_BUILD=true for BrowserStack iOS builds",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30369",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-19T12:05:18Z",
+        "updatedAt": "2026-05-26T14:11:11Z",
+        "closedAt": "2026-05-26T14:10:57Z",
+        "mergedAt": null,
+        "authorLogin": "javiergarciavera",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-qa",
+          "no-changelog",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "30386": {
+        "number": 30386,
+        "title": "chore: enable Metro unstable_enablePackageExports",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30386",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T14:46:39Z",
+        "updatedAt": "2026-05-25T10:34:34Z",
+        "closedAt": "2026-05-25T10:32:54Z",
+        "mergedAt": "2026-05-25T10:32:54Z",
+        "authorLogin": "andrepimenta",
+        "labels": [
+          "team-mobile-platform",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30408": {
+        "number": 30408,
+        "title": "chore: Enforce isolation of mobile route directories (WPC-403)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30408",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T22:02:59Z",
+        "updatedAt": "2026-05-26T10:18:18Z",
+        "closedAt": "2026-05-26T10:16:33Z",
+        "mergedAt": "2026-05-26T10:16:33Z",
+        "authorLogin": "cryptodev-2s",
+        "labels": [
+          "size-M",
+          "team-core-platform",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4328663633,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-20T12:58:37Z",
+            "authorLogin": "salimtb"
+          },
+          {
+            "id": 4329118253,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-20T13:52:39Z",
+            "authorLogin": "salimtb"
+          },
+          {
+            "id": 4336521426,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-21T11:35:23Z",
+            "authorLogin": "salimtb"
+          },
+          {
+            "id": 4336531009,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-21T11:36:56Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4336533717,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-21T11:37:23Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4337273196,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-21T13:24:00Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4361285532,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-26T06:53:25Z",
+            "authorLogin": "bergarces"
+          }
+        ]
+      },
+      "30409": {
+        "number": 30409,
+        "title": "feat: sentry error monitoring for quick buy and top traders",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30409",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-19T22:05:07Z",
+        "updatedAt": "2026-05-25T11:00:53Z",
+        "closedAt": "2026-05-25T10:59:01Z",
+        "mergedAt": "2026-05-25T10:59:01Z",
+        "authorLogin": "Bigshmow",
+        "labels": [
+          "size-XL",
+          "team-social-ai",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30429": {
+        "number": 30429,
+        "title": "feat: disable smart account on gas fees sponsored network",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30429",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-20T08:51:00Z",
+        "updatedAt": "2026-05-26T16:23:42Z",
+        "closedAt": "2026-05-26T16:21:29Z",
+        "mergedAt": "2026-05-26T16:21:29Z",
+        "authorLogin": "Battambang",
+        "labels": [
+          "QA Passed",
+          "team-networks",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30476": {
+        "number": 30476,
+        "title": "feat: add push pre-prompt integration (part 3) cp-7.80.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30476",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-20T18:41:18Z",
+        "updatedAt": "2026-05-28T21:12:32Z",
+        "closedAt": "2026-05-28T21:10:48Z",
+        "mergedAt": "2026-05-28T21:10:48Z",
+        "authorLogin": "samir-acle",
+        "labels": [
+          "size-XL",
+          "team-engagement",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30478": {
+        "number": 30478,
+        "title": "refactor(earn): migrate Earn routes to native stack and HeaderStandard",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30478",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-20T19:11:41Z",
+        "updatedAt": "2026-05-25T21:26:41Z",
+        "closedAt": "2026-05-25T21:25:04Z",
+        "mergedAt": "2026-05-25T21:25:04Z",
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30479": {
+        "number": 30479,
+        "title": "chore(rewards): VIP view rework",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30479",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-20T21:12:24Z",
+        "updatedAt": "2026-05-28T20:08:12Z",
+        "closedAt": "2026-05-21T14:36:58Z",
+        "mergedAt": "2026-05-21T14:36:58Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "size-XL",
+          "team-rewards",
+          "release-7.79.0"
+        ],
+        "reviews": []
+      },
+      "30489": {
+        "number": 30489,
+        "title": "fix(confirmations): preserve Predict claim navigation state",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30489",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-21T04:02:07Z",
+        "updatedAt": "2026-05-28T16:44:16Z",
+        "closedAt": "2026-05-28T16:44:07Z",
+        "mergedAt": null,
+        "authorLogin": "ghgoodreau",
+        "labels": [
+          "size-M",
+          "team-predict"
+        ],
+        "reviews": []
+      },
+      "30495": {
+        "number": 30495,
+        "title": "fix: adjust chart interaction detection",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30495",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T08:27:50Z",
+        "updatedAt": "2026-05-27T15:54:07Z",
+        "closedAt": "2026-05-27T15:51:46Z",
+        "mergedAt": "2026-05-27T15:51:46Z",
+        "authorLogin": "sahar-fehri",
+        "labels": [
+          "team-assets",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4372053737,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-27T11:38:37Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4372865683,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T13:48:04Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30512": {
+        "number": 30512,
+        "title": "chore: adds the QuickBuy main sheet with modular buy flow",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30512",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T11:15:14Z",
+        "updatedAt": "2026-05-26T14:29:27Z",
+        "closedAt": "2026-05-26T14:27:36Z",
+        "mergedAt": "2026-05-26T14:27:36Z",
+        "authorLogin": "zone-live",
+        "labels": [
+          "size-XL",
+          "team-social-ai",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30525": {
+        "number": 30525,
+        "title": "fix: update icon for chart switch button",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30525",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T13:12:46Z",
+        "updatedAt": "2026-05-26T15:18:45Z",
+        "closedAt": "2026-05-26T15:17:00Z",
+        "mergedAt": "2026-05-26T15:17:00Z",
+        "authorLogin": "sahar-fehri",
+        "labels": [
+          "team-assets",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4337209153,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-21T13:15:44Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30528": {
+        "number": 30528,
+        "title": "fix: gate Social AI notification settings & bump notification-services-controller to 24.1.1",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30528",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T13:29:17Z",
+        "updatedAt": "2026-05-26T12:27:15Z",
+        "closedAt": "2026-05-22T00:22:03Z",
+        "mergedAt": "2026-05-22T00:22:03Z",
+        "authorLogin": "baptiste-marchand",
+        "labels": [
+          "No QA Needed",
+          "skip-sonar-cloud",
+          "no-changelog",
+          "size-M",
+          "team-engagement",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30530": {
+        "number": 30530,
+        "title": "chore(notifications): add push pre-prompt dev setting",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30530",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T14:39:02Z",
+        "updatedAt": "2026-05-27T00:14:50Z",
+        "closedAt": "2026-05-27T00:13:06Z",
+        "mergedAt": "2026-05-27T00:13:06Z",
+        "authorLogin": "samir-acle",
+        "labels": [
+          "no-changelog",
+          "size-M",
+          "team-engagement",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30532": {
+        "number": 30532,
+        "title": "feat: adding money account methods to get transaction data array",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30532",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T14:53:54Z",
+        "updatedAt": "2026-05-22T13:39:23Z",
+        "closedAt": "2026-05-22T13:37:40Z",
+        "mergedAt": "2026-05-22T13:37:40Z",
+        "authorLogin": "jpuri",
+        "labels": [
+          "team-confirmations",
+          "no-changelog",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30537": {
+        "number": 30537,
+        "title": "feat: [MUSD-816] show transfers in money account activity",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30537",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T16:55:05Z",
+        "updatedAt": "2026-05-28T16:26:51Z",
+        "closedAt": "2026-05-28T16:24:51Z",
+        "mergedAt": "2026-05-28T16:24:51Z",
+        "authorLogin": "Jwhiles",
+        "labels": [
+          "team-earn",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30543": {
+        "number": 30543,
+        "title": "feat(component-library): add shared Pressable primitive and migrate Settings Drawer",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30543",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T18:58:29Z",
+        "updatedAt": "2026-05-27T13:23:17Z",
+        "closedAt": "2026-05-27T13:21:29Z",
+        "mergedAt": "2026-05-27T13:21:29Z",
+        "authorLogin": "vinnyhoward",
+        "labels": [
+          "team-mobile-ux",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30544": {
+        "number": 30544,
+        "title": "ci: skip Smart E2E comment on locked PRs",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30544",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-21T19:11:03Z",
+        "updatedAt": "2026-05-27T12:00:54Z",
+        "closedAt": "2026-05-27T12:00:45Z",
+        "mergedAt": null,
+        "authorLogin": "cmd-ob",
+        "labels": [
+          "team-qa",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "30550": {
+        "number": 30550,
+        "title": "release: 7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30550",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T19:56:13Z",
+        "updatedAt": "2026-05-29T22:26:23Z",
+        "closedAt": "2026-05-29T22:26:16Z",
+        "mergedAt": "2026-05-29T22:26:16Z",
+        "authorLogin": "chloeYue",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-delivery",
+          "size-XL",
+          "release-7.79.0"
+        ],
+        "reviews": []
+      },
+      "30554": {
+        "number": 30554,
+        "title": "fix(card): sponsor money account <> card link approve via 7702 relay",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30554",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-21T21:13:56Z",
+        "updatedAt": "2026-05-28T14:18:32Z",
+        "closedAt": "2026-05-28T14:16:45Z",
+        "mergedAt": "2026-05-28T14:16:45Z",
+        "authorLogin": "Brunonascdev",
+        "labels": [
+          "team-card",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30561": {
+        "number": 30561,
+        "title": "feat(perps): closing order type bottom sheet with a tap outside bottom sheet closes order screen ",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30561",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T00:34:44Z",
+        "updatedAt": "2026-05-25T14:11:36Z",
+        "closedAt": "2026-05-25T14:09:50Z",
+        "mergedAt": "2026-05-25T14:09:50Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "team-perps",
+          "size-XS",
+          "agentic",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30562": {
+        "number": 30562,
+        "title": "fix(rewards): transparent background of rewards modals",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30562",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T00:37:24Z",
+        "updatedAt": "2026-05-26T16:27:21Z",
+        "closedAt": "2026-05-26T16:25:19Z",
+        "mergedAt": "2026-05-26T16:25:19Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "size-S",
+          "team-rewards",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30564": {
+        "number": 30564,
+        "title": "chore(rewards): vip tier view rework",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30564",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T01:19:49Z",
+        "updatedAt": "2026-05-28T20:08:27Z",
+        "closedAt": "2026-05-26T15:17:17Z",
+        "mergedAt": "2026-05-26T15:17:17Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "skip-sonar-cloud",
+          "size-M",
+          "team-rewards",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30565": {
+        "number": 30565,
+        "title": "feat(perps): fingerprint-gated build cache for agentic preflight",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30565",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T02:24:30Z",
+        "updatedAt": "2026-05-22T10:40:03Z",
+        "closedAt": "2026-05-22T10:38:14Z",
+        "mergedAt": "2026-05-22T10:38:14Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "skip-sonar-cloud",
+          "no-changelog",
+          "team-perps",
+          "size-L",
+          "skip-e2e",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30568": {
+        "number": 30568,
+        "title": "chore(release): sync stable to main for version 7.78.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30568",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T14:16:29Z",
+        "updatedAt": "2026-05-22T14:42:14Z",
+        "closedAt": "2026-05-22T14:40:26Z",
+        "mergedAt": "2026-05-22T14:40:26Z",
+        "authorLogin": "metamaskbotv2[bot]",
+        "labels": [
+          "team-bots",
+          "size-S",
+          "pr-not-ready-for-e2e",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30569": {
+        "number": 30569,
+        "title": "feat(perps): decouple agentic cache fingerprint from project EAS fingerprint",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30569",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T14:24:22Z",
+        "updatedAt": "2026-05-22T16:19:25Z",
+        "closedAt": "2026-05-22T16:17:44Z",
+        "mergedAt": "2026-05-22T16:17:44Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "skip-sonar-cloud",
+          "no-changelog",
+          "team-perps",
+          "size-M",
+          "skip-e2e",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30571": {
+        "number": 30571,
+        "title": "feat(card): money-account UX polishes across Card Home, Asset Selection, and Spending Limit",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30571",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-22T16:25:28Z",
+        "updatedAt": "2026-05-26T19:07:19Z",
+        "closedAt": "2026-05-26T19:05:36Z",
+        "mergedAt": "2026-05-26T19:05:36Z",
+        "authorLogin": "Brunonascdev",
+        "labels": [
+          "team-card",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30572": {
+        "number": 30572,
+        "title": "fix(perps): perps Mobile: Screen transition from market detail to order entry is down→up instead of left→right",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30572",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-23T05:06:32Z",
+        "updatedAt": "2026-05-26T14:11:09Z",
+        "closedAt": "2026-05-26T14:08:14Z",
+        "mergedAt": "2026-05-26T14:08:14Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "team-perps",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30574": {
+        "number": 30574,
+        "title": "ci: validate e2e build metadata before artifact reuse",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30574",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-24T07:43:27Z",
+        "updatedAt": "2026-05-28T08:06:17Z",
+        "closedAt": "2026-05-27T11:42:15Z",
+        "mergedAt": "2026-05-27T11:42:15Z",
+        "authorLogin": "jvbriones",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-M",
+          "skip-smart-e2e-selection",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30582": {
+        "number": 30582,
+        "title": "fix: upgrade qs version",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30582",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T08:18:09Z",
+        "updatedAt": "2026-05-25T09:56:38Z",
+        "closedAt": "2026-05-25T09:54:58Z",
+        "mergedAt": "2026-05-25T09:54:58Z",
+        "authorLogin": "sahar-fehri",
+        "labels": [
+          "team-assets",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30584": {
+        "number": 30584,
+        "title": "fix(perps): auto-detect and clean stale CocoaPods state in preflight",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30584",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T09:16:41Z",
+        "updatedAt": "2026-05-26T13:53:03Z",
+        "closedAt": "2026-05-26T13:50:33Z",
+        "mergedAt": "2026-05-26T13:50:33Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-perps",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30585": {
+        "number": 30585,
+        "title": "Resolve `format:check` CI failure by applying Prettier formatting to deeplink and navigation/saga tests",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30585",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T09:23:46Z",
+        "updatedAt": "2026-05-25T09:33:34Z",
+        "closedAt": "2026-05-25T09:33:13Z",
+        "mergedAt": "2026-05-25T09:33:13Z",
+        "authorLogin": "Copilot",
+        "labels": [],
+        "reviews": []
+      },
+      "30586": {
+        "number": 30586,
+        "title": "chore: bump qs 6.15.2",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30586",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T09:46:57Z",
+        "updatedAt": "2026-05-25T12:15:14Z",
+        "closedAt": "2026-05-25T12:13:34Z",
+        "mergedAt": "2026-05-25T12:13:34Z",
+        "authorLogin": "tommasini",
+        "labels": [
+          "team-mobile-platform",
+          "no-changelog",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30588": {
+        "number": 30588,
+        "title": "test: fix smoke fixture flakes",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30588",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T10:15:35Z",
+        "updatedAt": "2026-05-27T14:30:46Z",
+        "closedAt": "2026-05-27T14:28:53Z",
+        "mergedAt": "2026-05-27T14:28:53Z",
+        "authorLogin": "racitores",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30590": {
+        "number": 30590,
+        "title": "fix(android): exclude x86_64 ABI from production AAB to resolve Play 16 KB warning",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30590",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T10:22:32Z",
+        "updatedAt": "2026-05-25T13:44:27Z",
+        "closedAt": "2026-05-25T13:42:46Z",
+        "mergedAt": "2026-05-25T13:42:46Z",
+        "authorLogin": "andrepimenta",
+        "labels": [
+          "team-mobile-platform",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30593": {
+        "number": 30593,
+        "title": "feat(homepage): add More section with import token/NFT and support contact options",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30593",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T11:09:46Z",
+        "updatedAt": "2026-05-28T13:30:39Z",
+        "closedAt": "2026-05-28T13:28:45Z",
+        "mergedAt": "2026-05-28T13:28:45Z",
+        "authorLogin": "PatrykLucka",
+        "labels": [
+          "team-mobile-ux",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4363268931,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-26T11:30:24Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4381107976,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-28T12:55:47Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30594": {
+        "number": 30594,
+        "title": "Cferreira/device mocks poc",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30594",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-05-25T12:08:39Z",
+        "updatedAt": "2026-05-29T09:19:43Z",
+        "closedAt": "2026-05-29T09:19:32Z",
+        "mergedAt": null,
+        "authorLogin": "christopherferreira9",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-XL"
+        ],
+        "reviews": []
+      },
+      "30596": {
+        "number": 30596,
+        "title": "fix(money-card): drive CTA variant by presence of other primary CTA on Home (MUSD-838)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30596",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T12:26:52Z",
+        "updatedAt": "2026-05-27T12:43:13Z",
+        "closedAt": "2026-05-27T12:40:58Z",
+        "mergedAt": "2026-05-27T12:40:58Z",
+        "authorLogin": "Kureev",
+        "labels": [
+          "team-earn",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30598": {
+        "number": 30598,
+        "title": "feat: align unified assets hides and non-EVM import with assets-controller v8",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30598",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-25T12:50:04Z",
+        "updatedAt": "2026-05-26T12:17:07Z",
+        "closedAt": "2026-05-26T12:09:50Z",
+        "mergedAt": null,
+        "authorLogin": "salimtb",
+        "labels": [
+          "team-assets",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "30599": {
+        "number": 30599,
+        "title": "feat: Add dev auto-unlock password support",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30599",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T14:11:49Z",
+        "updatedAt": "2026-05-26T16:24:10Z",
+        "closedAt": "2026-05-26T16:21:29Z",
+        "mergedAt": "2026-05-26T16:21:29Z",
+        "authorLogin": "sahar-fehri",
+        "labels": [
+          "team-assets",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4361565037,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-26T07:32:43Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30600": {
+        "number": 30600,
+        "title": "feat(predict): add portfolio feature flag",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30600",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T14:54:32Z",
+        "updatedAt": "2026-05-26T18:51:21Z",
+        "closedAt": "2026-05-26T18:49:31Z",
+        "mergedAt": "2026-05-26T18:49:31Z",
+        "authorLogin": "caieu",
+        "labels": [
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30601": {
+        "number": 30601,
+        "title": "fix: correct fiat no-quotes alert condition in useNoPayTokenQuotesAlert",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30601",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T15:51:30Z",
+        "updatedAt": "2026-05-26T06:11:11Z",
+        "closedAt": "2026-05-26T06:09:24Z",
+        "mergedAt": "2026-05-26T06:09:24Z",
+        "authorLogin": "OGPoyraz",
+        "labels": [
+          "team-confirmations",
+          "no-changelog",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30602": {
+        "number": 30602,
+        "title": "ci: re-run CI on finished runs when e2e labels are modified in the PR…",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30602",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T17:45:50Z",
+        "updatedAt": "2026-05-25T18:26:37Z",
+        "closedAt": "2026-05-25T18:24:57Z",
+        "mergedAt": "2026-05-25T18:24:57Z",
+        "authorLogin": "jvbriones",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30603": {
+        "number": 30603,
+        "title": "chore: bump tron-wallet-snap 1.25.6",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30603",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-05-25T18:09:41Z",
+        "updatedAt": "2026-05-29T06:16:17Z",
+        "closedAt": "2026-05-29T06:16:09Z",
+        "mergedAt": null,
+        "authorLogin": "maxime-oe",
+        "labels": [
+          "team-networks",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "30605": {
+        "number": 30605,
+        "title": "feat: add money account option to payment bottom sheet",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30605",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T19:02:31Z",
+        "updatedAt": "2026-05-26T08:08:13Z",
+        "closedAt": "2026-05-26T08:06:39Z",
+        "mergedAt": "2026-05-26T08:06:39Z",
+        "authorLogin": "jpuri",
+        "labels": [
+          "team-confirmations",
+          "no-changelog",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30606": {
+        "number": 30606,
+        "title": "ci: revert \"re-run CI on finished runs when e2e labels are modified in the PR\"",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30606",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-25T20:10:36Z",
+        "updatedAt": "2026-05-25T20:12:56Z",
+        "closedAt": "2026-05-25T20:12:48Z",
+        "mergedAt": null,
+        "authorLogin": "jvbriones",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-qa",
+          "no-changelog"
+        ],
+        "reviews": []
+      },
+      "30607": {
+        "number": 30607,
+        "title": "ci: fix auto-rc-build-core permission cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30607",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T20:57:54Z",
+        "updatedAt": "2026-05-26T17:53:55Z",
+        "closedAt": "2026-05-26T17:51:56Z",
+        "mergedAt": "2026-05-26T17:51:56Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30609": {
+        "number": 30609,
+        "title": "fix(predict): pause details price refresh during buy flow",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30609",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-25T22:33:58Z",
+        "updatedAt": "2026-05-27T12:43:13Z",
+        "closedAt": "2026-05-27T12:40:58Z",
+        "mergedAt": "2026-05-27T12:40:58Z",
+        "authorLogin": "caieu",
+        "labels": [
+          "size-M",
+          "team-predict",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30610": {
+        "number": 30610,
+        "title": "test: update assets unify state mocks",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30610",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-05-25T23:30:33Z",
+        "updatedAt": "2026-05-26T19:19:27Z",
+        "closedAt": "2026-05-26T19:19:12Z",
+        "mergedAt": null,
+        "authorLogin": "salimtb",
+        "labels": [
+          "team-assets",
+          "size-L"
+        ],
+        "reviews": []
+      },
+      "30611": {
+        "number": 30611,
+        "title": "refactor(aggregator): migrate aggregator routes to native stack",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30611",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T00:21:47Z",
+        "updatedAt": "2026-05-29T17:38:30Z",
+        "closedAt": "2026-05-29T17:36:45Z",
+        "mergedAt": "2026-05-29T17:36:45Z",
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-S",
+          "risk:low",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30612": {
+        "number": 30612,
+        "title": "fix(perps): investigate Failed to execute 'dispatchEvent' on 'EventTarget': parameter 1 is not of type 'Event'",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30612",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T00:40:18Z",
+        "updatedAt": "2026-05-26T17:05:21Z",
+        "closedAt": "2026-05-26T17:03:20Z",
+        "mergedAt": "2026-05-26T17:03:20Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "team-perps",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30614": {
+        "number": 30614,
+        "title": "feat: update correct transactiondata.paymentOverride value and pay token for deposit using money account",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30614",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T05:56:31Z",
+        "updatedAt": "2026-05-27T04:27:01Z",
+        "closedAt": "2026-05-27T04:25:15Z",
+        "mergedAt": "2026-05-27T04:25:15Z",
+        "authorLogin": "jpuri",
+        "labels": [
+          "team-confirmations",
+          "no-changelog",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30615": {
+        "number": 30615,
+        "title": "fix(perps): incorrect decimals on limit price for open orders",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30615",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T06:22:15Z",
+        "updatedAt": "2026-05-27T01:51:16Z",
+        "closedAt": "2026-05-27T01:49:37Z",
+        "mergedAt": "2026-05-27T01:49:37Z",
+        "authorLogin": "abretonc7s",
+        "labels": [
+          "team-perps",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30616": {
+        "number": 30616,
+        "title": "ci: revert - re-run CI on finished runs when e2e labels are modified in the PR",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30616",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T07:16:21Z",
+        "updatedAt": "2026-05-26T08:25:38Z",
+        "closedAt": "2026-05-26T08:23:56Z",
+        "mergedAt": "2026-05-26T08:23:56Z",
+        "authorLogin": "jvbriones",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30617": {
+        "number": 30617,
+        "title": "feat: enhance payment method and provider selection error handling wi…",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30617",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T07:38:09Z",
+        "updatedAt": "2026-05-27T08:37:07Z",
+        "closedAt": "2026-05-27T08:35:24Z",
+        "mergedAt": "2026-05-27T08:35:24Z",
+        "authorLogin": "meltingice1337",
+        "labels": [
+          "team-money-movement",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30620": {
+        "number": 30620,
+        "title": "test: add global infrastructure change hard rules",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30620",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T08:46:26Z",
+        "updatedAt": "2026-05-28T12:03:09Z",
+        "closedAt": "2026-05-28T12:00:38Z",
+        "mergedAt": "2026-05-28T12:00:38Z",
+        "authorLogin": "cmd-ob",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-qa",
+          "no-changelog",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30621": {
+        "number": 30621,
+        "title": "feat(perps): pass VIP tier and discount through trading analytics events",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30621",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T08:47:21Z",
+        "updatedAt": "2026-05-27T13:42:08Z",
+        "closedAt": "2026-05-27T13:40:10Z",
+        "mergedAt": "2026-05-27T13:40:10Z",
+        "authorLogin": "michalconsensys",
+        "labels": [
+          "team-perps",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30622": {
+        "number": 30622,
+        "title": "fix: upgrade assets controller to fix solana AssetsController middleware",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30622",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T08:57:52Z",
+        "updatedAt": "2026-05-27T16:30:40Z",
+        "closedAt": "2026-05-27T16:28:14Z",
+        "mergedAt": "2026-05-27T16:28:14Z",
+        "authorLogin": "bergarces",
+        "labels": [
+          "team-assets",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4363260110,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T11:28:25Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4363263738,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T11:29:12Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4363270703,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T11:30:47Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4363292555,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-26T11:35:34Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4363354404,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T11:48:16Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4364280342,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T14:00:19Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4367285025,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-26T20:32:33Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4370255643,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T07:19:54Z",
+            "authorLogin": "salimtb"
+          },
+          {
+            "id": 4371020745,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T09:09:33Z",
+            "authorLogin": "juanmigdr"
+          },
+          {
+            "id": 4372084633,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T11:45:09Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30623": {
+        "number": 30623,
+        "title": "fix: dismiss AddWallet sheet before entering HW flow to fix post-connect navigation",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30623",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T09:08:54Z",
+        "updatedAt": "2026-05-26T13:45:17Z",
+        "closedAt": "2026-05-26T13:43:30Z",
+        "mergedAt": "2026-05-26T13:43:30Z",
+        "authorLogin": "mathieuartu",
+        "labels": [
+          "team-accounts-framework",
+          "size-S",
+          "team-accounts",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30624": {
+        "number": 30624,
+        "title": "fix: avoid layout shift in confirmation loading skeleton",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30624",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T09:24:03Z",
+        "updatedAt": "2026-05-26T10:19:50Z",
+        "closedAt": "2026-05-26T10:16:33Z",
+        "mergedAt": "2026-05-26T10:16:33Z",
+        "authorLogin": "OGPoyraz",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "team-confirmations",
+          "no-changelog",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30626": {
+        "number": 30626,
+        "title": "chore: Adds the \"Pay With\" sheet and toolbar polish",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30626",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T09:34:11Z",
+        "updatedAt": "2026-05-27T13:22:30Z",
+        "closedAt": "2026-05-27T13:20:42Z",
+        "mergedAt": "2026-05-27T13:20:42Z",
+        "authorLogin": "zone-live",
+        "labels": [
+          "size-XL",
+          "team-social-ai",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30628": {
+        "number": 30628,
+        "title": "fix(money): don't show failed toast when user rejects deposit (MUSD-840)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30628",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T12:08:45Z",
+        "updatedAt": "2026-05-27T07:57:19Z",
+        "closedAt": "2026-05-27T00:15:01Z",
+        "mergedAt": "2026-05-27T00:15:01Z",
+        "authorLogin": "Kureev",
+        "labels": [
+          "team-earn",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30630": {
+        "number": 30630,
+        "title": "chore(money-home): show APY even if it is zero",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30630",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T12:40:55Z",
+        "updatedAt": "2026-05-26T22:41:38Z",
+        "closedAt": "2026-05-26T22:39:40Z",
+        "mergedAt": "2026-05-26T22:39:40Z",
+        "authorLogin": "shane-t",
+        "labels": [
+          "team-earn",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30631": {
+        "number": 30631,
+        "title": "test: migrate Swap & Bridge E2E smoke tests to CVT ",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30631",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T12:56:31Z",
+        "updatedAt": "2026-05-28T16:42:34Z",
+        "closedAt": "2026-05-28T16:40:51Z",
+        "mergedAt": "2026-05-28T16:40:51Z",
+        "authorLogin": "davibroc",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30632": {
+        "number": 30632,
+        "title": "fix: remove Save button from trader notifications bottom sheet",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30632",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T12:59:46Z",
+        "updatedAt": "2026-05-26T14:39:37Z",
+        "closedAt": "2026-05-26T14:37:26Z",
+        "mergedAt": "2026-05-26T14:37:26Z",
+        "authorLogin": "xavier-brochard",
+        "labels": [
+          "size-M",
+          "team-social-ai",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30635": {
+        "number": 30635,
+        "title": "test: added project name to the browserstack configuration",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30635",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T13:36:10Z",
+        "updatedAt": "2026-05-26T15:18:52Z",
+        "closedAt": "2026-05-26T15:17:00Z",
+        "mergedAt": "2026-05-26T15:17:00Z",
+        "authorLogin": "javiergarciavera",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30636": {
+        "number": 30636,
+        "title": "fix: non-evm assets not being added",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30636",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-26T14:11:46Z",
+        "updatedAt": "2026-05-26T14:23:28Z",
+        "closedAt": "2026-05-26T14:23:16Z",
+        "mergedAt": null,
+        "authorLogin": "juanmigdr",
+        "labels": [
+          "team-assets",
+          "size-M",
+          "pr-not-ready-for-e2e"
+        ],
+        "reviews": []
+      },
+      "30640": {
+        "number": 30640,
+        "title": "fix(ui): keep Activity tab underline in sync",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30640",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T14:57:39Z",
+        "updatedAt": "2026-05-26T20:03:48Z",
+        "closedAt": "2026-05-26T20:01:59Z",
+        "mergedAt": "2026-05-26T20:01:59Z",
+        "authorLogin": "wachunei",
+        "labels": [
+          "team-design-system",
+          "team-mobile-ux",
+          "skip-sonar-cloud",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30641": {
+        "number": 30641,
+        "title": "fix: explore browser icon opens blank page",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30641",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T15:06:45Z",
+        "updatedAt": "2026-05-27T14:28:52Z",
+        "closedAt": "2026-05-27T14:27:08Z",
+        "mergedAt": "2026-05-27T14:27:08Z",
+        "authorLogin": "Prithpal-Sooriya",
+        "labels": [
+          "team-assets",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4372089364,
+            "state": "COMMENTED",
+            "submittedAt": "2026-05-27T11:46:53Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4372937483,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T13:57:08Z",
+            "authorLogin": "bergarces"
+          }
+        ]
+      },
+      "30642": {
+        "number": 30642,
+        "title": "fix(android): drop x86 ABI from production AAB to satisfy Play 64-bit rule",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30642",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T15:17:43Z",
+        "updatedAt": "2026-05-27T09:57:47Z",
+        "closedAt": "2026-05-27T09:56:00Z",
+        "mergedAt": "2026-05-27T09:56:00Z",
+        "authorLogin": "andrepimenta",
+        "labels": [
+          "team-mobile-platform",
+          "skip-sonar-cloud",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30647": {
+        "number": 30647,
+        "title": "feat(predict): add portfolio module to Predict homepage",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30647",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-26T16:25:45Z",
+        "updatedAt": "2026-05-26T21:02:07Z",
+        "closedAt": "2026-05-26T21:01:45Z",
+        "mergedAt": null,
+        "authorLogin": "caieu",
+        "labels": [
+          "size-XL"
+        ],
+        "reviews": []
+      },
+      "30648": {
+        "number": 30648,
+        "title": "Wsun/test aggregator",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30648",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-05-26T16:35:39Z",
+        "updatedAt": "2026-05-27T21:38:31Z",
+        "closedAt": "2026-05-27T21:38:23Z",
+        "mergedAt": null,
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-M",
+          "pr-not-ready-for-e2e"
+        ],
+        "reviews": []
+      },
+      "30650": {
+        "number": 30650,
+        "title": "feat: Money account balance enhancements",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30650",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T17:40:41Z",
+        "updatedAt": "2026-05-27T08:55:12Z",
+        "closedAt": "2026-05-27T08:53:32Z",
+        "mergedAt": "2026-05-27T08:53:32Z",
+        "authorLogin": "Matt561",
+        "labels": [
+          "team-earn",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30652": {
+        "number": 30652,
+        "title": "chore(money): update how it works bar chart asset (MUSD-842)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30652",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T18:08:42Z",
+        "updatedAt": "2026-05-26T20:24:40Z",
+        "closedAt": "2026-05-26T20:22:59Z",
+        "mergedAt": "2026-05-26T20:22:59Z",
+        "authorLogin": "Kureev",
+        "labels": [
+          "team-earn",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30653": {
+        "number": 30653,
+        "title": "test: add inital set up for ai visual regression testing",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30653",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T18:13:04Z",
+        "updatedAt": "2026-05-28T08:01:19Z",
+        "closedAt": "2026-05-28T07:59:31Z",
+        "mergedAt": "2026-05-28T07:59:31Z",
+        "authorLogin": "pnarayanaswamy",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-XL",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30654": {
+        "number": 30654,
+        "title": "fix: sort no longer sorts on bottom sheet open",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30654",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T18:22:59Z",
+        "updatedAt": "2026-05-26T19:54:57Z",
+        "closedAt": "2026-05-26T19:53:19Z",
+        "mergedAt": "2026-05-26T19:53:19Z",
+        "authorLogin": "vinnyhoward",
+        "labels": [
+          "team-mobile-ux",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4366408501,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-26T18:26:34Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4366419434,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-26T18:28:14Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30656": {
+        "number": 30656,
+        "title": "fix(rewards): VIP tier page fixes",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30656",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T20:49:40Z",
+        "updatedAt": "2026-05-28T20:07:15Z",
+        "closedAt": "2026-05-27T10:15:50Z",
+        "mergedAt": "2026-05-27T10:15:50Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "size-XL",
+          "team-rewards",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30657": {
+        "number": 30657,
+        "title": "feat(predict): add shared portfolio model hook",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30657",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T21:06:45Z",
+        "updatedAt": "2026-05-27T14:07:41Z",
+        "closedAt": "2026-05-27T14:05:54Z",
+        "mergedAt": "2026-05-27T14:05:54Z",
+        "authorLogin": "caieu",
+        "labels": [
+          "size-L",
+          "team-predict",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30662": {
+        "number": 30662,
+        "title": "fix(predict): improve crypto up/down cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30662",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-26T22:52:18Z",
+        "updatedAt": "2026-05-27T16:09:06Z",
+        "closedAt": "2026-05-27T16:03:38Z",
+        "mergedAt": "2026-05-27T16:03:38Z",
+        "authorLogin": "ghgoodreau",
+        "labels": [
+          "size-XL",
+          "team-predict",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30663": {
+        "number": 30663,
+        "title": "refactor(card): migrate card onboarding screen header to HeaderStandard",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30663",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T00:12:20Z",
+        "updatedAt": "2026-05-27T20:58:44Z",
+        "closedAt": "2026-05-27T20:56:56Z",
+        "mergedAt": "2026-05-27T20:56:56Z",
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30665": {
+        "number": 30665,
+        "title": "ci: improve E2E shard caching and add cache/timing summaries",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30665",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-27T06:48:27Z",
+        "updatedAt": "2026-05-27T08:13:15Z",
+        "closedAt": "2026-05-27T08:13:06Z",
+        "mergedAt": null,
+        "authorLogin": "cmd-ob",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "no changelog required",
+          "size-M",
+          "skip-smart-e2e-selection"
+        ],
+        "reviews": []
+      },
+      "30667": {
+        "number": 30667,
+        "title": "fix(social-leaderboard): trade markers on trader price chart",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30667",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T08:48:38Z",
+        "updatedAt": "2026-05-27T09:32:31Z",
+        "closedAt": "2026-05-27T09:30:41Z",
+        "mergedAt": "2026-05-27T09:30:41Z",
+        "authorLogin": "xavier-brochard",
+        "labels": [
+          "size-S",
+          "team-social-ai",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30668": {
+        "number": 30668,
+        "title": "chore: 7702 support money account keyring",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30668",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T08:59:00Z",
+        "updatedAt": "2026-05-27T10:31:03Z",
+        "closedAt": "2026-05-27T10:28:36Z",
+        "mergedAt": "2026-05-27T10:28:35Z",
+        "authorLogin": "MoMannn",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "size-S",
+          "team-delegation",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30669": {
+        "number": 30669,
+        "title": "feat: add haptic feedback to What's Happening Trade CTA",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30669",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T09:07:43Z",
+        "updatedAt": "2026-05-27T13:42:04Z",
+        "closedAt": "2026-05-27T13:40:10Z",
+        "mergedAt": "2026-05-27T13:40:10Z",
+        "authorLogin": "xavier-brochard",
+        "labels": [
+          "size-S",
+          "team-social-ai",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30677": {
+        "number": 30677,
+        "title": "fix: explore search v2 issues cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30677",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T12:10:51Z",
+        "updatedAt": "2026-05-27T14:30:45Z",
+        "closedAt": "2026-05-27T14:28:53Z",
+        "mergedAt": "2026-05-27T14:28:53Z",
+        "authorLogin": "juanmigdr",
+        "labels": [
+          "team-assets",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4372763003,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T13:35:11Z",
+            "authorLogin": "bergarces"
+          },
+          {
+            "id": 4372850365,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-27T13:46:21Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30679": {
+        "number": 30679,
+        "title": "chore(predict): build predict portfolio module and shared portfolio UI components",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30679",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T12:53:46Z",
+        "updatedAt": "2026-05-27T23:04:05Z",
+        "closedAt": "2026-05-27T19:49:35Z",
+        "mergedAt": "2026-05-27T19:49:35Z",
+        "authorLogin": "caieu",
+        "labels": [
+          "size-L",
+          "team-predict",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30683": {
+        "number": 30683,
+        "title": "fix(money): update How it works description (MUSD-843)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30683",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T13:19:44Z",
+        "updatedAt": "2026-05-27T14:28:56Z",
+        "closedAt": "2026-05-27T14:27:08Z",
+        "mergedAt": "2026-05-27T14:27:08Z",
+        "authorLogin": "Kureev",
+        "labels": [
+          "team-earn",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30687": {
+        "number": 30687,
+        "title": "revert(android): restore all four ABIs for production AAB",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30687",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T14:29:37Z",
+        "updatedAt": "2026-05-27T17:29:09Z",
+        "closedAt": "2026-05-27T17:27:22Z",
+        "mergedAt": "2026-05-27T17:27:22Z",
+        "authorLogin": "andrepimenta",
+        "labels": [
+          "team-mobile-platform",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30691": {
+        "number": 30691,
+        "title": "chore(rewards): sync more labels from contentful",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30691",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-27T15:43:41Z",
+        "updatedAt": "2026-05-28T20:07:23Z",
+        "closedAt": "2026-05-28T12:29:15Z",
+        "mergedAt": null,
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "size-L",
+          "team-rewards"
+        ],
+        "reviews": []
+      },
+      "30695": {
+        "number": 30695,
+        "title": "release: 7.78.1 (OTA)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30695",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T16:51:16Z",
+        "updatedAt": "2026-05-29T14:34:07Z",
+        "closedAt": "2026-05-29T14:33:57Z",
+        "mergedAt": "2026-05-29T14:33:57Z",
+        "authorLogin": "metamaskbotv2[bot]",
+        "labels": [
+          "team-bots",
+          "size-M"
+        ],
+        "reviews": []
+      },
+      "30696": {
+        "number": 30696,
+        "title": "chore(pure black): fix elevated surface token use background.alternative for first-level sheets",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30696",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T16:58:19Z",
+        "updatedAt": "2026-05-27T19:20:02Z",
+        "closedAt": "2026-05-27T19:18:19Z",
+        "mergedAt": "2026-05-27T19:18:19Z",
+        "authorLogin": "vinnyhoward",
+        "labels": [
+          "team-mobile-ux",
+          "size-XS",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30697": {
+        "number": 30697,
+        "title": "feat(onboarding): preselect swap tokens on wallet home trade step (TMCU-681)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30697",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T17:00:13Z",
+        "updatedAt": "2026-05-28T13:03:25Z",
+        "closedAt": "2026-05-28T13:01:16Z",
+        "mergedAt": "2026-05-28T13:01:16Z",
+        "authorLogin": "wachunei",
+        "labels": [
+          "team-mobile-ux",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30698": {
+        "number": 30698,
+        "title": "chore: QuickBuy, quote selection, details, tooltips, and more",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30698",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T17:05:42Z",
+        "updatedAt": "2026-05-29T08:47:39Z",
+        "closedAt": "2026-05-29T08:45:53Z",
+        "mergedAt": "2026-05-29T08:45:53Z",
+        "authorLogin": "zone-live",
+        "labels": [
+          "size-XL",
+          "team-social-ai",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30699": {
+        "number": 30699,
+        "title": "fix(predict): preserve game market outcomes in staleness filtering cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30699",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T17:28:06Z",
+        "updatedAt": "2026-05-27T18:46:01Z",
+        "closedAt": "2026-05-27T18:44:17Z",
+        "mergedAt": "2026-05-27T18:44:16Z",
+        "authorLogin": "caieu",
+        "labels": [
+          "size-S",
+          "team-predict",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30700": {
+        "number": 30700,
+        "title": "release: update changelog for 7.78.1 (hotfix - no test plan)",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30700",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T17:39:26Z",
+        "updatedAt": "2026-05-29T00:30:12Z",
+        "closedAt": "2026-05-29T00:30:04Z",
+        "mergedAt": "2026-05-29T00:30:03Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "30701": {
+        "number": 30701,
+        "title": "cherry-pick: fix(perps): investigate Failed to execute 'dispatchEvent' on 'EventTa…",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30701",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T17:44:35Z",
+        "updatedAt": "2026-05-27T17:46:17Z",
+        "closedAt": "2026-05-27T17:45:27Z",
+        "mergedAt": "2026-05-27T17:45:27Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-M"
+        ],
+        "reviews": []
+      },
+      "30702": {
+        "number": 30702,
+        "title": "feat: do not show MM connect toasts for eth_accounts and eth_chainId",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30702",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T18:00:16Z",
+        "updatedAt": "2026-05-28T14:35:31Z",
+        "closedAt": "2026-05-28T14:33:43Z",
+        "mergedAt": "2026-05-28T14:33:43Z",
+        "authorLogin": "jiexi",
+        "labels": [
+          "size-M",
+          "team-wallet-integrations",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30707": {
+        "number": 30707,
+        "title": "refactor(card onboarding): migrate to native stack ",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30707",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T20:05:55Z",
+        "updatedAt": "2026-05-27T23:23:09Z",
+        "closedAt": "2026-05-27T23:21:24Z",
+        "mergedAt": "2026-05-27T23:21:24Z",
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30708": {
+        "number": 30708,
+        "title": "chore(pure black): elevate MMDS BottomSheet surfaces via useElevatedSurface shim",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30708",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T20:48:58Z",
+        "updatedAt": "2026-05-29T22:27:26Z",
+        "closedAt": "2026-05-29T22:25:42Z",
+        "mergedAt": "2026-05-29T22:25:42Z",
+        "authorLogin": "vinnyhoward",
+        "labels": [
+          "team-mobile-ux",
+          "size-L",
+          "risk:medium",
+          "release-7.81.0"
+        ],
+        "reviews": [
+          {
+            "id": 4381921780,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-28T14:36:53Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4383774467,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-28T18:46:35Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4391114770,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-29T16:12:47Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30709": {
+        "number": 30709,
+        "title": "feat(card): redesign spend-and-earn promo on spending limit screen",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30709",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T21:05:18Z",
+        "updatedAt": "2026-05-29T15:33:11Z",
+        "closedAt": "2026-05-29T15:31:25Z",
+        "mergedAt": "2026-05-29T15:31:25Z",
+        "authorLogin": "Brunonascdev",
+        "labels": [
+          "team-card",
+          "size-M",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30711": {
+        "number": 30711,
+        "title": "fix(Rewards): Ondo campaign UX cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30711",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T21:29:20Z",
+        "updatedAt": "2026-05-27T22:43:15Z",
+        "closedAt": "2026-05-27T22:41:24Z",
+        "mergedAt": "2026-05-27T22:41:24Z",
+        "authorLogin": "Montoya",
+        "labels": [
+          "size-S",
+          "team-rewards",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30712": {
+        "number": 30712,
+        "title": "temp: test package bump",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30712",
+        "state": "CLOSED",
+        "draft": true,
+        "createdAt": "2026-05-27T21:34:09Z",
+        "updatedAt": "2026-05-29T08:36:04Z",
+        "closedAt": "2026-05-29T08:35:53Z",
+        "mergedAt": null,
+        "authorLogin": "Prithpal-Sooriya",
+        "labels": [
+          "team-assets",
+          "size-XS"
+        ],
+        "reviews": []
+      },
+      "30713": {
+        "number": 30713,
+        "title": "feat: auto-select fiat payment method for `MoneyAccount` \"Deposit Funds\" action",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30713",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-27T21:45:54Z",
+        "updatedAt": "2026-05-30T07:24:47Z",
+        "closedAt": "2026-05-30T07:23:06Z",
+        "mergedAt": "2026-05-30T07:23:06Z",
+        "authorLogin": "OGPoyraz",
+        "labels": [
+          "team-confirmations",
+          "skip-sonar-cloud",
+          "size-M",
+          "team-mUSD",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30726": {
+        "number": 30726,
+        "title": "feat(smartTransactions): add client version retrieval for smart transaction metadata",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30726",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T09:10:05Z",
+        "updatedAt": "2026-05-28T15:36:45Z",
+        "closedAt": "2026-05-28T15:34:59Z",
+        "mergedAt": "2026-05-28T15:34:59Z",
+        "authorLogin": "klejeune",
+        "labels": [
+          "team-transactions",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30731": {
+        "number": 30731,
+        "title": "feat(perps): add competition banner to perps home screen cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30731",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T09:54:36Z",
+        "updatedAt": "2026-05-28T17:05:20Z",
+        "closedAt": "2026-05-28T17:03:44Z",
+        "mergedAt": "2026-05-28T17:03:43Z",
+        "authorLogin": "michalconsensys",
+        "labels": [
+          "team-perps",
+          "size-L",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30735": {
+        "number": 30735,
+        "title": "refactor(predictions): introduce useHomepagePredictWorldCupMarkets hook and update related components",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30735",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T11:28:27Z",
+        "updatedAt": "2026-05-28T17:56:25Z",
+        "closedAt": "2026-05-28T17:54:35Z",
+        "mergedAt": "2026-05-28T17:54:35Z",
+        "authorLogin": "PatrykLucka",
+        "labels": [
+          "team-mobile-ux",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30739": {
+        "number": 30739,
+        "title": "feat(rewards): force dark theme on VIP dashboard",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30739",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T11:59:46Z",
+        "updatedAt": "2026-05-28T20:07:31Z",
+        "closedAt": "2026-05-28T14:34:57Z",
+        "mergedAt": "2026-05-28T14:34:57Z",
+        "authorLogin": "VGR-GIT",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "size-M",
+          "team-rewards",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30742": {
+        "number": 30742,
+        "title": "chore(rewards): sync more labels from contentful",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30742",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T12:29:37Z",
+        "updatedAt": "2026-05-28T19:58:55Z",
+        "closedAt": "2026-05-28T13:27:22Z",
+        "mergedAt": "2026-05-28T13:27:22Z",
+        "authorLogin": "VGR-GIT",
+        "labels": [
+          "INVALID-PR-TEMPLATE",
+          "size-L",
+          "team-rewards",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30746": {
+        "number": 30746,
+        "title": "fix: add chartType prop to chart events",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30746",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T13:52:35Z",
+        "updatedAt": "2026-05-28T14:43:48Z",
+        "closedAt": "2026-05-28T14:41:48Z",
+        "mergedAt": "2026-05-28T14:41:48Z",
+        "authorLogin": "sahar-fehri",
+        "labels": [
+          "team-assets",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": [
+          {
+            "id": 4381576288,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-28T13:56:27Z",
+            "authorLogin": "juanmigdr"
+          },
+          {
+            "id": 4381634738,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-28T14:03:24Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30748": {
+        "number": 30748,
+        "title": "ci: handle missing ci-js-deps artifact on job re-run",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30748",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T13:59:53Z",
+        "updatedAt": "2026-05-28T16:01:03Z",
+        "closedAt": "2026-05-28T15:59:17Z",
+        "mergedAt": "2026-05-28T15:59:17Z",
+        "authorLogin": "tommasini",
+        "labels": [
+          "team-mobile-platform",
+          "no-changelog",
+          "size-S",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30749": {
+        "number": 30749,
+        "title": "chore: raise smart-e2e-selection confidence threshold from 80% to 85%",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30749",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T14:00:46Z",
+        "updatedAt": "2026-05-29T14:01:06Z",
+        "closedAt": "2026-05-29T13:59:25Z",
+        "mergedAt": "2026-05-29T13:59:25Z",
+        "authorLogin": "cmd-ob",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "no changelog required",
+          "size-XS",
+          "risk:low",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30753": {
+        "number": 30753,
+        "title": "feat(onboarding): TMCU-792 interest questionnaire 2-column grid",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30753",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T14:35:35Z",
+        "updatedAt": "2026-05-28T17:34:40Z",
+        "closedAt": "2026-05-28T17:32:02Z",
+        "mergedAt": "2026-05-28T17:32:02Z",
+        "authorLogin": "wachunei",
+        "labels": [
+          "team-mobile-ux",
+          "size-M",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30754": {
+        "number": 30754,
+        "title": "refactor(Predict): remove temporary BTC up/down row flag and update imports cp-7.80.0 ",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30754",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T15:42:33Z",
+        "updatedAt": "2026-05-29T14:25:07Z",
+        "closedAt": "2026-05-29T14:23:22Z",
+        "mergedAt": "2026-05-29T14:23:21Z",
+        "authorLogin": "PatrykLucka",
+        "labels": [
+          "team-mobile-ux",
+          "skip-sonar-cloud",
+          "size-M",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30756": {
+        "number": 30756,
+        "title": "chore(rewards): fetch vip status on mount",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30756",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-28T15:48:12Z",
+        "updatedAt": "2026-05-28T17:04:41Z",
+        "closedAt": "2026-05-28T17:04:32Z",
+        "mergedAt": null,
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "size-S",
+          "team-rewards"
+        ],
+        "reviews": []
+      },
+      "30757": {
+        "number": 30757,
+        "title": "test: fixes dismissDevScreens for local playwright runs",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30757",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T15:57:31Z",
+        "updatedAt": "2026-05-28T17:32:19Z",
+        "closedAt": "2026-05-28T17:30:36Z",
+        "mergedAt": "2026-05-28T17:30:36Z",
+        "authorLogin": "christopherferreira9",
+        "labels": [
+          "team-qa",
+          "no-changelog",
+          "size-M",
+          "skip-e2e",
+          "release-7.80.0"
+        ],
+        "reviews": []
+      },
+      "30764": {
+        "number": 30764,
+        "title": "feat(component-library): migrate row primitives to Pressable",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30764",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T18:31:56Z",
+        "updatedAt": "2026-05-28T22:36:20Z",
+        "closedAt": "2026-05-28T22:34:39Z",
+        "mergedAt": "2026-05-28T22:34:39Z",
+        "authorLogin": "vinnyhoward",
+        "labels": [
+          "team-mobile-ux",
+          "size-L",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30765": {
+        "number": 30765,
+        "title": "fix: android crash for new social login users cp-7.79.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30765",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T18:44:02Z",
+        "updatedAt": "2026-05-28T20:32:05Z",
+        "closedAt": "2026-05-28T20:30:21Z",
+        "mergedAt": "2026-05-28T20:30:21Z",
+        "authorLogin": "grvgoel81",
+        "labels": [
+          "team-onboarding",
+          "size-S",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30772": {
+        "number": 30772,
+        "title": "feat: MUSD-864 consolidate money feature flags",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30772",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T21:09:48Z",
+        "updatedAt": "2026-05-29T14:24:00Z",
+        "closedAt": "2026-05-29T14:21:59Z",
+        "mergedAt": "2026-05-29T14:21:59Z",
+        "authorLogin": "Matt561",
+        "labels": [
+          "team-earn",
+          "size-M",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30773": {
+        "number": 30773,
+        "title": "chore(runway): cherry-pick fix: android crash for new social login users",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30773",
+        "state": "CLOSED",
+        "draft": false,
+        "createdAt": "2026-05-28T21:15:01Z",
+        "updatedAt": "2026-05-28T21:16:41Z",
+        "closedAt": "2026-05-28T21:15:26Z",
+        "mergedAt": null,
+        "authorLogin": "runway-github[bot]",
+        "labels": [
+          "team-bots",
+          "size-S"
+        ],
+        "reviews": []
+      },
+      "30778": {
+        "number": 30778,
+        "title": "chore(release): Bump main version to 7.81.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30778",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T23:31:01Z",
+        "updatedAt": "2026-05-29T00:22:50Z",
+        "closedAt": "2026-05-29T00:21:14Z",
+        "mergedAt": "2026-05-29T00:21:14Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-S",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30779": {
+        "number": 30779,
+        "title": "refactor(card): migrate card routes to native stack",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30779",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-28T23:39:51Z",
+        "updatedAt": "2026-05-29T08:57:43Z",
+        "closedAt": "2026-05-29T08:56:00Z",
+        "mergedAt": "2026-05-29T08:55:59Z",
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-S",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30787": {
+        "number": 30787,
+        "title": "chore: remove explore search V1",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30787",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T10:08:19Z",
+        "updatedAt": "2026-05-29T15:27:34Z",
+        "closedAt": "2026-05-29T15:25:48Z",
+        "mergedAt": "2026-05-29T15:25:48Z",
+        "authorLogin": "juanmigdr",
+        "labels": [
+          "team-assets",
+          "size-XL",
+          "release-7.81.0"
+        ],
+        "reviews": [
+          {
+            "id": 4388852289,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-29T10:49:57Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4389057700,
+            "state": "DISMISSED",
+            "submittedAt": "2026-05-29T11:22:32Z",
+            "authorLogin": "sahar-fehri"
+          },
+          {
+            "id": 4389093975,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-29T11:27:29Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30791": {
+        "number": 30791,
+        "title": "chore: remove inconsistencies on token import flow",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30791",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T11:16:26Z",
+        "updatedAt": "2026-05-29T12:42:09Z",
+        "closedAt": "2026-05-29T12:40:26Z",
+        "mergedAt": "2026-05-29T12:40:26Z",
+        "authorLogin": "juanmigdr",
+        "labels": [
+          "team-assets",
+          "size-M",
+          "release-7.81.0"
+        ],
+        "reviews": [
+          {
+            "id": 4389462230,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-29T12:23:59Z",
+            "authorLogin": "Prithpal-Sooriya"
+          }
+        ]
+      },
+      "30806": {
+        "number": 30806,
+        "title": "ci(release): slack notif: do not include android lint report cp-7.80.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30806",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T14:31:12Z",
+        "updatedAt": "2026-05-29T15:27:32Z",
+        "closedAt": "2026-05-29T15:25:48Z",
+        "mergedAt": "2026-05-29T15:25:47Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-XS",
+          "pr-not-ready-for-e2e",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30807": {
+        "number": 30807,
+        "title": "chore(release): sync stable to main for version 7.78.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30807",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T14:35:53Z",
+        "updatedAt": "2026-05-29T20:32:15Z",
+        "closedAt": "2026-05-29T20:30:58Z",
+        "mergedAt": "2026-05-29T20:30:58Z",
+        "authorLogin": "metamaskbotv2[bot]",
+        "labels": [
+          "team-bots",
+          "size-XS",
+          "risk:low",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30808": {
+        "number": 30808,
+        "title": "fix(engagement): latch startup marketing consent prompt cp-7.80.0",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30808",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T15:15:20Z",
+        "updatedAt": "2026-05-29T22:22:56Z",
+        "closedAt": "2026-05-29T22:21:13Z",
+        "mergedAt": "2026-05-29T22:21:13Z",
+        "authorLogin": "samir-acle",
+        "labels": [
+          "size-M",
+          "team-engagement",
+          "risk:low",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30809": {
+        "number": 30809,
+        "title": "chore: improve crypto movers section in explore",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30809",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T15:37:00Z",
+        "updatedAt": "2026-05-30T00:28:22Z",
+        "closedAt": "2026-05-30T00:26:41Z",
+        "mergedAt": "2026-05-30T00:26:41Z",
+        "authorLogin": "juanmigdr",
+        "labels": [
+          "team-assets",
+          "size-M",
+          "release-7.81.0"
+        ],
+        "reviews": [
+          {
+            "id": 4391008255,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-29T15:56:24Z",
+            "authorLogin": "Prithpal-Sooriya"
+          },
+          {
+            "id": 4391032460,
+            "state": "APPROVED",
+            "submittedAt": "2026-05-29T15:59:56Z",
+            "authorLogin": "bergarces"
+          }
+        ]
+      },
+      "30813": {
+        "number": 30813,
+        "title": "ci: remove OTA tag creation step",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30813",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T16:50:58Z",
+        "updatedAt": "2026-05-29T22:52:35Z",
+        "closedAt": "2026-05-29T22:50:51Z",
+        "mergedAt": "2026-05-29T22:50:51Z",
+        "authorLogin": "weitingsun",
+        "labels": [
+          "team-mobile-platform",
+          "size-M",
+          "risk:high",
+          "pr-not-ready-for-e2e",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30815": {
+        "number": 30815,
+        "title": "chore: bump axios 16.1",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30815",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T17:01:26Z",
+        "updatedAt": "2026-05-29T20:24:34Z",
+        "closedAt": "2026-05-29T20:22:53Z",
+        "mergedAt": "2026-05-29T20:22:53Z",
+        "authorLogin": "tommasini",
+        "labels": [
+          "team-mobile-platform",
+          "no-changelog",
+          "size-XS",
+          "risk:medium",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30816": {
+        "number": 30816,
+        "title": "feat(predict): add predictHomeRedesign feature flag and selector",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30816",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T17:14:45Z",
+        "updatedAt": "2026-05-29T22:03:30Z",
+        "closedAt": "2026-05-29T22:01:45Z",
+        "mergedAt": "2026-05-29T22:01:45Z",
+        "authorLogin": "MarioAslau",
+        "labels": [
+          "size-M",
+          "team-predict",
+          "risk:low",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30818": {
+        "number": 30818,
+        "title": "chore(rewards): add vip splash screen",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30818",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T17:50:39Z",
+        "updatedAt": "2026-05-30T04:36:10Z",
+        "closedAt": "2026-05-30T04:34:30Z",
+        "mergedAt": "2026-05-30T04:34:30Z",
+        "authorLogin": "sophieqgu",
+        "labels": [
+          "size-L",
+          "team-rewards",
+          "risk:medium",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      },
+      "30825": {
+        "number": 30825,
+        "title": "chore(ci): add bitrise.yml to fix release automation",
+        "url": "https://github.com/MetaMask/metamask-mobile/pull/30825",
+        "state": "MERGED",
+        "draft": false,
+        "createdAt": "2026-05-29T21:06:45Z",
+        "updatedAt": "2026-05-29T21:31:55Z",
+        "closedAt": "2026-05-29T21:29:45Z",
+        "mergedAt": "2026-05-29T21:29:45Z",
+        "authorLogin": "joaoloureirop",
+        "labels": [
+          "team-mobile-platform",
+          "size-XL",
+          "risk:medium",
+          "release-7.81.0"
+        ],
+        "reviews": []
+      }
+    }
+  }
+}

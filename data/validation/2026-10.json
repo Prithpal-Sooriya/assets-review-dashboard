@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "month": "2026-10",
+  "generatedAt": "2026-11-07T13:26:44.346Z",
+  "searchTruncations": 0,
+  "perMember": [
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "bergarces",
+      "searchTotal": 2,
+      "searchUnique": 2,
+      "partitionReviewedPrs": 2,
+      "matched": 2
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "sahar-fehri",
+      "searchTotal": 19,
+      "searchUnique": 19,
+      "partitionReviewedPrs": 19,
+      "matched": 19
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "Prithpal-Sooriya",
+      "searchTotal": 73,
+      "searchUnique": 73,
+      "partitionReviewedPrs": 73,
+      "matched": 73
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "Kriys94",
+      "searchTotal": 1,
+      "searchUnique": 1,
+      "partitionReviewedPrs": 1,
+      "matched": 1
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "salimtb",
+      "searchTotal": 29,
+      "searchUnique": 29,
+      "partitionReviewedPrs": 29,
+      "matched": 29
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "juanmigdr",
+      "searchTotal": 20,
+      "searchUnique": 20,
+      "partitionReviewedPrs": 20,
+      "matched": 20
+    },
+    {
+      "repo": "MetaMask/metamask-mobile",
+      "member": "dawnseeker8",
+      "searchTotal": 2,
+      "searchUnique": 2,
+      "partitionReviewedPrs": 2,
+      "matched": 2
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "bergarces",
+      "searchTotal": 1,
+      "searchUnique": 1,
+      "partitionReviewedPrs": 1,
+      "matched": 1
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "sahar-fehri",
+      "searchTotal": 3,
+      "searchUnique": 3,
+      "partitionReviewedPrs": 3,
+      "matched": 3
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "Prithpal-Sooriya",
+      "searchTotal": 30,
+      "searchUnique": 30,
+      "partitionReviewedPrs": 30,
+      "matched": 30
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "Kriys94",
+      "searchTotal": 1,
+      "searchUnique": 1,
+      "partitionReviewedPrs": 1,
+      "matched": 1
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "salimtb",
+      "searchTotal": 6,
+      "searchUnique": 6,
+      "partitionReviewedPrs": 6,
+      "matched": 6
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "juanmigdr",
+      "searchTotal": 6,
+      "searchUnique": 6,
+      "partitionReviewedPrs": 6,
+      "matched": 6
+    },
+    {
+      "repo": "MetaMask/metamask-extension",
+      "member": "dawnseeker8",
+      "searchTotal": 2,
+      "searchUnique": 2,
+      "partitionReviewedPrs": 2,
+      "matched": 2
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "bergarces",
+      "searchTotal": 0,
+      "searchUnique": 0,
+      "partitionReviewedPrs": 0,
+      "matched": 0
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "sahar-fehri",
+      "searchTotal": 5,
+      "searchUnique": 5,
+      "partitionReviewedPrs": 5,
+      "matched": 5
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "Prithpal-Sooriya",
+      "searchTotal": 22,
+      "searchUnique": 22,
+      "partitionReviewedPrs": 22,
+      "matched": 22
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "Kriys94",
+      "searchTotal": 8,
+      "searchUnique": 8,
+      "partitionReviewedPrs": 8,
+      "matched": 8
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "salimtb",
+      "searchTotal": 15,
+      "searchUnique": 15,
+      "partitionReviewedPrs": 15,
+      "matched": 15
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "juanmigdr",
+      "searchTotal": 7,
+      "searchUnique": 7,
+      "partitionReviewedPrs": 7,
+      "matched": 7
+    },
+    {
+      "repo": "MetaMask/core",
+      "member": "dawnseeker8",
+      "searchTotal": 4,
+      "searchUnique": 4,
+      "partitionReviewedPrs": 4,
+      "matched": 4
+    }
+  ],
+  "missingFromPartition": [],
+  "missingFromSearch": [],
+  "summary": {
+    "missingFromPartitionTotal": 0,
+    "walkGaps": 0,
+    "missingFromSearchTotal": 0,
+    "missingFromSearchClassified": {}
+  }
+}

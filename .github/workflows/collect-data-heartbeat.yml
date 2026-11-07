@@ -1,0 +1,88 @@
+# Hourly heartbeat for dashboard data collection.
+#
+# Thin orchestration around a TESTED decision core (scripts/lib/heartbeat.ts
+# via scripts/heartbeat.ts): the resume decision and freshness canary are
+# unit-tested TypeScript on the reviewed default branch, so checkpoint
+# schema drift fails this run RED instead of silently no-oping green.
+# This workflow never sleeps and never collects; at most it re-dispatches
+# collect-data (which resumes from committed checkpoints) and raises the
+# one red that is never expected: a stale dashboard.
+#
+# Freshness canary: data/dashboard.json on the default branch must be
+# younger than ~7 days, else [STALE-DASHBOARD] red with likely causes
+# (unmerged data PR / broken heartbeat / failed cron).
+#
+# Public-repo safe: everything read here is committed public data (PR
+# metadata only). Token policy is shared with collect-data.yml via the
+# .github/actions/run-token composite action (single source: non-default
+# refs refused before the secret is touched; fine-grained PATs only).
+name: collect-data-heartbeat
+
+on:
+  schedule:
+    - cron: "20 * * * *" # hourly, past the hour (rate windows reset on the hour)
+  workflow_dispatch: {}
+
+permissions:
+  actions: write # to dispatch collect-data
+  contents: read
+
+concurrency:
+  group: collect-data-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  resume-if-pending:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Resolve default branch (runtime-derived; safe on all triggers)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
+
+      - name: Checkout (always the reviewed default branch)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ env.DEFAULT_BRANCH }}
+
+      - name: Pin bun version from .bun-version
+        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Select run token (guard + fine-grained-only + auth preflight)
+        uses: ./.github/actions/run-token
+
+      - name: Decision (tested resume core + freshness canary)
+        env:
+          GH_TOKEN: ${{ env.RUN_TOKEN }}
+          REPO: ${{ github.repository }}
+          DEFAULT_BRANCH: ${{ env.DEFAULT_BRANCH }}
+          DATA_BRANCH: data/auto-refresh
+        run: |
+          set -euo pipefail
+          decision=$(bun run scripts/heartbeat.ts) || exit 1
+          echo "$decision"
+          case "$decision" in
+            noop\ *)
+              exit 0
+              ;;
+            dispatch\ *)
+              from_month="${decision#dispatch }"
+              # Don't stack runs: skip if one is already in progress or queued.
+              active=$(gh run list --workflow collect-data.yml --json status --jq '[.[] | select(.status == "in_progress" or .status == "queued")] | length')
+              if [ "$active" -gt 0 ]; then
+                echo "a collect-data run is already active/queued; skipping"
+                exit 0
+              fi
+              echo "dispatching collect-data from $from_month"
+              gh workflow run collect-data.yml --ref "$DEFAULT_BRANCH" -f start_date="${from_month}-01"
+              ;;
+            *)
+              echo "::error::unexpected heartbeat.ts output: $decision"
+              exit 1
+              ;;
+          esac
