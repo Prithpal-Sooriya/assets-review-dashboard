@@ -124,6 +124,7 @@ function snap(overrides: Partial<TodaySnapshot> = {}): TodaySnapshot {
     partialReason: null,
     rate: null,
     droppedMalformed: 0,
+    checksStoppedReason: null,
     missingChecks: [],
     prs: [],
     ...overrides,
@@ -370,6 +371,7 @@ describe('TodayCache — persistence', () => {
       expect(serialized).not.toContain('ghp_')
       expect(Object.keys(put.value as Record<string, unknown>).sort()).toEqual([
         'authMode',
+        'checksStoppedReason',
         'collectedAt',
         'complete',
         'droppedMalformed',
@@ -418,6 +420,25 @@ describe('TodayCache — persistence', () => {
     // Seed-with-self semantics are preserved through the memory tier.
     expect(loaded.baseline).toEqual(saved)
     expect(loaded.retained).toBeNull()
+  })
+
+  test('IndexedDB open failure marks the session degraded (UI can say so)', async () => {
+    // A blocked/corrupted open must not masquerade as a healthy persistent
+    // cache: nothing will survive a reload, and operational === false lets
+    // the UI surface that honestly.
+    const broken: IdbLike = {
+      open: () => {
+        const req: ReqLike = { onsuccess: null, onerror: null }
+        queueMicrotask(() => req.onerror?.({ target: { error: new Error('VersionError') } }))
+        return req
+      },
+    }
+    const cache = new TodayCache(broken)
+    const pair = await cache.saveComplete(snap({ collectedAt: at(0) }))
+    expect(pair.current).toEqual(snap({ collectedAt: at(0) })) // memory tier worked
+    expect(cache.persistent).toBe(true) // IDB is configured…
+    expect(cache.operational).toBe(false) // …but known-degraded this session
+    expect((await cache.load()).current).toEqual(snap({ collectedAt: at(0) }))
   })
 
   test('no IndexedDB: degrades to in-memory (persistent=false), still functional', async () => {

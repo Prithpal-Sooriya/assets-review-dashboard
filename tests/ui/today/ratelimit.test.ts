@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import {
   CycleBudget,
+  isPossiblyRateLimitedStatus,
   isStale,
-
   parseRateHeaders,
   rateRetryAtMs,
 } from '../../../src/today/ratelimit'
@@ -47,8 +47,21 @@ describe('rateRetryAtMs', () => {
     expect(rateRetryAtMs(429, headersOf({}), NOW)).toBe(NOW + 60_000)
   })
 
-  test('non-rate statuses return now (no retry hint)', () => {
-    expect(rateRetryAtMs(500, headersOf({}), NOW)).toBe(NOW)
+  test('non-rate statuses return null — never a meaningless retry-now', () => {
+    expect(rateRetryAtMs(500, headersOf({}), NOW)).toBeNull()
+    expect(rateRetryAtMs(200, headersOf({}), NOW)).toBeNull()
+  })
+})
+
+describe('isPossiblyRateLimitedStatus', () => {
+  test('429 and 403 are POSSIBLE rate limits (headers decide)', () => {
+    expect(isPossiblyRateLimitedStatus(429)).toBe(true)
+    expect(isPossiblyRateLimitedStatus(403)).toBe(true)
+    // Anything else is not even a candidate.
+    expect(isPossiblyRateLimitedStatus(401)).toBe(false)
+    expect(isPossiblyRateLimitedStatus(404)).toBe(false)
+    expect(isPossiblyRateLimitedStatus(500)).toBe(false)
+    expect(isPossiblyRateLimitedStatus(200)).toBe(false)
   })
 })
 

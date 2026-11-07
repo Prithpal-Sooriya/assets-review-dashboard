@@ -20,9 +20,6 @@ export function getToken(): string | null {
   return memoryToken
 }
 
-export function hasToken(): boolean {
-  return memoryToken !== null
-}
 
 /** Bumps the epoch. Callers must treat prior in-flight results as stale. */
 export function setToken(token: string): number {

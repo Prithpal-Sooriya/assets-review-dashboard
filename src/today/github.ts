@@ -14,7 +14,7 @@
  */
 
 import { GITHUB_API_ORIGIN, PULLS_PER_PAGE } from './config'
-import { isRateLimitedStatus, parseRateHeaders, rateRetryAtMs, type RateInfo } from './ratelimit'
+import { isPossiblyRateLimitedStatus, parseRateHeaders, rateRetryAtMs, type RateInfo } from './ratelimit'
 import { scrubSecrets } from './token'
 
 export type FetchLike = (input: string, init?: RequestInit) => Promise<Response>
@@ -103,7 +103,7 @@ export async function githubGet<T>(
   if (response.status === 401) {
     throw new GitHubError('Token rejected (HTTP 401)', 'auth-rejected')
   }
-  if (isRateLimitedStatus(response.status)) {
+  if (isPossiblyRateLimitedStatus(response.status)) {
     // Distinguish a true rate limit (remaining 0 / Retry-After) from other
     // 403s (GitHub also uses 403 for SSO/abuse); retry guidance only when
     // rate headers or Retry-After are present.
@@ -115,7 +115,7 @@ export async function githubGet<T>(
       throw new GitHubError(
         `Rate limited (HTTP ${response.status})`,
         'rate-limited',
-        rateRetryAtMs(response.status, response.headers, opts.nowMs),
+        rateRetryAtMs(response.status, response.headers, opts.nowMs) ?? opts.nowMs + 60_000,
       )
     }
     throw new GitHubError(`Forbidden (HTTP 403)`, 'http')

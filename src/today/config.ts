@@ -114,4 +114,7 @@ export const CACHE_KEY_RETAINED = 'retained'
 
 /** Web Locks / BroadcastChannel names for cross-tab coordination. */
 export const COLLECT_LOCK_NAME = 'assets-today-collect'
+/** Bounded retry when the initial collection finds the lock held by this
+ * tab's own just-unmounted instance (no broadcast will ever arrive). */
+export const LOCK_RETRY_MS = 2500
 export const CHANNEL_NAME = 'assets-today'

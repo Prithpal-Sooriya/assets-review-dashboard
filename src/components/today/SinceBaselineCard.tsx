@@ -12,7 +12,7 @@ import type { TodaySnapshot } from '../../today/normalize'
  * (merged / closed / left review queue) or as unverified — disappearance is
  * never silently equated with merging.
  */
-export function SinceYesterdayCard({
+export function SinceBaselineCard({
   baseline,
   current,
 }: {
@@ -20,13 +20,19 @@ export function SinceYesterdayCard({
   current: TodaySnapshot
 }) {
   const diff = diffSnapshots(baseline, current)
+  const CHECKS_STOPPED_LABEL: Record<NonNullable<typeof diff.checksStoppedReason>, string> = {
+    'rate-limit': 'the GitHub rate limit was reached',
+    budget: 'the request budget for this collection was spent',
+    http: 'GitHub returned an unexpected response',
+    network: 'GitHub could not be reached',
+  }
 
   const section = (
     title: string,
     view: typeof diff.needs,
     emptyText: string,
   ) => (
-    <div className="mini-metric" style={{ gridColumn: 'auto' }}>
+    <div className="mini-metric">
       <div className="mini-metric__label">{title}</div>
       <div className="mini-metric__value">
         +{view.newCount} / −{view.left.length}
@@ -61,7 +67,14 @@ export function SinceYesterdayCard({
         Only PRs whose state was verified are called merged or closed; the rest are labelled
         unverified — leaving the queue is not the same as merging.
       </p>
-      <div className="mini-metrics" style={{ gridTemplateColumns: undefined }}>
+      {diff.checksStoppedReason !== null && (
+        <p className="section__note" role="note">
+          Some departures are labelled unverified because{' '}
+          {CHECKS_STOPPED_LABEL[diff.checksStoppedReason]} before every state
+          check could run.
+        </p>
+      )}
+      <div className="mini-metrics">
         {section('Needs Assets review', diff.needs, 'No change against the baseline.')}
         {section('Assets PRs awaiting others', diff.awaiting, 'No change against the baseline.')}
       </div>

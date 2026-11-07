@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { collectCycle, type CycleOutcome } from '../../../src/today/collector'
-import { ASSETS_TEAM_SLUG } from '../../../src/today/config'
+import { ASSETS_TEAM_SLUG, PULLS_PER_PAGE } from '../../../src/today/config'
 import type { RawPull } from '../../../src/today/github'
 import type { TodayPr, TodaySnapshot } from '../../../src/today/normalize'
 
@@ -455,3 +455,111 @@ describe('collectCycle — bounded missing-PR checks (missing ≠ merged)', () =
     expect(out.requestsUsed).toBe(10)
   })
 })
+
+/* ------------------------------------------------------------------ */
+/* Round-3 hardening: drift, honest zero-collected outcomes, checks    */
+/* stopped reasons, first-reason-wins.                                 */
+/* ------------------------------------------------------------------ */
+
+describe('collectCycle — pagination drift and honest stoppages', () => {
+  test('a page boundary that jumps NEWER marks the snapshot drift-partial (never complete)', async () => {
+    // Page 1: 100 PRs, created_at descending. Page 2's first PR is NEWER
+    // than page 1's last — items shifted between fetches; PRs were skipped.
+    const page = (start: number, newest: number): RawPull[] =>
+      Array.from({ length: PULLS_PER_PAGE }, (_, i) =>
+        rawPull({
+          number: start + i,
+          created_at: new Date(newest - i * 3600_000).toISOString(),
+        }),
+      )
+    const rec = new FetchRecorder(
+      happyAnon({
+        core: (p) => (p === 1 ? nextPage(page(1, NOW)) : { status: 200, headers: ANON_RATE, body: page(201, NOW + 5 * 3600_000) }),
+        mobile: () => ({ status: 200, headers: ANON_RATE, body: [] }),
+        extension: () => ({ status: 200, headers: ANON_RATE, body: [] }),
+      }),
+    )
+    const out = await collectCycle(deps(rec))
+    expect(out.status).toBe('partial')
+    expect(out.snapshot?.partialReason).toBe('drift')
+    expect(out.message).toContain('shifted between pages')
+    // Other repos were still swept (drift does not stop the world).
+    expect(out.snapshot?.repos.map((r) => r.complete)).toEqual([false, true, true])
+  })
+
+  test('zero-collected HTTP failure returns a network-error outcome with NO snapshot', async () => {
+    const rec = new FetchRecorder(
+      happyAnon({
+        core: () => ({ status: 503, headers: ANON_RATE, body: { message: 'Service Unavailable' } }),
+      }),
+    )
+    const out = await collectCycle(deps(rec))
+    expect(out.status).toBe('network-error')
+    expect(out.snapshot).toBeNull()
+    expect(out.message).toContain('HTTP')
+  })
+
+  test('zero-collected rate limit returns a rate-limited outcome with NO snapshot', async () => {
+    const rec = new FetchRecorder(
+      happyAnon({
+        core: () => ({ status: 403, headers: { ...ANON_RATE, 'x-ratelimit-remaining': '0', 'retry-after': '120' }, body: {} }),
+      }),
+    )
+    const out = await collectCycle(deps(rec))
+    expect(out.status).toBe('rate-limited')
+    expect(out.snapshot).toBeNull()
+    expect(out.retryAtMs).toBe(NOW + 120_000)
+  })
+
+  test('a later hard error keeps the FIRST stop reason (page-cap/repo-missing not hidden)', async () => {
+    const rec = new FetchRecorder(
+      happyAnon({
+        core: () => ({ status: 404, headers: ANON_RATE, body: { message: 'Not Found' } }),
+        mobile: () => { throw new Error('network down') },
+      }),
+    )
+    const out = await collectCycle(deps(rec))
+    expect(out.status).toBe('partial')
+    expect(out.snapshot?.partialReason).toBe('repo-missing')
+    expect(out.message).toContain('not found')
+    // The hard error still ended the sweep: extension was not collected.
+    expect(out.snapshot?.repos.map((r) => r.complete)).toEqual([false, false])
+  })
+
+  test('missing-PR checks stopped by a rate limit are recorded, not swallowed', async () => {
+    const baseline: TodaySnapshot = {
+      schemaVersion: 1,
+      collectedAt: new Date(NOW - 30 * 3600_000).toISOString(),
+      authMode: 'anonymous',
+      repos: [],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      checksStoppedReason: null,
+      missingChecks: [],
+      prs: [rawPullToPr({ number: 42, requested_teams: [{ slug: ASSETS_TEAM_SLUG }] })],
+    }
+    const rec = new FetchRecorder(
+      happyAnon({
+        detail: {
+          'MetaMask/core#42': { status: 403, headers: { ...ANON_RATE, 'x-ratelimit-remaining': '0', 'retry-after': '60' }, body: {} },
+        },
+      }),
+    )
+    const out = await collectCycle(deps(rec, { baseline }))
+    expect(out.status).toBe('complete') // the sweep itself was complete
+    expect(out.snapshot?.checksStoppedReason).toBe('rate-limit')
+    expect(out.snapshot?.missingChecks).toEqual([
+      { repo: 'MetaMask/core', number: 42, state: 'unknown' },
+    ])
+  })
+})
+
+function rawPullToPr(overrides: Partial<RawPull> = {}): TodayPr {
+  const repo = 'MetaMask/core'
+  const raw = rawPull({ ...overrides, html_url: `https://github.com/${repo}/pull/${overrides.number ?? 1}` })
+  const pr = require('../../../src/today/normalize').normalizePull(repo, raw)
+  if (pr === null) throw new Error('fixture PR failed to normalize')
+  return pr
+}

@@ -5,7 +5,6 @@ import { buildRows, viewCounts } from '../../today/table'
 import {
   applyHash,
   buildTodayHash,
-  DEFAULT_TODAY_STATE,
   parseHash,
   type TodayUrlState,
 } from '../../today/urlstate'
@@ -14,7 +13,7 @@ import type { AuthMode } from '../../today/normalize'
 import { TokenCard } from './TokenCard'
 import { TodayStatus } from './TodayStatus'
 import { TodayTable } from './TodayTable'
-import { SinceYesterdayCard } from './SinceYesterdayCard'
+import { SinceBaselineCard } from './SinceBaselineCard'
 
 /**
  * Today dashboard: client-only collection from public GitHub REST data.
@@ -194,7 +193,7 @@ export function TodayPanel() {
       <TokenCard today={today} />
 
       {today.usableBaseline !== null && display !== null && display.complete && (
-        <SinceYesterdayCard baseline={today.usableBaseline} current={display} />
+        <SinceBaselineCard baseline={today.usableBaseline} current={display} />
       )}
       {today.usableBaseline !== null && display !== null && !display.complete && (
         <p className="section__note">

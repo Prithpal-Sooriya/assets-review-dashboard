@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { repoDisplayName } from '../../data/format'
 import { ASSETS_TEAM_SLUG } from '../../today/config'
 import { authorshipOf, formatAge, nextActionOf } from '../../today/classify'
+import type { GroupedRows } from '../../today/table'
 import type { Row } from '../../today/table'
 import type { TodayUrlState } from '../../today/urlstate'
 import type { AuthMode } from '../../today/normalize'
@@ -17,7 +18,7 @@ export function TodayTable({
   authMode,
   onSort,
 }: {
-  groups: { groupKey: string; rows: Row[] }[]
+  groups: GroupedRows[]
   state: TodayUrlState
   authMode: AuthMode
   onSort: (sort: TodayUrlState['sort']) => void

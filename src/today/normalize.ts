@@ -7,6 +7,7 @@
  * no token, no account data, no comment/diff content — ever.
  */
 
+import { TODAY_REPOS } from './config'
 import type { RawPull } from './github'
 
 export const TODAY_SCHEMA_VERSION = 1
@@ -41,6 +42,7 @@ export type PartialReason =
   | 'aborted'
   | 'network'
   | 'http'
+  | 'drift'
   | 'repo-missing'
 
 export interface MissingPrCheck {
@@ -61,6 +63,9 @@ export interface TodaySnapshot {
   prs: TodayPr[]
   /** Entries dropped for malformed fields (counted, never silently hidden). */
   droppedMalformed: number
+  /** Why the bounded missing-PR checks stopped early (null = all ran).
+   * Optional only for pre-field cached records; sanitize always emits it. */
+  checksStoppedReason?: 'rate-limit' | 'budget' | 'http' | 'network' | null
   /** Bounded missing-PR state checks (since-yesterday diff evidence). */
   missingChecks: MissingPrCheck[]
 }
@@ -173,6 +178,7 @@ const PARTIAL_REASON_TABLE: Record<PartialReason, true> = {
   aborted: true,
   network: true,
   http: true,
+  drift: true,
   'repo-missing': true,
 }
 const PARTIAL_REASONS: ReadonlySet<string> = new Set(Object.keys(PARTIAL_REASON_TABLE))
@@ -182,11 +188,15 @@ function sanitizePr(value: unknown): TodayPr | null {
   const v = value as Partial<TodayPr>
   if (typeof v.repo !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(v.repo)) return null
   if (typeof v.number !== 'number' || !Number.isInteger(v.number) || v.number < 1) return null
+  // Bind the repo to the configured sweep: a planted record for some other
+  // repository (including private ones) must never drive an AUTHENTICATED
+  // detail request, and must never render as if it were collected here.
+  if (!TODAY_REPOS.includes(v.repo)) return null
   // Single field-rule source: re-run the same normalizePull rules the
   // collector used, on a raw-shaped view of the cached record, so the two
   // validation paths can never drift apart.
   const asString = (x: unknown): string | null => (typeof x === 'string' ? x : null)
-  return normalizePull(v.repo, {
+  const pr = normalizePull(v.repo, {
     number: v.number,
     title: asString(v.title),
     html_url: asString(v.url),
@@ -202,12 +212,18 @@ function sanitizePr(value: unknown): TodayPr | null {
       ? v.requestedTeams.map((slug) => ({ slug }))
       : null,
   })
+  if (pr === null) return null
+  // URL must point at exactly this repo and pull number — a record whose
+  // href disagrees with its identity fields is poisoned, not stale.
+  const path = new URL(pr.url).pathname
+  return path === `/${pr.repo}/pull/${pr.number}` ? pr : null
 }
 
 function sanitizeMissingCheck(value: unknown): MissingPrCheck | null {
   if (typeof value !== 'object' || value === null) return null
   const v = value as Partial<MissingPrCheck>
   if (typeof v.repo !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(v.repo)) return null
+  if (!TODAY_REPOS.includes(v.repo)) return null
   if (typeof v.number !== 'number' || !Number.isInteger(v.number) || v.number < 1) return null
   if (typeof v.state !== 'string' || !CHECK_STATES.has(v.state)) return null
   return { repo: v.repo, number: v.number, state: v.state as MissingPrCheck['state'] }
@@ -254,6 +270,11 @@ export function sanitizeSnapshot(value: unknown): TodaySnapshot | null {
     value.partialReason === null || PARTIAL_REASONS.has(value.partialReason)
       ? (value.partialReason as TodaySnapshot['partialReason'])
       : 'aborted'
+  const CHECK_STOP_REASONS: ReadonlySet<string> = new Set(['rate-limit', 'budget', 'http', 'network'])
+  const checksStoppedReason =
+    typeof value.checksStoppedReason === 'string' && CHECK_STOP_REASONS.has(value.checksStoppedReason)
+      ? (value.checksStoppedReason as NonNullable<TodaySnapshot['checksStoppedReason']>)
+      : null
   return {
     schemaVersion: value.schemaVersion,
     collectedAt: value.collectedAt,
@@ -263,6 +284,7 @@ export function sanitizeSnapshot(value: unknown): TodaySnapshot | null {
     partialReason,
     rate: value.rate,
     droppedMalformed: dropped,
+    checksStoppedReason,
     missingChecks,
     prs,
   }

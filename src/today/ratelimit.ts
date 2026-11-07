@@ -25,8 +25,10 @@ export function parseRateHeaders(headers: {
   }
 }
 
-/** True when the response status means "rate limited" (primary or secondary). */
-export function isRateLimitedStatus(status: number): boolean {
+/** True when the status MIGHT mean a rate limit: 429 always does, but GitHub
+ * also uses 403 for SSO enforcement and abuse — headers decide. Callers must
+ * treat a true result as "classify with headers", never as "is limited". */
+export function isPossiblyRateLimitedStatus(status: number): boolean {
   return status === 429 || status === 403
 }
 
@@ -39,8 +41,8 @@ export function rateRetryAtMs(
   status: number,
   headers: { get(name: string): string | null },
   nowMs: number,
-): number {
-  if (isRateLimitedStatus(status)) {
+): number | null {
+  if (isPossiblyRateLimitedStatus(status)) {
     const retryAfter = headers.get('retry-after')
     if (retryAfter !== null && /^\d+$/.test(retryAfter)) {
       return nowMs + Number(retryAfter) * 1000
@@ -51,7 +53,9 @@ export function rateRetryAtMs(
     }
     return nowMs + 60_000
   }
-  return nowMs
+  // Not a possibly-rate-limited status: no retry guidance (null), never a
+  // meaningless "retry now".
+  return null
 }
 
 /**

@@ -26,6 +26,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   CHANNEL_NAME,
   COLLECT_LOCK_NAME,
+  LOCK_RETRY_MS,
   MIN_SWEEP_INTERVAL_MS,
   REFRESH_INTERVAL_MS,
   RETRY_BACKOFF_MS,
@@ -118,7 +119,13 @@ export function useTodayData(): TodayController {
       if (!keepBannerRef.current) setBanner(null)
       // Durable cache write happens in the collecting tab only.
     } else if (outcome.status === 'partial' && snapshot !== null) {
-      setDisplay(snapshot)
+      // A partial sweep that collected NOTHING must never blank a painted
+      // complete view: keep the last-good rows on screen and let the banner
+      // explain. (Real "no open PRs anywhere" outcomes are 'complete', not
+      // 'partial'.)
+      if (!(snapshot.prs.length === 0 && cachedCompleteRef.current !== null)) {
+        setDisplay(snapshot)
+      }
       const kept = cachedCompleteRef.current
       const base =
         outcome.message ?? 'Incomplete collection — data below may be missing repositories or pages.'
@@ -303,16 +310,24 @@ export function useTodayData(): TodayController {
 
   // Late-bound reference so runCycle can trigger the lock-guarded collection
   // without a circular useCallback dependency.
-  const collectWithLockRef = useRef<((reason: 'initial' | 'scheduled' | 'auth-change') => void) | null>(null)
+  const collectWithLockRef = useRef<
+    ((reason: 'initial' | 'scheduled' | 'auth-change', wait?: boolean) => void) | null
+  >(null)
+  const lockRetryTimerRef = useRef<number | null>(null)
 
   /**
    * Collect under the cross-tab lock. Scheduled/initial cycles skip when
    * another tab is collecting (its broadcast updates us). Auth-change cycles
    * WAIT for the lock instead: the user just switched credentials and the
    * collection under the new auth must never be silently dropped.
+   *
+   * Remount race: a just-unmounted instance of THIS tab may still hold the
+   * lock while its channel is already closed — no broadcast will ever
+   * arrive. So the FIRST lock-skip on 'initial' schedules one bounded retry
+   * that WAITS for the lock and re-checks staleness first.
    */
   const collectWithLock = useCallback(
-    (reason: 'initial' | 'scheduled' | 'auth-change') => {
+    (reason: 'initial' | 'scheduled' | 'auth-change', wait = false) => {
       collectWithLockRef.current = collectWithLock
       const nav = navigator as Navigator & {
         locks?: {
@@ -328,8 +343,22 @@ export function useTodayData(): TodayController {
       }
       if (nav.locks !== undefined) {
         void nav.locks
-          .request(COLLECT_LOCK_NAME, { ifAvailable: reason !== 'auth-change' }, async (lock) => {
-            if (lock === null) return // another tab is collecting; its broadcast will update us
+          .request(COLLECT_LOCK_NAME, { ifAvailable: !wait && reason !== 'auth-change' }, async (lock) => {
+            if (lock === null) {
+              // Another tab is collecting; its broadcast will update us —
+              // unless the holder is this tab's own dead instance. One
+              // bounded retry that waits covers exactly that case.
+              if (reason === 'initial' && !wait && lockRetryTimerRef.current === null) {
+                lockRetryTimerRef.current = window.setTimeout(() => {
+                  lockRetryTimerRef.current = null
+                  const current = displayRef.current
+                  if (current === null || isStale(parseCollectedAt(current), Date.now(), REFRESH_INTERVAL_MS)) {
+                    collectWithLockRef.current?.('initial', true)
+                  }
+                }, LOCK_RETRY_MS)
+              }
+              return
+            }
             await runCycle(reason)
           })
           .catch(() => {
@@ -474,6 +503,8 @@ export function useTodayData(): TodayController {
 
     return () => {
       cancelled = true
+      if (lockRetryTimerRef.current !== null) window.clearTimeout(lockRetryTimerRef.current)
+      lockRetryTimerRef.current = null
       window.clearInterval(interval)
       document.removeEventListener('visibilitychange', onVisible)
       channel?.close()

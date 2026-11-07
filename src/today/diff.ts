@@ -28,12 +28,15 @@ export interface LeftEntry {
 
 export interface ViewDiff {
   newCount: number
-  /** New entries (title/url shown so the change is inspectable). */
+  /** Departures since the baseline (checked state where known). */
   left: LeftEntry[]
 }
 
 export interface SinceDiff {
+  /** Real baseline snapshot time — shown verbatim, never "yesterday". */
   baselineCollectedAt: string
+  /** Why the current snapshot's departure checks stopped early, if they did. */
+  checksStoppedReason: NonNullable<TodaySnapshot['checksStoppedReason']> | null
   needs: ViewDiff
   awaiting: ViewDiff
 }
@@ -99,6 +102,7 @@ export function diffSnapshots(baseline: TodaySnapshot, current: TodaySnapshot): 
 
   return {
     baselineCollectedAt: baseline.collectedAt,
+    checksStoppedReason: current.checksStoppedReason ?? null,
     needs: viewDiff('needs'),
     awaiting: viewDiff('awaiting'),
   }

@@ -67,8 +67,8 @@ export function TokenCard({ today }: { today: TodayController }) {
       </div>
       <p className="section__note">
         {active
-          ? 'Token active — held in memory only. It is sent directly to api.github.com, never stored anywhere, and disappears when you reload the page.'
-          : 'Memory only: the token is sent directly to api.github.com and is never stored, cached, logged or put in the URL. It is cleared when you reload.'}
+          ? 'Token active — held in memory only. The token itself is sent directly to api.github.com, never stored anywhere, and disappears when you reload. (The local cache stores only the same public repository data the anonymous view sees.)'
+          : 'Memory only: the token is sent directly to api.github.com and is never stored, cached, logged or put in the URL; it is cleared when you reload. (The local cache stores only the same public repository data the anonymous view sees.)'}
         {' '}Create a fine-grained token with <em>Public repositories (read-only)</em> access and no
         additional permissions — nothing broader is needed or recommended.
       </p>

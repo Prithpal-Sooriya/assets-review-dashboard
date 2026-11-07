@@ -32,6 +32,7 @@ function snap(partial: Partial<TodaySnapshot> & { prs: TodayPr[] }): TodaySnapsh
     partialReason: null,
     rate: null,
     droppedMalformed: 0,
+    checksStoppedReason: null,
     missingChecks: [],
     ...partial,
   }

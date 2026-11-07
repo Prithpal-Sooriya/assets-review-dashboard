@@ -125,8 +125,20 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
   const repos: RepoSweepInfo[] = []
   let dropped = 0
   let partialReason: PartialReason | null = null
+  // A hard error (network/http/rate-limit) ends the sweep even when an
+  // earlier page-cap/repo-missing reason is KEPT for the banner.
+  let hardStop = false
   let stopRetryAt: number | null = null
   let stopMessage: string | null = null
+  // First stoppage reason wins: a later error must never hide an earlier
+  // page-cap/repo-missing truncation from the banner (per-repo complete
+  // flags stay correct either way).
+  const recordStop = (reason: TodaySnapshot['partialReason'], message: string, retryAt: number | null = null) => {
+    if (partialReason !== null) return
+    partialReason = reason
+    stopMessage = message
+    stopRetryAt = retryAt
+  }
   let lastRate: TodaySnapshot['rate'] = null
   let aborted = false
   let authRejected = false
@@ -139,13 +151,21 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
     if (
       aborted ||
       authRejected ||
-      (partialReason !== null && partialReason !== 'page-cap' && partialReason !== 'repo-missing')
+      hardStop ||
+      (partialReason !== null &&
+        partialReason !== 'page-cap' &&
+        partialReason !== 'repo-missing' &&
+        partialReason !== 'drift')
     ) {
       break
     }
     let page = 1
     let repoComplete = false
     const pagesFetched = { count: 0 }
+    // created_at of the LAST item of the previous page (sort=created desc,
+    // so the next page must start with an equal-or-older item — anything
+    // strictly newer means the window shifted and PRs were skipped).
+    let prevPageLastCreatedAt: string | null = null
     // Defensive de-duplication: GitHub pagination glitches must never
     // duplicate rows (same repo + number).
     const seenNumbers = new Set<number>()
@@ -154,12 +174,13 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
       const allowance = budget.allow()
       if (!allowance.ok) {
         if (allowance.reason === 'floor') {
-          partialReason = 'rate-limit'
-          stopRetryAt = deps.nowMs() + 60_000
-          stopMessage = 'Stopped early: rate-limit floor reached — remaining quota preserved for other users of this network.'
+          recordStop(
+            'rate-limit',
+            'Stopped early: rate-limit floor reached — remaining quota preserved for other users of this network.',
+            deps.nowMs() + 60_000,
+          )
         } else {
-          partialReason = 'budget'
-          stopMessage = 'Stopped early: per-cycle request budget reached.'
+          recordStop('budget', 'Stopped early: per-cycle request budget reached.')
         }
         break
       }
@@ -178,26 +199,38 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
         } else if (errIsKind(err, 'auth-rejected')) {
           authRejected = true
         } else if (errIsKind(err, 'rate-limited')) {
-          partialReason = 'rate-limit'
-          stopRetryAt = err instanceof GitHubError ? err.retryAtMs : null
-          stopMessage = 'Rate limited mid-sweep — kept the pages already fetched.'
+          hardStop = true
+          recordStop(
+            'rate-limit',
+            'Rate limited mid-sweep — kept the pages already fetched.',
+            err instanceof GitHubError ? err.retryAtMs : null,
+          )
         } else if (errIsKind(err, 'not-found')) {
-          partialReason = 'repo-missing'
-          stopMessage = `${repo} was not found (HTTP 404) — it may be private, renamed or removed. Its data is missing from this snapshot; other repos were still collected.`
+          // repo-missing stays a CONTINUE reason: later repos still collect.
+          recordStop(
+            'repo-missing',
+            `${repo} was not found (HTTP 404) — it may be private, renamed or removed. Its data is missing from this snapshot; other repos were still collected.`,
+          )
         } else if (errIsKind(err, 'network')) {
-          partialReason = 'network'
-          stopMessage = pagesFetched.count === 0 && repos.length === 0
-            ? 'Could not reach api.github.com — nothing was collected.'
-            : 'Network error mid-sweep — kept the pages already fetched.'
+          hardStop = true
+          recordStop(
+            'network',
+            pagesFetched.count === 0 && repos.length === 0
+              ? 'Could not reach api.github.com — nothing was collected.'
+              : 'Network error mid-sweep — kept the pages already fetched.',
+          )
         } else if (errIsKind(err, 'http')) {
+          hardStop = true
           // Honest label: GitHub answered with an unexpected HTTP status
           // (5xx, enforced SSO 403…) — this is NOT a client connectivity
           // problem and must not be presented as one.
-          partialReason = 'http'
-          stopMessage = `GitHub returned an unexpected HTTP response${err instanceof Error ? ` (${scrubSecrets(err.message)})` : ''} — kept the pages already fetched.`
+          recordStop(
+            'http',
+            `GitHub returned an unexpected HTTP response${err instanceof Error ? ` (${scrubSecrets(err.message)})` : ''} — kept the pages already fetched.`,
+          )
         } else {
-          partialReason = 'network'
-          stopMessage = scrubSecrets(err instanceof Error ? err.message : 'Unexpected error')
+          hardStop = true
+          recordStop('network', scrubSecrets(err instanceof Error ? err.message : 'Unexpected error'))
         }
         break
       }
@@ -212,6 +245,23 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
       }
 
       const items = Array.isArray(response.data) ? response.data : []
+      const firstCreatedAt = items[0] !== undefined && typeof items[0].created_at === 'string'
+        ? items[0].created_at
+        : null
+      if (
+        prevPageLastCreatedAt !== null &&
+        firstCreatedAt !== null &&
+        Date.parse(firstCreatedAt) > Date.parse(prevPageLastCreatedAt)
+      ) {
+        // Gap detected: an item on this page is NEWER than the end of the
+        // previous page — PRs were skipped by mid-sweep shifts. Never report
+        // this as complete; never cache it. Kept data stays on screen.
+        recordStop(
+          'drift',
+          `${repo} results shifted between pages (pull requests closed while collecting) — some PRs may be missing. Snapshot marked incomplete.`,
+        )
+        break
+      }
       for (const raw of items) {
         const normalized = normalizePull(repo, raw)
         if (normalized === null) {
@@ -222,6 +272,10 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
         seenNumbers.add(normalized.number)
         prs.push(normalized)
       }
+      const lastItem = items[items.length - 1]
+      if (lastItem !== undefined && typeof lastItem.created_at === 'string') {
+        prevPageLastCreatedAt = lastItem.created_at
+      }
       pagesFetched.count = page
 
       const morePages = response.linkNext && items.length >= PULLS_PER_PAGE
@@ -231,8 +285,7 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
       }
       if (page === MAX_PAGES_PER_REPO) {
         // Link says more pages exist but the per-repo cap is hit.
-        partialReason = 'page-cap'
-        stopMessage = `${repo} has more open PRs than the per-repo page cap — results truncated.`
+        recordStop('page-cap', `${repo} has more open PRs than the per-repo page cap — results truncated.`)
         break
       }
       page += 1
@@ -244,7 +297,8 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
   if (aborted) return abortedOutcome(budget.usedCount)
   if (authRejected) return authRejectedOutcome(budget.usedCount)
 
-  if (partialReason === 'network' && prs.length === 0 && repos.every((r) => !r.complete)) {
+  const nothingCollected = prs.length === 0 && repos.every((r) => !r.complete)
+  if (nothingCollected && (partialReason === 'network' || partialReason === 'http')) {
     return {
       status: 'network-error',
       snapshot: null,
@@ -253,11 +307,21 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
       requestsUsed: budget.usedCount,
     }
   }
+  if (nothingCollected && partialReason === 'rate-limit') {
+    return {
+      status: 'rate-limited',
+      snapshot: null,
+      retryAtMs: stopRetryAt,
+      message: stopMessage ?? 'Rate limited — no requests left to collect with.',
+      requestsUsed: budget.usedCount,
+    }
+  }
 
   const complete = partialReason === null && repos.every((r) => r.complete)
 
   // ---- Bounded missing-PR state checks (complete sweeps with a usable baseline).
   const missingChecks: MissingPrCheck[] = []
+  let checksStoppedReason: TodaySnapshot['checksStoppedReason'] = null
   if (complete && deps.baseline !== null) {
     // Usability is measured against the snapshot being built (now).
     const inProgress = {
@@ -274,7 +338,12 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
         .slice(0, MISSING_CHECK_MAX)
       for (const pr of missing) {
         const allowance = budget.allow()
-        if (!allowance.ok) break // remaining entries stay 'unverified' — never guessed
+        if (!allowance.ok) {
+          // Remaining entries stay 'unverified' — never guessed — and the
+          // snapshot records WHY the checks stopped, so the card can say so.
+          checksStoppedReason = allowance.reason === 'floor' ? 'rate-limit' : 'budget'
+          break
+        }
         budget.spend()
         try {
           const res = await githubGet<RawPullDetail>(pullDetailUrl(pr.repo, pr.number), {
@@ -297,7 +366,14 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
           if (errIsKind(err, 'aborted')) return abortedOutcome(budget.usedCount)
           if (errIsKind(err, 'auth-rejected')) return authRejectedOutcome(budget.usedCount)
           // Rate limit or error during a check: stop checking; the diff
-          // labels the rest unverified.
+          // labels the rest unverified and the snapshot says why.
+          checksStoppedReason = errIsKind(err, 'rate-limited')
+            ? 'rate-limit'
+            : errIsKind(err, 'network')
+              ? 'network'
+              : errIsKind(err, 'http')
+                ? 'http'
+                : 'network'
           missingChecks.push({ repo: pr.repo, number: pr.number, state: 'unknown' })
           break
         }
@@ -315,6 +391,7 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
     rate: lastRate,
     prs,
     droppedMalformed: dropped,
+    checksStoppedReason,
     missingChecks,
   }
 

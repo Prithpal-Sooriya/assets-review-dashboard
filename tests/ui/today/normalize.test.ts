@@ -105,6 +105,7 @@ function storedSnapshot(overrides: Record<string, unknown> = {}): Record<string,
     partialReason: null,
     rate: null,
     droppedMalformed: 0,
+    checksStoppedReason: null,
     missingChecks: [],
     prs: [pr()],
     ...overrides,
@@ -205,3 +206,53 @@ describe('sanitizeSnapshot — revalidate snapshots from IndexedDB or broadcasts
     expect(sanitizeSnapshot(storedSnapshot({ missingChecks: null }))).toBeNull()
   })
 })
+
+/* ------------------------------------------------------------------ */
+/* Round-3: bound cached repos to the sweep; URL identity consistency. */
+/* ------------------------------------------------------------------ */
+
+describe('sanitizeSnapshot — poisoned-record binding', () => {
+  test('PRs for repositories outside TODAY_REPOS are dropped, never authenticated', () => {
+    const out = sanitizeSnapshot(
+      storedSnapshot({
+        prs: [storedSnapshotPr({ repo: 'evil/private-repo', number: 9, url: 'https://github.com/evil/private-repo/pull/9' })],
+      }),
+    )
+    expect(out?.prs).toEqual([])
+    expect(out?.droppedMalformed).toBe(1)
+  })
+
+  test('a URL that disagrees with the repo/number identity is dropped', () => {
+    // Same repo, different pull number — the href would send the user to
+    // the wrong PR while the row claims another.
+    const out = sanitizeSnapshot(
+      storedSnapshot({ prs: [storedSnapshotPr({ number: 7, url: 'https://github.com/MetaMask/core/pull/999' })] }),
+    )
+    expect(out?.prs).toEqual([])
+    expect(out?.droppedMalformed).toBe(1)
+  })
+
+  test('missing checks for foreign repositories are dropped too', () => {
+    const out = sanitizeSnapshot(
+      storedSnapshot({ missingChecks: [{ repo: 'evil/private-repo', number: 5, state: 'MERGED' }] }),
+    )
+    expect(out?.missingChecks).toEqual([])
+  })
+})
+
+function storedSnapshotPr(over: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    repo: 'MetaMask/core',
+    number: 7,
+    title: 'Fix thing',
+    url: 'https://github.com/MetaMask/core/pull/7',
+    author: 'someone',
+    draft: false,
+    createdAt: '2026-11-01T00:00:00Z',
+    updatedAt: '2026-11-01T00:00:00Z',
+    labels: [],
+    requestedTeams: [],
+    requestedReviewers: [],
+    ...over,
+  }
+}

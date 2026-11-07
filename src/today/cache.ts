@@ -247,7 +247,10 @@ export class TodayCache {
     try {
       db = await this.dbPromise
     } catch {
+      // Open failed (blocked, version downgrade, corrupted store): nothing
+      // will persist this session — mark degraded so the UI can say so.
       this.dbPromise = null
+      this.degradedFlag = true
       return null
     }
     return new Promise<T | null>((resolve) => {
