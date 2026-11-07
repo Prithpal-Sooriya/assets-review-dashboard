@@ -31,7 +31,10 @@ test('coverage panel spans the full collection window (regression: issue #7)', a
   // Timeline stays scoped to months with data (fixture months[] = Jul–Oct),
   // asserted in the test above; the coverage panel spans the FULL range.
   // Exact real-dataset figures: 10/39 contract-window repo-months, 29 pending
-  // (the fixture's coverage array is byte-identical to the real one).
+  // (the fixture's range + coverage are a frozen snapshot of the real
+  // data/dashboard.json @ 2026-11-07T13:30:26.843Z — deliberately byte-equal
+  // so this regression pins the exact production numbers; it is NOT kept in
+  // sync as backfill progresses).
   await expect(page.getByText('Covers the full collection window (Nov 2025 – Nov 2026)')).toBeVisible()
   await expect(page.getByText('10/39 repo-months complete')).toBeVisible()
   await expect(page.getByText('· 29 pending')).toBeVisible()

@@ -1,10 +1,25 @@
 import { coverageWindowMonths, formatMonthKey, repoDisplayName } from '../data/format'
-import type { CoverageEntry, DashboardData } from '../data/types'
+import type { CoverageEntry, CoverageStatus, DashboardData } from '../data/types'
 import { coverageLookup, coverageSummary } from '../data/metrics'
 
 interface CoveragePanelProps {
   data: DashboardData
   repos: string[]
+}
+
+/** A non-complete repo-month worth listing: a coverage entry, or the absence of one. */
+type ProblemEntry =
+  | (CoverageEntry & { status: CoverageStatus })
+  | { repo: string; month: string; status: 'missing' }
+
+/** Most severe first so genuine failures aren't buried under pending backfill. */
+const problemRank: Record<ProblemEntry['status'], number> = {
+  error: 0,
+  partial: 1,
+  missing: 2,
+  pending: 3,
+  // 'complete' never appears in problemEntries; ranked last if that ever changes.
+  complete: Number.MAX_SAFE_INTEGER,
 }
 
 function statusChip(entry: CoverageEntry | undefined): { label: string; cls: string } {
@@ -27,14 +42,26 @@ export function CoveragePanel({ data, repos }: CoveragePanelProps) {
   // coverage" true in the rendered product.
   const coverageMonths = coverageWindowMonths(data.range)
   const summary = coverageSummary(data.coverage, repos, coverageMonths)
-  // Derive from the same last-wins map the grid and summary use, so a
+  // Every non-complete repo-month is listed — including months outside the
+  // months-with-data window and repo-months the collector wrote NO coverage
+  // entry for at all ("missing coverage metadata") — so no gap can hide.
+  // Derived from the same last-wins map the grid and summary use, so a
   // duplicate repo|month entry can never make the grid say "Complete" while
-  // the list below flags the same month (and keys stay unique). Every
-  // non-complete entry is listed — including months outside the months-with-
-  // data window — so no gap can hide.
-  const problemEntries = [...lookup.entries()]
-    .filter((c) => c.status !== 'complete')
-    .sort((a, b) => a.month.localeCompare(b.month) || a.repo.localeCompare(b.repo))
+  // the list below flags the same month (and keys stay unique).
+  const problemEntries: ProblemEntry[] = [...lookup.entries()].filter(
+    (c): c is CoverageEntry & { status: CoverageStatus } => c.status !== 'complete',
+  )
+  for (const month of coverageMonths) {
+    for (const repo of repos) {
+      if (!lookup.get(repo, month)) problemEntries.push({ repo, month, status: 'missing' })
+    }
+  }
+  problemEntries.sort(
+    (a, b) =>
+      problemRank[a.status] - problemRank[b.status] ||
+      a.month.localeCompare(b.month) ||
+      a.repo.localeCompare(b.repo),
+  )
   const windowNote = coverageMonths.length > 0
     ? `${formatMonthKey(coverageMonths[0]!)} – ${formatMonthKey(coverageMonths[coverageMonths.length - 1]!)}`
     : ''
@@ -52,8 +79,15 @@ export function CoveragePanel({ data, repos }: CoveragePanelProps) {
       </p>
       {windowNote && (
         <p className="section__note" style={{ marginTop: 8 }}>
-          Covers the full collection window ({windowNote}) — every month in the captured range,
-          including months with no collected data. Timeline sections show only months with data.
+          Covers the full collection window ({windowNote}) — every month in the captured
+          range, including months with no collected data. Timeline sections show only months with
+          data.
+        </p>
+      )}
+      {coverageMonths.length === 0 && (
+        <p className="section__note notice--warn" style={{ marginTop: 8 }}>
+          The collection window could not be derived from the data range ({data.range.start} →{' '}
+          {data.range.end}); nothing is being hidden — the grid below is empty for that reason.
         </p>
       )}
       <p className="section__note" style={{ marginTop: 8 }}>
@@ -102,8 +136,10 @@ export function CoveragePanel({ data, repos }: CoveragePanelProps) {
           <ul className="issue-list">
             {problemEntries.map((c) => (
               <li key={`${c.repo}|${c.month}`}>
-                <code>{repoDisplayName(c.repo)} · {formatMonthKey(c.month)}</code> — {c.status}
-                {c.detail ? `: ${c.detail}` : ''}
+                <code>{repoDisplayName(c.repo)} · {formatMonthKey(c.month)}</code> —{' '}
+                {c.status === 'missing'
+                  ? 'missing coverage metadata'
+                  : `${c.status}${c.detail ? `: ${c.detail}` : ''}`}
               </li>
             ))}
           </ul>

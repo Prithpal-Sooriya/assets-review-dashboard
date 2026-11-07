@@ -79,10 +79,23 @@ const COVERAGE_WINDOW_MONTHS_CAP = 1200
  */
 export function coverageWindowMonths(range: { start: string; end: string }): string[] {
   const start = monthKeyOfISO(range.start)
-  const end = monthKeyOfISO(range.end)
-  if (start === null || end === null || !isValidMonthKey(start) || !isValidMonthKey(end)) {
-    return []
-  }
+  if (start === null || !isValidMonthKey(start)) return []
+  // range.end is EXCLUSIVE: an end that lands exactly on midnight UTC of the
+  // 1st contributes zero days of its own month, so the window stops with the
+  // previous month (…→ 2026-11-01T00:00:00Z ends with Oct 2026, not Nov 2026).
+  const endInstant = new Date(range.end)
+  if (Number.isNaN(endInstant.getTime())) return []
+  const endOnFirstMidnight =
+    endInstant.getUTCDate() === 1 &&
+    endInstant.getUTCHours() === 0 &&
+    endInstant.getUTCMinutes() === 0 &&
+    endInstant.getUTCSeconds() === 0 &&
+    endInstant.getUTCMilliseconds() === 0
+  const effectiveEnd = new Date(
+    endOnFirstMidnight ? endInstant.getTime() - 1 : endInstant.getTime(),
+  )
+  const end = monthKeyOfISO(effectiveEnd.toISOString())
+  if (end === null || !isValidMonthKey(end)) return []
   if (end < start) return []
   const months: string[] = []
   let year = Number(start.slice(0, 4))

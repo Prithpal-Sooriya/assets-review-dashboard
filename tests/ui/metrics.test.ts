@@ -134,9 +134,9 @@ describe('coverageWindowMonths (full collection window for the coverage panel)',
     expect(months).toEqual([...months].sort())
   })
 
-  test('single-month and same-month ranges', () => {
+  test('single-month and multi-month ranges', () => {
     expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-07-31T00:00:00Z' })).toEqual(['2026-07'])
-    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-01T00:00:00Z' })).toEqual([
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-15T00:00:00Z' })).toEqual([
       '2026-07', '2026-08', '2026-09', '2026-10', '2026-11',
     ])
   })
@@ -145,6 +145,23 @@ describe('coverageWindowMonths (full collection window for the coverage panel)',
     expect(coverageWindowMonths({ start: '2026-11-01T00:00:00Z', end: '2025-11-01T00:00:00Z' })).toEqual([])
     expect(coverageWindowMonths({ start: 'not-a-date', end: '2026-11-01T00:00:00Z' })).toEqual([])
     expect(coverageWindowMonths({ start: '2025-11-01T00:00:00Z', end: '' })).toEqual([])
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-07-01T00:00:00Z' })).toEqual([])
+  })
+
+  test('range.end is exclusive: midnight of the 1st contributes no month of its own', () => {
+    // …→ 2026-11-01T00:00:00Z contains zero days of Nov 2026 — the window
+    // must stop at Oct 2026, not add an empty trailing month.
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-01T00:00:00Z' })).toEqual([
+      '2026-07', '2026-08', '2026-09', '2026-10',
+    ])
+    // Millisecond-precision boundary behaves the same
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-01T00:00:00.000Z' })).toHaveLength(4)
+    // One second past midnight DOES include the month
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-01T00:00:01Z' })).toHaveLength(5)
+    // Midnight on a non-1st day is a normal inclusive end
+    expect(coverageWindowMonths({ start: '2026-07-01T00:00:00Z', end: '2026-11-07T00:00:00Z' })).toHaveLength(5)
+    // Year boundary: …→ 2027-01-01T00:00:00Z stops at Dec 2026
+    expect(coverageWindowMonths({ start: '2025-11-01T00:00:00Z', end: '2027-01-01T00:00:00Z' })).toHaveLength(14)
   })
 
   test('a pathological multi-year range is capped, never unbounded', () => {
