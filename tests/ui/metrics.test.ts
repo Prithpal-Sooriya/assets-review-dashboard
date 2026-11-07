@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
-import type { DashboardData } from '../../src/data/types'
+import type { CoverageEntry, DashboardData } from '../../src/data/types'
 import {
   aggregateMonths,
   coverageLookup,
@@ -14,6 +14,7 @@ import {
   totalAggregate,
 } from '../../src/data/metrics'
 import { coverageWindowMonths, formatMonthKey, monthKeyOfISO, repoDisplayName } from '../../src/data/format'
+import { coverageProblemEntries } from '../../src/components/CoveragePanel'
 
 const demo: DashboardData = JSON.parse(
   readFileSync(new URL('../../src/data/demo-fixture.json', import.meta.url), 'utf8'),
@@ -167,6 +168,65 @@ describe('coverageWindowMonths (full collection window for the coverage panel)',
   test('a pathological multi-year range is capped, never unbounded', () => {
     const months = coverageWindowMonths({ start: '1900-01-01T00:00:00Z', end: '2900-01-01T00:00:00Z' })
     expect(months.length).toBeLessThanOrEqual(1200)
+  })
+})
+
+describe('coverageProblemEntries (the panel\'s full-disclosure list)', () => {
+  const repos = ['MetaMask/core', 'MetaMask/metamask-mobile']
+
+  test('non-complete entries are listed most-severe-first (error > partial > missing > pending)', () => {
+    const coverage: CoverageEntry[] = [
+      { repo: 'MetaMask/core', month: '2026-07', status: 'pending', detail: 'not collected' },
+      { repo: 'MetaMask/metamask-mobile', month: '2026-07', status: 'partial', detail: 'capped' },
+      { repo: 'MetaMask/core', month: '2026-08', status: 'error', detail: 'boom' },
+    ]
+    const problems = coverageProblemEntries(coverage, repos, ['2026-07', '2026-08'])
+    expect(problems.map((p) => `${p.status}:${p.repo}:${p.month}`)).toEqual([
+      'error:MetaMask/core:2026-08',
+      'partial:MetaMask/metamask-mobile:2026-07',
+      'missing:MetaMask/metamask-mobile:2026-08',
+      'pending:MetaMask/core:2026-07',
+    ])
+  })
+
+  test('in-window repo-months with NO coverage entry are listed as missing', () => {
+    const coverage: CoverageEntry[] = [{ repo: 'MetaMask/core', month: '2026-07', status: 'complete' }]
+    const problems = coverageProblemEntries(coverage, repos, ['2026-07', '2026-08'])
+    expect(problems).toEqual([
+      { repo: 'MetaMask/metamask-mobile', month: '2026-07', status: 'missing' },
+      { repo: 'MetaMask/core', month: '2026-08', status: 'missing' },
+      { repo: 'MetaMask/metamask-mobile', month: '2026-08', status: 'missing' },
+    ])
+  })
+
+  test('non-complete entries OUTSIDE the derived window stay listed (never hidden)', () => {
+    const coverage: CoverageEntry[] = [{ repo: 'MetaMask/core', month: '2030-01', status: 'error', detail: 'boom' }]
+    const problems = coverageProblemEntries(coverage, repos, ['2026-07'])
+    expect(problems[0]).toMatchObject({ month: '2030-01', status: 'error' })
+    // plus the in-window missing entries
+    expect(problems).toHaveLength(1 + repos.length)
+  })
+
+  test('duplicate repo|month entries collapse last-wins (grid and list agree)', () => {
+    const coverage: CoverageEntry[] = [
+      { repo: 'MetaMask/core', month: '2026-07', status: 'complete' },
+      { repo: 'MetaMask/core', month: '2026-07', status: 'error', detail: 'late failure' },
+    ]
+    const problems = coverageProblemEntries(coverage, repos, ['2026-07'])
+    expect(problems.filter((p) => p.repo === 'MetaMask/core' && p.month === '2026-07')).toEqual([
+      { repo: 'MetaMask/core', month: '2026-07', status: 'error', detail: 'late failure' },
+    ])
+  })
+
+  test('the real dataset shape yields exactly 29 pending entries, none missing', () => {
+    // frozen snapshot fields from the real data/dashboard.json @ 2026-11-07
+    const coverage = JSON.parse(
+      readFileSync(new URL('./fixtures/sample-real.json', import.meta.url), 'utf8'),
+    ).coverage
+    const months = coverageWindowMonths({ start: '2025-11-01T00:00:00.000Z', end: '2026-11-07T13:30:26.843Z' })
+    const problems = coverageProblemEntries(coverage, repos, months)
+    expect(problems).toHaveLength(29)
+    expect(problems.every((p) => p.status === 'pending')).toBe(true)
   })
 })
 

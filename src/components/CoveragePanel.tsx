@@ -1,5 +1,5 @@
 import { coverageWindowMonths, formatMonthKey, repoDisplayName } from '../data/format'
-import type { CoverageEntry, CoverageStatus, DashboardData } from '../data/types'
+import type { CoverageEntry, DashboardData } from '../data/types'
 import { coverageLookup, coverageSummary } from '../data/metrics'
 
 interface CoveragePanelProps {
@@ -8,9 +8,7 @@ interface CoveragePanelProps {
 }
 
 /** A non-complete repo-month worth listing: a coverage entry, or the absence of one. */
-type ProblemEntry =
-  | (CoverageEntry & { status: CoverageStatus })
-  | { repo: string; month: string; status: 'missing' }
+export type ProblemEntry = CoverageEntry | { repo: string; month: string; status: 'missing' }
 
 /** Most severe first so genuine failures aren't buried under pending backfill. */
 const problemRank: Record<ProblemEntry['status'], number> = {
@@ -18,8 +16,37 @@ const problemRank: Record<ProblemEntry['status'], number> = {
   partial: 1,
   missing: 2,
   pending: 3,
-  // 'complete' never appears in problemEntries; ranked last if that ever changes.
+  // 'complete' never appears in the result; ranked last if that ever changes.
   complete: Number.MAX_SAFE_INTEGER,
+}
+
+/**
+ * Every non-complete repo-month the panel must disclose, most severe first:
+ * all non-complete `coverage` entries (last-wins on duplicate repo|month) —
+ * including entries outside the derived window, which stay listed rather
+ * than hidden — plus every in-window repo-month the collector wrote no
+ * coverage entry for at all ("missing"). The timeline's months-with-data
+ * window is irrelevant here; this list is scoped to the collection window.
+ */
+export function coverageProblemEntries(
+  coverage: CoverageEntry[],
+  repos: string[],
+  coverageMonths: string[],
+): ProblemEntry[] {
+  const lookup = coverageLookup(coverage)
+  const problems: ProblemEntry[] = [...lookup.entries()].filter((c) => c.status !== 'complete')
+  for (const month of coverageMonths) {
+    for (const repo of repos) {
+      if (!lookup.get(repo, month)) problems.push({ repo, month, status: 'missing' })
+    }
+  }
+  problems.sort(
+    (a, b) =>
+      problemRank[a.status] - problemRank[b.status] ||
+      a.month.localeCompare(b.month) ||
+      a.repo.localeCompare(b.repo),
+  )
+  return problems
 }
 
 function statusChip(entry: CoverageEntry | undefined): { label: string; cls: string } {
@@ -42,26 +69,9 @@ export function CoveragePanel({ data, repos }: CoveragePanelProps) {
   // coverage" true in the rendered product.
   const coverageMonths = coverageWindowMonths(data.range)
   const summary = coverageSummary(data.coverage, repos, coverageMonths)
-  // Every non-complete repo-month is listed — including months outside the
-  // months-with-data window and repo-months the collector wrote NO coverage
-  // entry for at all ("missing coverage metadata") — so no gap can hide.
-  // Derived from the same last-wins map the grid and summary use, so a
-  // duplicate repo|month entry can never make the grid say "Complete" while
-  // the list below flags the same month (and keys stay unique).
-  const problemEntries: ProblemEntry[] = [...lookup.entries()].filter(
-    (c): c is CoverageEntry & { status: CoverageStatus } => c.status !== 'complete',
-  )
-  for (const month of coverageMonths) {
-    for (const repo of repos) {
-      if (!lookup.get(repo, month)) problemEntries.push({ repo, month, status: 'missing' })
-    }
-  }
-  problemEntries.sort(
-    (a, b) =>
-      problemRank[a.status] - problemRank[b.status] ||
-      a.month.localeCompare(b.month) ||
-      a.repo.localeCompare(b.repo),
-  )
+  // Every non-complete repo-month is listed (see coverageProblemEntries), so
+  // no gap can hide — not out-of-window months, not missing coverage entries.
+  const problemEntries = coverageProblemEntries(data.coverage, repos, coverageMonths)
   const windowNote = coverageMonths.length > 0
     ? `${formatMonthKey(coverageMonths[0]!)} – ${formatMonthKey(coverageMonths[coverageMonths.length - 1]!)}`
     : ''
