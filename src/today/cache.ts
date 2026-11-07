@@ -277,7 +277,10 @@ export class TodayCache {
     const fromDb = await this.withStore('readonly', (store) =>
       requestToPromise(store.get(key)),
     )
-    const raw = fromDb !== null ? fromDb : (this.memory.get(key) ?? null)
+    // A clean miss resolves undefined; a failed transaction resolves null.
+    // Both fall through to the memory tier, so a session with degraded
+    // IndexedDB writes still reads its own latest data.
+    const raw = fromDb ?? this.memory.get(key) ?? null
     // Untrusted input (IndexedDB or memory): revalidate every PR before it
     // can reach an <a href>.
     return sanitizeSnapshot(raw)

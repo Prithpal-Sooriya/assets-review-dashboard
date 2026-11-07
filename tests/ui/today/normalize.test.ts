@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { isTodaySnapshot, normalizePull, sanitizeSnapshot } from '../../../src/today/normalize'
+import { normalizePull, sanitizeSnapshot } from '../../../src/today/normalize'
 import type { RawPull } from '../../../src/today/github'
 import type { TodaySnapshot } from '../../../src/today/normalize'
 
@@ -77,31 +77,6 @@ describe('normalizePull — strict public-field normalization', () => {
   })
 })
 
-describe('isTodaySnapshot — cache validation', () => {
-  test('accepts a well-formed snapshot', () => {
-    const snap = {
-      schemaVersion: 1,
-      collectedAt: '2026-11-08T12:00:00Z',
-      authMode: 'anonymous',
-      repos: [],
-      complete: true,
-      partialReason: null,
-      rate: null,
-      droppedMalformed: 0,
-      missingChecks: [],
-      prs: [],
-    }
-    expect(isTodaySnapshot(snap)).toBe(true)
-  })
-
-  test('rejects wrong schema versions and non-objects', () => {
-    expect(isTodaySnapshot(null)).toBe(false)
-    expect(isTodaySnapshot('nope')).toBe(false)
-    expect(isTodaySnapshot({ schemaVersion: 2, collectedAt: 'x' })).toBe(false)
-    expect(isTodaySnapshot({ schemaVersion: 1 })).toBe(false) // missing fields
-  })
-})
-
 /* ------------------------------------------------------------------ */
 /* sanitizeSnapshot — untrusted input revalidation (IDB or broadcast)  */
 /* ------------------------------------------------------------------ */
@@ -140,6 +115,22 @@ describe('sanitizeSnapshot — revalidate snapshots from IndexedDB or broadcasts
   test('a clean snapshot round-trips unchanged', () => {
     const clean = storedSnapshot()
     expect(sanitizeSnapshot(clean)).toEqual(clean as unknown as TodaySnapshot)
+  })
+
+  test('every PartialReason the collector can emit survives sanitization (no silent relabeling)', () => {
+    // Regression: 'budget' and 'network' partial snapshots used to be
+    // silently relabeled 'aborted' by the cache revalidator, hiding the real
+    // reason from the UI. The whitelist is now derived from the union, so a
+    // member can never be dropped again.
+    for (const reason of ['page-cap', 'budget', 'rate-limit', 'aborted', 'network', 'http', 'repo-missing'] as const) {
+      const out = sanitizeSnapshot(storedSnapshot({ complete: false, partialReason: reason }))
+      expect(out?.partialReason).toBe(reason)
+    }
+    // Unknown reasons still degrade to the honest catch-all.
+    const out = sanitizeSnapshot(
+      storedSnapshot({ complete: false, partialReason: 'something-new' as unknown as null }),
+    )
+    expect(out?.partialReason).toBe('aborted')
   })
 
   test('null / non-object / wrong schema → null (never rendered)', () => {

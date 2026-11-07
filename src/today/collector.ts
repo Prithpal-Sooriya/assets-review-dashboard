@@ -151,7 +151,7 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
     const seenNumbers = new Set<number>()
 
     while (page <= MAX_PAGES_PER_REPO) {
-      const allowance = budget.allow(deps.nowMs())
+      const allowance = budget.allow()
       if (!allowance.ok) {
         if (allowance.reason === 'floor') {
           partialReason = 'rate-limit'
@@ -189,6 +189,12 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
           stopMessage = pagesFetched.count === 0 && repos.length === 0
             ? 'Could not reach api.github.com — nothing was collected.'
             : 'Network error mid-sweep — kept the pages already fetched.'
+        } else if (errIsKind(err, 'http')) {
+          // Honest label: GitHub answered with an unexpected HTTP status
+          // (5xx, enforced SSO 403…) — this is NOT a client connectivity
+          // problem and must not be presented as one.
+          partialReason = 'http'
+          stopMessage = `GitHub returned an unexpected HTTP response${err instanceof Error ? ` (${scrubSecrets(err.message)})` : ''} — kept the pages already fetched.`
         } else {
           partialReason = 'network'
           stopMessage = scrubSecrets(err instanceof Error ? err.message : 'Unexpected error')
@@ -267,7 +273,7 @@ export async function collectCycle(deps: CycleDeps): Promise<CycleOutcome> {
         .sort((a, b) => a.number - b.number)
         .slice(0, MISSING_CHECK_MAX)
       for (const pr of missing) {
-        const allowance = budget.allow(deps.nowMs())
+        const allowance = budget.allow()
         if (!allowance.ok) break // remaining entries stay 'unverified' — never guessed
         budget.spend()
         try {

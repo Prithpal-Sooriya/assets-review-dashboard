@@ -3,11 +3,11 @@
  * React hook so it can be unit-tested without a browser:
  *
  *  - failure backoff (including rate-limit reset walls from outcomes);
- *  - which cross-tab broadcasts a tab may apply;
- *  - what the next save's baseline slot will hold (preview used so
- *    missing-PR checks run against the baseline the UI will actually diff).
+ *  - which cross-tab broadcasts a tab may apply.
  *
- * The hook stays thin wiring: refs, effects, Web Locks, BroadcastChannel.
+ * Baseline rotation/preview decisions live in cache.ts (rollBaseline,
+ * baselineForNextSave). The hook stays thin wiring: refs, effects, Web
+ * Locks, BroadcastChannel.
  */
 
 import type { CycleOutcome } from './collector'

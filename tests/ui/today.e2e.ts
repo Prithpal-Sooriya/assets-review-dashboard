@@ -96,8 +96,8 @@ function json(route: Route, status: number, body: unknown, headers: Record<strin
  * Install the api.github.com mock. Records request counts on the route
  * handler object for assertions (per-page).
  */
-async function mockGitHub(page: Page, opts: MockOptions = {}) {
-  const counts = { preflight: 0, pulls: 0, detail: 0 }
+async function mockGitHub(page: Page, opts: MockOptions = {}, shared?: { preflight: number; pulls: number; detail: number }) {
+  const counts = shared ?? { preflight: 0, pulls: 0, detail: 0 }
   const delay = () => (opts.delayMs ? new Promise((r) => setTimeout(r, opts.delayMs)) : Promise.resolve())
   await page.route('**/api.github.com/**', async (route) => {
     await delay()
@@ -496,27 +496,36 @@ test.describe('Today view — since-baseline diff (missing ≠ merged)', () => {
     // The real baseline timestamp — not a fabricated "yesterday".
     await expect(card).toContainText(/local baseline snapshot from \d{1,2} \w{3} \d{4}/)
     expect(counts.detail).toBe(2) // both departures were actually verified
-    // #999 verified merged; #998 verified still-open (left the queue).
+    // #999 verified merged; #998 is verified still-open yet absent from the
+    // sweep — contradictory evidence, so it is honestly labelled unverified
+    // (never fabricated as "left" and never assumed merged).
     await expect(card.getByRole('listitem').filter({ hasText: '#999' })).toContainText('merged')
-    await expect(card.getByRole('listitem').filter({ hasText: '#998' })).toContainText('left the review queue')
+    await expect(card.getByRole('listitem').filter({ hasText: '#998' })).toContainText('state not verified')
   })
 })
 
 test.describe('Today view — cross-tab coordination', () => {
   test('only one tab collects; the second applies the broadcast', async ({ page, context }) => {
     await page.unrouteAll()
-    const counts = await mockGitHub(page, { delayMs: 700 })
+    // ONE shared counter across BOTH pages' route handlers — the totals
+    // below count real network requests made by the whole context.
+    const totals = { preflight: 0, pulls: 0, detail: 0 }
+    await mockGitHub(page, { delayMs: 700 }, totals)
     await gotoToday(page)
     await expect(page.locator('.today-table')).toContainText('#201')
+    // Tab A's mount: one pre-flight + one sweep (one page per repo, 3 repos).
+    expect(totals.preflight).toBe(1)
+    expect(totals.pulls).toBe(3)
 
     const pageB = await context.newPage()
-    await mockGitHub(pageB, { delayMs: 700 })
+    await mockGitHub(pageB, { delayMs: 700 }, totals)
     await pageB.goto('/#/today')
-    // B shows the same data (broadcast or cache) without a second sweep:
+    // B shows the same data (broadcast or shared cache) without collecting:
     await expect(pageB.locator('.today-table')).toContainText('#201', { timeout: 15_000 })
-    // Exactly ONE pre-flight ran for B's mount (A's was earlier): B was
-    // either lock-skipped or applied the broadcast — but no double sweep
-    // storm: total pulls requests stay bounded.
-    expect(counts.pulls).toBeLessThanOrEqual(6)
+    // Exact coordination proof: B's mount added ZERO requests — the
+    // pre-flight, sweep and detail checks all ran exactly once, for A.
+    expect(totals.preflight).toBe(1)
+    expect(totals.pulls).toBe(3)
+    expect(totals.detail).toBe(0)
   })
 })

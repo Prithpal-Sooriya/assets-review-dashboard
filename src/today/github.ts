@@ -28,7 +28,6 @@ export class GitHubError extends Error {
       | 'auth-rejected'
       | 'not-found'
       | 'http'
-      | 'redirect'
       | 'aborted',
     readonly retryAtMs: number | null = null,
   ) {

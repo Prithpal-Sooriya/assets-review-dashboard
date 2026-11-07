@@ -79,7 +79,7 @@ export class CycleBudget {
   }
 
   /** May the next request be sent? `reason` explains the first blocker. */
-  allow(nowMs: number): { ok: true } | { ok: false; reason: 'cap' | 'floor' } {
+  allow(): { ok: true } | { ok: false; reason: 'cap' | 'floor' } {
     if (this.used >= this.cap) return { ok: false, reason: 'cap' }
     if (this.lastRemaining !== null && this.lastRemaining <= this.floor) {
       return { ok: false, reason: 'floor' }
@@ -97,7 +97,3 @@ export function isStale(collectedAtMs: number, nowMs: number, intervalMs: number
   return nowMs - collectedAtMs >= intervalMs
 }
 
-/** Backoff delay for retry attempt N (0-based). Null: stop retrying. */
-export function retryDelayMs(attempt: number, schedule: readonly number[]): number | null {
-  return attempt < schedule.length ? (schedule[attempt] ?? null) : null
-}

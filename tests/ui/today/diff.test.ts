@@ -56,7 +56,6 @@ describe('diffSnapshots — per-view new/left', () => {
     })
     const d = diffSnapshots(baseline, current)
     expect(d.needs.newCount).toBe(1) // #5
-    expect(d.needs.added.map((a) => a.number)).toEqual([5])
     expect(d.needs.left.map((l) => l.number)).toEqual([1, 3])
     expect(d.awaiting.newCount).toBe(1) // #6
     expect(d.awaiting.left.map((l) => l.number)).toEqual([3])
@@ -93,12 +92,15 @@ describe('missing PRs are never silently merged', () => {
     expect(diffSnapshots(baseline, current).needs.left[0]?.outcome).toBe('closed')
   })
 
-  test('still-open-but-not-requested labels left-queue (disappearance ≠ merge)', () => {
+  test('verified-open but absent from the sweep is unverified (contradictory evidence)', () => {
+    // The sweep lists open PRs; a verified-open PR missing from a COMPLETE
+    // sweep means the data does not add up. Honest label: unverified —
+    // never "left the queue" and never silently merged.
     const current = snap({
       prs: [],
       missingChecks: [{ repo: 'MetaMask/core', number: 10, state: 'OPEN' }],
     })
-    expect(diffSnapshots(baseline, current).needs.left[0]?.outcome).toBe('left-queue')
+    expect(diffSnapshots(baseline, current).needs.left[0]?.outcome).toBe('unverified')
   })
 
   test('unverified and unknown states label unverified, never guess', () => {
@@ -148,6 +150,8 @@ describe('missing PRs are never silently merged', () => {
       prs: [],
       missingChecks: [{ repo: 'MetaMask/core', number: 10, state: 'OPEN' }],
     })
-    expect(diffSnapshots(base, currentGone).awaiting.left[0]?.outcome).toBe('left-queue')
+    // Verified OPEN but absent from a complete sweep = contradictory
+    // evidence — unverified, never a fabricated "left the queue".
+    expect(diffSnapshots(base, currentGone).awaiting.left[0]?.outcome).toBe('unverified')
   })
 })

@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { repoDisplayName } from '../../data/format'
 import { ASSETS_TEAM_SLUG } from '../../today/config'
-import { awaitingInfoOf, authorshipOf, formatAge, nextActionOf } from '../../today/classify'
+import { authorshipOf, formatAge, nextActionOf } from '../../today/classify'
 import type { Row } from '../../today/table'
 import type { TodayUrlState } from '../../today/urlstate'
 import type { AuthMode } from '../../today/normalize'
@@ -97,7 +97,6 @@ export function TodayTable({
             )}
             {group.rows.map(({ pr, ageDays }) => {
               const ownership = authorshipOf(pr)
-              const awaiting = awaitingInfoOf(pr)
               return (
                 <tr key={`${pr.repo}#${pr.number}`}>
                   <td>{repoDisplayName(pr.repo)}</td>

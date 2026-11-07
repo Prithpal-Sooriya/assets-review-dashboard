@@ -29,7 +29,6 @@ export interface LeftEntry {
 export interface ViewDiff {
   newCount: number
   /** New entries (title/url shown so the change is inspectable). */
-  added: { repo: string; number: number; title: string; url: string }[]
   left: LeftEntry[]
 }
 
@@ -52,30 +51,21 @@ function outcomeFor(
   number: number,
   checks: TodaySnapshot['missingChecks'],
   currentOpen: Set<string>,
-  view: 'needs' | 'awaiting',
 ): LeftEntry['outcome'] {
   const checked = checks.find((c) => c.repo === repo && c.number === number)
   if (checked !== undefined) {
     if (checked.state === 'MERGED') return 'merged'
     if (checked.state === 'CLOSED') return 'closed'
-    if (checked.state === 'OPEN') {
-      // The PR is verifiably still open, so it did NOT merge or close — it
-      // left the view's queue. For the awaiting view an open team-authored
-      // PR should still be queued; if it is not, the evidence does not add
-      // up (e.g. roster drift), so stay unverified instead of guessing.
-      if (view === 'needs') return 'left-queue'
-      return currentOpen.has(`${repo}#${number}`) ? 'unverified' : 'left-queue'
-    }
-    return 'unverified'
+    if (checked.state === 'unknown') return 'unverified'
+    // checked.state === 'OPEN': verified still open — fall through.
   }
-  // No bounded check ran. The most common needs-view departure is the PR
-  // staying OPEN while the review request was simply removed: the sweep
-  // still contains the PR, which is itself proof it is open — label it
-  // left-queue rather than unverified. Only a PR absent from the current
-  // sweep (not checked, not visible) stays unverified — disappearance is
-  // never silently equated with merging.
-  if (view === 'needs' && currentOpen.has(`${repo}#${number}`)) return 'left-queue'
-  return 'unverified'
+  // Still open (verified, or by sweep membership: the sweep lists open PRs).
+  // Present in the current sweep → it left this view's QUEUE (review request
+  // removed, or the author is no longer on the roster) — not GitHub.
+  // Absent from a complete sweep entirely → contradictory evidence (an open
+  // PR cannot be missing from an open-PR sweep): unverified, never silently
+  // "left" and never silently merged.
+  return currentOpen.has(`${repo}#${number}`) ? 'left-queue' : 'unverified'
 }
 
 /** Compute the per-view since-baseline diff. */
@@ -99,12 +89,12 @@ export function diffSnapshots(baseline: TodaySnapshot, current: TodaySnapshot): 
         number: pr.number,
         title: pr.title,
         url: pr.url,
-        outcome: outcomeFor(pr.repo, pr.number, current.missingChecks, currentOpen, view),
+        outcome: outcomeFor(pr.repo, pr.number, current.missingChecks, currentOpen),
       }))
       // Oldest PR numbers first — the most interesting departures surface early.
       .sort((a, b) => a.number - b.number)
 
-    return { newCount: added.length, added: added.slice(0, 12), left }
+    return { newCount: added.length, left }
   }
 
   return {

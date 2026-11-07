@@ -19,7 +19,6 @@ const BANNER_CLASS: Record<TodayBanner['kind'], string> = {
   'rate-limited': 'notice notice--warn',
   'network-error': 'notice notice--error',
   'auth-rejected': 'notice notice--error',
-  info: 'notice',
 }
 
 const BANNER_LABEL: Record<TodayBanner['kind'], string> = {
@@ -27,7 +26,6 @@ const BANNER_LABEL: Record<TodayBanner['kind'], string> = {
   'rate-limited': 'Rate limited',
   'network-error': 'Connection problem',
   'auth-rejected': 'Token rejected',
-  info: 'Note',
 }
 
 /**

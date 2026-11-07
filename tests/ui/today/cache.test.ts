@@ -24,6 +24,8 @@ type ReqLike = {
 class MockIdb implements IdbLike {
   stores = new Map<string, Map<string, unknown>>()
   puts: { key: string; value: unknown }[] = []
+  /** When true, put() requests fail — reads keep working. */
+  failPuts = false
 
   open(name: string, _version: number) {
     const req: {
@@ -74,6 +76,11 @@ class MockIdb implements IdbLike {
               self.puts.push({ key, value })
               const req: ReqLike = { onsuccess: null, onerror: null }
               queueMicrotask(() => {
+                if (self.failPuts) {
+                  req.onerror?.({ target: { error: new Error('QuotaExceededError') } })
+                  queueMicrotask(() => tx.onabort?.())
+                  return
+                }
                 map.set(key, value)
                 req.onsuccess?.({ target: { result: undefined } })
                 queueMicrotask(() => queueMicrotask(() => tx.oncomplete?.()))
@@ -388,6 +395,29 @@ describe('TodayCache — persistence', () => {
     const loaded = await fresh.load()
     expect(loaded.current).toBeNull()
     expect(loaded.baseline).toBeNull()
+  })
+
+  test('clean IDB miss falls through to the memory tier (degraded writes stay readable)', async () => {
+    // Regression: a get() that resolves undefined (clean miss) used to skip
+    // the memory tier entirely, so a session whose IndexedDB writes failed
+    // (quota, private mode) could not read back the data its own in-memory
+    // tier still held — the view went blank for the rest of the session.
+    const idb = new MockIdb()
+    idb.failPuts = true // writes fail; reads keep resolving
+    const cache = new TodayCache(idb)
+    const saved = snap({ collectedAt: at(0) })
+    await cache.saveComplete(saved) // write fails → memory tier + degraded
+    // `persistent` just means "IDB configured"; `operational` reports the
+    // session-degraded state the UI surfaces.
+    expect(cache.persistent).toBe(true)
+    expect(cache.operational).toBe(false)
+    // Same session, same client: load() must surface the memory tier even
+    // though every IDB get() cleanly misses (resolves undefined).
+    const loaded = await cache.load()
+    expect(loaded.current).toEqual(saved)
+    // Seed-with-self semantics are preserved through the memory tier.
+    expect(loaded.baseline).toEqual(saved)
+    expect(loaded.retained).toBeNull()
   })
 
   test('no IndexedDB: degrades to in-memory (persistent=false), still functional', async () => {

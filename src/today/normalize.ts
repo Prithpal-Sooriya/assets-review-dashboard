@@ -40,6 +40,7 @@ export type PartialReason =
   | 'rate-limit'
   | 'aborted'
   | 'network'
+  | 'http'
   | 'repo-missing'
 
 export interface MissingPrCheck {
@@ -162,42 +163,45 @@ export function prId(pr: TodayPr): string {
 }
 
 const CHECK_STATES: ReadonlySet<string> = new Set(['MERGED', 'CLOSED', 'OPEN', 'unknown'])
-const PARTIAL_REASONS: ReadonlySet<string> = new Set([
-  'page-cap',
-  'rate-limit',
-  'repo-missing',
-  'aborted',
-])
+// Derived from the PartialReason union: the Record<> shape makes TypeScript
+// fail to compile if a member is missing, so the sanitizer can never reject
+// (or silently relabel) a reason the collector actually emits.
+const PARTIAL_REASON_TABLE: Record<PartialReason, true> = {
+  'page-cap': true,
+  budget: true,
+  'rate-limit': true,
+  aborted: true,
+  network: true,
+  http: true,
+  'repo-missing': true,
+}
+const PARTIAL_REASONS: ReadonlySet<string> = new Set(Object.keys(PARTIAL_REASON_TABLE))
 
 function sanitizePr(value: unknown): TodayPr | null {
   if (typeof value !== 'object' || value === null) return null
   const v = value as Partial<TodayPr>
   if (typeof v.repo !== 'string' || !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(v.repo)) return null
   if (typeof v.number !== 'number' || !Number.isInteger(v.number) || v.number < 1) return null
-  const title = cleanString(v.title, 300)
-  const url = cleanPullUrl(v.url)
-  const author = cleanString(v.author, 100) ?? 'unknown'
-  const createdAt = cleanString(v.createdAt, 40)
-  const updatedAt = cleanString(v.updatedAt, 40)
-  if (title === null || url === null || createdAt === null || updatedAt === null) return null
-  if (Number.isNaN(Date.parse(createdAt)) || Number.isNaN(Date.parse(updatedAt))) return null
-  const cleanList = (x: unknown): string[] =>
-    Array.isArray(x)
-      ? x.map((e) => cleanString(e, 100)).filter((e): e is string => e !== null).slice(0, MAX_LIST)
-      : []
-  return {
-    repo: v.repo,
+  // Single field-rule source: re-run the same normalizePull rules the
+  // collector used, on a raw-shaped view of the cached record, so the two
+  // validation paths can never drift apart.
+  const asString = (x: unknown): string | null => (typeof x === 'string' ? x : null)
+  return normalizePull(v.repo, {
     number: v.number,
-    title,
-    url,
-    author,
+    title: asString(v.title),
+    html_url: asString(v.url),
     draft: v.draft === true,
-    createdAt,
-    updatedAt,
-    labels: cleanList(v.labels).slice(0, MAX_LABELS),
-    requestedTeams: cleanList(v.requestedTeams),
-    requestedReviewers: cleanList(v.requestedReviewers),
-  }
+    created_at: asString(v.createdAt),
+    updated_at: asString(v.updatedAt),
+    user: { login: asString(v.author) },
+    labels: Array.isArray(v.labels) ? v.labels.map((name) => ({ name })) : null,
+    requested_reviewers: Array.isArray(v.requestedReviewers)
+      ? v.requestedReviewers.map((login) => ({ login }))
+      : null,
+    requested_teams: Array.isArray(v.requestedTeams)
+      ? v.requestedTeams.map((slug) => ({ slug }))
+      : null,
+  })
 }
 
 function sanitizeMissingCheck(value: unknown): MissingPrCheck | null {
@@ -216,8 +220,23 @@ function sanitizeMissingCheck(value: unknown): MissingPrCheck | null {
  * planted javascript:/phishing href can never reach an <a href>. Returns null
  * when the record is unusable at the top level.
  */
+/** Structural top-level check (single source, used by sanitizeSnapshot). */
+function isTodaySnapshotShape(value: unknown): value is TodaySnapshot {
+  if (typeof value !== 'object' || value === null) return false
+  const v = value as Partial<TodaySnapshot>
+  if (v.schemaVersion !== TODAY_SCHEMA_VERSION) return false
+  if (typeof v.collectedAt !== 'string') return false
+  if (v.authMode !== 'anonymous' && v.authMode !== 'token') return false
+  if (!Array.isArray(v.repos) || !Array.isArray(v.prs) || !Array.isArray(v.missingChecks)) {
+    return false
+  }
+  if (typeof v.complete !== 'boolean') return false
+  if (typeof v.droppedMalformed !== 'number') return false
+  return true
+}
+
 export function sanitizeSnapshot(value: unknown): TodaySnapshot | null {
-  if (!isTodaySnapshot(value)) return null
+  if (!isTodaySnapshotShape(value)) return null
   const prs: TodayPr[] = []
   let dropped = value.droppedMalformed
   for (const raw of value.prs) {
@@ -249,17 +268,3 @@ export function sanitizeSnapshot(value: unknown): TodaySnapshot | null {
   }
 }
 
-/** Defensive revalidation of a record read back from IndexedDB. */
-export function isTodaySnapshot(value: unknown): value is TodaySnapshot {
-  if (typeof value !== 'object' || value === null) return false
-  const v = value as Partial<TodaySnapshot>
-  if (v.schemaVersion !== TODAY_SCHEMA_VERSION) return false
-  if (typeof v.collectedAt !== 'string') return false
-  if (v.authMode !== 'anonymous' && v.authMode !== 'token') return false
-  if (!Array.isArray(v.repos) || !Array.isArray(v.prs) || !Array.isArray(v.missingChecks)) {
-    return false
-  }
-  if (typeof v.complete !== 'boolean') return false
-  if (typeof v.droppedMalformed !== 'number') return false
-  return true
-}

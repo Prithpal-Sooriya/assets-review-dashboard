@@ -38,7 +38,7 @@ import { isStale } from './ratelimit'
 import { clearToken, currentEpoch, getToken, scrubSecrets, setToken } from './token'
 
 export interface TodayBanner {
-  kind: 'partial' | 'rate-limited' | 'network-error' | 'auth-rejected' | 'info'
+  kind: 'partial' | 'rate-limited' | 'network-error' | 'auth-rejected'
   message: string
   retryAtMs: number | null
 }
@@ -233,6 +233,18 @@ export function useTodayData(): TodayController {
       if (outcome.status === 'complete' && outcome.snapshot !== null && cacheRef.current !== null) {
         try {
           const pair: CachePair = await cacheRef.current.saveComplete(outcome.snapshot)
+          // Auth changed while the multi-transaction save was in flight: the
+          // save wrote the PREVIOUS auth mode's snapshot back into the cache
+          // after authChange's clearAll. Wipe it again and publish nothing —
+          // stale cross-auth state must never reach the UI or survive on disk.
+          if (epoch !== currentEpoch()) {
+            void cacheRef.current.clearAll()
+            if (rerunAuthChangeRef.current) {
+              rerunAuthChangeRef.current = false
+              void runCycle('auth-change')
+            }
+            return
+          }
           cachedCompleteRef.current = pair.current
           setUsableBaseline(
             pair.current !== null && isUsableBaseline(pair.baseline, pair.current, Date.now())
@@ -411,13 +423,25 @@ export function useTodayData(): TodayController {
       channel.onmessage = (event: MessageEvent) => {
         if (!shouldApplyBroadcast(event.data, sessionAuthMode())) return
         const msg = event.data
-        // Broadcast snapshots are untrusted input: revalidate every PR
-        // (URLs, dates, identity) before it can reach an <a href>.
+        // Broadcast payloads are untrusted input: revalidate the snapshot
+        // (every PR's URLs/dates/identity) before it can reach an <a href>,
+        // and coerce the banner fields — a non-string message would crash
+        // rendering and a bogus retryAtMs would throw in TodayStatus,
+        // blanking every listening tab.
         if (msg.outcome.snapshot !== null) {
           const clean = sanitizeSnapshot(msg.outcome.snapshot)
           if (clean === null) return
           msg.outcome = { ...msg.outcome, snapshot: clean }
         }
+        const message = typeof msg.outcome.message === 'string' ? msg.outcome.message.slice(0, 300) : null
+        const retryAtMs =
+          typeof msg.outcome.retryAtMs === 'number' &&
+          Number.isFinite(msg.outcome.retryAtMs) &&
+          msg.outcome.retryAtMs > Date.now() - 60_000 &&
+          msg.outcome.retryAtMs < Date.now() + 24 * 60 * 60 * 1000
+            ? msg.outcome.retryAtMs
+            : null
+        msg.outcome = { ...msg.outcome, message, retryAtMs }
         applyOutcome(msg.outcome)
         if (msg.outcome.status === 'complete') {
           void cacheRef.current?.load().then((pair) => {

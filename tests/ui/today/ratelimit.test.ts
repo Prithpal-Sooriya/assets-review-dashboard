@@ -5,7 +5,6 @@ import {
 
   parseRateHeaders,
   rateRetryAtMs,
-  retryDelayMs,
 } from '../../../src/today/ratelimit'
 
 function headersOf(entries: Record<string, string>): { get(name: string): string | null } {
@@ -56,25 +55,25 @@ describe('rateRetryAtMs', () => {
 describe('CycleBudget', () => {
   test('enforces the request cap', () => {
     const b = new CycleBudget(2, 0)
-    expect(b.allow(0)).toEqual({ ok: true })
+    expect(b.allow()).toEqual({ ok: true })
     b.spend()
-    expect(b.allow(0)).toEqual({ ok: true })
+    expect(b.allow()).toEqual({ ok: true })
     b.spend()
-    expect(b.allow(0)).toEqual({ ok: false, reason: 'cap' })
+    expect(b.allow()).toEqual({ ok: false, reason: 'cap' })
   })
 
   test('stops at the remaining floor to preserve shared-IP quota', () => {
     const b = new CycleBudget(100, 10)
     b.observeRemaining(11)
-    expect(b.allow(0)).toEqual({ ok: true })
+    expect(b.allow()).toEqual({ ok: true })
     b.observeRemaining(10)
-    expect(b.allow(0)).toEqual({ ok: false, reason: 'floor' })
+    expect(b.allow()).toEqual({ ok: false, reason: 'floor' })
   })
 
   test('null remaining observations never block (headers absent)', () => {
     const b = new CycleBudget(10, 10)
     b.observeRemaining(null)
-    expect(b.allow(0)).toEqual({ ok: true })
+    expect(b.allow()).toEqual({ ok: true })
   })
 })
 
@@ -85,11 +84,4 @@ describe('staleness + retry schedule', () => {
     expect(isStale(0, THREE_HOURS + 1, THREE_HOURS)).toBe(true)
   })
 
-  test('backoff schedule then stop (no retry storms)', () => {
-    const schedule = [5, 15, 45]
-    expect(retryDelayMs(0, schedule)).toBe(5)
-    expect(retryDelayMs(2, schedule)).toBe(45)
-    expect(retryDelayMs(3, schedule)).toBeNull()
-    expect(retryDelayMs(99, schedule)).toBeNull()
-  })
 })

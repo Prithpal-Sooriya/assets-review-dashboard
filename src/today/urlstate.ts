@@ -33,10 +33,6 @@ export const DEFAULT_TODAY_STATE: TodayUrlState = {
   sort: 'oldest',
 }
 
-// Single source of truth: the collector sweeps exactly what the URL state
-// and filter buttons accept, so both derive from config's TODAY_REPOS.
-export const KNOWN_REPOS: readonly string[] = TODAY_REPOS
-
 const VIEW_VALUES: readonly TodayView[] = ['needs', 'awaiting']
 const SORT_VALUES: readonly TodaySort[] = ['oldest', 'newest', 'repo', 'author']
 const GROUP_VALUES: readonly TodayGroup[] = ['repo', 'team', 'none']
@@ -58,7 +54,8 @@ export function parseHash(hash: string): { route: Route; today: TodayUrlState } 
     route,
     today: {
       view: oneOf(params.get('view'), VIEW_VALUES, DEFAULT_TODAY_STATE.view),
-      repo: repo !== null && KNOWN_REPOS.includes(repo) ? repo : null,
+      // Same single source as the collector's sweep: config's TODAY_REPOS.
+      repo: repo !== null && TODAY_REPOS.includes(repo) ? repo : null,
       author: oneOf(params.get('author'), AUTHOR_VALUES, DEFAULT_TODAY_STATE.author),
       group: oneOf(params.get('group'), GROUP_VALUES, DEFAULT_TODAY_STATE.group),
       sort: oneOf(params.get('sort'), SORT_VALUES, DEFAULT_TODAY_STATE.sort),
