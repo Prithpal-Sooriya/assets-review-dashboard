@@ -46,10 +46,11 @@ jobs:
           # workspace — empty at this point (PR #20's first revision failed
           # exactly so), and any mechanism materializing it pre-checkout
           # would execute triggering-ref code before the reviewed
-          # default-branch checkout. Keep behavior identical to the action
-          # (data-pr-guard.yml invokes it post-checkout); the
-          # workflow-structure tests enforce the ordering — a proxy for,
-          # not proof of, the reviewed-code trust.
+          # default-branch checkout. Keep the commands identical to the
+          # action (data-pr-guard.yml invokes it post-checkout) — the
+          # workflow-structure tests enforce both that identity and the
+          # ordering; the ordering is a proxy for, not proof of, the
+          # reviewed-code trust.
           branch="$(gh repo view "$GH_TARGET_REPO" --json defaultBranchRef --jq .defaultBranchRef.name)" || {
             echo "::error::gh repo view failed while resolving the default branch of $GH_TARGET_REPO"
             exit 1

@@ -15,8 +15,9 @@ description: |
   was rejected for it; tests/collector/workflow-structure.test.ts
   enforces the order — a proxy for, not proof of, the reviewed-code
   trust). The collect workflows therefore resolve inline
-  before their checkout; keep that inline block behavior-identical to
-  this action. Local actions also execute from the triggering ref;
+  before their checkout; keep that inline block command-identical to
+  this action (enforced by tests/collector/workflow-structure.test.ts;
+  comments may differ). Local actions also execute from the triggering ref;
   acceptable here because this logic is ref-agnostic — the same
   trade-off run-token documents.
 runs:

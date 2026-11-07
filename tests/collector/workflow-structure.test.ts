@@ -36,11 +36,41 @@ interface Step {
 }
 
 async function workflows(): Promise<{ file: string; doc: any }[]> {
-  const files = [...new Bun.Glob("*.yml").scanSync({ cwd: workflowsDir })];
+  const files = [
+    ...new Bun.Glob("*.yml").scanSync({ cwd: workflowsDir }),
+    ...new Bun.Glob("*.yaml").scanSync({ cwd: workflowsDir }),
+  ];
   expect(files.length).toBeGreaterThanOrEqual(5); // sanity: the scan sees the real set
   const out: { file: string; doc: any }[] = [];
   for (const file of files) out.push({ file, doc: parse(await Bun.file(path.join(workflowsDir, file)).text()) });
   return out;
+}
+
+/** The real detection pass, shared by the live scan and the reproduction fixture. */
+function orderViolations(doc: any, file: string): { violations: string[]; localUses: number } {
+  const violations: string[] = [];
+  let localUses = 0;
+  const jobs = doc?.jobs;
+  expect(jobs && typeof jobs === "object", `${file}: no jobs parsed — the scanner went blind`).toBeTruthy();
+  for (const [jobName, job] of Object.entries<any>(jobs)) {
+    if (job?.steps === undefined && typeof job?.uses === "string") continue; // reusable-workflow job: no steps by design
+    const steps: Step[] = job?.steps ?? [];
+    expect(steps.length, `${file} job '${jobName}': no steps parsed — the scanner went blind`).toBeGreaterThan(0);
+    const firstCheckout = steps.findIndex((st) => typeof st.uses === "string" && st.uses.startsWith("actions/checkout"));
+    steps.forEach((st, i) => {
+      if (typeof st.uses === "string" && st.uses.startsWith("./")) {
+        localUses++;
+        if (firstCheckout === -1) {
+          violations.push(`${file} job '${jobName}': local action at step ${i + 1} but the job has NO checkout step`);
+        } else if (i < firstCheckout) {
+          violations.push(
+            `${file} job '${jobName}': local action at step ${i + 1}, before checkout at step ${firstCheckout + 1} — the workspace is empty pre-checkout, and materializing triggering-ref code there would run unreviewed code`,
+          );
+        }
+      }
+    });
+  }
+  return { violations, localUses };
 }
 
 /** Non-comment, non-blank lines of a run block, trimmed — the executable content. */
@@ -56,25 +86,9 @@ describe("local-action bootstrap order", () => {
     const violations: string[] = [];
     let localUsesSeen = 0;
     for (const { file, doc } of await workflows()) {
-      const jobs = doc?.jobs;
-      expect(jobs && typeof jobs === "object", `${file}: no jobs parsed — the scanner went blind`).toBeTruthy();
-      for (const [jobName, job] of Object.entries<any>(jobs)) {
-        const steps: Step[] = job?.steps ?? [];
-        expect(steps.length, `${file} job '${jobName}': no steps parsed — the scanner went blind`).toBeGreaterThan(0);
-        const firstCheckout = steps.findIndex((s) => typeof s.uses === "string" && s.uses.startsWith("actions/checkout"));
-        steps.forEach((s, i) => {
-          if (typeof s.uses === "string" && s.uses.startsWith("./")) {
-            localUsesSeen++;
-            if (firstCheckout === -1) {
-              violations.push(`${file} job '${jobName}': local action at step ${i + 1} but the job has NO checkout step`);
-            } else if (i < firstCheckout) {
-              violations.push(
-                `${file} job '${jobName}': local action at step ${i + 1}, before checkout at step ${firstCheckout + 1} — the workspace is empty pre-checkout, and materializing triggering-ref code there would run unreviewed code`,
-              );
-            }
-          }
-        });
-      }
+      const r = orderViolations(doc, file);
+      violations.push(...r.violations);
+      localUsesSeen += r.localUses;
     }
     // Sanity floor: the suite must actually be looking at local uses
     // (data-pr-guard.yml guarantees at least one post-checkout use).
@@ -95,17 +109,11 @@ jobs:
     steps:
       - uses: ./.github/actions/run-token
 `) as any;
-    const flagged: string[] = [];
-    for (const [jobName, job] of Object.entries<any>(buggy.jobs)) {
-      const steps: Step[] = job.steps;
-      const firstCheckout = steps.findIndex((s) => typeof s.uses === "string" && s.uses.startsWith("actions/checkout"));
-      steps.forEach((s, i) => {
-        if (typeof s.uses === "string" && s.uses.startsWith("./") && (firstCheckout === -1 || i < firstCheckout)) {
-          flagged.push(`${jobName}:${i + 1}`);
-        }
-      });
-    }
-    expect(flagged).toEqual(["collect:1", "second-job:1"]); // pre-checkout use AND a no-checkout job are both caught
+    const { violations, localUses } = orderViolations(buggy, "fixture.yml");
+    expect(localUses).toBe(3);
+    expect(violations.length).toBe(2); // the pre-checkout use AND the no-checkout job are both caught
+    expect(violations.some((v) => v.includes("job 'collect':") && v.includes("before checkout at step 2"))).toBe(true);
+    expect(violations.some((v) => v.includes("job 'second-job':") && v.includes("NO checkout step"))).toBe(true);
   });
 });
 
@@ -137,6 +145,21 @@ describe("drift identity of duplicated blocks", () => {
       }
     }
     expect(seen.size, "the bun-pin block drifted across workflows").toBe(1);
-    expect([...seen.values()][0]!.length, "expected the bun-pin block in four workflows").toBe(4);
+    expect([...seen.values()][0]!.length, "expected the guarded bun-pin block in at least the four collector workflows").toBeGreaterThanOrEqual(4);
+    // No UNGUARDED BUN_VERSION writer may exist anywhere: any step that
+    // writes BUN_VERSION to GITHUB_ENV without the assign-then-guard form
+    // (the `BUN_VERSION=$v` marker) reintroduces the silent-empty class
+    // invisibly to the identity check above.
+    const unguarded: string[] = [];
+    for (const { file, doc } of await workflows()) {
+      for (const [jobName, job] of Object.entries<any>(doc?.jobs ?? {})) {
+        for (const st of (job?.steps ?? []) as Step[]) {
+          if (typeof st.run === "string" && st.run.includes("BUN_VERSION") && st.run.includes("GITHUB_ENV") && !st.run.includes("BUN_VERSION=$v")) {
+            unguarded.push(`${file}:${jobName}`);
+          }
+        }
+      }
+    }
+    expect(unguarded).toEqual([]);
   });
 });
