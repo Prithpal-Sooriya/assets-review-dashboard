@@ -182,8 +182,13 @@ aggregation dedupes by freshest snapshot per PR).
   guard only protects unmodified default-branch copies of a workflow — a
   repo writer can dispatch a guard-stripped branch copy — and a stolen
   classic repo-scope token grants every repository its owner can access.
-  Non-default refs are refused before the secret is touched. An auth
-  preflight fails loudly — naming the secret and the remedy — if it stops
+  Non-default refs are refused before the secret is touched. The guard's
+  policy shell is extracted to `scripts/run-token.sh` and unit-tested
+  (`tests/collector/run-token.test.ts`). Callers route the secret as
+  `secrets.DASHBOARD_GH_TOKEN || '__UNSET__'`: the script treats
+  `'__UNSET__'` as an unset secret (GITHUB_TOKEN fallback) and an empty
+  value as an unrouted input — failing closed — because the runner does
+  not enforce `required` for composite-action inputs at runtime. An auth preflight fails loudly — naming the secret and the remedy — if it stops
   authenticating (PATs expire; rotate in Settings > Secrets, or unset it to
   fall back to `GITHUB_TOKEN`). The token is selected AFTER the collector
   tests so it is never ambient during `bun install`/`bun test`. No secret

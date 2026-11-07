@@ -4,8 +4,14 @@
 #
 # The operational workflows (collect-data*.yml) and composite actions are
 # the only code here that never runs in CI otherwise — without this gate a
-# typo in them merges green and first executes as the monthly cron. They
-# are linted (actionlint) on every PR that touches them.
+# typo in them merges green and first executes as the monthly cron. The
+# WORKFLOWS are linted (actionlint) on every PR that touches them; note the
+# boundary: actionlint opens local composite actions only to validate
+# call-site `with:` inputs — it does not lint expressions or steps inside
+# them (it missed the secrets-context bug in run-token that the first real
+# run caught), so action internals get no static lint here. The run-token
+# policy shell is therefore extracted to scripts/run-token.sh and unit-
+# tested in tests/collector/run-token.test.ts.
 name: ci-collector
 
 on:
@@ -16,10 +22,7 @@ on:
       - "config/**"
       - "tsconfig.collector.json"
       - ".bun-version"
-      - ".github/workflows/ci-collector.yml"
-      - ".github/workflows/collect-data.yml"
-      - ".github/workflows/collect-data-heartbeat.yml"
-      - ".github/workflows/data-pr-guard.yml"
+      - ".github/workflows/**"
       - ".github/actions/**"
       - "bun.lock"
       - "package.json"
@@ -32,10 +35,7 @@ on:
       - "config/**"
       - "tsconfig.collector.json"
       - ".bun-version"
-      - ".github/workflows/ci-collector.yml"
-      - ".github/workflows/collect-data.yml"
-      - ".github/workflows/collect-data-heartbeat.yml"
-      - ".github/workflows/data-pr-guard.yml"
+      - ".github/workflows/**"
       - ".github/actions/**"
       - "bun.lock"
       - "package.json"
@@ -56,7 +56,7 @@ jobs:
           bun-version: ${{ env.BUN_VERSION }}
       - name: Install dependencies
         run: bun install --frozen-lockfile
-      - name: Lint workflows and actions (actionlint)
+      - name: Lint workflows (actionlint)
         run: |
           set -euo pipefail
           curl -sSfL https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz | tar -xz -C /tmp actionlint
