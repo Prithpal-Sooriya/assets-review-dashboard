@@ -1,4 +1,6 @@
 node_modules/
+# Built UI test variants — keep in sync with tests/ui/variants.ts (the single
+# source of truth for the variant matrix; gitignore cannot import it).
 dist/
 dist-real/
 dist-empty/
@@ -6,7 +8,7 @@ dist-invalid/
 test-results/
 playwright-report/
 .vercel/
+.env*
+!.env.example
 *.log
 .DS_Store
-.vercel
-.env*

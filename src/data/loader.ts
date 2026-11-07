@@ -41,7 +41,11 @@ export function loadDashboard(input: {
     loadError: input.loadError,
   }
 
-  if (input.source === 'none' || input.raw === '') {
+  // Only a total absence of data is "missing". An existing-but-empty file
+  // (e.g. a truncated collector write) must surface as an explicit invalid
+  // state via the parser's "Data file is empty" error — never as "missing",
+  // which would tell the operator the wrong thing.
+  if (input.source === 'none') {
     return {
       ...base,
       status: 'missing',

@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react'
 const VIRTUAL_ID = 'virtual:dashboard-data'
 const RESOLVED_ID = '\0' + VIRTUAL_ID
 const DEFAULT_DATA_PATH = 'data/dashboard.json'
-const DEMO_DATA_PATH = 'public/sample/demo-dashboard.json'
+const DEMO_DATA_PATH = 'src/data/demo-fixture.json'
 
 export interface DashboardBuildInput {
   source: 'real' | 'demo' | 'none'
@@ -21,13 +21,24 @@ export interface DashboardBuildInput {
  * Resolution order:
  *  1. $DASHBOARD_DATA_PATH (explicit override, used by UI tests)
  *  2. data/dashboard.json   (real data produced by the collector)
- *  3. public/sample/demo-dashboard.json (clearly-labelled synthetic demo fixture)
+ *  3. src/data/demo-fixture.json (clearly-labelled synthetic demo fixture)
  *
  * `source` is 'demo' whenever the demo fixture is used, so the UI can show a
  * prominent demo banner and never present fixture numbers as real findings.
  */
 export function readDashboardBuildInput(projectRoot: string): DashboardBuildInput {
   const override = process.env.DASHBOARD_DATA_PATH
+  if (override !== undefined) {
+    // Path safety: the override must be a repo-relative path that resolves
+    // inside the project. It is embedded into the public bundle, so absolute
+    // paths or traversal outside the repo would publish arbitrary build-host
+    // files (credentials, ~/.vercel, etc.).
+    if (path.isAbsolute(override) || override.split(path.sep).includes('..')) {
+      throw new Error(
+        `DASHBOARD_DATA_PATH must be a path relative to the project root (got: ${override})`,
+      )
+    }
+  }
   const candidates: string[] = override
     ? [override]
     : [DEFAULT_DATA_PATH, DEMO_DATA_PATH]
@@ -35,6 +46,11 @@ export function readDashboardBuildInput(projectRoot: string): DashboardBuildInpu
   let firstError: string | null = null
   for (const candidate of candidates) {
     const abs = path.resolve(projectRoot, candidate)
+    if (path.relative(projectRoot, abs).startsWith('..')) {
+      throw new Error(
+        `DASHBOARD_DATA_PATH must resolve inside the project (got: ${candidate})`,
+      )
+    }
     try {
       const raw = fs.readFileSync(abs, 'utf8')
       const isDemo = path.resolve(projectRoot, DEMO_DATA_PATH) === abs
@@ -108,11 +124,32 @@ function dashboardDataPlugin(projectRoot: string): Plugin {
 
 export default defineConfig(() => {
   const projectRoot = path.resolve(process.cwd())
+  const input = readDashboardBuildInput(projectRoot)
+
+  // Guard: real data must never be built for a public production target on
+  // the current (hobby) Vercel plan — production is verified public and
+  // password protection is unavailable (see docs/deployment.md). Deploying
+  // real data requires the owner to resolve protection AND set this explicit
+  // opt-in, so the barrier is code, not prose.
+  const isVercelProduction = process.env.VERCEL_ENV === 'production'
+  if (isVercelProduction && input.source === 'real' && process.env.DASHBOARD_ALLOW_REAL_DATA !== '1') {
+    throw new Error(
+      [
+        'Refusing to build: this build embeds REAL dashboard data but targets a production deployment.',
+        'The production alias is verified PUBLIC on the hobby plan (docs/deployment.md — protection verification).',
+        'Deploy real data to protected preview URLs only, or resolve production access control and set',
+        'DASHBOARD_ALLOW_REAL_DATA=1 to acknowledge it explicitly.',
+      ].join(' '),
+    )
+  }
+
   return {
     plugins: [react(), dashboardDataPlugin(projectRoot)],
     build: {
       outDir: process.env.VITE_OUT_DIR ?? 'dist',
-      sourcemap: true,
+      // Sourcemaps embed full original sources (sourcesContent) — they are
+      // for local debugging only and must not ship on public deployments.
+      sourcemap: process.env.VITE_SOURCEMAP === '1',
     },
   }
 })

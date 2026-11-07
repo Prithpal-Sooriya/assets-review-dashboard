@@ -1,6 +1,6 @@
 import { test, expect, type Page } from '@playwright/test'
 import { AxeBuilder } from '@axe-core/playwright'
-import demoJson from '../../public/sample/demo-dashboard.json' with { type: 'json' }
+import demoJson from '../../src/data/demo-fixture.json' with { type: 'json' }
 import {
   aggregateMonths,
   displayWindow,
@@ -171,7 +171,7 @@ test('mobile viewport has no horizontal overflow', async ({ page }) => {
 test('footer records provenance, schema and privacy stance', async ({ page }) => {
   const footer = page.locator('.site-footer')
   await expect(footer).toContainText('Synthetic demo fixture')
-  await expect(footer).toContainText('public/sample/demo-dashboard.json')
+  await expect(footer).toContainText('src/data/demo-fixture.json')
   await expect(footer).toContainText('dashboard.json v1')
   await expect(footer).toContainText('no individual reviewer data')
 })
@@ -185,5 +185,5 @@ test('has no detectable accessibility violations (axe)', async ({ page }) => {
 })
 
 test('window caption reflects the rolling 12+partial month default', async ({ page }) => {
-  await expect(page.getByText('Window: Nov 2025 – Nov 2026 · 13 months')).toBeVisible()
+  await expect(page.getByText('Window: Nov 2025 – Nov 2026 · 13 months with data')).toBeVisible()
 })

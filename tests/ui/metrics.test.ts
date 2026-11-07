@@ -16,7 +16,7 @@ import {
 import { formatMonthKey, monthKeyOfISO, repoDisplayName } from '../../src/data/format'
 
 const demo: DashboardData = JSON.parse(
-  readFileSync(new URL('../../public/sample/demo-dashboard.json', import.meta.url), 'utf8'),
+  readFileSync(new URL('../../src/data/demo-fixture.json', import.meta.url), 'utf8'),
 ) as DashboardData
 
 describe('orderedMonthKeys / displayWindow', () => {

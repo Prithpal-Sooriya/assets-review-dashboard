@@ -8,7 +8,7 @@ import {
 import type { DashboardData } from '../../src/data/types'
 
 const demo: DashboardData = JSON.parse(
-  readFileSync(new URL('../../public/sample/demo-dashboard.json', import.meta.url), 'utf8'),
+  readFileSync(new URL('../../src/data/demo-fixture.json', import.meta.url), 'utf8'),
 ) as DashboardData
 
 describe('parseDashboardJson', () => {
@@ -187,5 +187,39 @@ describe('demo fixture privacy invariants', () => {
   })
   test('labels the data as demo in methodology notes', () => {
     expect(demo.methodology.notes.some((n) => n.includes('DEMO SAMPLE DATA'))).toBe(true)
+  })
+})
+
+describe('validateDashboardData — hostile shapes must not throw', () => {
+  const base = (): DashboardData => JSON.parse(JSON.stringify(demo))
+
+  test('missing months array yields errors, not a TypeError', () => {
+    const d = base() as unknown as { months?: unknown }
+    delete d.months
+    const r = validateDashboardData(d as unknown as DashboardData)
+    expect(r.errors.some((e) => e.path === '$.months' && /expected an array/.test(e.message))).toBe(true)
+  })
+
+  test('null months yields errors, not a TypeError', () => {
+    const d = base() as unknown as { months?: unknown }
+    d.months = null
+    const r = validateDashboardData(d as unknown as DashboardData)
+    expect(r.errors.some((e) => e.path === '$.months')).toBe(true)
+  })
+
+  test('non-array coverage alongside valid months yields errors, not a TypeError', () => {
+    const d = base() as unknown as { coverage?: unknown }
+    d.coverage = 'not-a-list'
+    const r = validateDashboardData(d as unknown as DashboardData)
+    expect(r.errors.some((e) => e.path === '$.coverage' && /expected an array/.test(e.message))).toBe(true)
+  })
+
+  test('missing months AND non-array coverage together yield errors, not a TypeError', () => {
+    const d = base() as unknown as { months?: unknown; coverage?: unknown }
+    delete d.months
+    d.coverage = 7
+    const r = validateDashboardData(d as unknown as DashboardData)
+    expect(r.errors.some((e) => e.path === '$.months')).toBe(true)
+    expect(r.errors.some((e) => e.path === '$.coverage')).toBe(true)
   })
 })

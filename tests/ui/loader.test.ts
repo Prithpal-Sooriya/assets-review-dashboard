@@ -4,7 +4,7 @@ import { loadDashboard } from '../../src/data/loader'
 import type { DashboardData } from '../../src/data/types'
 
 const demoRaw = readFileSync(
-  new URL('../../public/sample/demo-dashboard.json', import.meta.url), 'utf8',
+  new URL('../../src/data/demo-fixture.json', import.meta.url), 'utf8',
 )
 
 const realRaw = readFileSync(
@@ -15,7 +15,7 @@ const demoData = JSON.parse(demoRaw) as DashboardData
 
 describe('loadDashboard', () => {
   test('demo source renders ok with demo flag', () => {
-    const loaded = loadDashboard({ source: 'demo', dataPath: 'public/sample/demo-dashboard.json', raw: demoRaw, loadError: null })
+    const loaded = loadDashboard({ source: 'demo', dataPath: 'src/data/demo-fixture.json', raw: demoRaw, loadError: null })
     expect(loaded.status).toBe('ok')
     expect(loaded.isDemo).toBe(true)
     expect(loaded.data?.months.length).toBe(39)
@@ -63,15 +63,60 @@ describe('loadDashboard', () => {
   })
 
   test('read failures on the real path surface as warnings after fallback', () => {
-    const loaded = loadDashboard({ source: 'demo', dataPath: 'public/sample/demo-dashboard.json', raw: demoRaw, loadError: 'Could not read data/dashboard.json: EACCES' })
+    const loaded = loadDashboard({ source: 'demo', dataPath: 'src/data/demo-fixture.json', raw: demoRaw, loadError: 'Could not read data/dashboard.json: EACCES' })
     expect(loaded.status).toBe('ok')
     expect(loaded.warnings.some((w) => w.message.includes('EACCES'))).toBe(true)
   })
 
   test('generatedAt and range survive loading', () => {
-    const loaded = loadDashboard({ source: 'demo', dataPath: 'public/sample/demo-dashboard.json', raw: demoRaw, loadError: null })
+    const loaded = loadDashboard({ source: 'demo', dataPath: 'src/data/demo-fixture.json', raw: demoRaw, loadError: null })
     expect(loaded.data?.generatedAt).toBe(demoData.generatedAt)
     expect(loaded.data?.range.start).toBe('2025-11-01T00:00:00Z')
     expect(loaded.data?.range.end).toBe('2026-11-07T00:00:00Z')
+  })
+})
+
+describe('loadDashboard — empty-file semantics', () => {
+  test('an existing but empty real data file is invalid, not missing', () => {
+    const loaded = loadDashboard({ source: 'real', dataPath: 'data/dashboard.json', raw: '', loadError: null })
+    expect(loaded.status).toBe('invalid')
+    expect(loaded.parseError).toContain('empty')
+  })
+
+  test('an empty demo fixture is invalid, not missing', () => {
+    const loaded = loadDashboard({ source: 'demo', dataPath: 'src/data/demo-fixture.json', raw: '', loadError: null })
+    expect(loaded.status).toBe('invalid')
+    expect(loaded.isDemo).toBe(true)
+  })
+
+  test('whitespace-only real data is invalid', () => {
+    const loaded = loadDashboard({ source: 'real', dataPath: 'data/dashboard.json', raw: '   \n ', loadError: null })
+    expect(loaded.status).toBe('invalid')
+    expect(loaded.parseError).toBeTruthy()
+  })
+})
+
+describe('loadDashboard — malformed structural shapes stay in-band', () => {
+  const shell = (raw: object): string => JSON.stringify(raw)
+
+  test('data without a months array loads to the invalid state (no throw)', () => {
+    const loaded = loadDashboard({
+      source: 'real',
+      dataPath: 'data/dashboard.json',
+      raw: shell({ schemaVersion: 1, generatedAt: '2026-11-07T10:15:00Z', range: { start: '2026-07-01T00:00:00Z', end: '2026-11-01T00:00:00Z' }, methodology: { notes: [] }, coverage: [], prs: [] }),
+      loadError: null,
+    })
+    expect(loaded.status).toBe('invalid')
+    expect(loaded.errors.some((e) => e.path === '$.months')).toBe(true)
+  })
+
+  test('data with months: [] and no range key loads to the empty state (no throw)', () => {
+    const loaded = loadDashboard({
+      source: 'real',
+      dataPath: 'data/dashboard.json',
+      raw: shell({ schemaVersion: 1, generatedAt: '2026-11-07T10:15:00Z', methodology: { notes: [] }, coverage: [], months: [], prs: [] }),
+      loadError: null,
+    })
+    expect(loaded.status === 'empty' || loaded.status === 'invalid').toBe(true)
   })
 })

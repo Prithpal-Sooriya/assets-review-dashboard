@@ -1,17 +1,23 @@
 import { defineConfig } from '@playwright/test'
+import { UI_VARIANTS } from './tests/ui/variants'
 
 /**
  * UI e2e tests run against built preview servers (production build path,
- * including the build-time data loader) for four data variants:
- *   demo    — public/sample/demo-dashboard.json fallback (port 4173)
- *   real    — tests/ui/fixtures/sample-real.json via DASHBOARD_DATA_PATH (4174)
- *   empty   — valid schema, no records (4175)
- *   invalid — contract violations (4176)
- * Run `bun run test:ui` (builds all variants first) or `bun run build:test-fixtures` manually.
- * Uses the locally installed Google Chrome; no browser download required.
+ * including the build-time data loader) for every variant in
+ * tests/ui/variants.ts (single source of truth: projects, ports and outDirs
+ * are all derived from that table).
+ *
+ * Run `bun run test:ui` (builds all variants first) or
+ * `bun run build:test-fixtures` manually.
+ *
+ * Browser: defaults to the locally installed Google Chrome (channel 'chrome',
+ * no browser download). Set PW_CHANNEL to override for other environments,
+ * e.g. PW_CHANNEL=chromium in CI after `bunx playwright install chromium`.
  */
 
-function previewServer(port: number, outDir: string, name: string) {
+const useChannel = process.env.PW_CHANNEL ?? 'chrome'
+
+function previewServer(outDir: string, port: number, name: string) {
   return {
     name,
     command: `bunx vite preview --outDir ${outDir} --port ${port} --strictPort`,
@@ -30,22 +36,18 @@ export default defineConfig({
   workers: 4,
   reporter: [['list']],
   use: {
-    channel: 'chrome',
+    channel: useChannel,
     headless: true,
     colorScheme: 'light',
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
   },
-  projects: [
-    { name: 'demo', testMatch: /dashboard\.e2e\.ts/, use: { baseURL: 'http://localhost:4173' } },
-    { name: 'real', testMatch: /real\.e2e\.ts/, use: { baseURL: 'http://localhost:4174' } },
-    { name: 'empty', testMatch: /empty\.e2e\.ts/, use: { baseURL: 'http://localhost:4175' } },
-    { name: 'invalid', testMatch: /invalid\.e2e\.ts/, use: { baseURL: 'http://localhost:4176' } },
-  ],
-  webServer: [
-    previewServer(4173, 'dist', 'demo'),
-    previewServer(4174, 'dist-real', 'real'),
-    previewServer(4175, 'dist-empty', 'empty'),
-    previewServer(4176, 'dist-invalid', 'invalid'),
-  ],
+  projects: UI_VARIANTS.map((variant) => ({
+    name: variant.name,
+    testMatch: variant.testMatch,
+    use: { baseURL: `http://localhost:${variant.port}` },
+  })),
+  webServer: UI_VARIANTS.map((variant) =>
+    previewServer(variant.outDir, variant.port, variant.name),
+  ),
 })

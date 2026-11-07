@@ -13,7 +13,7 @@ The Vite build resolves the `virtual:dashboard-data` module (see
    test builds,
 2. `data/dashboard.json` — the collector's committed output (not present in
    this branch; owned by the collector role),
-3. `public/sample/demo-dashboard.json` — a clearly-labelled synthetic demo
+3. `src/data/demo-fixture.json` — a clearly-labelled synthetic demo
    fixture.
 
 If the data file is missing, invalid, or empty the app refuses to render
@@ -38,8 +38,20 @@ DASHBOARD_DATA_PATH=data/dashboard.json bunx vite build --outDir dist-real
 bunx vite preview --outDir dist-real --port 4174
 ```
 
-`bun run test:ui` builds all four variants (demo, real-shaped, empty, invalid)
-and runs the Playwright suite against them.
+`bun run test:ui` builds all four variants (demo, real-shaped, empty, invalid —
+see `tests/ui/variants.ts`) and runs the Playwright suite against them.
+
+Prerequisites and knobs:
+
+- e2e tests default to the locally installed **Google Chrome** (`channel:
+  'chrome'`, no browser download). Set `PW_CHANNEL=chromium` to use the
+  Playwright-bundled browser instead (after `bunx playwright install
+  chromium`).
+- Sourcemaps are off by default and only for local debugging
+  (`VITE_SOURCEMAP=1 bun run build`); they embed full original sources and
+  must not ship on public deployments.
+- The full gate before any deploy: `bun run typecheck && bun run test:unit &&
+  bun run test:ui`.
 
 ## Vercel
 
@@ -54,9 +66,12 @@ Project setup (owner: the repo owner — do **not** create projects on other
 people's accounts):
 
 ```sh
-vercel link        # once, in the repo root
-vercel deploy --prebuilt   # preview deployment
-vercel --prod --prebuilt   # production
+vercel link                 # once, in the repo root
+vercel build                # build .vercel/output from dist/
+vercel deploy --prebuilt    # PREVIEW deployment (protected — verified below)
+# production deploys: see the protection requirement below — do not run
+# `vercel deploy --prebuilt --prod` with real data until protection is
+# resolved; the build itself also refuses (see the guard note below).
 ```
 
 ### Private protection — REQUIRED before any real-data deployment
@@ -104,16 +119,36 @@ result, date, and who checked:
 Until then, real-data builds go to preview URLs only (verified private), or
 stay local.
 
+This is enforced in code, not just prose: `vite.config.ts` **fails any build
+that embeds real data for a Vercel production target** (`VERCEL_ENV=production`)
+unless `DASHBOARD_ALLOW_REAL_DATA=1` is set explicitly. Resolving protection is
+still the owner's deliberate decision; the guard just makes the routine
+monthly refresh unable to publish real data publicly by accident.
+
 ### Data refresh
 
-The dashboard is a snapshot; it only changes when it is rebuilt:
+The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
 
-1. The collector updates `data/dashboard.json` (monthly, after the month
-   closes; PR-reviewed on the default branch).
+1. The collector updates `data/dashboard.json` (after the month closes;
+   PR-reviewed on the default branch).
 2. Merge the collector PR.
-3. Re-run the frontend build (`vercel deploy --prebuilt` or a Git-connected
-   redeploy). The new data is embedded; Vercel's immutable asset hashing means
-   old bundles are not mutated.
+3. Rebuild and deploy **to a preview URL only** (`vercel build && vercel
+   deploy --prebuilt`): previews are the verified-private surface. Do **not**
+   reconnect the Git integration (auto-deploy would target the public
+   production alias on every merge) and do **not** run `--prod` while the
+   production alias is public — the build-time guard in `vite.config.ts`
+   refuses exactly that combination unless protection was resolved and
+   `DASHBOARD_ALLOW_REAL_DATA=1` set.
 
 There is no cron, webhook or runtime refresh by design: every number on the
 site traces to one reviewed commit.
+
+**If real data ever lands on a public URL anyway** (alias mistake, guard
+bypassed): redeploying does **not** unpublish it. Vercel keeps every
+deployment live at its unique `project-<hash>.vercel.app` URL. Delete the
+affected deployments explicitly (`vercel rm <deployment-url>` for each, or the
+dashboard) and treat the exposed data as disclosed.
+
+**Re-verify protection** (both preview and production, logged-out curl) after
+any Vercel plan change, project transfer, or protection setting change — and
+at least quarterly. Update the verification record above when you do.

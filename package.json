@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:test-fixtures": "bun run build && DASHBOARD_DATA_PATH=tests/ui/fixtures/sample-real.json vite build --outDir dist-real && DASHBOARD_DATA_PATH=tests/ui/fixtures/empty.json vite build --outDir dist-empty && DASHBOARD_DATA_PATH=tests/ui/fixtures/invalid.json vite build --outDir dist-invalid",
+    "build:test-fixtures": "bun tests/ui/build-fixtures.ts",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.json --noEmit && tsc -p tsconfig.tests.json --noEmit",
     "test:unit": "bun test tests/ui",

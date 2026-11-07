@@ -22,11 +22,17 @@ export function niceMax(value: number): number {
 }
 
 export function niceTicks(max: number, count = 5): number[] {
+  if (!Number.isFinite(max) || max <= 0) return [0]
+  // Small integer maxima (1, 2) would otherwise round to duplicate tick
+  // values — duplicate React keys and double-drawn axis labels.
+  if (Number.isInteger(max) && max < count) {
+    return Array.from({ length: max + 1 }, (_, i) => i)
+  }
   const ticks: number[] = []
   for (let i = 0; i <= count; i++) {
     ticks.push(Math.round((max / count) * i))
   }
-  return ticks
+  return [...new Set(ticks)]
 }
 
 export interface BarLayout {

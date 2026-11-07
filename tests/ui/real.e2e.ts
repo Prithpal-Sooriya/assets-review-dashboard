@@ -17,7 +17,7 @@ test('real-shaped data renders without any demo labelling', async ({ page }) => 
 
 test('window, totals and coverage reflect the fixture', async ({ page }) => {
   await page.goto('/')
-  await expect(page.getByText('Window: Jul 2026 – Oct 2026 · 4 months')).toBeVisible()
+  await expect(page.getByText('Window: Jul 2026 – Oct 2026 · 4 months with data')).toBeVisible()
   const reviewed = (totals.internalReviewedPrs + totals.externalReviewedPrs).toLocaleString('en-US')
   await expect(page.locator('.stat', { hasText: 'Reviewed PRs' }).locator('.stat__value')).toHaveText(reviewed)
   await expect(page.locator('.bar-group')).toHaveCount(4)

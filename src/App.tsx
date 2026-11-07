@@ -28,11 +28,13 @@ export default function App() {
   const [repoFilter, setRepoFilter] = useState<string | null>(null)
   const loaded = dashboard
 
+  // Defensive access: in missing/invalid/empty states `data` may be present
+  // but malformed — never dereference its fields before `ok` is established.
   const monthKeys = useMemo(
-    () => (loaded.data ? orderedMonthKeys(loaded.data.months) : []),
+    () => (loaded.data && Array.isArray(loaded.data.months) ? orderedMonthKeys(loaded.data.months) : []),
     [loaded.data],
   )
-  const { shown: windowMonths, omittedCount } = useMemo(
+  const { shown: windowMonths, omittedCount, gapCount } = useMemo(
     () => displayWindow(monthKeys),
     [monthKeys],
   )
@@ -42,24 +44,33 @@ export default function App() {
   const data = loaded.data
 
   const repos = useMemo(
-    () => (data ? reposInData(data.months, data.coverage) : []),
+    () => (data && Array.isArray(data.months) && Array.isArray(data.coverage)
+      ? reposInData(data.months, data.coverage)
+      : []),
     [data],
   )
   const aggregates = useMemo(
-    () => (data ? aggregateMonths(data.months, repoFilter, windowMonths) : []),
+    () => (data && Array.isArray(data.months) ? aggregateMonths(data.months, repoFilter, windowMonths) : []),
     [data, repoFilter, windowMonths],
   )
   const total = useMemo(() => totalAggregate(aggregates), [aggregates])
   const partialMonths = useMemo(
-    () => (data ? incompleteCoverageMonths(data.coverage) : new Set<string>()),
+    () => (data && Array.isArray(data.coverage) ? incompleteCoverageMonths(data.coverage) : new Set<string>()),
     [data],
   )
   const effectiveSelected = windowMonths.includes(selectedMonth)
     ? selectedMonth
     : (latestMonth(windowMonths) ?? '')
 
-  const windowLabel = data
-    ? `Window: ${formatMonthKey(windowMonths[0] ?? data.range.start)} – ${formatMonthKey(windowMonths[windowMonths.length - 1] ?? data.range.end)} · ${windowMonths.length} month${windowMonths.length === 1 ? '' : 's'}`
+  // Only read data.range when the window is empty but data is structurally
+  // valid; the invalid-state path renders from errors only, never from data.
+  // The caption counts months with data and calls out calendar gaps honestly.
+  const windowLabel = ok
+    ? `Window: ${formatMonthKey(windowMonths[0] ?? (typeof data?.range?.start === 'string' ? data.range.start : ''))} – ${formatMonthKey(
+        windowMonths[windowMonths.length - 1] ?? (typeof data?.range?.end === 'string' ? data.range.end : ''),
+      )} · ${windowMonths.length} month${windowMonths.length === 1 ? '' : 's'} with data${
+        gapCount > 0 ? ` · ${gapCount} calendar month${gapCount === 1 ? '' : 's'} without data in window` : ''
+      }`
     : ''
 
   const selectMonth = (month: string) => setSelectedMonth(month)

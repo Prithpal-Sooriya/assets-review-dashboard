@@ -21,19 +21,36 @@ export function orderedMonthKeys(months: MonthEntry[]): string[] {
 }
 
 /**
- * Default rolling display window: the trailing 12 completed calendar months
- * plus the current partial month (13 keys). Earlier months are omitted from
- * the default view.
+ * Default rolling display window: the trailing 13 distinct month keys present
+ * in the data (nominally 12 completed calendar months + the current partial).
+ * Earlier months are omitted from the default view.
+ *
+ * If a calendar month has no data at all (collection gap — no months[] row
+ * for any repo), it simply has no key here; `gapCount` reports how many
+ * calendar months inside the first..last span carry no data so the UI can
+ * label the window honestly instead of implying a contiguous 13 months.
  */
-export function displayWindow(monthKeys: string[]): { shown: string[]; omittedCount: number } {
+export function displayWindow(monthKeys: string[]): {
+  shown: string[]
+  omittedCount: number
+  gapCount: number
+} {
   const sorted = [...monthKeys].sort()
-  if (sorted.length <= DISPLAY_MONTHS) {
-    return { shown: sorted, omittedCount: 0 }
-  }
-  return {
-    shown: sorted.slice(sorted.length - DISPLAY_MONTHS),
-    omittedCount: sorted.length - DISPLAY_MONTHS,
-  }
+  const shown = sorted.length <= DISPLAY_MONTHS ? sorted : sorted.slice(sorted.length - DISPLAY_MONTHS)
+  const gapCount = shown.length === 0
+    ? 0
+    : calendarMonthSpan(shown[0]!, shown[shown.length - 1]!) - shown.length
+  const omittedCount = sorted.length - shown.length
+  return { shown, omittedCount, gapCount }
+}
+
+/** Number of calendar months from `start` to `end` inclusive (YYYY-MM keys). */
+export function calendarMonthSpan(start: string, end: string): number {
+  const s = /^(\d{4})-(\d{2})$/.exec(start)
+  const e = /^(\d{4})-(\d{2})$/.exec(end)
+  if (!s || !e) return 1
+  const months = (Number(e[1]) - Number(s[1])) * 12 + (Number(e[2]) - Number(s[2]))
+  return months >= 0 ? months + 1 : 1
 }
 
 /** Repos referenced by months/coverage, in canonical order. */

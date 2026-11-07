@@ -130,11 +130,16 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
 
   const seenMonthRepo = new Set<string>()
   const monthsByRepo = new Map<string, MonthEntry[]>()
+  // Safe locals: never dereference data.months / data.coverage after their
+  // Array.isArray checks fail — malformed input must produce validation
+  // errors, never a thrown TypeError (which would white-screen the app).
+  const monthsArr: MonthEntry[] = Array.isArray(at('months')) ? (data.months as MonthEntry[]) : []
+  const coverageArr: CoverageEntry[] = Array.isArray(at('coverage')) ? (data.coverage as CoverageEntry[]) : []
 
   if (!Array.isArray(at('months'))) {
     errors.push({ path: '$.months', message: 'expected an array' })
   } else {
-    data.months.forEach((entry: MonthEntry, i: number) => {
+    monthsArr.forEach((entry: MonthEntry, i: number) => {
       const path = `$.months[${i}]`
       if (!isRecord(entry)) {
         errors.push({ path, message: 'expected an object' })
@@ -172,7 +177,7 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
     errors.push({ path: '$.coverage', message: 'expected an array' })
   } else {
     const seenCoverage = new Set<string>()
-    data.coverage.forEach((entry: CoverageEntry, i: number) => {
+    coverageArr.forEach((entry: CoverageEntry, i: number) => {
       const path = `$.coverage[${i}]`
       if (!isRecord(entry)) {
         errors.push({ path, message: 'expected an object' })
@@ -194,7 +199,7 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
       }
       seenCoverage.add(key)
     })
-    if (data.coverage.length === 0 && data.months.length > 0) {
+    if (coverageArr.length === 0 && monthsArr.length > 0) {
       warnings.push({
         path: '$.coverage',
         message: 'coverage is empty although months exist; completeness cannot be shown',
@@ -204,7 +209,7 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
 
   const seenPrIds = new Set<string>()
   const seenPrRepoNumbers = new Set<string>()
-  const monthKeys = new Set(data.months.map((m: MonthEntry) => m.month))
+  const monthKeys = new Set(monthsArr.map((m: MonthEntry) => m.month))
 
   if (!Array.isArray(at('prs'))) {
     errors.push({ path: '$.prs', message: 'expected an array' })
@@ -294,9 +299,9 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
   }
 
   // Cross-check (warning): months[] aggregates vs PR-level derivation.
-  if (errors.length === 0 && data.months.length > 0) {
+  if (errors.length === 0 && monthsArr.length > 0) {
     const derived = deriveAggregatesFromPrs(data.prs)
-    for (const entry of data.months) {
+    for (const entry of monthsArr) {
       const d = derived.get(`${entry.repo}|${entry.month}`)
       if (!d) {
         if (entry.internalReviewedPrs + entry.externalReviewedPrs > 0) {
