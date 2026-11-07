@@ -12,8 +12,9 @@ The Vite build resolves the `virtual:dashboard-data` module (see
 1. `$DASHBOARD_DATA_PATH` — a path **relative to the project root** that
    resolves inside it (absolute paths, `..` traversal and symlink escapes are
    rejected at build time). Used by CI and local test builds.
-2. `data/dashboard.json` — the collector's committed output (not present on
-   the UI branch; produced and owned by the collector role in this repo),
+2. `data/dashboard.json` — the collector's committed output (committed on
+   the default branch by the collector role in this repo; production builds
+   embed it, UI test variants pin their own fixtures explicitly),
 3. `src/data/demo-fixture.json` — a clearly-labelled synthetic demo
    fixture.
 
@@ -33,13 +34,17 @@ the sample fixture and its "Sample data" labelling intact.
 
 ```sh
 bun install
-bun run build                 # demo fixture → dist/
+bun run build                 # data/dashboard.json → dist/ (demo fixture
+                              # only when no real data file is committed)
 bun run preview               # http://localhost:4173
 ```
 
-The e2e variant builds (real-shaped / empty / invalid fixtures) are produced by
-`bun run build:test-fixtures` into `dist-variants/` — no manual commands
-needed. Preview ports 4173-4176 must be free when running the suite
+The e2e variant builds are produced by `bun run build:test-fixtures` into
+`dist-variants/` — no manual commands needed. Every variant pins its fixture
+explicitly via `DASHBOARD_DATA_PATH` (`tests/ui/variants.ts`); in particular
+the demo variant pins `src/data/demo-fixture.json`, so a committed real
+`data/dashboard.json` can never leak into a test build. Preview ports
+4173-4176 must be free when running the suite
 (`--strictPort` fails fast on collisions; kill leftover preview servers).
 
 `bun run test:ui` builds all four variants (demo, real-shaped, empty, invalid —
