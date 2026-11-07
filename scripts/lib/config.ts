@@ -18,7 +18,25 @@ export function validateConfig(cfg: unknown): CollectorConfig {
   const c = cfg as CollectorConfig;
   const errors: string[] = [];
   if (!Array.isArray(c.repos) || c.repos.length === 0) errors.push("repos must be a non-empty array");
-  else if (c.repos.some((r) => !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(r))) errors.push("repos must be owner/name slugs");
+  else {
+    for (const r of c.repos) {
+      if (!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(r)) {
+        errors.push("repos must be owner/name slugs");
+        break;
+      }
+      // '.'/'..' segments would escape data/raw via path joins (a partition
+      // path like data/raw/../<month>.json) — reject them outright.
+      const segs = r.split("/");
+      if (segs.some((s) => s === "." || s === "..")) {
+        errors.push(`repos entry '${r}' must not contain '.' or '..' segments`);
+        break;
+      }
+    }
+    // Same-named repos in different orgs map to one partition directory and
+    // one walk-state file — silent cross-repo overwrite; reject collisions.
+    const slugs = c.repos.map((r) => repoSlug(r));
+    if (new Set(slugs).size !== slugs.length) errors.push("repo names must be unique (same-named repos would share partition files)");
+  }
   if (!Array.isArray(c.roster) || c.roster.length === 0) errors.push("roster must be a non-empty array");
   if (!Array.isArray(c.excludedReviewers)) errors.push("excludedReviewers must be an array");
   if (typeof c.teamLabel !== "string" || !c.teamLabel) errors.push("teamLabel must be a non-empty string");

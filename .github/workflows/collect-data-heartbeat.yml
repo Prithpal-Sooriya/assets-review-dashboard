@@ -13,8 +13,9 @@
 # (unmerged data PR / broken heartbeat / failed cron).
 #
 # Public-repo safe: everything read here is committed public data (PR
-# metadata only). The PAT-bearing path is guarded: runs must be on the
-# reviewed default ref, else they are refused before the secret is used.
+# metadata only). Token policy is shared with collect-data.yml via the
+# .github/actions/run-token composite action (single source: non-default
+# refs refused before the secret is touched; fine-grained PATs only).
 name: collect-data-heartbeat
 
 on:
@@ -40,36 +41,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
 
-      - name: Select run token (PAT only on the reviewed default ref)
-        env:
-          REF: ${{ github.ref }}
-          PAT_SECRET: ${{ secrets.DASHBOARD_GH_TOKEN }}
-          BASE_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          # Same guard as collect-data.yml: a workflow_dispatch of a feature
-          # branch would run that branch's workflow file — refuse before the
-          # PAT is ever used.
-          if [ "$REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
-            echo "::error::refusing to run from a non-default ref ($REF); dispatch from $DEFAULT_BRANCH"
-            exit 1
-          fi
-          if [ -n "$PAT_SECRET" ]; then
-            echo "RUN_TOKEN=$PAT_SECRET" >> "$GITHUB_ENV"
-          else
-            echo "RUN_TOKEN=$BASE_TOKEN" >> "$GITHUB_ENV"
-          fi
-
-      - name: Auth preflight (fail loudly on a broken secret)
-        env:
-          GH_TOKEN: ${{ env.RUN_TOKEN }}
-        run: |
-          set -euo pipefail
-          if ! gh api /rate_limit >/dev/null 2>&1; then
-            echo "::error::run token failed authentication — DASHBOARD_GH_TOKEN has likely EXPIRED; rotate it or unset it to fall back to GITHUB_TOKEN."
-            exit 1
-          fi
-
       - name: Checkout (always the reviewed default branch)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -81,6 +52,9 @@ jobs:
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
           bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Select run token (guard + fine-grained-only + auth preflight)
+        uses: ./.github/actions/run-token
 
       - name: Decision (tested resume core + freshness canary)
         env:

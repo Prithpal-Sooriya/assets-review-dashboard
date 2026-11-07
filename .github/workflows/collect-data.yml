@@ -2,9 +2,10 @@
 # (e.g. backfills). One combined workflow by design — the manual dispatch is
 # the same incremental, resumable collection as the monthly run.
 #
-# Flow: run the collector tests (gate), collect/aggregate with the repo's
-# reviewed default-branch code, then commit ONLY data/** to an orphan data
-# branch and open/update a single data PR. The data branch deliberately
+# Flow: run the collector tests (gate, before any token beyond the default
+# GITHUB_TOKEN touches the environment), then collect/aggregate with the
+# repo's reviewed default-branch code, then commit ONLY data/** to an orphan
+# data branch and open/update a single data PR. The data branch deliberately
 # carries no code (orphan, data-only) so nothing unreviewed ever executes in
 # this token-bearing job, and merging the data PR never touches source files.
 # The default branch is NEVER pushed directly.
@@ -18,13 +19,19 @@
 # collector failures (exit 1) fail this run red immediately (checkpoints are
 # already pushed) and are NOT auto-retried more than hourly by the heartbeat.
 #
-# Optional secret DASHBOARD_GH_TOKEN (a PAT with repo scope) raises the rate
-# budget vs GITHUB_TOKEN and is exposed ONLY to runs on the reviewed
-# default ref (scheduled runs and dispatches from the default branch); any
-# other ref is refused before the PAT is used. It is never written anywhere
-# persistent, and an auth preflight fails loudly on expiry. Note: data PRs
-# do NOT trigger ci-collector.yml (its paths filter only matches code) —
-# the collector test step in THIS workflow is the gate for data runs.
+# Token policy (see .github/actions/run-token — single source for both
+# workflows): runs are refused from any non-default ref BEFORE the optional
+# secret is touched, and DASHBOARD_GH_TOKEN must be a FINE-GRAINED PAT
+# (github_pat_ …) scoped to this repository only — classic repo-scope PATs
+# (ghp_ …) are refused outright because a workflow guard only protects
+# unmodified default-branch copies, not writer-supplied branch copies, and a
+# stolen classic repo-scope token grants every repository its owner can
+# access. Honest guarantee: the guard protects runs of THIS repo's reviewed
+# workflow files; containment against repo writers additionally requires the
+# fine-grained scope. The token is selected AFTER the collector tests so it
+# is never ambient during `bun install` / `bun test`. Data PRs do NOT trigger
+# ci-collector.yml (its paths filter only matches code) — the collector test
+# step in THIS workflow is the gate for data runs.
 name: collect-data
 
 on:
@@ -58,29 +65,6 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: echo "DEFAULT_BRANCH=$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)" >> "$GITHUB_ENV"
 
-      - name: Select run token (PAT only on the reviewed default ref)
-        env:
-          REF: ${{ github.ref }}
-          PAT_SECRET: ${{ secrets.DASHBOARD_GH_TOKEN }}
-          BASE_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          # A repo-scope PAT may only ever be exposed to runs whose workflow
-          # file and checkout are the reviewed default branch. Anything else
-          # (a workflow_dispatch of a feature branch would run that branch's
-          # workflow file) is refused here, BEFORE any PAT-bearing step.
-          if [ "$REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
-            echo "::error::refusing to run from a non-default ref ($REF); dispatch from $DEFAULT_BRANCH so only reviewed code executes"
-            exit 1
-          fi
-          if [ -n "$PAT_SECRET" ]; then
-            echo "RUN_TOKEN=$PAT_SECRET" >> "$GITHUB_ENV"
-            echo "run token: DASHBOARD_GH_TOKEN"
-          else
-            echo "RUN_TOKEN=$BASE_TOKEN" >> "$GITHUB_ENV"
-            echo "run token: GITHUB_TOKEN"
-          fi
-
       - name: Checkout (always the reviewed default branch — the code that runs)
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
@@ -94,39 +78,30 @@ jobs:
         with:
           bun-version: ${{ env.BUN_VERSION }}
 
-      - name: Auth preflight (fail loudly on a broken secret)
-        env:
-          GH_TOKEN: ${{ env.RUN_TOKEN }}
-        run: |
-          set -euo pipefail
-          # secrets.DASHBOARD_GH_TOKEN || github.token only falls back when
-          # the secret is ABSENT — an expired-but-present PAT yields 401s on
-          # every call with the fallback never engaging. Detect that here,
-          # named and with the remedy, instead of as inscrutable collector 401s.
-          if ! gh api /rate_limit >/dev/null 2>&1; then
-            echo "::error::run token failed authentication (gh api /rate_limit). If this is a scheduled run using DASHBOARD_GH_TOKEN, the secret has likely EXPIRED — rotate it (Settings > Secrets) or unset it to fall back to GITHUB_TOKEN."
-            exit 1
-          fi
-          gh api /rate_limit --jq '.resources.core | "rate budget: \(.remaining)/\(.limit)"'
-
-      - name: Collector tests (gate before any data is written)
+      - name: Collector tests (gate before any data is written; runs with only the default GITHUB_TOKEN ambient)
         run: |
           set -euo pipefail
           bun install --frozen-lockfile
           bun test tests/collector/
 
+      - name: Select run token (guard + fine-grained-only + auth preflight)
+        uses: ./.github/actions/run-token
+
       - name: Compute window and fixed run cutoff
         env:
           START_DATE_INPUT: ${{ inputs.start_date }}
-          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           set -euo pipefail
+          # Env-indirected, never interpolated into the shell. The month is
+          # validated as 01-12 with a bounded year — 2026-13-01 or 0000-01-01
+          # would otherwise survive to the engine and grind a full rate
+          # budget across ~24k bogus months before the job timeout.
           START_DATE="$START_DATE_INPUT"
           if [ -z "$START_DATE" ]; then
             START_DATE="$(date -u -d '-12 months' +%Y-%m-01)"
           fi
-          if ! [[ "$START_DATE" =~ ^[0-9]{4}-[0-9]{2}-01$ ]]; then
-            echo "::error::start_date must look like YYYY-MM-01 (first day of a month); got '$START_DATE'"
+          if ! [[ "$START_DATE" =~ ^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-01$ ]]; then
+            echo "::error::start_date must be a real first day of a month, like 2025-11-01; got '$START_DATE'"
             exit 1
           fi
           RUN_CUTOFF="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
@@ -134,7 +109,6 @@ jobs:
           {
             echo "RUN_CUTOFF=$RUN_CUTOFF"
             echo "FROM_MONTH=$FROM_MONTH"
-            echo "DEFAULT_BRANCH=$DEFAULT_BRANCH"
           } >> "$GITHUB_ENV"
           echo "collecting $FROM_MONTH .. current month, fixed cutoff $RUN_CUTOFF"
 
@@ -168,12 +142,15 @@ jobs:
           # partitions) onto the checkout's data/ so the walk resumes instead
           # of starting from scratch. --checksum (not mtime): freshly
           # checked-out main files always carry "now" mtimes, so content must
-          # decide — and the data branch is the authoritative freshest state
-          # (data changes must flow through it, not direct commits to main).
-          # Only when the data branch exists — on the very first run the
-          # orphan worktree is empty and the checkout's own data/ is the seed.
+          # decide. --delete: the data branch is the authoritative store —
+          # files it no longer has (e.g. walk-state the engine cleared after
+          # completing a walk) must not resurrect from the checkout, or a
+          # later dispatch reuses stale cached reviews and bakes them into a
+          # partition stamped with a fresh cutoff. Only when the data branch
+          # exists — on the very first run the orphan worktree is empty and
+          # the checkout's own data/ is the seed.
           if [ "${DATA_BRANCH_EXISTING:-0}" = "1" ]; then
-            rsync -a --checksum /tmp/data-tree/data/ data/ || {
+            rsync -a --checksum --delete /tmp/data-tree/data/ data/ || {
               echo "::error::failed to seed data/ from $DATA_BRANCH — refusing to start from scratch"
               exit 1
             }
@@ -203,7 +180,12 @@ jobs:
           GH_TOKEN: ${{ env.RUN_TOKEN }}
         run: |
           set -euo pipefail
-          bun run scripts/aggregate.ts --as-of "$RUN_CUTOFF" --out data/dashboard.json --prune
+          # --prune-keep-from = this run's requested window start: pruning
+          # must never delete months THIS run (or a paused backfill it
+          # resumes) is still collecting, or the resumed walk would skip
+          # months whose manifest entries were pruned away and stall. Months
+          # older than both the display window and the request are deleted.
+          bun run scripts/aggregate.ts --as-of "$RUN_CUTOFF" --out data/dashboard.json --prune --prune-keep-from "$FROM_MONTH"
 
       - name: Push aggregated data
         uses: ./.github/actions/push-data

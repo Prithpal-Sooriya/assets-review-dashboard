@@ -1,0 +1,66 @@
+# Composite action: ref guard + run-token selection + auth preflight.
+# Single source for the token policy used by collect-data.yml and
+# collect-data-heartbeat.yml (was copy-pasted and already drifting).
+#
+# Contract:
+#   requires: DEFAULT_BRANCH already set in the environment (runtime-derived
+#             via `gh repo view` by the caller)
+#   provides: RUN_TOKEN in $GITHUB_ENV for subsequent gh-calling steps
+#             (auth-preflighted)
+#
+# Guarantees (stated honestly): this guard protects runs of the UNMODIFIED
+# default-branch copy of a workflow. A repo writer can push a guard-stripped
+# branch copy and dispatch it — GitHub supplies secrets to any-branch
+# workflow_dispatch — so containment additionally REQUIRES a fine-grained
+# PAT: classic repo-scope tokens (ghp_ …, which grant every repo their owner
+# can access) are refused outright. Fine-grained PATs are github_pat_ … and
+# must be scoped to this repository only.
+name: run-token
+description: Guard non-default refs, select the run token (fine-grained PAT only), preflight auth
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      env:
+        REF: ${{ github.ref }}
+        PAT_SECRET: ${{ secrets.DASHBOARD_GH_TOKEN }}
+        BASE_TOKEN: ${{ github.token }}
+      run: |
+        set -euo pipefail
+        if [ "$REF" != "refs/heads/$DEFAULT_BRANCH" ]; then
+          echo "::error::refusing to run from a non-default ref ($REF); dispatch from $DEFAULT_BRANCH so only reviewed code executes"
+          exit 1
+        fi
+        if [ -n "$PAT_SECRET" ]; then
+          case "$PAT_SECRET" in
+            github_pat_*)
+              echo "RUN_TOKEN=$PAT_SECRET" >> "$GITHUB_ENV"
+              echo "run token: DASHBOARD_GH_TOKEN (fine-grained PAT)"
+              ;;
+            ghp_*)
+              echo "::error::DASHBOARD_GH_TOKEN is a CLASSIC PAT (ghp_ prefix) — classic repo-scope tokens grant every repository their owner can access and cannot be contained by workflow guards. Replace it with a fine-grained PAT (github_pat_ prefix) scoped to this repository only, or unset the secret to fall back to GITHUB_TOKEN."
+              exit 1
+              ;;
+            *)
+              echo "::error::DASHBOARD_GH_TOKEN has an unrecognized format — expected a fine-grained PAT (github_pat_ prefix). Unset it to fall back to GITHUB_TOKEN."
+              exit 1
+              ;;
+          esac
+        else
+          echo "RUN_TOKEN=$BASE_TOKEN" >> "$GITHUB_ENV"
+          echo "run token: GITHUB_TOKEN"
+        fi
+
+    - shell: bash
+      env:
+        GH_TOKEN: ${{ env.RUN_TOKEN }}
+      run: |
+        set -euo pipefail
+        # secrets.DASHBOARD_GH_TOKEN || github.token only falls back when the
+        # secret is ABSENT — an expired-but-present PAT yields 401s with the
+        # fallback never engaging. Detect that here, named, with the remedy.
+        if ! gh api /rate_limit >/dev/null 2>&1; then
+          echo "::error::run token failed authentication — DASHBOARD_GH_TOKEN has likely EXPIRED; rotate it (Settings > Secrets) or unset it to fall back to GITHUB_TOKEN."
+          exit 1
+        fi
+        gh api /rate_limit --jq '.resources.core | "rate budget: \(.remaining)/\(.limit)"'

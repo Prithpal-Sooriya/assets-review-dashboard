@@ -1,6 +1,11 @@
-# Collector CI: typecheck + deterministic aggregation/collection tests.
-# (UI CI lives in ci-ui.yml, owned by the frontend. Filenames deliberately
-# distinct so the two roles never edit each other's CI.)
+# Collector CI: typecheck + deterministic aggregation/collection tests +
+# workflow-lint. (UI CI lives in ci-ui.yml, owned by the frontend. Filenames
+# deliberately distinct so the two roles never edit each other's CI.)
+#
+# The operational workflows (collect-data*.yml) and composite actions are
+# the only code here that never runs in CI otherwise — without this gate a
+# typo in them merges green and first executes as the monthly cron. They
+# are linted (actionlint) on every PR that touches them.
 name: ci-collector
 
 on:
@@ -12,6 +17,9 @@ on:
       - "tsconfig.collector.json"
       - ".bun-version"
       - ".github/workflows/ci-collector.yml"
+      - ".github/workflows/collect-data.yml"
+      - ".github/workflows/collect-data-heartbeat.yml"
+      - ".github/actions/**"
       - "bun.lock"
       - "package.json"
   push:
@@ -24,6 +32,9 @@ on:
       - "tsconfig.collector.json"
       - ".bun-version"
       - ".github/workflows/ci-collector.yml"
+      - ".github/workflows/collect-data.yml"
+      - ".github/workflows/collect-data-heartbeat.yml"
+      - ".github/actions/**"
       - "bun.lock"
       - "package.json"
 
@@ -43,6 +54,11 @@ jobs:
           bun-version: ${{ env.BUN_VERSION }}
       - name: Install dependencies
         run: bun install --frozen-lockfile
+      - name: Lint workflows and actions (actionlint)
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz | tar -xz -C /tmp actionlint
+          /tmp/actionlint -color
       - name: Typecheck (collector tsconfig)
         run: bunx tsc -p tsconfig.collector.json --noEmit
       - name: Tests

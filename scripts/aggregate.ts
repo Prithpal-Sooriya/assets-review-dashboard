@@ -6,6 +6,7 @@
  *   bun run scripts/aggregate.ts [--as-of 2026-11-07T12:00:00Z]
  *                                [--data-dir data] [--config config/collector.json]
  *                                [--out data/dashboard.json] [--window-months 12]
+ *                                [--prune [--prune-keep-from YYYY-MM]]
  */
 import { mkdir, rename, writeFile } from "node:fs/promises";
 import * as path from "node:path";
@@ -21,6 +22,12 @@ function argValue(name: string): string | undefined {
   const v = argv[i + 1];
   if (!v || v.startsWith("--")) throw new Error(`--${name} requires a value`);
   return v;
+}
+
+/** Boolean flags (--prune) are distinct from value args: they take no value,
+ * so a following --flag or end-of-argv is normal, not an error. */
+function flagHas(name: string): boolean {
+  return process.argv.slice(2).includes(`--${name}`);
 }
 
 async function main(): Promise<number> {
@@ -88,10 +95,19 @@ async function main(): Promise<number> {
 
   // --prune: bound the data branch's growth under the rolling window —
   // delete partition files and manifest entries outside the aggregated
-  // window so closed months don't accumulate forever.
-  if (argValue("prune") !== undefined) {
-    const pruned = await prunePartitions(dataDir, new Set(monthsList), cfg.repos);
-    if (pruned.length > 0) console.log(`pruned ${pruned.length} out-of-window partitions: ${pruned.slice(0, 20).join(" ")}${pruned.length > 20 ? " …" : ""}`);
+  // window so closed months don't accumulate forever. --prune-keep-from
+  // (default: the display-window start) extends the kept range DOWNWARD to
+  // the requested window start: a paused backfill run must never have the
+  // months it is still collecting pruned away, or its resumed walk would
+  // skip months whose manifest entries were deleted and stall forever
+  // (done-checkpoint with pending, heartbeat no-ops on the drift).
+  if (flagHas("prune")) {
+    const keepFrom = argValue("prune-keep-from") ?? startMonth;
+    assertMonth(keepFrom);
+    const keepStart = keepFrom < startMonth ? keepFrom : startMonth;
+    const keepMonths = monthRange(keepStart, currentMonth);
+    const pruned = await prunePartitions(dataDir, new Set(keepMonths), cfg.repos);
+    if (pruned.length > 0) console.log(`pruned ${pruned.length} out-of-window partitions (kept ${keepStart}..${currentMonth}): ${pruned.slice(0, 20).join(" ")}${pruned.length > 20 ? " …" : ""}`);
   }
 
   const covCounts = data.coverage.reduce<Record<string, number>>((acc, c) => {

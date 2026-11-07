@@ -91,4 +91,14 @@ describe("validateConfig request block", () => {
     const bad = { ...(configJson as object), request: { perPage: 100, maxRetries: "3", retryBaseDelayMs: 2000, minDelayMs: 150, rateCheckInterval: 15, rateReserve: 250 } } as unknown;
     expect(() => validateConfig(bad)).toThrow(/request\.maxRetries must be a positive integer/);
   });
+
+  test("'..' repo segments are rejected (path escape from data/raw)", () => {
+    const bad = { ...(configJson as object), repos: [...(configJson as { repos: string[] }).repos, "owner/.."] } as unknown;
+    expect(() => validateConfig(bad)).toThrow(/must not contain '.' or '..' segments/);
+  });
+
+  test("same-named repos in different orgs are rejected (partition collision)", () => {
+    const bad = { ...(configJson as object), repos: [...(configJson as { repos: string[] }).repos, "Consensys/core"] } as unknown;
+    expect(() => validateConfig(bad)).toThrow(/repo names must be unique/);
+  });
 });

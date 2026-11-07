@@ -26,9 +26,11 @@ re-running the same command), `1` usage error or hard failure (the CLI's
 catch path still writes a truthful `.last-run.json` with `stopped: "error"`
 and the pending list, so aborted runs can't masquerade as complete).
 Aggregation is deterministic for fixed partitions + fixed `--as-of`.
-`aggregate --prune` additionally deletes partition files and manifest
-entries outside the aggregated window, bounding the data branch's growth
-under the rolling display window.
+`aggregate --prune [--prune-keep-from YYYY-MM]` additionally deletes
+partition files and manifest entries outside the kept range, bounding the
+data branch's growth; the kept range is the display window extended down to
+the requested `--prune-keep-from` (the collecting run's window start), so a
+paused backfill never has the months it is still collecting pruned away.
 
 ## Collection design (completeness)
 
@@ -153,18 +155,23 @@ aggregation dedupes by freshest snapshot per PR).
   dispatched run consumes a fresh hourly budget and resumes from committed
   checkpoints.
 - Auth: `GITHUB_TOKEN` (contents+pull-requests: write). Optional secret
-  **`DASHBOARD_GH_TOKEN`** (classic PAT, repo scope) — if set, it is used
-  for its higher rate budget, but ONLY by runs on the reviewed default ref;
-  non-default refs are refused before the PAT is touched (a workflow_dispatch
-  of a feature branch would run that branch's workflow file). An auth
-  preflight in both workflows fails loudly — naming the secret and the
-  remedy — if it stops authenticating (classic PATs expire; rotate in
-  Settings > Secrets, or unset it to fall back to `GITHUB_TOKEN`). No secret
-  values live in this repo. Prefer a fine-grained PAT scoped to just this
-  repository when configuring it, to bound exfiltration blast radius.
+  **`DASHBOARD_GH_TOKEN`** — MUST be a fine-grained PAT (`github_pat_…`)
+  scoped to this repository only; classic repo-scope PATs (`ghp_…`) are
+  refused outright by the shared `run-token` guard, because a workflow
+  guard only protects unmodified default-branch copies of a workflow — a
+  repo writer can dispatch a guard-stripped branch copy — and a stolen
+  classic repo-scope token grants every repository its owner can access.
+  Non-default refs are refused before the secret is touched. An auth
+  preflight fails loudly — naming the secret and the remedy — if it stops
+  authenticating (PATs expire; rotate in Settings > Secrets, or unset it to
+  fall back to `GITHUB_TOKEN`). The token is selected AFTER the collector
+  tests so it is never ambient during `bun install`/`bun test`. No secret
+  values live in this repo.
 
-`ci-collector.yml` (PRs + pushes touching collector-owned paths):
-`bun install --frozen-lockfile` (shared root package.json), typecheck via
+`ci-collector.yml` (PRs + pushes touching collector-owned paths, including
+the operational workflows and composite actions):
+`bun install --frozen-lockfile` (shared root package.json), actionlint over
+`.github/workflows/` + `.github/actions/`, typecheck via
 `tsconfig.collector.json`, then `bun test tests/collector/`. UI CI is
 `ci-ui.yml`, owned by the frontend; filenames are deliberately distinct
 so the two roles never edit each other's CI.

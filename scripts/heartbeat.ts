@@ -1,7 +1,8 @@
 /**
  * Heartbeat CLI (run by collect-data-heartbeat.yml on the reviewed default
- * branch). Fetches the checkpoint + dashboard via gh, applies the tested
- * decision core (scripts/lib/heartbeat.ts), and prints one machine line:
+ * branch). Reads the published dashboard from the local checkout, fetches
+ * the data-branch checkpoint via gh, applies the tested decision core
+ * (scripts/lib/heartbeat.ts), and prints one machine line:
  *
  *   noop <reason>            -> nothing to do (exit 0)
  *   dispatch <YYYY-MM>       -> re-dispatch collect-data from that month (exit 0)
@@ -32,20 +33,27 @@ async function fetchJson(path: string, ref: string): Promise<unknown | null> {
   return JSON.parse(Buffer.from(meta.content, "base64").toString("utf8"));
 }
 
-const DEFAULT_BRANCH = process.env.DEFAULT_BRANCH ?? "";
 const DATA_BRANCH = process.env.DATA_BRANCH ?? "data/auto-refresh";
-if (!/^[A-Za-z0-9._-]+$/.test(DEFAULT_BRANCH)) throw new Error("DEFAULT_BRANCH env must be a branch name");
 
 // Freshness canary: the one red that is never expected.
-const dashboard = await fetchJson("data/dashboard.json", DEFAULT_BRANCH);
-if (dashboard === null) {
-  console.error(`no data/dashboard.json on ${DEFAULT_BRANCH} yet — nothing to freshness-check`);
-} else {
-  const stale = staleness(dashboard as Record<string, unknown>, Date.now());
-  if (stale !== null) {
-    console.error(`::error::[STALE-DASHBOARD] ${stale}`);
-    process.exit(1);
-  }
+// Read the dashboard from the DEFAULT-BRANCH CHECKOUT (this CLI runs inside
+// the checked-out repo), NOT the contents API: that API returns base64 only
+// for files <= 1MB and serves content:"" beyond — the committed dashboard
+// grows past 1MB as coverage completes, which would break the canary exactly
+// when the pipeline first reaches full coverage. A local read has no size
+// cliff. The tiny .last-run.json checkpoint below stays on the contents API
+// (it is kilobytes and lives on the data branch, which is not checked out).
+let dashboard: unknown;
+try {
+  dashboard = JSON.parse(await Bun.file("data/dashboard.json").text());
+} catch {
+  console.error("::error::[STALE-DASHBOARD] data/dashboard.json is missing or unparseable on the default branch — the published dashboard was deleted or corrupted; restore it (the data PR should carry it)");
+  process.exit(1);
+}
+const stale = staleness(dashboard as Record<string, unknown>, Date.now());
+if (stale !== null) {
+  console.error(`::error::[STALE-DASHBOARD] ${stale}`);
+  process.exit(1);
 }
 
 // Resume decision from the data-branch checkpoint.
