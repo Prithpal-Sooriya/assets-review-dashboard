@@ -1,0 +1,48 @@
+# Collector CI: typecheck + deterministic aggregation tests.
+# (UI CI lives in ci-ui.yml, owned by the frontend.)
+name: ci-collector
+
+on:
+  pull_request:
+    paths:
+      - "scripts/**"
+      - "tests/collector/**"
+      - "config/**"
+      - ".github/workflows/ci-collector.yml"
+      - "bun.lockb"
+  push:
+    branches:
+      - main
+    paths:
+      - "scripts/**"
+      - "tests/collector/**"
+      - "config/**"
+      - ".github/workflows/ci-collector.yml"
+      - "bun.lockb"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - name: Typecheck (scratch install — root package.json is frontend-owned)
+        run: |
+          set -euo pipefail
+          mkdir /tmp/tc && cd /tmp/tc
+          bun add --dev typescript @types/node @types/bun > /dev/null
+          ./node_modules/.bin/tsc --noEmit --strict --target es2022 --module preserve \
+            --moduleResolution bundler --typeRoots /tmp/tc/node_modules/@types \
+            --types node,bun --skipLibCheck \
+            "$GITHUB_WORKSPACE/scripts/collect.ts" \
+            "$GITHUB_WORKSPACE/scripts/aggregate.ts" \
+            "$GITHUB_WORKSPACE/scripts/validate-search.ts" \
+            "$GITHUB_WORKSPACE"/tests/collector/*.ts
+      - name: Tests
+        run: bun test tests/collector/

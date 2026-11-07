@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "repos": [
+    "MetaMask/metamask-mobile",
+    "MetaMask/metamask-extension",
+    "MetaMask/core"
+  ],
+  "roster": [
+    "bergarces",
+    "sahar-fehri",
+    "Prithpal-Sooriya",
+    "Kriys94",
+    "salimtb",
+    "juanmigdr",
+    "dawnseeker8"
+  ],
+  "excludedReviewers": ["amandaye0h", "amitabh94"],
+  "teamLabel": "team-assets",
+  "metadataTeam": "MetaMask/metamask-assets",
+  "displayWindowMonths": 12,
+  "reviewStates": ["APPROVED", "CHANGES_REQUESTED", "COMMENTED", "DISMISSED"],
+  "request": {
+    "perPage": 100,
+    "maxRetries": 3,
+    "retryBaseDelayMs": 2000,
+    "minDelayMs": 150,
+    "rateCheckInterval": 15,
+    "rateReserve": 250
+  },
+  "methodologyVersion": "1.0.0",
+  "methodologyNotes": [
+    "Ownership is label/roster attribution at collection time (team-assets label, else supplied author roster), not historically proven organization membership.",
+    "Fixed supplied roster is applied across the whole window; the join date of dawnseeker8 is unknown, so they are included for the entire window (never an invented date).",
+    "amandaye0h and amitabh94 are excluded from reviewer membership; their PRs are still counted as external reviewed work.",
+    "Review months are derived from review submittedAt (UTC), never from the PR merged date.",
+    "Submitted review events include APPROVED, CHANGES_REQUESTED, COMMENTED and DISMISSED (historically submitted, later dismissed); PENDING reviews and self-reviews are excluded.",
+    "Reviews submitted after a PR was merged (post-merge comment reviews) count as submissions in their submission month but never satisfy the at/before-merge condition.",
+    "reviewedUnmergedPrs reflects the current PR state at generation time (snapshot), not the historical month-end state.",
+    "The current month is partial and covers data through the range end cutoff only; completeness means coverage through that cutoff, not that the month has ended.",
+    "A month row is only emitted when partition coverage for that repo is complete from the month through the cutoff; otherwise the month is omitted and the gap is visible in coverage.",
+    "Discovery walks PRs ordered by updated_at and relies on review submissions updating PR updated_at; this assumption was validated empirically and cross-checked with reviewed-by search (see docs/collection.md)."
+  ]
+}

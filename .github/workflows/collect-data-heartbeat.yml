@@ -1,0 +1,73 @@
+# Hourly heartbeat for dashboard data collection.
+#
+# No-op unless there is unfinished collection work: reads the last-run
+# checkpoint from the data branch and, if partitions are pending AND the
+# rate window has reset AND no collect-data run is already active,
+# re-dispatches collect-data with the same window start. This gives the
+# collector automatic bounded continuation without sleeping runners or
+# human re-runs (the collector pauses at the rate reserve; each dispatched
+# run consumes a fresh hourly budget window and resumes from committed
+# checkpoints).
+#
+# Public-repo safe: the checkpoint contains only PR metadata (numbers,
+# titles, dates, labels, logins, review states/timestamps) from public
+# repositories — no credentials, no bodies, comments, or emails.
+name: collect-data-heartbeat
+
+on:
+  schedule:
+    - cron: "20 * * * *" # hourly, past the hour (rate windows reset on the hour)
+  workflow_dispatch: {}
+
+permissions:
+  actions: write # to dispatch collect-data
+  contents: read
+
+concurrency:
+  group: collect-data-heartbeat
+  cancel-in-progress: false
+
+jobs:
+  resume-if-pending:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Resume collection if pending and budget available
+        env:
+          GH_TOKEN: ${{ secrets.DASHBOARD_GH_TOKEN || github.token }}
+          DATA_BRANCH: data/auto-refresh
+        run: |
+          set -euo pipefail
+          repo="${{ github.repository }}"
+          # No data branch yet -> nothing to resume.
+          if ! gh api "repos/$repo/branches/$DATA_BRANCH" >/dev/null 2>&1; then
+            echo "no $DATA_BRANCH branch; nothing to resume"
+            exit 0
+          fi
+          # No checkpoint file -> nothing pending.
+          if ! gh api "repos/$repo/contents/data/raw/.last-run.json?ref=$DATA_BRANCH" >/tmp/lr-meta.json 2>/dev/null; then
+            echo "no last-run checkpoint on $DATA_BRANCH; nothing to resume"
+            exit 0
+          fi
+          jq -r '.content' /tmp/lr-meta.json | base64 -d > /tmp/last-run.json
+          pending=$(jq -r '.pending | length' /tmp/last-run.json)
+          if [ "$pending" -eq 0 ]; then
+            echo "no pending partitions; nothing to resume"
+            exit 0
+          fi
+          reset=$(jq -r '.resetEpoch // 0' /tmp/last-run.json)
+          now=$(date -u +%s)
+          if [ "$((now - reset))" -lt 60 ]; then
+            echo "rate window has not reset yet (reset epoch $reset); skipping (next heartbeat will resume)"
+            exit 0
+          fi
+          # Don't stack runs: skip if one is already in progress or queued.
+          active=$(gh run list --repo "$repo" --workflow collect-data.yml --json status --jq '[.[] | select(.status == "in_progress" or .status == "queued")] | length')
+          if [ "$active" -gt 0 ]; then
+            echo "a collect-data run is already active/queued; skipping"
+            exit 0
+          fi
+          from_month=$(jq -r '.from' /tmp/last-run.json)
+          start_date="${from_month}-01"
+          echo "resuming: $pending pending partitions, from $from_month; dispatching collect-data"
+          gh workflow run collect-data.yml --repo "$repo" --ref "${{ github.event.repository.default_branch }}" -f start_date="$start_date"

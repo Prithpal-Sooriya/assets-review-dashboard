@@ -1,0 +1,6 @@
+# Transient concurrency lock (per-machine, mtime-based — never commit).
+raw/.lock
+
+# NOTE: raw/.inprogress/*.json walk-state checkpoints ARE committed on purpose:
+# they make incomplete runs durable across runner exits so the next run
+# resumes instead of restarting (see docs/collection.md).
