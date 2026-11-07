@@ -1,0 +1,113 @@
+import { describe, expect, test } from 'bun:test'
+import {
+  CycleBudget,
+  isStale,
+  linkHasNext,
+  parseRateHeaders,
+  rateRetryAtMs,
+  retryDelayMs,
+} from '../../../src/today/ratelimit'
+
+function headersOf(entries: Record<string, string>): { get(name: string): string | null } {
+  const lower = Object.fromEntries(
+    Object.entries(entries).map(([k, v]) => [k.toLowerCase(), v]),
+  )
+  return { get: (name: string) => lower[name.toLowerCase()] ?? null }
+}
+
+describe('parseRateHeaders', () => {
+  test('parses numeric limit/remaining/reset', () => {
+    const h = headersOf({
+      'X-RateLimit-Limit': '60',
+      'X-RateLimit-Remaining': '42',
+      'X-RateLimit-Reset': '1799070000',
+    })
+    expect(parseRateHeaders(h)).toEqual({ limit: 60, remaining: 42, reset: 1799070000 })
+  })
+
+  test('missing or malformed headers yield nulls, never NaN', () => {
+    expect(parseRateHeaders(headersOf({})).remaining).toBeNull()
+    expect(parseRateHeaders(headersOf({ 'x-ratelimit-remaining': 'many' })).remaining).toBeNull()
+  })
+})
+
+describe('rateRetryAtMs', () => {
+  const NOW = 1_000_000
+
+  test('Retry-After (secondary limit) wins when present', () => {
+    const at = rateRetryAtMs(403, headersOf({ 'retry-after': '30' }), NOW)
+    expect(at).toBe(NOW + 30_000)
+  })
+
+  test('falls back to X-RateLimit-Reset (primary limit)', () => {
+    const at = rateRetryAtMs(403, headersOf({ 'x-ratelimit-reset': '2000' }), NOW)
+    expect(at).toBe(2_000_000)
+  })
+
+  test('429 without hints backs off 60s', () => {
+    expect(rateRetryAtMs(429, headersOf({}), NOW)).toBe(NOW + 60_000)
+  })
+
+  test('non-rate statuses return now (no retry hint)', () => {
+    expect(rateRetryAtMs(500, headersOf({}), NOW)).toBe(NOW)
+  })
+})
+
+describe('linkHasNext', () => {
+  test('detects rel="next" in either quote style', () => {
+    expect(linkHasNext('<https://x?page=2>; rel="next", <https://x?page=9>; rel="last"')).toBe(true)
+    expect(linkHasNext("<https://x?page=2>; rel='next'")).toBe(true)
+  })
+
+  test('null or last-only headers mean no next page', () => {
+    expect(linkHasNext(null)).toBe(false)
+    expect(linkHasNext('<https://x?page=9>; rel="last"')).toBe(false)
+  })
+})
+
+describe('CycleBudget', () => {
+  test('enforces the request cap', () => {
+    const b = new CycleBudget(2, 0)
+    expect(b.allow(0)).toEqual({ ok: true })
+    b.spend()
+    expect(b.allow(0)).toEqual({ ok: true })
+    b.spend()
+    expect(b.allow(0)).toEqual({ ok: false, reason: 'cap' })
+  })
+
+  test('stops at the remaining floor to preserve shared-IP quota', () => {
+    const b = new CycleBudget(100, 10)
+    b.observeRemaining(11)
+    expect(b.allow(0)).toEqual({ ok: true })
+    b.observeRemaining(10)
+    expect(b.allow(0)).toEqual({ ok: false, reason: 'floor' })
+  })
+
+  test('wall blocks spending before retryNotBefore', () => {
+    const b = new CycleBudget(10, 0, 5000)
+    expect(b.allow(1000)).toEqual({ ok: false, reason: 'wall' })
+    expect(b.allow(6000)).toEqual({ ok: true })
+  })
+
+  test('null remaining observations never block (headers absent)', () => {
+    const b = new CycleBudget(10, 10)
+    b.observeRemaining(null)
+    expect(b.allow(0)).toEqual({ ok: true })
+  })
+})
+
+describe('staleness + retry schedule', () => {
+  test('3h interval: fresh cache is not stale, 3h+ is', () => {
+    const THREE_HOURS = 3 * 60 * 60 * 1000
+    expect(isStale(0, THREE_HOURS - 1, THREE_HOURS)).toBe(false)
+    expect(isStale(0, THREE_HOURS + 1, THREE_HOURS)).toBe(true)
+  })
+
+  test('backoff schedule then stop (no retry storms)', () => {
+    const schedule = [5, 15, 45]
+    expect(retryDelayMs(0, schedule)).toBe(5)
+    expect(retryDelayMs(2, schedule)).toBe(45)
+    expect(retryDelayMs(3, schedule)).toBeNull()
+    expect(retryDelayMs(99, schedule)).toBeNull()
+  })
+})
