@@ -220,11 +220,15 @@ describe('coverageProblemEntries (the panel\'s full-disclosure list)', () => {
 
   test('the real dataset shape yields exactly 29 pending entries, none missing', () => {
     // frozen snapshot fields from the real data/dashboard.json @ 2026-11-07
-    const coverage = JSON.parse(
+    // (all three fixture repos — the real coverage is complete metadata for
+    // every in-window repo-month, so 'missing' cannot appear)
+    const coverage: CoverageEntry[] = JSON.parse(
       readFileSync(new URL('./fixtures/sample-real.json', import.meta.url), 'utf8'),
     ).coverage
+    const allRepos = [...new Set(coverage.map((c) => c.repo))]
+    expect(allRepos).toHaveLength(3)
     const months = coverageWindowMonths({ start: '2025-11-01T00:00:00.000Z', end: '2026-11-07T13:30:26.843Z' })
-    const problems = coverageProblemEntries(coverage, repos, months)
+    const problems = coverageProblemEntries(coverage, allRepos, months)
     expect(problems).toHaveLength(29)
     expect(problems.every((p) => p.status === 'pending')).toBe(true)
   })

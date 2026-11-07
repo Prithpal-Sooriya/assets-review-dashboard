@@ -70,12 +70,19 @@ export function formatInt(n: number): string {
 const COVERAGE_WINDOW_MONTHS_CAP = 1200
 
 /**
- * Every month key in the collection window, `range.start` through `range.end`
- * inclusive — the end month counts even when the cutoff lands mid-month
- * (the current month is partial, not absent). The coverage panel renders this
- * full window so months with no collected data stay visible instead of being
- * silently dropped; `months[]`/display-window scope the timeline and the
- * month drill-down only.
+ * Every month key of the collection window. `range.end` is an EXCLUSIVE
+ * instant: its month is included iff any moment of it lies within the range —
+ * i.e. unless the end is exactly midnight UTC on the 1st, in which case that
+ * month contributes zero days and the window stops with the previous month
+ * (…→ 2026-11-01T00:00:00Z ends with Oct 2026, not Nov 2026). A mid-month
+ * cutoff (2026-11-07T…) keeps its partial month, per methodology. The
+ * coverage panel renders this full window so months with no collected data
+ * stay visible instead of being silently dropped; `months[]`/display-window
+ * scope the timeline and the month drill-down only.
+ *
+ * The 1200-month cap is a guard against unbounded rendering on absurd
+ * (≥100-year) ranges — corrupt input that validation flags anyway; it cannot
+ * trigger for any realistic collection window.
  */
 export function coverageWindowMonths(range: { start: string; end: string }): string[] {
   const start = monthKeyOfISO(range.start)
