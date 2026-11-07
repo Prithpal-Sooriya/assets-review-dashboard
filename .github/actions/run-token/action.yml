@@ -57,7 +57,10 @@ runs:
           esac
         else
           echo "RUN_TOKEN=$BASE_TOKEN" >> "$GITHUB_ENV"
-          echo "run token: GITHUB_TOKEN"
+          # Visible annotation, not a gray log line: an unset secret and a
+          # caller that forgot `with: pat-secret:` are indistinguishable
+          # here, so surface which token is actually running.
+          echo "::notice::run token: GITHUB_TOKEN (DASHBOARD_GH_TOKEN unset — or pat-secret input not passed by the caller)"
         fi
 
     - shell: bash
