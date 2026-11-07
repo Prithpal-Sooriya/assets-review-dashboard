@@ -219,7 +219,10 @@ test.describe('Navigation — Daily and Historical pages', () => {
     await mockGitHub(page)
     await page.goto('/')
     await expect(daily).toHaveAttribute('aria-current', 'page')
-    await expect(historical).not.toHaveAttribute('aria-current', 'anything')
+    // Inactive tab must not carry the attribute at all (a value-based
+    // negation like not.toHaveAttribute('aria-current', 'x') would pass even
+    // if the inactive tab wrongly said aria-current="page").
+    await expect(historical).not.toHaveAttribute('aria-current')
     // Keyboard: Tab reaches the nav links, Enter activates the focused one.
     await daily.focus()
     await page.keyboard.press('Tab') // focus moves to Historical
@@ -227,7 +230,27 @@ test.describe('Navigation — Daily and Historical pages', () => {
     await page.keyboard.press('Enter')
     await expect(page.locator('.stat').first()).toBeVisible()
     await expect(historical).toHaveAttribute('aria-current', 'page')
-    await expect(daily).not.toHaveAttribute('aria-current', 'anything')
+    await expect(daily).not.toHaveAttribute('aria-current')
+  })
+
+  test('in-page fragment anchors never flip the page (regression)', async ({ page }) => {
+    const historicalMarker = page.locator('.stat').first()
+    await mockGitHub(page)
+    // Historical held by the legacy hash at the root path — following a
+    // plain fragment anchor (e.g. a future skip link, or a shared URL with a
+    // fragment) must keep the Historical page, not flip to Daily.
+    await page.goto('/#/history')
+    await expect(historicalMarker).toBeVisible()
+    await page.evaluate(() => {
+      window.location.hash = '#main'
+    })
+    await expect(historicalMarker).toBeVisible()
+    await expect(page.locator('.today-meta')).toHaveCount(0)
+    // A route-shaped hash still switches pages from any path.
+    await page.evaluate(() => {
+      window.location.hash = '#/today'
+    })
+    await expect(page.locator('.today-meta')).toBeVisible()
   })
 
   test('legacy #/today and #/history deep links still work (old bookmarks)', async ({ page }) => {

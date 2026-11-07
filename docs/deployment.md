@@ -141,7 +141,8 @@ What still holds regardless of visibility:
   deploy](./deploys/2026-11-07.md), pinned by the tag `deploy/2026-11-07`.
 - **The production tree is merged `main` — the combined app** (Daily at `/`
   and Historical at `/historical`, plus the preserved `#/today` / `#/history`
-  legacy hash links). The earlier temporary rule — excluding PR #3's Daily
+  legacy hash links — `#/today?…` being the live share-link format for Daily
+  filters, `#/history` a read-only alias). The earlier temporary rule — excluding PR #3's Daily
   dashboard from production pending [issue
   #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6) —
   is **superseded** (2026-11-07): daily publication is now authorized, the

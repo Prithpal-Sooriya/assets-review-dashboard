@@ -3,7 +3,7 @@ import { formatISOTimestamp } from '../data/format'
 import type { LoadedDashboard } from '../data/loader'
 import { pageHref, type Page } from '../routing'
 
-export function Header({ loaded, page = 'daily' }: { loaded: LoadedDashboard; page?: Page }) {
+export function Header({ loaded, page }: { loaded: LoadedDashboard; page: Page }) {
   const { theme, toggle } = useTheme()
   const next = theme === 'dark' ? 'light' : 'dark'
   return (

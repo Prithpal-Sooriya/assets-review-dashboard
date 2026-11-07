@@ -8,6 +8,10 @@
     {
       "source": "/historical",
       "destination": "/"
+    },
+    {
+      "source": "/historical/",
+      "destination": "/"
     }
   ],
   "headers": [

@@ -15,10 +15,13 @@ two pages, one app:
   `data/dashboard.json`. Team-level metrics only — no individual data.
 
 The top navigation switches between the two pages (real URLs — direct loads,
-reloads and back/forward all work). Legacy hash links are preserved: `#/today`
-still opens Daily (shareable Daily filter links keep their state in the hash
-query, e.g. `/#/today?repo=MetaMask%2Fcore&sort=newest`) and `#/history` still
-opens Historical.
+reloads and back/forward all work). Hash routes are honored on any path:
+`#/today` is the **live share-link format for Daily** — filter changes write
+the filter state into the hash query (e.g.
+`/#/today?repo=MetaMask%2Fcore&sort=newest`), so the app produces these URLs
+today; treat them as a current feature, not just old bookmarks. `#/history`
+is a read-only legacy alias from the hash-routed era, kept so old links keep
+working.
 
 ## Local development
 

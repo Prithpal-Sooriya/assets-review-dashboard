@@ -24,28 +24,38 @@ import { MethodologyCard, WarningsCard } from './components/NotesCards'
 import { EmptyState, InvalidState, MissingState } from './components/StateCards'
 import { Footer } from './components/Footer'
 import { TodayPanel } from './components/today/TodayPanel'
-import { resolvePage, type Page } from './routing'
+import { isRouteHash, resolvePage, type Page } from './routing'
 
 export default function App() {
   const [repoFilter, setRepoFilter] = useState<string | null>(null)
   // Page routing: Daily lives at / (the landing page), Historical at
-  // /historical. Legacy hash routes are preserved — #/today shows Daily and
-  // #/history shows Historical, so old bookmarks and shared filter links
-  // (whose state lives in the hash query) keep working on any path. See
-  // src/routing.ts for the exact precedence (unit-tested there).
+  // /historical. Route-shaped hashes are honored on any path: #/today is the
+  // LIVE share-link format for Daily (filter state lives in its query) and
+  // #/history is a legacy alias — see src/routing.ts (unit-tested there).
   const [page, setPage] = useState<Page>(() =>
     typeof window === 'undefined' ? 'daily' : resolvePage(window.location.pathname, window.location.hash),
   )
   useEffect(() => {
-    // popstate covers back/forward; hashchange covers legacy hash links and
-    // manual hash edits. Filter updates use history.replaceState, which fires
-    // neither — filters change state, not the page.
-    const sync = () => setPage(resolvePage(window.location.pathname, window.location.hash))
-    window.addEventListener('popstate', sync)
-    window.addEventListener('hashchange', sync)
+    // Browsers fire popstate for EVERY same-document URL change — hash edits
+    // and in-page anchors included, not just back/forward — so both handlers
+    // share one guard: re-resolve only on an explicit page navigation, i.e. a
+    // route-shaped hash (#/today, #/history) or a path change (/ ↔
+    // /historical). A plain fragment anchor (#main) must never flip the page
+    // (e.g. Historical held by #/history at / would otherwise flip to Daily).
+    // Filter updates use history.replaceState, which fires neither event.
+    let lastPathname = window.location.pathname
+    const sync = () => {
+      lastPathname = window.location.pathname
+      setPage(resolvePage(window.location.pathname, window.location.hash))
+    }
+    const onUrlChange = () => {
+      if (isRouteHash(window.location.hash) || window.location.pathname !== lastPathname) sync()
+    }
+    window.addEventListener('popstate', onUrlChange)
+    window.addEventListener('hashchange', onUrlChange)
     return () => {
-      window.removeEventListener('popstate', sync)
-      window.removeEventListener('hashchange', sync)
+      window.removeEventListener('popstate', onUrlChange)
+      window.removeEventListener('hashchange', onUrlChange)
     }
   }, [])
   const loaded = dashboard
