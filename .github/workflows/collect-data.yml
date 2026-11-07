@@ -131,15 +131,21 @@ jobs:
           fi
           # Keep the branch convergent with the default branch: merge the
           # default branch IN (never the reverse — the default branch is
-          # never pushed from here). -X ours resolves any data/** conflicts
-          # to this branch's newer collected state (the data branch is the
-          # system of record for data/; a hand edit to collected data on
-          # main is superseded by the next data PR). Non-data files only
-          # ever change on the default branch, so they merge cleanly toward
-          # its content. No history is rewritten: merge commits only, plain
-          # (non-force) pushes only.
-          if ! git -C /tmp/data-tree merge --no-edit -X ours "origin/$DEFAULT_BRANCH"; then
-            echo "::error::failed to merge $DEFAULT_BRANCH into $DATA_BRANCH — inspect the data branch; refusing to continue"
+          # never pushed from here). -X ours resolves CONFLICTING data/**
+          # paths to this branch's newer collected state (the data branch is
+          # the system of record for data/; hand edits to collected data on
+          # main are superseded by the next data PR). Non-conflicting
+          # main-side changes are adopted as usual: non-data files end up
+          # identical to the default branch, and non-conflicting hand-ADDED
+          # data files are preserved. No history is rewritten: merge commits
+          # only, plain (non-force) pushes only. (-X ours would also retain
+          # a malicious non-data change, but the guard below refuses such a
+          # branch before anything is pushed.)
+          if ! git -C /tmp/data-tree \
+              -c user.name=dashboard-bot \
+              -c user.email=dashboard-bot@users.noreply.github.com \
+              merge --no-edit -X ours "origin/$DEFAULT_BRANCH"; then
+            echo "::error::failed to merge $DEFAULT_BRANCH into $DATA_BRANCH (log above). Repair per docs/collection.md 'Data branch repair', then re-run; refusing to continue"
             exit 1
           fi
           # The data branch descends from the default branch and therefore
@@ -148,12 +154,13 @@ jobs:
           # must be data-only. (The code it carries is never executed here —
           # this job always checks out and runs the default branch's code —
           # and a data-only diff means merging the data PR only ever applies
-          # data changes to the default branch.)
-          bad="$(git -C /tmp/data-tree diff --name-only "origin/$DEFAULT_BRANCH" HEAD -- . ':(exclude)data' | head -n 5 || true)"
-          if [ -n "$bad" ]; then
-            echo "::error::$DATA_BRANCH diverges from $DEFAULT_BRANCH outside data/ (first: $bad); refusing to continue"
-            exit 1
-          fi
+          # data changes to the default branch. Data PRs must be SQUASH-merged
+          # so transient branch commits can never enter main's ancestry.)
+          # The mechanics live in the tested guard module, which fails CLOSED
+          # (a git error is a refusal, never a pass) and also rejects a
+          # top-level data symlink that would slide under the :(exclude)data
+          # pathspec.
+          bun run scripts/check-data-branch.ts /tmp/data-tree "origin/$DEFAULT_BRANCH"
 
       - name: Collect (resumable; pauses at rate reserve — heartbeat resumes)
         env:

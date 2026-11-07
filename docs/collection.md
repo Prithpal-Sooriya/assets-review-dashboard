@@ -135,15 +135,33 @@ aggregation dedupes by freshest snapshot per PR).
   default branch** whose committed diff vs it is guarded to be **data-only**
   (**never the default branch**, no force-push, merge commits only): the
   workflow prepares a git worktree of that branch, converges it by merging
-  the default branch in (`-X ours` keeps collected data authoritative),
-  mirrors `data/` into it with rsync, and pushes. GitHub refuses PRs
+  the default branch in, mirrors `data/` into it with rsync, and pushes.
+  Merge semantics are precise: `-X ours` resolves only **conflicting**
+  `data/**` paths to the branch's newer collected state (hand edits to
+  collected data on main are superseded); **non-conflicting** main-side
+  changes are adopted — non-data files end up identical to the default
+  branch, and hand-added new data files are preserved. GitHub refuses PRs
   between branches with no common history, so an orphan data branch cannot
   open a PR — hence the main ancestry. Nothing on the data branch executes
   in the token-bearing job (the job always checks out and runs the
   default branch's code; the branch's non-data files are only ever main's
   own reviewed content), and a guard refuses to continue if the branch's
   changed paths vs the default branch ever diverge outside `data/` — so
-  merging the data PR only ever applies data changes.
+  merging the data PR only ever applies data changes. The guard
+  (`scripts/check-data-branch.ts`, unit-tested in
+  `tests/collector/data-branch-guard.test.ts`) also rejects a top-level
+  `data` symlink and **fails closed**: a git error is a refusal, never a
+  pass.
+- **Data PRs must be squash-merged.** The guard certifies the branch TIP's
+  diff, not its history: squash-merging means only the tip's data-only
+  tree lands on main, so transient commits on the data branch (e.g. a
+  malicious commit later reverted before a run) can never enter main's
+  ancestry.
+- The data branch carries the default branch's `.github/workflows` files
+  (required by the data-only invariant — deleting them would itself be a
+  non-data divergence). Pushes to it are inert only by **convention**: CI
+  workflows pin `branches: [main]`; any future workflow using `on: push`
+  must keep a branch filter so data-branch pushes stay inert.
 - Hard collector failures (exit 1) fail the run red immediately with the
   checkpoints already pushed; paused runs finish red with a greppable
   `[EXPECTED-AUTO-RESUME]` annotation (not actionable).
@@ -173,6 +191,19 @@ aggregation dedupes by freshest snapshot per PR).
   values live in this repo.
 
 `ci-collector.yml` (PRs + pushes touching collector-owned paths, including
+
+### Data branch repair
+
+If `data/auto-refresh` is ever corrupted, diverged outside `data/`, or
+unmergeable: close any open data PR, delete the branch (repo admin:
+`git push origin --delete data/auto-refresh`), and re-dispatch
+`collect-data` — the first run recreates it from the default branch and
+resumes from the checkpoints committed there (the data is re-derivable,
+so losing the branch loses nothing that cannot be recollected). A
+refusing run never pushes anything, so a bad branch can never make
+progress silently.
+
+`ci-collector.yml`
 the operational workflows and composite actions):
 `bun install --frozen-lockfile` (shared root package.json), actionlint over
 `.github/workflows/` + `.github/actions/`, typecheck via
