@@ -132,40 +132,21 @@ What still holds regardless of visibility:
   URLs expose. A logged-out curl of each URL remains the source of truth
   (`302` = protected, `200` = public); re-run it quarterly and after changes.
 
-### Production provenance — first real-data deploy (2026-11-07)
+### Deploy records and the production tree
 
-Recorded so the exact deployed tree stays traceable and is not mistaken for
-a bare-`main` build:
-
-- **Deployed commit:** `233ed12` on branch `fm/historical-real-data-deploy`
-  (pushed; same content cherry-picked from `fm/fix-demo-e2e-pin-fixture`).
-- **Tree:** `origin/main` (`294d2a7`, PR #4 collector + real
-  `data/dashboard.json`) **minus PR #3** (`fm/assets-daily-digest`: client-only
-  Today dashboard with in-browser PAT handling), reverse-applied because that
-  separate session's changes were explicitly not authorized for deploy from
-  the dashboard task. This is a deploy-tree exclusion, **not** a product
-  decision to remove PR #3 from `main` — `main` keeps it. **Deploying from
-  bare `main` would ship PR #3; coordinate before any such deploy.**
-- **Runtime identity:** frontend bytes identical to `a7e91fd` (PR #1/#2, the
-  previously deployed sample-data production); only the embedded data payload
-  changed (real collector data instead of the demo fixture).
-- **Deployment:** `dpl_Hx3Q4i66PYY4wJ71wfXMA5tPpyZu` (production, Ready,
-  2026-11-07 19:47 UTC) → `https://metamask-assets-dashboard-ui.vercel.app`
-  (and `https://assets-dashboard-ui.vercel.app`; same bundle).
-- **Data coverage at deploy time:** 10 of **39** contract-window repo-months
-  complete (Mobile 2026-06…11, Core + Extension 2026-10…11); the other 29 are
-  pending (not yet collected). The coverage panel reads "10/18" because it
-  summarises only the displayed window (the 6 months that have data); see the
-  known-display limitation below.
-
-**Known display limitation (reported, fix pending):** months with no collected
-data at all (2025-11 … 2026-05 in this dataset) are absent from the timeline,
-the month drill-down **and the coverage grid** — their `pending` coverage
-entries exist in `data/dashboard.json` but are not rendered, so the coverage
-summary can be misread as total (10/18 displayed vs 10/39 contract window).
-The full intended window is currently stated only in the Methodology section
-(`Window 2025-11-01 → 2026-11-07`). The coverage panel should surface
-out-of-window `pending` months before the next real-data deploy.
+- **Per-deploy records** (exact commit, tree composition, deployment id,
+  URLs, verification, coverage at deploy time) live in [`docs/deploys/`](./deploys/),
+  one file per production deploy. Latest: [2026-11-07 — first real-data
+  deploy](./deploys/2026-11-07.md).
+- **The production tree is not bare `main`.** The first real-data deploy ran
+  `main` **minus PR #3** (client-only Today dashboard with in-browser PAT
+  handling), excluded while that separate session's deploy status is settled
+  ([issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)).
+  **Deploying bare `main` would ship PR #3 — coordinate first.**
+- The Vercel project has **no git integration**: every deploy is a CLI
+  `--prebuilt` build, so nothing auto-deploys on push. The manual deploy
+  command (`vercel build --prod && vercel deploy --prebuilt --prod`) builds
+  **whatever tree is checked out** — confirm the tree before running it.
 
 ### Data refresh
 
@@ -178,6 +159,17 @@ The dashboard is a snapshot; it only changes when it is rebuilt. Monthly flow:
    Preview deployments (`--prebuilt` without `--prod`) are available for
    checking a refresh before promoting it, and stay behind Vercel
    Authentication.
+
+**Pre-deploy checklist** (each refresh):
+
+- [ ] **Confirm the tree being built** — production must not ship PR #3's
+      Today dashboard / PAT handling until [issue #6](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/6)
+      is settled (see *Deploy records and the production tree* above).
+- [ ] **Coverage disclosure:** months with no collected data are currently
+      dropped from the coverage grid (the summary reads "N/18" over the
+      displayed window, not "N/39" over the contract window) — [issue #7](https://github.com/Prithpal-Sooriya/assets-review-dashboard/issues/7).
+      Fix it, or record in the deploy record that the limitation was
+      consciously accepted.
 
 There is no cron, webhook or runtime refresh by design: every number on the
 site traces to one reviewed commit.
