@@ -17,13 +17,22 @@
 # must be scoped to this repository only.
 name: run-token
 description: Guard non-default refs, select the run token (fine-grained PAT only), preflight auth
+inputs:
+  pat-secret:
+    description: |
+      Optional DASHBOARD_GH_TOKEN value, passed by the caller as
+      `${{ secrets.DASHBOARD_GH_TOKEN }}` — composite actions cannot read the
+      secrets context directly (referencing it fails template validation at
+      job load, before any step runs). Empty/absent means GITHUB_TOKEN.
+    default: ""
+    required: false
 runs:
   using: composite
   steps:
     - shell: bash
       env:
         REF: ${{ github.ref }}
-        PAT_SECRET: ${{ secrets.DASHBOARD_GH_TOKEN }}
+        PAT_SECRET: ${{ inputs.pat-secret }}
         BASE_TOKEN: ${{ github.token }}
       run: |
         set -euo pipefail
@@ -56,8 +65,9 @@ runs:
         GH_TOKEN: ${{ env.RUN_TOKEN }}
       run: |
         set -euo pipefail
-        # secrets.DASHBOARD_GH_TOKEN || github.token only falls back when the
-        # secret is ABSENT — an expired-but-present PAT yields 401s with the
+        # The pat-secret input (DASHBOARD_GH_TOKEN, empty when unset) ||
+        # github.token only falls back when the secret is ABSENT — an
+        # expired-but-present PAT yields 401s with the
         # fallback never engaging. Detect that here, named, with the remedy.
         if ! gh api /rate_limit >/dev/null 2>&1; then
           echo "::error::run token failed authentication — DASHBOARD_GH_TOKEN has likely EXPIRED; rotate it (Settings > Secrets) or unset it to fall back to GITHUB_TOKEN."

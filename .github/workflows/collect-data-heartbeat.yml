@@ -55,6 +55,8 @@ jobs:
 
       - name: Select run token (guard + fine-grained-only + auth preflight)
         uses: ./.github/actions/run-token
+        with:
+          pat-secret: ${{ secrets.DASHBOARD_GH_TOKEN }}
 
       - name: Decision (tested resume core + freshness canary)
         env:
