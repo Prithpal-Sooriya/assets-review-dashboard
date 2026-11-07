@@ -3,7 +3,7 @@
   "repo": "MetaMask/metamask-extension",
   "month": "2026-11",
   "completeness": "asOfCutoff",
-  "collectedAt": "2026-11-07T12:55:09.593Z",
+  "collectedAt": "2026-11-07T17:38:15.198Z",
   "prCount": 425,
   "prs": [
     {
@@ -1248,7 +1248,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-09-16T16:58:28Z",
-      "updatedAt": "2026-11-06T19:34:03Z",
+      "updatedAt": "2026-11-07T16:17:19Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "pedronfigueiredo",
@@ -1265,7 +1265,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-09-16T17:03:25Z",
-      "updatedAt": "2026-11-06T19:57:13Z",
+      "updatedAt": "2026-11-07T16:16:35Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "pedronfigueiredo",

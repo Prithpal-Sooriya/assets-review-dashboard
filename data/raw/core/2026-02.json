@@ -1,0 +1,5601 @@
+{
+  "schemaVersion": 1,
+  "repo": "MetaMask/core",
+  "month": "2026-02",
+  "completeness": "monthEnd",
+  "collectedAt": "2026-11-07T19:57:43.809Z",
+  "prCount": 270,
+  "prs": [
+    {
+      "number": 5118,
+      "title": "fix(scripts): fix create-package path check",
+      "url": "https://github.com/MetaMask/core/pull/5118",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-01-09T14:28:45Z",
+      "updatedAt": "2026-02-05T21:18:09Z",
+      "closedAt": "2026-02-05T21:18:09Z",
+      "mergedAt": null,
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 5502,
+      "title": "feat: Add signDelegation method",
+      "url": "https://github.com/MetaMask/core/pull/5502",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-03-19T10:34:19Z",
+      "updatedAt": "2026-02-13T12:18:25Z",
+      "closedAt": "2026-02-13T12:18:25Z",
+      "mergedAt": null,
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 5734,
+      "title": "perf!: remove `InternalAccount` snap metadata",
+      "url": "https://github.com/MetaMask/core/pull/5734",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-04-30T14:21:19Z",
+      "updatedAt": "2026-02-05T21:17:55Z",
+      "closedAt": "2026-02-05T21:17:55Z",
+      "mergedAt": null,
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6073,
+      "title": "poc: confirmation intents",
+      "url": "https://github.com/MetaMask/core/pull/6073",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-07-08T09:18:30Z",
+      "updatedAt": "2026-02-13T12:18:35Z",
+      "closedAt": "2026-02-13T12:18:35Z",
+      "mergedAt": null,
+      "authorLogin": "matthewwalsh0",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6307,
+      "title": "Integrate patch changes into core codebase",
+      "url": "https://github.com/MetaMask/core/pull/6307",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-08-13T20:52:23Z",
+      "updatedAt": "2026-02-25T01:47:25Z",
+      "closedAt": "2026-02-25T01:47:25Z",
+      "mergedAt": null,
+      "authorLogin": "amitabh94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6648,
+      "title": "feat: add script to check packages versions update",
+      "url": "https://github.com/MetaMask/core/pull/6648",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2025-09-17T22:43:27Z",
+      "updatedAt": "2026-02-18T21:13:13Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 6914,
+      "title": "feat: update AccountTrackerController to use BlockTracker",
+      "url": "https://github.com/MetaMask/core/pull/6914",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-10-22T10:33:04Z",
+      "updatedAt": "2026-02-11T11:06:54Z",
+      "closedAt": "2026-02-11T11:06:54Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7100,
+      "title": "Release/667.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7100",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-10T11:31:01Z",
+      "updatedAt": "2026-02-20T13:35:55Z",
+      "closedAt": "2025-11-10T12:37:46Z",
+      "mergedAt": "2025-11-10T12:37:46Z",
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7137,
+      "title": "perf!: remove `getNextAvailableAccountName`",
+      "url": "https://github.com/MetaMask/core/pull/7137",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2025-11-12T17:35:22Z",
+      "updatedAt": "2026-02-04T17:56:55Z",
+      "closedAt": "2026-02-04T17:56:53Z",
+      "mergedAt": "2026-02-04T17:56:53Z",
+      "authorLogin": "hmalik88",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7222,
+      "title": "chore: migrate Jest from v27 to v28",
+      "url": "https://github.com/MetaMask/core/pull/7222",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-22T14:17:31Z",
+      "updatedAt": "2026-02-02T17:20:41Z",
+      "closedAt": "2026-02-02T17:20:41Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7225,
+      "title": "feat: clear transaction quotes action",
+      "url": "https://github.com/MetaMask/core/pull/7225",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-24T10:08:44Z",
+      "updatedAt": "2026-02-13T12:19:59Z",
+      "closedAt": "2026-02-13T12:19:59Z",
+      "mergedAt": null,
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7239,
+      "title": "refactor: flatten nested test helpers and remove any types",
+      "url": "https://github.com/MetaMask/core/pull/7239",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-25T18:05:58Z",
+      "updatedAt": "2026-02-11T11:06:41Z",
+      "closedAt": "2026-02-11T11:06:41Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7259,
+      "title": "chore: update to Jest 29 and fix tests",
+      "url": "https://github.com/MetaMask/core/pull/7259",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-27T21:52:21Z",
+      "updatedAt": "2026-02-11T11:06:26Z",
+      "closedAt": "2026-02-11T11:06:26Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7264,
+      "title": "chore: update to Jest 30 and fix tests",
+      "url": "https://github.com/MetaMask/core/pull/7264",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2025-11-28T14:52:16Z",
+      "updatedAt": "2026-02-18T21:12:51Z",
+      "closedAt": "2026-02-18T21:12:51Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7425,
+      "title": "more metrics for swaps and bridge",
+      "url": "https://github.com/MetaMask/core/pull/7425",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2025-12-10T03:05:53Z",
+      "updatedAt": "2026-02-04T20:59:15Z",
+      "closedAt": "2026-02-04T20:59:15Z",
+      "mergedAt": null,
+      "authorLogin": "ghgoodreau",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7557,
+      "title": "dirty: assets-controller",
+      "url": "https://github.com/MetaMask/core/pull/7557",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-01-06T09:45:48Z",
+      "updatedAt": "2026-02-09T13:08:36Z",
+      "closedAt": "2026-02-09T13:08:36Z",
+      "mergedAt": null,
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7575,
+      "title": "feat: add asset picker opened and selected metrics",
+      "url": "https://github.com/MetaMask/core/pull/7575",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-01-07T16:49:05Z",
+      "updatedAt": "2026-02-18T19:49:41Z",
+      "closedAt": "2026-02-18T19:39:01Z",
+      "mergedAt": null,
+      "authorLogin": "ghgoodreau",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7581,
+      "title": "[DON'T MERGE] Add potentially breaking change to NetworkController for testing preview builds",
+      "url": "https://github.com/MetaMask/core/pull/7581",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-01-07T22:07:39Z",
+      "updatedAt": "2026-02-24T17:47:16Z",
+      "closedAt": "2026-02-24T17:47:09Z",
+      "mergedAt": null,
+      "authorLogin": "mcmire",
+      "labels": [
+        "DO-NOT-MERGE"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7586,
+      "title": "Reorganize contributor docs",
+      "url": "https://github.com/MetaMask/core/pull/7586",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-08T15:35:29Z",
+      "updatedAt": "2026-02-12T03:31:56Z",
+      "closedAt": "2026-01-12T14:58:01Z",
+      "mergedAt": "2026-01-12T14:58:01Z",
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7588,
+      "title": "Update preview build instructions",
+      "url": "https://github.com/MetaMask/core/pull/7588",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-08T19:55:51Z",
+      "updatedAt": "2026-02-03T14:55:35Z",
+      "closedAt": "2026-02-03T14:55:33Z",
+      "mergedAt": "2026-02-03T14:55:33Z",
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7602,
+      "title": "Release 747.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7602",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-12T10:26:38Z",
+      "updatedAt": "2026-02-12T03:33:20Z",
+      "closedAt": "2026-01-12T10:47:41Z",
+      "mergedAt": "2026-01-12T10:47:41Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7616,
+      "title": "feat: bridge and bridgeStatus use auto generated types from API",
+      "url": "https://github.com/MetaMask/core/pull/7616",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-01-13T21:38:33Z",
+      "updatedAt": "2026-02-09T21:33:10Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7655,
+      "title": "Add MPC keyring type",
+      "url": "https://github.com/MetaMask/core/pull/7655",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-01-19T09:44:16Z",
+      "updatedAt": "2026-02-13T14:19:35Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "matthiasgeihs",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7659,
+      "title": "fix: set isExternalSign to true for delegated transactions",
+      "url": "https://github.com/MetaMask/core/pull/7659",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-01-19T14:26:21Z",
+      "updatedAt": "2026-02-11T15:12:31Z",
+      "closedAt": "2026-02-11T15:12:31Z",
+      "mergedAt": null,
+      "authorLogin": "khanti42",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7660,
+      "title": "chore: seedless error with causes details TO-168",
+      "url": "https://github.com/MetaMask/core/pull/7660",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-19T14:27:51Z",
+      "updatedAt": "2026-02-12T07:32:38Z",
+      "closedAt": "2026-02-12T07:32:37Z",
+      "mergedAt": "2026-02-12T07:32:37Z",
+      "authorLogin": "ieow",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7688,
+      "title": "feat: Add INK support",
+      "url": "https://github.com/MetaMask/core/pull/7688",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-21T13:17:48Z",
+      "updatedAt": "2026-02-13T11:17:01Z",
+      "closedAt": "2026-02-13T11:16:59Z",
+      "mergedAt": "2026-02-13T11:16:59Z",
+      "authorLogin": "bizk",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3796690825,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-13T11:11:27Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7697,
+      "title": "feat(bridge-status): add polling for Tron same-chain swaps",
+      "url": "https://github.com/MetaMask/core/pull/7697",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-22T03:31:14Z",
+      "updatedAt": "2026-02-03T17:19:31Z",
+      "closedAt": "2026-02-03T17:19:30Z",
+      "mergedAt": "2026-02-03T17:19:30Z",
+      "authorLogin": "ghgoodreau",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7732,
+      "title": "fix: improved validation for types sign message in package eth-json-rpc-middleware",
+      "url": "https://github.com/MetaMask/core/pull/7732",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-27T13:24:47Z",
+      "updatedAt": "2026-02-02T10:57:21Z",
+      "closedAt": "2026-02-02T10:57:19Z",
+      "mergedAt": "2026-02-02T10:57:19Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7749,
+      "title": "feat(perps): perps controller migration from mobile",
+      "url": "https://github.com/MetaMask/core/pull/7749",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-01-28T08:33:14Z",
+      "updatedAt": "2026-02-11T03:27:46Z",
+      "closedAt": "2026-02-11T03:27:45Z",
+      "mergedAt": null,
+      "authorLogin": "abretonc7s",
+      "labels": [
+        "team-perps"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7756,
+      "title": "refactor: handle intent orders in fetch bridge tx function",
+      "url": "https://github.com/MetaMask/core/pull/7756",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-28T14:14:54Z",
+      "updatedAt": "2026-02-03T18:23:40Z",
+      "closedAt": "2026-02-03T18:23:38Z",
+      "mergedAt": "2026-02-03T18:23:38Z",
+      "authorLogin": "oscarwroche",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7759,
+      "title": "feat: add network fallback mechanism to IncomingTransactionHelper",
+      "url": "https://github.com/MetaMask/core/pull/7759",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-28T14:37:32Z",
+      "updatedAt": "2026-02-02T10:25:53Z",
+      "closedAt": "2026-02-02T10:25:51Z",
+      "mergedAt": "2026-02-02T10:25:51Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7764,
+      "title": "fix(AssetController): refactor Snap data source",
+      "url": "https://github.com/MetaMask/core/pull/7764",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-28T17:36:06Z",
+      "updatedAt": "2026-02-02T11:12:57Z",
+      "closedAt": "2026-02-02T11:12:56Z",
+      "mergedAt": "2026-02-02T11:12:55Z",
+      "authorLogin": "Kriys94",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3722857943,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T13:50:50Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3722860010,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T13:51:12Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3722962599,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T14:07:30Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3723846249,
+          "state": "DISMISSED",
+          "submittedAt": "2026-01-29T16:40:06Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3729922042,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:03:25Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3729957673,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:13:15Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3729960934,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:14:07Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3729961238,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:14:12Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3729962540,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:14:36Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3729964058,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:15:03Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3729975412,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-30T19:18:14Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3738748485,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-02T11:07:34Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7769,
+      "title": "chore: migrate Jest from v27 to v28",
+      "url": "https://github.com/MetaMask/core/pull/7769",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-01-29T07:12:22Z",
+      "updatedAt": "2026-02-02T17:20:14Z",
+      "closedAt": "2026-02-02T17:20:14Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7770,
+      "title": "feat: add `HyperEVM` support in `PreferenceController` and `TransactionController`",
+      "url": "https://github.com/MetaMask/core/pull/7770",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-29T08:05:32Z",
+      "updatedAt": "2026-02-02T08:30:53Z",
+      "closedAt": "2026-02-02T08:30:52Z",
+      "mergedAt": "2026-02-02T08:30:52Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7777,
+      "title": "feat(AssetController): add hiddenAssets state",
+      "url": "https://github.com/MetaMask/core/pull/7777",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-29T15:20:35Z",
+      "updatedAt": "2026-02-04T14:47:54Z",
+      "closedAt": "2026-02-04T14:46:19Z",
+      "mergedAt": "2026-02-04T14:46:19Z",
+      "authorLogin": "Kriys94",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3723860205,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:43:03Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3723873925,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:45:36Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3723880021,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:46:51Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3723889778,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:49:04Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3723908831,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:53:09Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3723910588,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:53:32Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3723914776,
+          "state": "COMMENTED",
+          "submittedAt": "2026-01-29T16:54:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3750733257,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T12:20:00Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3750879397,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T12:48:45Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3750883924,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-04T12:49:34Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3751458762,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T14:39:20Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3751476236,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-04T14:42:13Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7779,
+      "title": "feat(ramps): refactor RampsControllerState to use nested objects for each resource type",
+      "url": "https://github.com/MetaMask/core/pull/7779",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-29T20:43:04Z",
+      "updatedAt": "2026-02-03T12:58:13Z",
+      "closedAt": "2026-02-03T12:58:09Z",
+      "mergedAt": "2026-02-03T12:58:09Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7783,
+      "title": "feat: Withdrawal to any token (Predict)",
+      "url": "https://github.com/MetaMask/core/pull/7783",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-01-30T10:44:28Z",
+      "updatedAt": "2026-02-12T00:37:41Z",
+      "closedAt": "2026-02-11T17:51:08Z",
+      "mergedAt": "2026-02-11T17:51:08Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7794,
+      "title": "feat: add chiliz pricing support",
+      "url": "https://github.com/MetaMask/core/pull/7794",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-01-30T16:24:03Z",
+      "updatedAt": "2026-02-16T16:30:40Z",
+      "closedAt": "2026-02-16T16:30:40Z",
+      "mergedAt": null,
+      "authorLogin": "bizk",
+      "labels": [
+        "team-network-enablement"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7796,
+      "title": "refactor: replace sinon with Jest timers and mocks",
+      "url": "https://github.com/MetaMask/core/pull/7796",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-01-30T17:49:28Z",
+      "updatedAt": "2026-02-11T11:07:31Z",
+      "closedAt": "2026-02-11T11:07:31Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7799,
+      "title": "feat: Add forceRefreshTokenList method to TokenListController",
+      "url": "https://github.com/MetaMask/core/pull/7799",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-01-31T15:30:36Z",
+      "updatedAt": "2026-02-03T12:02:00Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "ruhil6789",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7800,
+      "title": "fix: persist new `accessToken` in SeedlessOnboarding Vault after tokens refresh",
+      "url": "https://github.com/MetaMask/core/pull/7800",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T06:11:46Z",
+      "updatedAt": "2026-02-11T13:06:23Z",
+      "closedAt": "2026-02-11T13:06:21Z",
+      "mergedAt": "2026-02-11T13:06:21Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "team-onboarding",
+        "area-onboarding"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7802,
+      "title": "Release/781.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7802",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T09:25:08Z",
+      "updatedAt": "2026-02-02T14:00:17Z",
+      "closedAt": "2026-02-02T14:00:16Z",
+      "mergedAt": "2026-02-02T14:00:16Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7803,
+      "title": "[DRAFT]: FiatStrategy PoC implementation",
+      "url": "https://github.com/MetaMask/core/pull/7803",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-02T09:54:07Z",
+      "updatedAt": "2026-02-23T08:56:13Z",
+      "closedAt": "2026-02-23T08:56:13Z",
+      "mergedAt": null,
+      "authorLogin": "OGPoyraz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7804,
+      "title": "feat: add rwa data to tokens in tokens controller",
+      "url": "https://github.com/MetaMask/core/pull/7804",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T10:00:55Z",
+      "updatedAt": "2026-02-05T17:27:51Z",
+      "closedAt": "2026-02-05T17:27:50Z",
+      "mergedAt": "2026-02-05T17:27:50Z",
+      "authorLogin": "oscarwroche",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3758425363,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-05T17:24:34Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3758426905,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-05T17:24:58Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7807,
+      "title": "Release 782.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7807",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-02T13:26:37Z",
+      "updatedAt": "2026-02-02T14:08:34Z",
+      "closedAt": "2026-02-02T14:08:34Z",
+      "mergedAt": null,
+      "authorLogin": "jpuri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7808,
+      "title": "feat(ClientController): init controller",
+      "url": "https://github.com/MetaMask/core/pull/7808",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T13:31:37Z",
+      "updatedAt": "2026-02-17T17:06:10Z",
+      "closedAt": "2026-02-17T17:06:08Z",
+      "mergedAt": "2026-02-17T17:06:08Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3746253919,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-03T16:24:58Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3746254540,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-03T16:25:03Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3746254838,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-03T16:25:06Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3757480517,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T14:30:17Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3757482118,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T14:30:36Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3757482972,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T14:30:44Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3757488522,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T14:31:39Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3757489964,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T14:31:53Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3759154675,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T19:59:41Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3759155388,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T19:59:50Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3759618439,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T10:40:25Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3813147200,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T10:41:18Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7809,
+      "title": "Mikesposito/refactor/simplify controller",
+      "url": "https://github.com/MetaMask/core/pull/7809",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T13:48:09Z",
+      "updatedAt": "2026-02-06T09:51:24Z",
+      "closedAt": "2026-02-06T09:51:21Z",
+      "mergedAt": "2026-02-06T09:51:20Z",
+      "authorLogin": "wantedsystem",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7810,
+      "title": "Release/782.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7810",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T14:45:00Z",
+      "updatedAt": "2026-02-03T10:16:28Z",
+      "closedAt": "2026-02-03T10:16:26Z",
+      "mergedAt": "2026-02-03T10:16:26Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7811,
+      "title": "fix: avoid making unnecessary api calls",
+      "url": "https://github.com/MetaMask/core/pull/7811",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T15:23:47Z",
+      "updatedAt": "2026-02-09T13:10:28Z",
+      "closedAt": "2026-02-09T13:10:21Z",
+      "mergedAt": "2026-02-09T13:10:21Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3773129078,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T12:52:33Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773137661,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-09T12:54:36Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773198801,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:08:33Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3773204129,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T13:09:45Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7812,
+      "title": "chore: migrate Jest from v27 to v28",
+      "url": "https://github.com/MetaMask/core/pull/7812",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-02T15:39:29Z",
+      "updatedAt": "2026-02-11T11:06:27Z",
+      "closedAt": "2026-02-11T11:06:27Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7813,
+      "title": "feat(ramps): migrates legacy ramp state to new interface",
+      "url": "https://github.com/MetaMask/core/pull/7813",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-02T19:26:16Z",
+      "updatedAt": "2026-02-03T02:40:47Z",
+      "closedAt": "2026-02-03T02:40:47Z",
+      "mergedAt": null,
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7815,
+      "title": "perf: add Node.js memory optimization for ESLint CI",
+      "url": "https://github.com/MetaMask/core/pull/7815",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-02T20:01:37Z",
+      "updatedAt": "2026-02-11T16:35:21Z",
+      "closedAt": "2026-02-11T16:35:21Z",
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7816,
+      "title": "feat: make `wallet_sendCalls` more reliable",
+      "url": "https://github.com/MetaMask/core/pull/7816",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-02T22:14:32Z",
+      "updatedAt": "2026-02-05T17:09:20Z",
+      "closedAt": "2026-02-05T17:09:18Z",
+      "mergedAt": "2026-02-05T17:09:18Z",
+      "authorLogin": "jiexi",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7817,
+      "title": "Release/783.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7817",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T10:30:20Z",
+      "updatedAt": "2026-02-03T11:51:28Z",
+      "closedAt": "2026-02-03T11:51:27Z",
+      "mergedAt": "2026-02-03T11:51:27Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3744804978,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-03T11:46:28Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7818,
+      "title": "refactor(ramps): streamline RampsController reset and abort logic",
+      "url": "https://github.com/MetaMask/core/pull/7818",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T11:37:22Z",
+      "updatedAt": "2026-02-12T15:15:49Z",
+      "closedAt": "2026-02-12T15:15:47Z",
+      "mergedAt": "2026-02-12T15:15:47Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7819,
+      "title": "feat: pass required assets to transaction controller",
+      "url": "https://github.com/MetaMask/core/pull/7819",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T12:40:49Z",
+      "updatedAt": "2026-02-09T18:20:07Z",
+      "closedAt": "2026-02-09T18:20:06Z",
+      "mergedAt": "2026-02-09T18:20:06Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7820,
+      "title": "feat: persist required assets in transaction meta",
+      "url": "https://github.com/MetaMask/core/pull/7820",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T12:44:35Z",
+      "updatedAt": "2026-02-04T16:55:18Z",
+      "closedAt": "2026-02-04T16:55:16Z",
+      "mergedAt": "2026-02-04T16:55:16Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7821,
+      "title": "Release/784.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7821",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T14:38:16Z",
+      "updatedAt": "2026-02-03T15:37:25Z",
+      "closedAt": "2026-02-03T15:37:23Z",
+      "mergedAt": "2026-02-03T15:37:23Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7822,
+      "title": "feat: using websockets events for transaction polling",
+      "url": "https://github.com/MetaMask/core/pull/7822",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T15:00:28Z",
+      "updatedAt": "2026-02-09T09:44:15Z",
+      "closedAt": "2026-02-08T14:48:35Z",
+      "mergedAt": "2026-02-08T14:48:35Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7823,
+      "title": "feat: bridge-controller add MegaETH",
+      "url": "https://github.com/MetaMask/core/pull/7823",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T15:10:46Z",
+      "updatedAt": "2026-02-04T09:10:22Z",
+      "closedAt": "2026-02-04T09:10:21Z",
+      "mergedAt": "2026-02-04T09:10:21Z",
+      "authorLogin": "gabrieledm",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7824,
+      "title": "feat(ramps): add automatic quote polling with auto-selection",
+      "url": "https://github.com/MetaMask/core/pull/7824",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T15:46:29Z",
+      "updatedAt": "2026-02-03T20:40:36Z",
+      "closedAt": "2026-02-03T20:40:34Z",
+      "mergedAt": "2026-02-03T20:40:34Z",
+      "authorLogin": "AxelGes",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7825,
+      "title": "feat: BridgeStatusController track max polling reached and manually restarted polling events",
+      "url": "https://github.com/MetaMask/core/pull/7825",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T16:26:57Z",
+      "updatedAt": "2026-02-06T17:27:35Z",
+      "closedAt": "2026-02-05T16:32:33Z",
+      "mergedAt": "2026-02-05T16:32:33Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7826,
+      "title": "chore: read bridge gas fee estimates from gasFeeEstimatesByChainId",
+      "url": "https://github.com/MetaMask/core/pull/7826",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T22:13:29Z",
+      "updatedAt": "2026-02-05T16:59:53Z",
+      "closedAt": "2026-02-05T16:25:46Z",
+      "mergedAt": "2026-02-05T16:25:46Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7827,
+      "title": "fix: RemoteFeatureFlagController client version change cache invalidation",
+      "url": "https://github.com/MetaMask/core/pull/7827",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-03T22:18:39Z",
+      "updatedAt": "2026-02-12T10:03:21Z",
+      "closedAt": "2026-02-12T10:03:20Z",
+      "mergedAt": "2026-02-12T10:03:20Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3750689174,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-04T12:07:04Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3750720104,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T12:13:54Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3750737420,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T12:18:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3751155899,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T13:44:41Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3751156864,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T13:44:53Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752489999,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T17:55:58Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752538309,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T18:04:47Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752811842,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T18:57:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752813181,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T18:57:33Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3756056694,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T10:42:08Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7828,
+      "title": "Release/785.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7828",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-04T09:03:58Z",
+      "updatedAt": "2026-02-04T09:06:27Z",
+      "closedAt": "2026-02-04T09:06:27Z",
+      "mergedAt": null,
+      "authorLogin": "oscarwroche",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7829,
+      "title": "fix: trending tokens show incorrect MC value",
+      "url": "https://github.com/MetaMask/core/pull/7829",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T09:04:29Z",
+      "updatedAt": "2026-02-04T10:38:05Z",
+      "closedAt": "2026-02-04T10:38:03Z",
+      "mergedAt": "2026-02-04T10:38:03Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3750260921,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-04T10:32:39Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7830,
+      "title": "Release/785.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7830",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-04T09:08:37Z",
+      "updatedAt": "2026-02-04T09:12:41Z",
+      "closedAt": "2026-02-04T09:12:21Z",
+      "mergedAt": null,
+      "authorLogin": "oscarwroche",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7831,
+      "title": "feat: add isEnabled option to skip initialization and avoid duplicate requests",
+      "url": "https://github.com/MetaMask/core/pull/7831",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T09:16:41Z",
+      "updatedAt": "2026-02-04T10:32:48Z",
+      "closedAt": "2026-02-04T10:32:46Z",
+      "mergedAt": "2026-02-04T10:32:46Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3750230503,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-04T10:26:23Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7832,
+      "title": "Release/785.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7832",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T09:58:43Z",
+      "updatedAt": "2026-02-04T10:17:47Z",
+      "closedAt": "2026-02-04T10:17:46Z",
+      "mergedAt": "2026-02-04T10:17:45Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7833,
+      "title": "Release/786.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7833",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T10:36:47Z",
+      "updatedAt": "2026-02-04T10:52:26Z",
+      "closedAt": "2026-02-04T10:52:25Z",
+      "mergedAt": "2026-02-04T10:52:25Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3750325444,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-04T10:46:49Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7834,
+      "title": "Release 787.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7834",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T11:51:10Z",
+      "updatedAt": "2026-02-04T13:04:50Z",
+      "closedAt": "2026-02-04T13:04:49Z",
+      "mergedAt": "2026-02-04T13:04:49Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7835,
+      "title": "Chore/improve error handling",
+      "url": "https://github.com/MetaMask/core/pull/7835",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T12:04:01Z",
+      "updatedAt": "2026-02-10T10:34:09Z",
+      "closedAt": "2026-02-10T10:34:07Z",
+      "mergedAt": "2026-02-10T10:34:07Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "area-shield",
+        "team-shield"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7836,
+      "title": "feat(signature-controller): allow EIP-7702 self-signatures where verifyingContract equals signer",
+      "url": "https://github.com/MetaMask/core/pull/7836",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-02-04T12:11:43Z",
+      "updatedAt": "2026-02-04T12:17:59Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "zerodustxyz",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7837,
+      "title": "Release/788.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7837",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T14:11:08Z",
+      "updatedAt": "2026-02-05T09:57:56Z",
+      "closedAt": "2026-02-05T09:57:54Z",
+      "mergedAt": "2026-02-05T09:57:54Z",
+      "authorLogin": "gabrieledm",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7838,
+      "title": "fix: Preserve `data.cause` when deserializing",
+      "url": "https://github.com/MetaMask/core/pull/7838",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T14:40:56Z",
+      "updatedAt": "2026-02-04T18:31:41Z",
+      "closedAt": "2026-02-04T18:31:39Z",
+      "mergedAt": "2026-02-04T18:31:39Z",
+      "authorLogin": "FrederikBolding",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7839,
+      "title": "feat: replace viem with manual ABI encoding",
+      "url": "https://github.com/MetaMask/core/pull/7839",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T14:48:03Z",
+      "updatedAt": "2026-02-04T17:58:07Z",
+      "closedAt": "2026-02-04T16:18:45Z",
+      "mergedAt": "2026-02-04T16:18:45Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3751971845,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-04T16:16:07Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7840,
+      "title": "feat: move Notifications networks config to backend [GE-23]",
+      "url": "https://github.com/MetaMask/core/pull/7840",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T17:47:30Z",
+      "updatedAt": "2026-02-10T15:45:06Z",
+      "closedAt": "2026-02-10T13:49:42Z",
+      "mergedAt": "2026-02-10T13:49:42Z",
+      "authorLogin": "baptiste-marchand",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3752553653,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T18:08:05Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752571664,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T18:11:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752572711,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-04T18:11:33Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3752602170,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-04T18:17:51Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3778088139,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T10:24:05Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3778089060,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T10:24:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3778096332,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T10:25:48Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3778097071,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T10:25:57Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3778209517,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-10T10:49:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7841,
+      "title": "[draft]: perps-controller preview",
+      "url": "https://github.com/MetaMask/core/pull/7841",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-04T21:08:39Z",
+      "updatedAt": "2026-02-24T19:09:32Z",
+      "closedAt": "2026-02-24T19:09:32Z",
+      "mergedAt": null,
+      "authorLogin": "gambinish",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7842,
+      "title": "fix(ramps): \"Proxy handler is null\" error when updating state",
+      "url": "https://github.com/MetaMask/core/pull/7842",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-04T21:09:56Z",
+      "updatedAt": "2026-02-04T23:24:24Z",
+      "closedAt": "2026-02-04T23:24:24Z",
+      "mergedAt": null,
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7843,
+      "title": "fix: add changelog entry for breaking intent tx history change",
+      "url": "https://github.com/MetaMask/core/pull/7843",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T21:36:03Z",
+      "updatedAt": "2026-02-04T21:51:12Z",
+      "closedAt": "2026-02-04T21:51:10Z",
+      "mergedAt": "2026-02-04T21:51:10Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7845,
+      "title": "feat(ramps): update payment method delay type to array",
+      "url": "https://github.com/MetaMask/core/pull/7845",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-04T23:46:49Z",
+      "updatedAt": "2026-02-05T15:44:19Z",
+      "closedAt": "2026-02-05T15:44:17Z",
+      "mergedAt": "2026-02-05T15:44:17Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7846,
+      "title": "feat(ramps-controller): require provider selection for quote polling",
+      "url": "https://github.com/MetaMask/core/pull/7846",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T01:57:14Z",
+      "updatedAt": "2026-02-05T15:37:33Z",
+      "closedAt": "2026-02-05T15:37:31Z",
+      "mergedAt": "2026-02-05T15:37:31Z",
+      "authorLogin": "AxelGes",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7847,
+      "title": "refactor: improve `GatorPermissionsController` permission storage and syncronisation",
+      "url": "https://github.com/MetaMask/core/pull/7847",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T03:08:17Z",
+      "updatedAt": "2026-02-12T01:35:37Z",
+      "closedAt": "2026-02-12T00:39:40Z",
+      "mergedAt": "2026-02-12T00:39:40Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7848,
+      "title": "Release/789.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7848",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T10:11:00Z",
+      "updatedAt": "2026-02-05T10:35:41Z",
+      "closedAt": "2026-02-05T10:35:40Z",
+      "mergedAt": "2026-02-05T10:35:40Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3755940004,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T10:26:50Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3755963431,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T10:29:55Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7849,
+      "title": "Release/790.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7849",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T11:01:15Z",
+      "updatedAt": "2026-02-05T12:32:09Z",
+      "closedAt": "2026-02-05T12:32:07Z",
+      "mergedAt": "2026-02-05T12:32:07Z",
+      "authorLogin": "mathieuartu",
+      "labels": [
+        "team-accounts"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7850,
+      "title": "Release/791.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7850",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T15:12:20Z",
+      "updatedAt": "2026-02-05T17:41:48Z",
+      "closedAt": "2026-02-05T17:41:46Z",
+      "mergedAt": "2026-02-05T17:41:46Z",
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7851,
+      "title": "chore: removing use of WebSocketState constant from @metamask/core-backend in transaction-controller",
+      "url": "https://github.com/MetaMask/core/pull/7851",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T16:10:41Z",
+      "updatedAt": "2026-02-06T08:58:03Z",
+      "closedAt": "2026-02-06T08:58:01Z",
+      "mergedAt": "2026-02-06T08:58:01Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations",
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7852,
+      "title": "fix: downgrade core-backend to 5.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7852",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T17:54:30Z",
+      "updatedAt": "2026-02-05T19:00:20Z",
+      "closedAt": "2026-02-05T19:00:19Z",
+      "mergedAt": "2026-02-05T19:00:19Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3758776047,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-05T18:43:14Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7853,
+      "title": "Release/792.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7853",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-05T18:26:31Z",
+      "updatedAt": "2026-02-05T19:45:05Z",
+      "closedAt": "2026-02-05T19:45:03Z",
+      "mergedAt": "2026-02-05T19:45:03Z",
+      "authorLogin": "AxelGes",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7854,
+      "title": "Release/793.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7854",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T03:28:05Z",
+      "updatedAt": "2026-02-06T10:30:10Z",
+      "closedAt": "2026-02-06T10:30:08Z",
+      "mergedAt": "2026-02-06T10:30:08Z",
+      "authorLogin": "jpuri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7855,
+      "title": "Release/794.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7855",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T11:16:45Z",
+      "updatedAt": "2026-02-06T11:50:06Z",
+      "closedAt": "2026-02-06T11:50:05Z",
+      "mergedAt": "2026-02-06T11:50:05Z",
+      "authorLogin": "oscarwroche",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7856,
+      "title": "Release 795.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7856",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T12:53:50Z",
+      "updatedAt": "2026-02-06T13:17:15Z",
+      "closedAt": "2026-02-06T13:17:14Z",
+      "mergedAt": "2026-02-06T13:17:14Z",
+      "authorLogin": "FrederikBolding",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7857,
+      "title": "feat: bump `accounts` deps + use new `AccountProvider.createAccounts`",
+      "url": "https://github.com/MetaMask/core/pull/7857",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T14:38:55Z",
+      "updatedAt": "2026-02-10T12:17:24Z",
+      "closedAt": "2026-02-10T12:17:22Z",
+      "mergedAt": "2026-02-10T12:17:22Z",
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7858,
+      "title": "chore: remove tempo testnet multicall",
+      "url": "https://github.com/MetaMask/core/pull/7858",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T15:21:57Z",
+      "updatedAt": "2026-02-06T15:56:43Z",
+      "closedAt": "2026-02-06T15:56:41Z",
+      "mergedAt": "2026-02-06T15:56:41Z",
+      "authorLogin": "Julink-eth",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3763806898,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-06T15:46:54Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3763823978,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-06T15:50:49Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7859,
+      "title": "fix(AssetsController): Remove messenger in Data sources",
+      "url": "https://github.com/MetaMask/core/pull/7859",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T15:27:19Z",
+      "updatedAt": "2026-02-09T09:00:33Z",
+      "closedAt": "2026-02-09T09:00:31Z",
+      "mergedAt": "2026-02-09T09:00:31Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3771940130,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T08:45:16Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7860,
+      "title": "Release/796.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7860",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T16:04:29Z",
+      "updatedAt": "2026-02-06T16:38:22Z",
+      "closedAt": "2026-02-06T16:38:20Z",
+      "mergedAt": "2026-02-06T16:38:20Z",
+      "authorLogin": "Julink-eth",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7861,
+      "title": "feat: zero out missing erc-20 token balances from account api",
+      "url": "https://github.com/MetaMask/core/pull/7861",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T17:40:51Z",
+      "updatedAt": "2026-02-09T14:28:42Z",
+      "closedAt": "2026-02-09T14:28:40Z",
+      "mergedAt": "2026-02-09T14:28:40Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3764430070,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-06T17:50:47Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3773513392,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T14:05:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3773601340,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T14:21:48Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773602515,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T14:22:02Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773604224,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T14:22:21Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773613874,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T14:24:14Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3773618577,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T14:25:06Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7862,
+      "title": "Release/797.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7862",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-06T17:49:30Z",
+      "updatedAt": "2026-02-09T09:01:54Z",
+      "closedAt": "2026-02-09T09:01:52Z",
+      "mergedAt": "2026-02-09T09:01:52Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7863,
+      "title": "fix(ramps): fixes quote race condition bug with missing payment method",
+      "url": "https://github.com/MetaMask/core/pull/7863",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-07T22:09:51Z",
+      "updatedAt": "2026-02-09T17:29:13Z",
+      "closedAt": "2026-02-09T17:29:11Z",
+      "mergedAt": "2026-02-09T17:29:11Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7864,
+      "title": "feat: aggregated balance",
+      "url": "https://github.com/MetaMask/core/pull/7864",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-08T15:53:06Z",
+      "updatedAt": "2026-02-09T13:38:00Z",
+      "closedAt": "2026-02-09T13:37:58Z",
+      "mergedAt": "2026-02-09T13:37:58Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3772226675,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T09:36:18Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3772275308,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T09:45:31Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3772348416,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T10:02:26Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3772544992,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T10:41:46Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3772567005,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T10:46:05Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3772568328,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T10:46:20Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773183888,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:05:07Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3773197048,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T13:08:09Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3773208587,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:10:46Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3773212119,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:11:35Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3773217486,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:12:43Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773224193,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:13:59Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3773243867,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T13:17:46Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3773246820,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T13:18:24Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7865,
+      "title": "fix(AssetsController): Remove messenger in Data sources",
+      "url": "https://github.com/MetaMask/core/pull/7865",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-09T09:32:16Z",
+      "updatedAt": "2026-02-09T13:08:19Z",
+      "closedAt": "2026-02-09T13:08:19Z",
+      "mergedAt": null,
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7866,
+      "title": "chore: TransactionPoller cleanup",
+      "url": "https://github.com/MetaMask/core/pull/7866",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T10:18:04Z",
+      "updatedAt": "2026-02-09T12:40:22Z",
+      "closedAt": "2026-02-09T12:40:21Z",
+      "mergedAt": "2026-02-09T12:40:21Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations",
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7867,
+      "title": "fix(AssetsController): Clean code",
+      "url": "https://github.com/MetaMask/core/pull/7867",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T10:51:30Z",
+      "updatedAt": "2026-02-09T13:19:17Z",
+      "closedAt": "2026-02-09T13:19:15Z",
+      "mergedAt": "2026-02-09T13:19:15Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3772704060,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-09T11:14:10Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3773204966,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T13:09:57Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7868,
+      "title": "feat(transaction-pay): add ordered strategy fallback orchestration",
+      "url": "https://github.com/MetaMask/core/pull/7868",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T10:59:10Z",
+      "updatedAt": "2026-02-23T11:50:28Z",
+      "closedAt": "2026-02-23T11:50:26Z",
+      "mergedAt": "2026-02-23T11:50:25Z",
+      "authorLogin": "pedronfigueiredo",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7869,
+      "title": "Release/798.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7869",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T11:28:07Z",
+      "updatedAt": "2026-02-09T12:54:29Z",
+      "closedAt": "2026-02-09T12:54:27Z",
+      "mergedAt": "2026-02-09T12:54:27Z",
+      "authorLogin": "ccharly",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7870,
+      "title": "Feature/parallel middleware",
+      "url": "https://github.com/MetaMask/core/pull/7870",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-09T12:56:25Z",
+      "updatedAt": "2026-02-17T10:15:59Z",
+      "closedAt": "2026-02-17T10:15:59Z",
+      "mergedAt": null,
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7871,
+      "title": "feat(AssetsController): Measure intial fetch duration",
+      "url": "https://github.com/MetaMask/core/pull/7871",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T13:05:34Z",
+      "updatedAt": "2026-02-13T15:11:08Z",
+      "closedAt": "2026-02-13T15:11:06Z",
+      "mergedAt": "2026-02-13T15:11:06Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3796143436,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T09:38:48Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3796335044,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:07:29Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3796336132,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:07:40Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3796341704,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:08:27Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3796372566,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-13T10:12:49Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3796387067,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:14:53Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796395553,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:16:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796423433,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:20:06Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3796423988,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:20:11Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3796430873,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:21:09Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796441399,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:22:35Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3796449087,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:23:37Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3796451324,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T10:23:55Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3796945811,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T12:17:16Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3797038985,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-13T12:35:44Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3797780455,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-13T15:05:59Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7872,
+      "title": "Release/799.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7872",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T13:06:29Z",
+      "updatedAt": "2026-02-09T13:44:03Z",
+      "closedAt": "2026-02-09T13:44:01Z",
+      "mergedAt": "2026-02-09T13:44:01Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7873,
+      "title": "feat: Add HyperEVM in token scanning",
+      "url": "https://github.com/MetaMask/core/pull/7873",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T13:29:05Z",
+      "updatedAt": "2026-02-09T14:30:20Z",
+      "closedAt": "2026-02-09T14:30:18Z",
+      "mergedAt": "2026-02-09T14:30:18Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7874,
+      "title": "Release/800.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7874",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T13:53:43Z",
+      "updatedAt": "2026-02-09T14:08:15Z",
+      "closedAt": "2026-02-09T14:08:13Z",
+      "mergedAt": "2026-02-09T14:08:13Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3773502814,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-09T14:03:12Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7876,
+      "title": "Release/801.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7876",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-09T17:33:08Z",
+      "updatedAt": "2026-02-09T17:35:07Z",
+      "closedAt": "2026-02-09T17:34:54Z",
+      "mergedAt": null,
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7878,
+      "title": "Release/801.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7878",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T18:43:33Z",
+      "updatedAt": "2026-02-09T21:13:41Z",
+      "closedAt": "2026-02-09T21:13:39Z",
+      "mergedAt": "2026-02-09T21:13:39Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7879,
+      "title": "fix: custom token balances",
+      "url": "https://github.com/MetaMask/core/pull/7879",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-02-09T21:56:58Z",
+      "updatedAt": "2026-02-10T14:11:27Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "milos-ethernal",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7880,
+      "title": "fix(AssetsController): Clean code (#7867)",
+      "url": "https://github.com/MetaMask/core/pull/7880",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-09T22:21:20Z",
+      "updatedAt": "2026-02-11T15:12:42Z",
+      "closedAt": "2026-02-11T15:12:42Z",
+      "mergedAt": null,
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7881,
+      "title": "fix(ramps-controller): remove nested widgetUrl field from Quote type",
+      "url": "https://github.com/MetaMask/core/pull/7881",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-09T22:49:34Z",
+      "updatedAt": "2026-02-11T00:02:19Z",
+      "closedAt": "2026-02-11T00:02:18Z",
+      "mergedAt": "2026-02-11T00:02:17Z",
+      "authorLogin": "AxelGes",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7883,
+      "title": "Release/802.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7883",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T07:50:26Z",
+      "updatedAt": "2026-02-10T08:32:07Z",
+      "closedAt": "2026-02-10T08:32:06Z",
+      "mergedAt": "2026-02-10T08:32:06Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7884,
+      "title": "feat: filter out notifications older than 3 months [GE-35]",
+      "url": "https://github.com/MetaMask/core/pull/7884",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T09:08:07Z",
+      "updatedAt": "2026-02-11T09:51:10Z",
+      "closedAt": "2026-02-11T09:51:09Z",
+      "mergedAt": "2026-02-11T09:51:09Z",
+      "authorLogin": "baptiste-marchand",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7885,
+      "title": "fix: remove spammy `notification-services-controller` error logs for silent failures",
+      "url": "https://github.com/MetaMask/core/pull/7885",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T10:54:38Z",
+      "updatedAt": "2026-02-10T11:11:30Z",
+      "closedAt": "2026-02-10T11:11:29Z",
+      "mergedAt": "2026-02-10T11:11:29Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7887,
+      "title": "refactor: simplify null checks with optional chaining",
+      "url": "https://github.com/MetaMask/core/pull/7887",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T11:49:06Z",
+      "updatedAt": "2026-02-10T12:52:18Z",
+      "closedAt": "2026-02-10T12:52:16Z",
+      "mergedAt": "2026-02-10T12:52:16Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3778678491,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T12:34:24Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3778691849,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T12:37:19Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3778734672,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-10T12:45:57Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3778735510,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-10T12:46:07Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7889,
+      "title": "Release/803.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7889",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T14:27:39Z",
+      "updatedAt": "2026-02-10T14:37:07Z",
+      "closedAt": "2026-02-10T14:37:06Z",
+      "mergedAt": "2026-02-10T14:37:06Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7891,
+      "title": "Release/804.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7891",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T15:35:12Z",
+      "updatedAt": "2026-02-10T16:01:53Z",
+      "closedAt": "2026-02-10T16:01:51Z",
+      "mergedAt": "2026-02-10T16:01:51Z",
+      "authorLogin": "baptiste-marchand",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3779896973,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-10T15:53:04Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7892,
+      "title": "feat(ramps):  update getQuotes to support passing multiple providers",
+      "url": "https://github.com/MetaMask/core/pull/7892",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T16:09:47Z",
+      "updatedAt": "2026-02-11T04:52:48Z",
+      "closedAt": "2026-02-11T04:52:47Z",
+      "mergedAt": "2026-02-11T04:52:47Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7894,
+      "title": "chore: migrate Jest from v27 to v29",
+      "url": "https://github.com/MetaMask/core/pull/7894",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T17:13:39Z",
+      "updatedAt": "2026-02-11T01:43:30Z",
+      "closedAt": "2026-02-11T01:43:29Z",
+      "mergedAt": "2026-02-11T01:43:29Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7896,
+      "title": "fix: sort quotes by priceImpact or destTokenAmount when cost is not available",
+      "url": "https://github.com/MetaMask/core/pull/7896",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T20:01:46Z",
+      "updatedAt": "2026-02-11T17:44:20Z",
+      "closedAt": "2026-02-11T17:44:18Z",
+      "mergedAt": "2026-02-11T17:44:18Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7897,
+      "title": "Release/805.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7897",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T20:11:29Z",
+      "updatedAt": "2026-02-11T18:18:08Z",
+      "closedAt": "2026-02-11T18:18:06Z",
+      "mergedAt": "2026-02-11T18:18:06Z",
+      "authorLogin": "hmalik88",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7898,
+      "title": "chore: upgrade `typedoc` from `^0.24.8` to `^0.25.13`",
+      "url": "https://github.com/MetaMask/core/pull/7898",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T21:42:18Z",
+      "updatedAt": "2026-02-11T13:31:14Z",
+      "closedAt": "2026-02-11T13:31:12Z",
+      "mergedAt": "2026-02-11T13:31:12Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7899,
+      "title": "fix: default usd_amount_source",
+      "url": "https://github.com/MetaMask/core/pull/7899",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-10T23:26:12Z",
+      "updatedAt": "2026-02-13T20:41:42Z",
+      "closedAt": "2026-02-13T20:41:41Z",
+      "mergedAt": "2026-02-13T20:41:41Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7900,
+      "title": "chore: update Jest deps to v29 in package template",
+      "url": "https://github.com/MetaMask/core/pull/7900",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T01:58:03Z",
+      "updatedAt": "2026-02-11T09:43:01Z",
+      "closedAt": "2026-02-11T09:42:59Z",
+      "mergedAt": "2026-02-11T09:42:59Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7901,
+      "title": "docs: fix typedoc docs generation",
+      "url": "https://github.com/MetaMask/core/pull/7901",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-02-11T13:10:06Z",
+      "updatedAt": "2026-02-11T13:32:35Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7902,
+      "title": "refactor: rename state and DataResponse from assetsMetadata to assetsInfo",
+      "url": "https://github.com/MetaMask/core/pull/7902",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T13:18:49Z",
+      "updatedAt": "2026-02-11T13:52:38Z",
+      "closedAt": "2026-02-11T13:52:37Z",
+      "mergedAt": "2026-02-11T13:52:37Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3784874426,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-11T13:37:47Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 7903,
+      "title": "Release/806.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7903",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-11T13:20:47Z",
+      "updatedAt": "2026-02-11T18:32:20Z",
+      "closedAt": "2026-02-11T18:32:15Z",
+      "mergedAt": null,
+      "authorLogin": "lwin-kyaw",
+      "labels": [
+        "DO-NOT-MERGE",
+        "team-onboarding",
+        "area-onboarding"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7904,
+      "title": "feat(AssetsController): Basic functionality",
+      "url": "https://github.com/MetaMask/core/pull/7904",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T14:37:55Z",
+      "updatedAt": "2026-02-12T17:16:28Z",
+      "closedAt": "2026-02-12T17:16:27Z",
+      "mergedAt": "2026-02-12T17:16:27Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3785554710,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-11T15:31:03Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3785556306,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-11T15:31:21Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3785562064,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-11T15:32:22Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3785572922,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-11T15:34:17Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3785578921,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-11T15:35:17Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3785580801,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-11T15:35:37Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3790785543,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-12T12:39:09Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3790787652,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-12T12:39:44Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3792014433,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-12T16:19:55Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3792041915,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-12T16:24:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3792056761,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-12T16:26:37Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3792266149,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-12T16:55:04Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3792352910,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-12T17:07:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7906,
+      "title": "fix: increase memory limit for lint script to prevent OOM",
+      "url": "https://github.com/MetaMask/core/pull/7906",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T16:07:47Z",
+      "updatedAt": "2026-02-11T17:18:27Z",
+      "closedAt": "2026-02-11T17:18:25Z",
+      "mergedAt": "2026-02-11T17:18:25Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7908,
+      "title": "Release 806.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7908",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T18:34:34Z",
+      "updatedAt": "2026-02-11T18:57:23Z",
+      "closedAt": "2026-02-11T18:57:22Z",
+      "mergedAt": "2026-02-11T18:57:22Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7909,
+      "title": "fix: formatChainIdToHex returns unprefixed hex",
+      "url": "https://github.com/MetaMask/core/pull/7909",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T22:22:09Z",
+      "updatedAt": "2026-02-11T22:36:44Z",
+      "closedAt": "2026-02-11T22:36:43Z",
+      "mergedAt": "2026-02-11T22:36:43Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7910,
+      "title": "Release/807.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7910",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T22:45:37Z",
+      "updatedAt": "2026-02-12T07:45:50Z",
+      "closedAt": "2026-02-12T07:45:48Z",
+      "mergedAt": "2026-02-12T07:45:48Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7911,
+      "title": "fix(transaction-pay-controller): relay quote target amount if max amount",
+      "url": "https://github.com/MetaMask/core/pull/7911",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-11T23:54:00Z",
+      "updatedAt": "2026-02-12T14:06:52Z",
+      "closedAt": "2026-02-12T14:06:50Z",
+      "mergedAt": "2026-02-12T14:06:50Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7912,
+      "title": "Release/808.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7912",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T04:37:38Z",
+      "updatedAt": "2026-02-12T11:12:50Z",
+      "closedAt": "2026-02-12T11:12:48Z",
+      "mergedAt": "2026-02-12T11:12:48Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7913,
+      "title": "fix: Update changelog",
+      "url": "https://github.com/MetaMask/core/pull/7913",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T09:52:21Z",
+      "updatedAt": "2026-02-12T09:58:06Z",
+      "closedAt": "2026-02-12T09:58:05Z",
+      "mergedAt": "2026-02-12T09:58:05Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7914,
+      "title": "Release/809.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7914",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T11:29:30Z",
+      "updatedAt": "2026-02-12T11:49:18Z",
+      "closedAt": "2026-02-12T11:49:17Z",
+      "mergedAt": "2026-02-12T11:49:17Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7915,
+      "title": "chore: remove unused `sinon` `devDependency` from 4 packages",
+      "url": "https://github.com/MetaMask/core/pull/7915",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T12:16:30Z",
+      "updatedAt": "2026-02-12T12:22:32Z",
+      "closedAt": "2026-02-12T12:22:31Z",
+      "mergedAt": "2026-02-12T12:22:31Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7916,
+      "title": "chore(profile-metrics-controller): replace `Sinon` with `Jest` in `ProfileMetricsService` tests",
+      "url": "https://github.com/MetaMask/core/pull/7916",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T13:25:49Z",
+      "updatedAt": "2026-02-17T16:33:49Z",
+      "closedAt": "2026-02-17T16:33:47Z",
+      "mergedAt": "2026-02-17T16:33:47Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7918,
+      "title": "fix: allow redelegation signing for internal accounts from external requests",
+      "url": "https://github.com/MetaMask/core/pull/7918",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-02-12T13:43:39Z",
+      "updatedAt": "2026-02-12T13:50:00Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "osobot-ai",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7919,
+      "title": "chore: Breaking change changelog rule",
+      "url": "https://github.com/MetaMask/core/pull/7919",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T16:09:31Z",
+      "updatedAt": "2026-02-12T16:18:11Z",
+      "closedAt": "2026-02-12T16:18:09Z",
+      "mergedAt": "2026-02-12T16:18:09Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7920,
+      "title": "feat(ramps): adds widget url to ramps controller state",
+      "url": "https://github.com/MetaMask/core/pull/7920",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T16:21:38Z",
+      "updatedAt": "2026-02-13T19:59:41Z",
+      "closedAt": "2026-02-13T19:59:40Z",
+      "mergedAt": "2026-02-13T19:59:40Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7921,
+      "title": "Release 810.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7921",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T17:03:49Z",
+      "updatedAt": "2026-02-12T17:09:48Z",
+      "closedAt": "2026-02-12T17:09:47Z",
+      "mergedAt": "2026-02-12T17:09:46Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7922,
+      "title": "feat(ramps):  Add TransakService for native deposit flow integration",
+      "url": "https://github.com/MetaMask/core/pull/7922",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T19:46:19Z",
+      "updatedAt": "2026-02-17T21:57:15Z",
+      "closedAt": "2026-02-17T21:57:14Z",
+      "mergedAt": "2026-02-17T21:57:14Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7923,
+      "title": "chore: add blockaid filter logic for spl tokens",
+      "url": "https://github.com/MetaMask/core/pull/7923",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T21:46:41Z",
+      "updatedAt": "2026-02-16T20:08:08Z",
+      "closedAt": "2026-02-16T20:08:07Z",
+      "mergedAt": "2026-02-16T20:08:07Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3796793176,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:37:58Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796806246,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:41:35Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796817734,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:44:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796833763,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:48:57Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796846084,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:52:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796847737,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:52:53Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796849541,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-13T11:53:24Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3797421790,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T13:54:40Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3797783751,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-13T15:06:36Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3805824418,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-15T23:44:09Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3807581225,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-16T09:37:55Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7924,
+      "title": "feat: skip rpc token detection when tokenDetectionEnabled is false",
+      "url": "https://github.com/MetaMask/core/pull/7924",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T23:16:41Z",
+      "updatedAt": "2026-02-13T13:31:19Z",
+      "closedAt": "2026-02-13T13:31:17Z",
+      "mergedAt": "2026-02-13T13:31:17Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3796692361,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:11:47Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796695559,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:12:24Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796699311,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-13T11:13:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796722723,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:18:52Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3797268916,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-13T13:23:29Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7925,
+      "title": "Exclude test folder from `@metamask/gator-permissions-controller` build artifact",
+      "url": "https://github.com/MetaMask/core/pull/7925",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T23:33:43Z",
+      "updatedAt": "2026-02-25T02:26:47Z",
+      "closedAt": "2026-02-25T02:26:46Z",
+      "mergedAt": "2026-02-25T02:26:46Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7926,
+      "title": "feat: use config objects for accounts API and price data sources",
+      "url": "https://github.com/MetaMask/core/pull/7926",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-12T23:54:58Z",
+      "updatedAt": "2026-02-13T14:25:06Z",
+      "closedAt": "2026-02-13T14:25:05Z",
+      "mergedAt": "2026-02-13T14:25:05Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3796731189,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:21:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796746070,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:25:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796781927,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:35:02Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796785872,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:36:11Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3797441959,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-13T13:59:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7928,
+      "title": "feat(core-backend): expose query options",
+      "url": "https://github.com/MetaMask/core/pull/7928",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T09:56:12Z",
+      "updatedAt": "2026-02-13T16:32:35Z",
+      "closedAt": "2026-02-13T16:32:33Z",
+      "mergedAt": "2026-02-13T16:32:33Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3796861263,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T11:56:41Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796874432,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T12:00:24Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3796877666,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-13T12:01:20Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3797792463,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-13T15:08:18Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3798190061,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-13T16:25:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7929,
+      "title": "chore: Remove transactionGas, update source network fee calculations",
+      "url": "https://github.com/MetaMask/core/pull/7929",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T10:17:25Z",
+      "updatedAt": "2026-02-13T12:38:46Z",
+      "closedAt": "2026-02-13T12:38:45Z",
+      "mergedAt": "2026-02-13T12:38:45Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7930,
+      "title": "feat: adds market insights logic in ai-digest-ctrl",
+      "url": "https://github.com/MetaMask/core/pull/7930",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T11:34:41Z",
+      "updatedAt": "2026-02-18T16:44:58Z",
+      "closedAt": "2026-02-18T16:44:57Z",
+      "mergedAt": "2026-02-18T16:44:57Z",
+      "authorLogin": "zone-live",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7931,
+      "title": "fix: add location property to unified swap bridge events",
+      "url": "https://github.com/MetaMask/core/pull/7931",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T11:54:21Z",
+      "updatedAt": "2026-02-17T15:16:09Z",
+      "closedAt": "2026-02-17T15:16:07Z",
+      "mergedAt": "2026-02-17T15:16:07Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3812476465,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T08:44:43Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3812481211,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T08:45:44Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3812693754,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T09:31:15Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3812768268,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T09:42:56Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3812783068,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T09:45:09Z",
+          "authorLogin": "sahar-fehri"
+        }
+      ]
+    },
+    {
+      "number": 7932,
+      "title": "Release/811.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7932",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T12:42:34Z",
+      "updatedAt": "2026-02-13T12:48:33Z",
+      "closedAt": "2026-02-13T12:48:32Z",
+      "mergedAt": "2026-02-13T12:48:32Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7933,
+      "title": "fix: Estimate relay transactions separately and combine with original transaction gas at quote time",
+      "url": "https://github.com/MetaMask/core/pull/7933",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T13:55:18Z",
+      "updatedAt": "2026-02-17T09:30:44Z",
+      "closedAt": "2026-02-16T10:46:42Z",
+      "mergedAt": "2026-02-16T10:46:42Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7934,
+      "title": "feat(ramps-controller): add unified getOrder to RampsService",
+      "url": "https://github.com/MetaMask/core/pull/7934",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T17:37:01Z",
+      "updatedAt": "2026-02-19T22:12:35Z",
+      "closedAt": "2026-02-19T22:12:33Z",
+      "mergedAt": "2026-02-19T22:12:33Z",
+      "authorLogin": "amitabh94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7935,
+      "title": "feat(transaction-pay-controller): live token balances",
+      "url": "https://github.com/MetaMask/core/pull/7935",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-13T22:46:01Z",
+      "updatedAt": "2026-02-20T11:02:27Z",
+      "closedAt": "2026-02-20T10:56:53Z",
+      "mergedAt": "2026-02-20T10:56:53Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7936,
+      "title": "feat: add staked balance data source",
+      "url": "https://github.com/MetaMask/core/pull/7936",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-15T23:57:44Z",
+      "updatedAt": "2026-02-17T10:05:28Z",
+      "closedAt": "2026-02-17T10:05:26Z",
+      "mergedAt": "2026-02-17T10:05:26Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3807649040,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T09:51:42Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3807895337,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T10:44:33Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3808177811,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T11:48:58Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3809109197,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:02:59Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3809115390,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:04:02Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3809117844,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:04:27Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3809154341,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:11:39Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3809206357,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:21:51Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3809212250,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:23:08Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809218340,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:24:18Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809232130,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:26:23Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809244748,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:28:37Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3809245099,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:28:42Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809272901,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T15:33:17Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809823118,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:42:13Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809827260,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:43:19Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3809829785,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:44:02Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809831833,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:44:43Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3809839759,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:46:39Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809845608,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:47:52Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809847902,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:48:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809850653,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:48:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809852663,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:49:17Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3809858796,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:50:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809866625,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:52:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809869023,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T17:52:46Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809910797,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T18:02:01Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3809921515,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T18:04:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809980368,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T18:19:52Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3809997744,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T18:23:45Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3810069583,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-16T18:41:19Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3812816518,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-17T09:50:18Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7937,
+      "title": "Release/812.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7937",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-16T05:05:00Z",
+      "updatedAt": "2026-02-16T11:23:46Z",
+      "closedAt": "2026-02-16T11:00:36Z",
+      "mergedAt": null,
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7938,
+      "title": "chore: return error message on search",
+      "url": "https://github.com/MetaMask/core/pull/7938",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T09:49:00Z",
+      "updatedAt": "2026-02-16T12:37:05Z",
+      "closedAt": "2026-02-16T12:37:04Z",
+      "mergedAt": "2026-02-16T12:37:03Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3807936220,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-16T10:53:47Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3807971708,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-16T11:02:04Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3808404796,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-16T12:36:11Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7939,
+      "title": "chore: add chiliz and fix plasma for price api supported chains",
+      "url": "https://github.com/MetaMask/core/pull/7939",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T09:49:01Z",
+      "updatedAt": "2026-02-16T11:07:29Z",
+      "closedAt": "2026-02-16T11:07:28Z",
+      "mergedAt": "2026-02-16T11:07:27Z",
+      "authorLogin": "Julink-eth",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3807944182,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-16T10:55:32Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3807973312,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-16T11:02:29Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7940,
+      "title": "Release/812.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7940",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-16T11:02:09Z",
+      "updatedAt": "2026-02-16T11:05:59Z",
+      "closedAt": "2026-02-16T11:05:59Z",
+      "mergedAt": null,
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7942,
+      "title": "Release/812.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7942",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T11:05:45Z",
+      "updatedAt": "2026-02-16T11:19:34Z",
+      "closedAt": "2026-02-16T11:19:33Z",
+      "mergedAt": "2026-02-16T11:19:33Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7943,
+      "title": "fix(gator-permissions-controller): remove merge conflict marker from CHANGELOG",
+      "url": "https://github.com/MetaMask/core/pull/7943",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T11:20:49Z",
+      "updatedAt": "2026-02-16T11:38:24Z",
+      "closedAt": "2026-02-16T11:38:22Z",
+      "mergedAt": "2026-02-16T11:38:22Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7944,
+      "title": "Release/813.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7944",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T13:51:20Z",
+      "updatedAt": "2026-02-16T15:55:22Z",
+      "closedAt": "2026-02-16T15:55:21Z",
+      "mergedAt": "2026-02-16T15:55:21Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3809007473,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T14:44:06Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3809007785,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-16T14:44:11Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3809157298,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-16T15:12:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7945,
+      "title": "feat: compliance controller",
+      "url": "https://github.com/MetaMask/core/pull/7945",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T16:38:50Z",
+      "updatedAt": "2026-02-18T16:29:58Z",
+      "closedAt": "2026-02-18T16:29:56Z",
+      "mergedAt": "2026-02-18T16:29:56Z",
+      "authorLogin": "aganglada",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7946,
+      "title": "Release/814.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7946",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-16T18:29:39Z",
+      "updatedAt": "2026-02-16T21:21:16Z",
+      "closedAt": "2026-02-16T21:21:14Z",
+      "mergedAt": "2026-02-16T21:21:14Z",
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7947,
+      "title": "feat(transaction-pay-controller): alternate relay deposit types",
+      "url": "https://github.com/MetaMask/core/pull/7947",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T00:23:11Z",
+      "updatedAt": "2026-02-20T11:24:34Z",
+      "closedAt": "2026-02-20T11:24:32Z",
+      "mergedAt": "2026-02-20T11:24:32Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7948,
+      "title": "Add new method to TransactionController to determine whether EIP-7702 is supported for specified chains",
+      "url": "https://github.com/MetaMask/core/pull/7948",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-17T03:34:19Z",
+      "updatedAt": "2026-02-19T00:09:31Z",
+      "closedAt": "2026-02-19T00:07:20Z",
+      "mergedAt": null,
+      "authorLogin": "jeffsmale90",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7950,
+      "title": "feat(assets-controller): clean and optimize data fetching",
+      "url": "https://github.com/MetaMask/core/pull/7950",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T10:15:39Z",
+      "updatedAt": "2026-02-23T09:29:48Z",
+      "closedAt": "2026-02-23T09:29:46Z",
+      "mergedAt": "2026-02-23T09:29:46Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3839861218,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-23T09:07:22Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3839918752,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-23T09:21:31Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7951,
+      "title": "fix: Use own messenger types for RpcDataSource and StakedBalanceDataSource",
+      "url": "https://github.com/MetaMask/core/pull/7951",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-17T10:42:01Z",
+      "updatedAt": "2026-02-17T12:11:16Z",
+      "closedAt": "2026-02-17T12:11:16Z",
+      "mergedAt": null,
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3813227054,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T10:53:02Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3813229704,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T10:53:26Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3813242757,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T10:55:20Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3813278427,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T11:01:07Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3813402708,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T11:22:01Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7952,
+      "title": "fix: clean up",
+      "url": "https://github.com/MetaMask/core/pull/7952",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T12:27:35Z",
+      "updatedAt": "2026-02-17T13:20:01Z",
+      "closedAt": "2026-02-17T13:20:00Z",
+      "mergedAt": "2026-02-17T13:19:59Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3813807786,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T12:53:38Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3813859886,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-17T13:04:59Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3813912366,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-17T13:16:34Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7953,
+      "title": "Release/815.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7953",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T13:21:40Z",
+      "updatedAt": "2026-02-17T13:33:48Z",
+      "closedAt": "2026-02-17T13:33:47Z",
+      "mergedAt": "2026-02-17T13:33:47Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7954,
+      "title": "feat: add `rpcMethodName` to `degraded` events",
+      "url": "https://github.com/MetaMask/core/pull/7954",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T14:06:00Z",
+      "updatedAt": "2026-02-18T20:47:44Z",
+      "closedAt": "2026-02-18T20:35:14Z",
+      "mergedAt": "2026-02-18T20:35:14Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7955,
+      "title": "feat: add auth header to bridge-api requests",
+      "url": "https://github.com/MetaMask/core/pull/7955",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T15:39:50Z",
+      "updatedAt": "2026-02-17T19:19:59Z",
+      "closedAt": "2026-02-17T19:19:57Z",
+      "mergedAt": "2026-02-17T19:19:57Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7956,
+      "title": "Release/816.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7956",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T16:13:13Z",
+      "updatedAt": "2026-02-17T16:22:08Z",
+      "closedAt": "2026-02-17T16:22:06Z",
+      "mergedAt": "2026-02-17T16:22:06Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7957,
+      "title": "chore(transaction-controller): replace Sinon with Jest fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7957",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T16:57:15Z",
+      "updatedAt": "2026-02-18T05:36:58Z",
+      "closedAt": "2026-02-18T05:36:57Z",
+      "mergedAt": "2026-02-18T05:36:57Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7958,
+      "title": "chore: improve mock asset controller data source tests",
+      "url": "https://github.com/MetaMask/core/pull/7958",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T17:32:06Z",
+      "updatedAt": "2026-02-18T09:55:02Z",
+      "closedAt": "2026-02-18T09:55:01Z",
+      "mergedAt": "2026-02-18T09:55:01Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3815315272,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:32:29Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3815320620,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:33:26Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3815322130,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:33:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3815389087,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:45:13Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3815395661,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:46:33Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3815396912,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:46:47Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3815404931,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-17T17:48:15Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3818747454,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-18T09:32:22Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3818751509,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-18T09:33:05Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3818757012,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-18T09:34:05Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3818795076,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-18T09:41:14Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7959,
+      "title": "chore(messenger): replace `Sinon` with `Jest` mocks",
+      "url": "https://github.com/MetaMask/core/pull/7959",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T18:25:13Z",
+      "updatedAt": "2026-02-17T19:40:26Z",
+      "closedAt": "2026-02-17T19:40:25Z",
+      "mergedAt": "2026-02-17T19:40:25Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7960,
+      "title": "chore: update README package list and dependency graph",
+      "url": "https://github.com/MetaMask/core/pull/7960",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T19:38:00Z",
+      "updatedAt": "2026-02-17T19:54:46Z",
+      "closedAt": "2026-02-17T19:54:44Z",
+      "mergedAt": "2026-02-17T19:54:44Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7961,
+      "title": "Release/817.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7961",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T19:38:00Z",
+      "updatedAt": "2026-02-17T22:54:23Z",
+      "closedAt": "2026-02-17T22:54:22Z",
+      "mergedAt": "2026-02-17T22:54:22Z",
+      "authorLogin": "micaelae",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7962,
+      "title": "chore(base-controller): replace `Sinon` with `Jest` mocks",
+      "url": "https://github.com/MetaMask/core/pull/7962",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T20:50:57Z",
+      "updatedAt": "2026-02-17T21:14:31Z",
+      "closedAt": "2026-02-17T21:14:29Z",
+      "mergedAt": "2026-02-17T21:14:29Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7963,
+      "title": "chore(sample-controllers): replace Sinon with Jest fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7963",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T20:59:18Z",
+      "updatedAt": "2026-02-17T21:19:44Z",
+      "closedAt": "2026-02-17T21:19:43Z",
+      "mergedAt": "2026-02-17T21:19:43Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7964,
+      "title": "chore(composable-controller): replace `Sinon` with `Jest` mocks",
+      "url": "https://github.com/MetaMask/core/pull/7964",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T21:20:54Z",
+      "updatedAt": "2026-02-18T13:04:40Z",
+      "closedAt": "2026-02-18T13:04:39Z",
+      "mergedAt": "2026-02-18T13:04:39Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7965,
+      "title": "chore(keyring-controller): replace `Sinon` with `Jest` mocks",
+      "url": "https://github.com/MetaMask/core/pull/7965",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T21:24:17Z",
+      "updatedAt": "2026-02-18T13:04:58Z",
+      "closedAt": "2026-02-18T13:04:56Z",
+      "mergedAt": "2026-02-18T13:04:56Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7966,
+      "title": "chore(polling-controller): replace Sinon with Jest fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7966",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T21:30:21Z",
+      "updatedAt": "2026-02-18T13:27:40Z",
+      "closedAt": "2026-02-18T13:27:38Z",
+      "mergedAt": "2026-02-18T13:27:38Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7967,
+      "title": "chore(controller-utils): replace `Sinon` with `Jest` fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7967",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T21:40:18Z",
+      "updatedAt": "2026-02-18T13:36:53Z",
+      "closedAt": "2026-02-18T13:36:52Z",
+      "mergedAt": "2026-02-18T13:36:52Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7968,
+      "title": "chore(gas-fee-controller): replace `Sinon` with `Jest` fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7968",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T22:36:40Z",
+      "updatedAt": "2026-02-18T05:38:38Z",
+      "closedAt": "2026-02-18T05:38:37Z",
+      "mergedAt": "2026-02-18T05:38:37Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7969,
+      "title": "Release 818.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7969",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-17T23:17:11Z",
+      "updatedAt": "2026-02-18T12:36:08Z",
+      "closedAt": "2026-02-18T12:36:06Z",
+      "mergedAt": "2026-02-18T12:36:06Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7970,
+      "title": "chore(analytics-data-regulation-controller): replace `Sinon` with `Jest` timers",
+      "url": "https://github.com/MetaMask/core/pull/7970",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T05:12:56Z",
+      "updatedAt": "2026-02-18T14:29:49Z",
+      "closedAt": "2026-02-18T14:29:47Z",
+      "mergedAt": "2026-02-18T14:29:47Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7971,
+      "title": "chore(network-enablement-controller): replace `Sinon` with `Jest` fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7971",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T05:13:14Z",
+      "updatedAt": "2026-02-18T13:48:45Z",
+      "closedAt": "2026-02-18T13:48:44Z",
+      "mergedAt": "2026-02-18T13:48:43Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3819984387,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-18T13:42:49Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7972,
+      "title": "chore(phishing-controller): replace `Sinon` with `Jest` mocks and fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7972",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T05:13:31Z",
+      "updatedAt": "2026-02-18T18:24:49Z",
+      "closedAt": "2026-02-18T18:24:47Z",
+      "mergedAt": "2026-02-18T18:24:47Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7973,
+      "title": "chore(ramps-controller): replace Sinon with Jest fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7973",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T05:13:45Z",
+      "updatedAt": "2026-02-18T18:36:56Z",
+      "closedAt": "2026-02-18T18:36:54Z",
+      "mergedAt": "2026-02-18T18:36:54Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7974,
+      "title": "chore(subscription-controller): replace Sinon with Jest fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7974",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T05:13:59Z",
+      "updatedAt": "2026-02-18T12:59:13Z",
+      "closedAt": "2026-02-18T12:59:11Z",
+      "mergedAt": "2026-02-18T12:59:11Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7975,
+      "title": "fix: override SLIP-44 for HyperEVM (chain 999) to 2457",
+      "url": "https://github.com/MetaMask/core/pull/7975",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T09:45:10Z",
+      "updatedAt": "2026-02-18T11:57:15Z",
+      "closedAt": "2026-02-18T11:57:13Z",
+      "mergedAt": "2026-02-18T11:57:13Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3819368110,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-18T11:36:24Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 7976,
+      "title": "feat!: Expose Accounts-owned controller/service methods through messenger",
+      "url": "https://github.com/MetaMask/core/pull/7976",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T11:14:53Z",
+      "updatedAt": "2026-02-24T14:48:03Z",
+      "closedAt": "2026-02-24T14:48:01Z",
+      "mergedAt": "2026-02-24T14:48:01Z",
+      "authorLogin": "GuillaumeRx",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7977,
+      "title": "Release/819.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7977",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T13:09:38Z",
+      "updatedAt": "2026-02-18T13:17:02Z",
+      "closedAt": "2026-02-18T13:17:01Z",
+      "mergedAt": "2026-02-18T13:17:01Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7978,
+      "title": "Release/820.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7978",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-18T13:58:50Z",
+      "updatedAt": "2026-02-18T14:10:55Z",
+      "closedAt": "2026-02-18T14:01:07Z",
+      "mergedAt": null,
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7979,
+      "title": "Release/820.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7979",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T14:11:20Z",
+      "updatedAt": "2026-02-18T14:47:26Z",
+      "closedAt": "2026-02-18T14:47:24Z",
+      "mergedAt": "2026-02-18T14:47:24Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7980,
+      "title": "perf: reduce notification calls during account sync",
+      "url": "https://github.com/MetaMask/core/pull/7980",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T15:00:57Z",
+      "updatedAt": "2026-02-18T15:18:40Z",
+      "closedAt": "2026-02-18T15:18:38Z",
+      "mergedAt": "2026-02-18T15:18:38Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3820457540,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-18T15:10:41Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 7981,
+      "title": "chore(assets-controllers): replace `Sinon` with `Jest` fake timers and mocks",
+      "url": "https://github.com/MetaMask/core/pull/7981",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T15:11:23Z",
+      "updatedAt": "2026-02-18T16:06:48Z",
+      "closedAt": "2026-02-18T16:06:45Z",
+      "mergedAt": "2026-02-18T16:06:45Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": [
+        {
+          "id": 3820810845,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-18T16:05:49Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7982,
+      "title": "Release/821.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7982",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T16:53:42Z",
+      "updatedAt": "2026-02-18T17:13:51Z",
+      "closedAt": "2026-02-18T17:13:49Z",
+      "mergedAt": "2026-02-18T17:13:49Z",
+      "authorLogin": "zone-live",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7983,
+      "title": "chore: Update `generate-method-action-types` script to be used in a single package",
+      "url": "https://github.com/MetaMask/core/pull/7983",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T17:07:35Z",
+      "updatedAt": "2026-02-19T13:59:13Z",
+      "closedAt": "2026-02-19T13:59:12Z",
+      "mergedAt": "2026-02-19T13:59:12Z",
+      "authorLogin": "GuillaumeRx",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7984,
+      "title": "Release/822.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7984",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T17:55:19Z",
+      "updatedAt": "2026-02-18T18:07:47Z",
+      "closedAt": "2026-02-18T18:07:45Z",
+      "mergedAt": "2026-02-18T18:07:45Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7986,
+      "title": "chore(network-controller): replace `Sinon` with `Jest` fake timers",
+      "url": "https://github.com/MetaMask/core/pull/7986",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T19:54:20Z",
+      "updatedAt": "2026-02-18T21:30:28Z",
+      "closedAt": "2026-02-18T21:30:27Z",
+      "mergedAt": "2026-02-18T21:30:27Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog",
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7987,
+      "title": "feat: add input_amount_preset to SwapBridge Input Changed",
+      "url": "https://github.com/MetaMask/core/pull/7987",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T20:14:45Z",
+      "updatedAt": "2026-02-19T16:28:18Z",
+      "closedAt": "2026-02-19T16:28:16Z",
+      "mergedAt": "2026-02-19T16:28:16Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7988,
+      "title": "feat: add `degradedType` and `retriedError` to degraded events",
+      "url": "https://github.com/MetaMask/core/pull/7988",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-18T22:17:10Z",
+      "updatedAt": "2026-02-19T18:00:11Z",
+      "closedAt": "2026-02-19T18:00:10Z",
+      "mergedAt": "2026-02-19T18:00:10Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 7989,
+      "title": "fix: JWT token refresh race conditions in seedless-onboarding-controller.",
+      "url": "https://github.com/MetaMask/core/pull/7989",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T05:47:15Z",
+      "updatedAt": "2026-02-23T04:54:09Z",
+      "closedAt": "2026-02-23T04:54:08Z",
+      "mergedAt": "2026-02-23T04:54:07Z",
+      "authorLogin": "himanshuchawla009",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7990,
+      "title": "fix: fix assets controllers changelog",
+      "url": "https://github.com/MetaMask/core/pull/7990",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T09:57:04Z",
+      "updatedAt": "2026-02-19T13:49:17Z",
+      "closedAt": "2026-02-19T13:49:15Z",
+      "mergedAt": "2026-02-19T13:49:15Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3824767827,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-19T10:20:17Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7991,
+      "title": "feat: currentCurrency added to AssetsController state",
+      "url": "https://github.com/MetaMask/core/pull/7991",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T10:13:39Z",
+      "updatedAt": "2026-02-23T17:56:14Z",
+      "closedAt": "2026-02-23T17:56:13Z",
+      "mergedAt": "2026-02-23T17:56:13Z",
+      "authorLogin": "bergarces",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3824821975,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T10:29:09Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3825103294,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T11:10:37Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3825533813,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T12:23:29Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3841506855,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-23T14:48:12Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3842386513,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-23T17:11:08Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7992,
+      "title": "Release/823.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7992",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-19T12:55:25Z",
+      "updatedAt": "2026-02-19T13:05:55Z",
+      "closedAt": "2026-02-19T13:05:55Z",
+      "mergedAt": null,
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7993,
+      "title": "Release/823.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7993",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T13:25:31Z",
+      "updatedAt": "2026-02-19T14:32:15Z",
+      "closedAt": "2026-02-19T14:32:13Z",
+      "mergedAt": "2026-02-19T14:32:13Z",
+      "authorLogin": "Kriys94",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3826101769,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T13:59:56Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3826102635,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T14:00:07Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3826154241,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T14:10:20Z",
+          "authorLogin": "Kriys94"
+        },
+        {
+          "id": 3826175306,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-19T14:13:46Z",
+          "authorLogin": "Kriys94"
+        }
+      ]
+    },
+    {
+      "number": 7994,
+      "title": "chore: change occurenceFloor for megaeth mainnet in getTokensURL",
+      "url": "https://github.com/MetaMask/core/pull/7994",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T15:05:43Z",
+      "updatedAt": "2026-02-19T16:34:40Z",
+      "closedAt": "2026-02-19T16:34:38Z",
+      "mergedAt": "2026-02-19T16:34:38Z",
+      "authorLogin": "Julink-eth",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3826970081,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-19T16:25:16Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 7995,
+      "title": "Release/824.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7995",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T16:47:04Z",
+      "updatedAt": "2026-02-19T18:56:19Z",
+      "closedAt": "2026-02-19T18:56:17Z",
+      "mergedAt": "2026-02-19T18:56:17Z",
+      "authorLogin": "maxime-oe",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7996,
+      "title": "Release/825.0.0",
+      "url": "https://github.com/MetaMask/core/pull/7996",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T19:10:44Z",
+      "updatedAt": "2026-02-19T19:57:12Z",
+      "closedAt": "2026-02-19T19:57:10Z",
+      "mergedAt": "2026-02-19T19:57:10Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7997,
+      "title": "chore: use 75 instead of 90 preset",
+      "url": "https://github.com/MetaMask/core/pull/7997",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-19T21:37:43Z",
+      "updatedAt": "2026-02-19T22:04:50Z",
+      "closedAt": "2026-02-19T22:04:48Z",
+      "mergedAt": "2026-02-19T22:04:48Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7998,
+      "title": "Ramps remove quote polling",
+      "url": "https://github.com/MetaMask/core/pull/7998",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-20T00:01:16Z",
+      "updatedAt": "2026-02-20T00:06:40Z",
+      "closedAt": "2026-02-20T00:02:02Z",
+      "mergedAt": null,
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 7999,
+      "title": "feat(ramps): removes quote polling functionality",
+      "url": "https://github.com/MetaMask/core/pull/7999",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T00:03:46Z",
+      "updatedAt": "2026-02-20T21:44:48Z",
+      "closedAt": "2026-02-20T21:44:47Z",
+      "mergedAt": "2026-02-20T21:44:47Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8000,
+      "title": "Use concrete types in RampsOrder instead of string | Object unions",
+      "url": "https://github.com/MetaMask/core/pull/8000",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T00:07:16Z",
+      "updatedAt": "2026-02-20T01:00:26Z",
+      "closedAt": "2026-02-20T01:00:25Z",
+      "mergedAt": "2026-02-20T01:00:25Z",
+      "authorLogin": "AxelGes",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8001,
+      "title": "Release/826.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8001",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T01:03:24Z",
+      "updatedAt": "2026-02-20T03:03:06Z",
+      "closedAt": "2026-02-20T03:03:05Z",
+      "mergedAt": "2026-02-20T03:03:05Z",
+      "authorLogin": "AxelGes",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8003,
+      "title": "fix: filter out only malicious non-evm assets",
+      "url": "https://github.com/MetaMask/core/pull/8003",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T08:19:17Z",
+      "updatedAt": "2026-02-20T08:33:25Z",
+      "closedAt": "2026-02-20T08:33:24Z",
+      "mergedAt": "2026-02-20T08:33:24Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3830716208,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-20T08:30:01Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 8004,
+      "title": "Release/827.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8004",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T08:37:02Z",
+      "updatedAt": "2026-02-20T11:08:11Z",
+      "closedAt": "2026-02-20T10:22:42Z",
+      "mergedAt": "2026-02-20T10:22:42Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8005,
+      "title": "Release 828.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8005",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T11:32:00Z",
+      "updatedAt": "2026-02-20T12:18:49Z",
+      "closedAt": "2026-02-20T12:15:57Z",
+      "mergedAt": "2026-02-20T12:15:57Z",
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8006,
+      "title": "chore: improve validation schema in AiDigestService",
+      "url": "https://github.com/MetaMask/core/pull/8006",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T14:32:42Z",
+      "updatedAt": "2026-02-20T16:23:49Z",
+      "closedAt": "2026-02-20T15:33:57Z",
+      "mergedAt": "2026-02-20T15:33:57Z",
+      "authorLogin": "zone-live",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8007,
+      "title": "chore: add optional abtest property event for swap events",
+      "url": "https://github.com/MetaMask/core/pull/8007",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T15:18:30Z",
+      "updatedAt": "2026-02-25T15:04:41Z",
+      "closedAt": "2026-02-25T15:04:39Z",
+      "mergedAt": "2026-02-25T15:04:39Z",
+      "authorLogin": "sahar-fehri",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3849445168,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-24T17:25:56Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3849659264,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-24T17:58:08Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 8008,
+      "title": "chore: add 90% into input amount preset",
+      "url": "https://github.com/MetaMask/core/pull/8008",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T16:29:50Z",
+      "updatedAt": "2026-02-23T20:28:15Z",
+      "closedAt": "2026-02-23T20:28:13Z",
+      "mergedAt": "2026-02-23T20:28:13Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8009,
+      "title": "feat!: add serialized keyring data to state",
+      "url": "https://github.com/MetaMask/core/pull/8009",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-02-20T17:02:52Z",
+      "updatedAt": "2026-02-24T16:10:48Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "mikesposito",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8010,
+      "title": "feat(ramps): surface transak errors for the consumer to read",
+      "url": "https://github.com/MetaMask/core/pull/8010",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-20T20:35:26Z",
+      "updatedAt": "2026-02-20T21:55:16Z",
+      "closedAt": "2026-02-20T21:55:15Z",
+      "mergedAt": "2026-02-20T21:55:15Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8011,
+      "title": "chore: secure PUBLISH_PREVIEW_NPM_TOKEN with GitHub environment",
+      "url": "https://github.com/MetaMask/core/pull/8011",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-21T05:09:47Z",
+      "updatedAt": "2026-02-23T21:03:26Z",
+      "closedAt": "2026-02-23T21:03:25Z",
+      "mergedAt": "2026-02-23T21:03:25Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog",
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8013,
+      "title": "refactor: removes quotes from ramp controller state",
+      "url": "https://github.com/MetaMask/core/pull/8013",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-22T20:54:29Z",
+      "updatedAt": "2026-02-23T20:03:52Z",
+      "closedAt": "2026-02-23T20:03:51Z",
+      "mergedAt": "2026-02-23T20:03:51Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8014,
+      "title": "feat: extract messenger-docs into publishable package",
+      "url": "https://github.com/MetaMask/core/pull/8014",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T05:01:02Z",
+      "updatedAt": "2026-02-24T23:34:01Z",
+      "closedAt": "2026-02-24T23:28:36Z",
+      "mergedAt": "2026-02-24T23:28:36Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8015,
+      "title": "feat: move intent api instantiation to intent manager",
+      "url": "https://github.com/MetaMask/core/pull/8015",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T10:03:16Z",
+      "updatedAt": "2026-02-26T10:38:34Z",
+      "closedAt": "2026-02-26T10:38:32Z",
+      "mergedAt": "2026-02-26T10:38:32Z",
+      "authorLogin": "Akaryatrh",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8016,
+      "title": "fix: Add missing `tsconfig` entries for `compliance-controller`",
+      "url": "https://github.com/MetaMask/core/pull/8016",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T10:03:17Z",
+      "updatedAt": "2026-02-23T10:09:33Z",
+      "closedAt": "2026-02-23T10:09:31Z",
+      "mergedAt": "2026-02-23T10:09:31Z",
+      "authorLogin": "FrederikBolding",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8017,
+      "title": "Release/829.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8017",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T13:31:52Z",
+      "updatedAt": "2026-02-23T14:47:36Z",
+      "closedAt": "2026-02-23T14:47:34Z",
+      "mergedAt": "2026-02-23T14:47:34Z",
+      "authorLogin": "lwin-kyaw",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8018,
+      "title": "fix: fix RampsController flaky test",
+      "url": "https://github.com/MetaMask/core/pull/8018",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T15:29:06Z",
+      "updatedAt": "2026-02-23T18:21:31Z",
+      "closedAt": "2026-02-23T18:21:29Z",
+      "mergedAt": "2026-02-23T18:21:29Z",
+      "authorLogin": "amitabh94",
+      "labels": [
+        "team-ramp"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8019,
+      "title": "fix: limit param in search is incorrect",
+      "url": "https://github.com/MetaMask/core/pull/8019",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T16:41:20Z",
+      "updatedAt": "2026-02-23T18:15:35Z",
+      "closedAt": "2026-02-23T18:15:34Z",
+      "mergedAt": "2026-02-23T18:15:34Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3842710099,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-23T18:07:55Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 8020,
+      "title": "Release/830.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8020",
+      "state": "CLOSED",
+      "draft": false,
+      "createdAt": "2026-02-23T18:19:56Z",
+      "updatedAt": "2026-02-23T21:12:49Z",
+      "closedAt": "2026-02-23T21:12:25Z",
+      "mergedAt": null,
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8021,
+      "title": "fix: include custom and all balance assets in detectedAssets; add pending metadata to addCustomAsset",
+      "url": "https://github.com/MetaMask/core/pull/8021",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T18:54:47Z",
+      "updatedAt": "2026-02-24T10:28:35Z",
+      "closedAt": "2026-02-24T10:28:33Z",
+      "mergedAt": "2026-02-24T10:28:33Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3846427848,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-24T09:52:31Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3846434084,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-24T09:53:48Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3846475455,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-24T10:00:51Z",
+          "authorLogin": "bergarces"
+        }
+      ]
+    },
+    {
+      "number": 8022,
+      "title": "Release/830.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8022",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T21:14:17Z",
+      "updatedAt": "2026-02-23T21:27:04Z",
+      "closedAt": "2026-02-23T21:27:02Z",
+      "mergedAt": "2026-02-23T21:27:02Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8023,
+      "title": "fix: include yarn.lock in preview build artifacts",
+      "url": "https://github.com/MetaMask/core/pull/8023",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T21:18:25Z",
+      "updatedAt": "2026-02-23T21:54:14Z",
+      "closedAt": "2026-02-23T21:54:13Z",
+      "mergedAt": "2026-02-23T21:54:13Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8024,
+      "title": "Release/831.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8024",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T21:42:24Z",
+      "updatedAt": "2026-02-24T03:35:52Z",
+      "closedAt": "2026-02-24T03:35:51Z",
+      "mergedAt": "2026-02-24T03:35:51Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8025,
+      "title": "fix: reconcile workspace state after restoring preview artifacts",
+      "url": "https://github.com/MetaMask/core/pull/8025",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T22:11:45Z",
+      "updatedAt": "2026-02-23T22:30:19Z",
+      "closedAt": "2026-02-23T22:29:41Z",
+      "mergedAt": "2026-02-23T22:29:41Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8026,
+      "title": "fix: include root package.json in preview build artifacts",
+      "url": "https://github.com/MetaMask/core/pull/8026",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-23T22:53:35Z",
+      "updatedAt": "2026-02-24T14:19:17Z",
+      "closedAt": "2026-02-24T14:19:15Z",
+      "mergedAt": "2026-02-24T14:19:15Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8027,
+      "title": "chore: add deprecation notices to the `AccountsController`",
+      "url": "https://github.com/MetaMask/core/pull/8027",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T03:34:39Z",
+      "updatedAt": "2026-02-24T12:52:16Z",
+      "closedAt": "2026-02-24T12:52:14Z",
+      "mergedAt": "2026-02-24T12:52:14Z",
+      "authorLogin": "hmalik88",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8028,
+      "title": "chore: TransactionController: rename feature flag useWebsockets to useBackendWebSocketService",
+      "url": "https://github.com/MetaMask/core/pull/8028",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T05:39:17Z",
+      "updatedAt": "2026-02-24T09:35:17Z",
+      "closedAt": "2026-02-24T09:35:15Z",
+      "mergedAt": "2026-02-24T09:35:15Z",
+      "authorLogin": "jpuri",
+      "labels": [
+        "team-confirmations"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8029,
+      "title": "Release/832.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8029",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T08:29:24Z",
+      "updatedAt": "2026-02-24T09:11:00Z",
+      "closedAt": "2026-02-24T09:10:58Z",
+      "mergedAt": "2026-02-24T09:10:58Z",
+      "authorLogin": "juanmigdr",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3846044109,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-24T08:40:27Z",
+          "authorLogin": "bergarces"
+        },
+        {
+          "id": 3846076015,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-24T08:46:30Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 3846145330,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-24T09:01:06Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 8030,
+      "title": "feat: Add metaMask fee field to TransactionPayFees",
+      "url": "https://github.com/MetaMask/core/pull/8030",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T09:14:29Z",
+      "updatedAt": "2026-02-25T12:14:39Z",
+      "closedAt": "2026-02-25T12:14:37Z",
+      "mergedAt": "2026-02-25T12:14:37Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8031,
+      "title": "Release/833.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8031",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T12:07:49Z",
+      "updatedAt": "2026-02-24T13:51:18Z",
+      "closedAt": "2026-02-24T13:51:16Z",
+      "mergedAt": "2026-02-24T13:51:16Z",
+      "authorLogin": "jpuri",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8033,
+      "title": "accounts-controller: Move mocks out of build",
+      "url": "https://github.com/MetaMask/core/pull/8033",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T14:20:23Z",
+      "updatedAt": "2026-02-24T15:06:26Z",
+      "closedAt": "2026-02-24T15:06:25Z",
+      "mergedAt": "2026-02-24T15:06:25Z",
+      "authorLogin": "mcmire",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": [
+        {
+          "id": 3848479442,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-24T14:56:34Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 8035,
+      "title": "fix: add workspace resolutions for preview builds",
+      "url": "https://github.com/MetaMask/core/pull/8035",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T22:49:00Z",
+      "updatedAt": "2026-02-25T18:00:41Z",
+      "closedAt": "2026-02-25T17:54:13Z",
+      "mergedAt": "2026-02-25T17:54:13Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [
+        "team-core-platform"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8036,
+      "title": "fix: improve balance state",
+      "url": "https://github.com/MetaMask/core/pull/8036",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-24T22:53:32Z",
+      "updatedAt": "2026-02-25T09:46:06Z",
+      "closedAt": "2026-02-25T09:46:04Z",
+      "mergedAt": "2026-02-25T09:46:04Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3853018639,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-25T09:38:57Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 8038,
+      "title": "chore: Initialize `base-data-service` package",
+      "url": "https://github.com/MetaMask/core/pull/8038",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-25T12:48:55Z",
+      "updatedAt": "2026-02-25T15:39:00Z",
+      "closedAt": "2026-02-25T15:38:57Z",
+      "mergedAt": "2026-02-25T15:38:57Z",
+      "authorLogin": "FrederikBolding",
+      "labels": [
+        "no-changelog"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8040,
+      "title": "Release/834.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8040",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-25T13:38:36Z",
+      "updatedAt": "2026-02-25T13:49:51Z",
+      "closedAt": "2026-02-25T13:49:50Z",
+      "mergedAt": "2026-02-25T13:49:50Z",
+      "authorLogin": "dan437",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8041,
+      "title": "Release/835.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8041",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-25T14:28:39Z",
+      "updatedAt": "2026-02-25T15:24:11Z",
+      "closedAt": "2026-02-25T15:24:09Z",
+      "mergedAt": "2026-02-25T15:24:09Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3854633846,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T14:30:25Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854674330,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-25T14:37:38Z",
+          "authorLogin": "juanmigdr"
+        },
+        {
+          "id": 3854675875,
+          "state": "DISMISSED",
+          "submittedAt": "2026-02-25T14:37:53Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3854731480,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T14:46:13Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854757957,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T14:49:59Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854773291,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T14:52:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854783461,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T14:53:51Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 8043,
+      "title": "fix: on assets update request forward",
+      "url": "https://github.com/MetaMask/core/pull/8043",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-25T14:58:44Z",
+      "updatedAt": "2026-02-25T18:30:28Z",
+      "closedAt": "2026-02-25T18:26:35Z",
+      "mergedAt": "2026-02-25T18:26:35Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3854914197,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T15:14:16Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854920404,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T15:15:18Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854921381,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T15:15:26Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854923266,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T15:15:45Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3854927407,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T15:16:27Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3854931549,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T15:17:13Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 3856018824,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-25T18:19:46Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 3856021979,
+          "state": "COMMENTED",
+          "submittedAt": "2026-02-25T18:20:24Z",
+          "authorLogin": "Prithpal-Sooriya"
+        }
+      ]
+    },
+    {
+      "number": 8044,
+      "title": "fix: AccountsApiBalanceFetcher stricter zero out conditions",
+      "url": "https://github.com/MetaMask/core/pull/8044",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-25T17:10:16Z",
+      "updatedAt": "2026-02-25T18:15:32Z",
+      "closedAt": "2026-02-25T18:15:30Z",
+      "mergedAt": "2026-02-25T18:15:30Z",
+      "authorLogin": "Prithpal-Sooriya",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3855658679,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-25T17:21:25Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 8045,
+      "title": "feat: adds ramp orders to controller state",
+      "url": "https://github.com/MetaMask/core/pull/8045",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-25T20:44:35Z",
+      "updatedAt": "2026-02-27T21:01:18Z",
+      "closedAt": "2026-02-27T21:01:16Z",
+      "mergedAt": "2026-02-27T21:01:16Z",
+      "authorLogin": "georgeweiler",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8046,
+      "title": "Release/836.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8046",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-26T01:10:09Z",
+      "updatedAt": "2026-02-26T09:08:06Z",
+      "closedAt": "2026-02-26T09:08:05Z",
+      "mergedAt": "2026-02-26T09:08:05Z",
+      "authorLogin": "salimtb",
+      "labels": [],
+      "reviews": [
+        {
+          "id": 3859506355,
+          "state": "APPROVED",
+          "submittedAt": "2026-02-26T09:06:37Z",
+          "authorLogin": "juanmigdr"
+        }
+      ]
+    },
+    {
+      "number": 8047,
+      "title": "chore(deps): bump MetaMask/action-checkout-and-setup from 2 to 3",
+      "url": "https://github.com/MetaMask/core/pull/8047",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-26T06:13:01Z",
+      "updatedAt": "2026-02-26T09:50:24Z",
+      "closedAt": "2026-02-26T09:50:23Z",
+      "mergedAt": "2026-02-26T09:50:23Z",
+      "authorLogin": "dependabot[bot]",
+      "labels": [
+        "dependencies",
+        "github_actions"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8049,
+      "title": "chore: updates CHZ multicall contract address",
+      "url": "https://github.com/MetaMask/core/pull/8049",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-02-26T12:58:03Z",
+      "updatedAt": "2026-02-26T13:36:25Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "bizk",
+      "labels": [
+        "team-network-enablement"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 8051,
+      "title": "Release/837.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8051",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-26T16:18:43Z",
+      "updatedAt": "2026-02-26T17:48:03Z",
+      "closedAt": "2026-02-26T17:48:02Z",
+      "mergedAt": "2026-02-26T17:48:02Z",
+      "authorLogin": "infiniteflower",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8055,
+      "title": "Revert \"chore(deps): bump MetaMask/action-checkout-and-setup from 2 to 3 (#8047)\"",
+      "url": "https://github.com/MetaMask/core/pull/8055",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-26T17:34:22Z",
+      "updatedAt": "2026-02-26T17:40:49Z",
+      "closedAt": "2026-02-26T17:40:47Z",
+      "mergedAt": "2026-02-26T17:40:47Z",
+      "authorLogin": "cryptodev-2s",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8056,
+      "title": "Test, please ignore",
+      "url": "https://github.com/MetaMask/core/pull/8056",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-26T17:51:37Z",
+      "updatedAt": "2026-02-26T18:13:14Z",
+      "closedAt": "2026-02-26T18:13:14Z",
+      "mergedAt": null,
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8057,
+      "title": "Test, please ignore",
+      "url": "https://github.com/MetaMask/core/pull/8057",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-02-26T17:59:45Z",
+      "updatedAt": "2026-02-26T18:02:10Z",
+      "closedAt": "2026-02-26T18:02:10Z",
+      "mergedAt": null,
+      "authorLogin": "Gudahtt",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8059,
+      "title": "Release/838.0.0",
+      "url": "https://github.com/MetaMask/core/pull/8059",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-26T20:13:59Z",
+      "updatedAt": "2026-02-26T20:53:19Z",
+      "closedAt": "2026-02-26T20:53:18Z",
+      "mergedAt": "2026-02-26T20:53:18Z",
+      "authorLogin": "jiexi",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8060,
+      "title": "chore: mark getAccounts → getPermittedAccountsForOrigin rename as breaking in eip-5792-middleware changelog",
+      "url": "https://github.com/MetaMask/core/pull/8060",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-27T02:25:52Z",
+      "updatedAt": "2026-02-27T17:26:52Z",
+      "closedAt": "2026-02-27T17:26:50Z",
+      "mergedAt": "2026-02-27T17:26:50Z",
+      "authorLogin": "adonesky1",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8068,
+      "title": "Document bulk controller method action registration",
+      "url": "https://github.com/MetaMask/core/pull/8068",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-27T15:10:56Z",
+      "updatedAt": "2026-02-27T15:35:04Z",
+      "closedAt": "2026-02-27T15:35:03Z",
+      "mergedAt": "2026-02-27T15:35:03Z",
+      "authorLogin": "mcmire",
+      "labels": [],
+      "reviews": []
+    },
+    {
+      "number": 8069,
+      "title": "feat: allow string quick amount presets for Unified Swap InputChanged",
+      "url": "https://github.com/MetaMask/core/pull/8069",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-02-27T19:07:46Z",
+      "updatedAt": "2026-02-27T19:47:22Z",
+      "closedAt": "2026-02-27T19:46:28Z",
+      "mergedAt": "2026-02-27T19:46:28Z",
+      "authorLogin": "bfullam",
+      "labels": [],
+      "reviews": []
+    }
+  ]
+}
