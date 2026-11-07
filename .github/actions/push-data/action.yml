@@ -8,7 +8,7 @@
 #     collect-data.yml creates it at /tmp/data-tree)
 #   - checkout-persisted git push credentials (the runner's default)
 name: push-data
-description: Commit data/ to the orphan data branch and push
+description: Commit data/ to the data branch (main-descendant, data-only diff) and push
 inputs:
   message:
     description: Commit message
@@ -37,7 +37,12 @@ runs:
           git -C "$WORKTREE" -c user.name=dashboard-bot \
             -c user.email=dashboard-bot@users.noreply.github.com \
             commit -m "$MESSAGE"
-          git -C "$WORKTREE" push origin "$DATA_BRANCH"
         else
-          echo "no data changes to push"
+          echo "no data changes to commit"
         fi
+        # Always push (plain, never force): a no-op when up to date, and it
+        # carries the prepare step's convergence merge even in a run where
+        # this step had nothing new to commit. A non-fast-forward push fails
+        # loudly (e.g. a concurrent writer) instead of silently dropping
+        # progress — the next run re-syncs from the remote tip.
+        git -C "$WORKTREE" push origin "$DATA_BRANCH"

@@ -4,10 +4,16 @@
 #
 # Flow: run the collector tests (gate, before any token beyond the default
 # GITHUB_TOKEN touches the environment), then collect/aggregate with the
-# repo's reviewed default-branch code, then commit ONLY data/** to an orphan
-# data branch and open/update a single data PR. The data branch deliberately
-# carries no code (orphan, data-only) so nothing unreviewed ever executes in
-# this token-bearing job, and merging the data PR never touches source files.
+# repo's reviewed default-branch code, then commit ONLY data/** changes to
+# the data branch and open/update a single data PR. The data branch is a
+# DESCENDANT of the default branch whose committed diff vs it is guarded to
+# be data-only (GitHub refuses PRs between branches with no common history
+# — an orphan data branch cannot open a PR; verified empirically). Nothing
+# on it ever executes in this token-bearing job: this job always checks out
+# and runs the default branch's code, and the data branch's non-data files
+# are only ever main's own reviewed content, kept convergent by merging the
+# default branch in. A data-only diff guarantee means merging the data PR
+# only ever applies data changes to the default branch.
 # The default branch is NEVER pushed directly.
 #
 # Bounded continuation without sleep loops: the collector stops gracefully at
@@ -112,7 +118,7 @@ jobs:
           } >> "$GITHUB_ENV"
           echo "collecting $FROM_MONTH .. current month, fixed cutoff $RUN_CUTOFF"
 
-      - name: Prepare data branch worktree (orphan, data-only)
+      - name: Prepare data branch worktree (main-descendant, data-only diff)
         id: prepare
         run: |
           set -euo pipefail
@@ -120,16 +126,32 @@ jobs:
             git worktree add -B "$DATA_BRANCH" /tmp/data-tree FETCH_HEAD
             echo "DATA_BRANCH_EXISTING=1" >> "$GITHUB_ENV"
           else
-            echo "no $DATA_BRANCH yet; creating an orphan data-only branch"
-            # NB: --orphan takes NO value; the branch name comes via -b.
-            git worktree add --orphan -b "$DATA_BRANCH" /tmp/data-tree
+            echo "no $DATA_BRANCH yet; creating it from $DEFAULT_BRANCH (common ancestry — an orphan branch cannot open a PR against main)"
+            git worktree add -b "$DATA_BRANCH" /tmp/data-tree "origin/$DEFAULT_BRANCH"
           fi
-          # The data branch must never carry anything outside data/ — refuse
-          # loudly if it does (code on the data branch would both execute
-          # unreviewed here and fire on:push workflows on its own pushes).
-          bad="$(git -C /tmp/data-tree ls-files | grep -v '^data/' | head -n 5 || true)"
+          # Keep the branch convergent with the default branch: merge the
+          # default branch IN (never the reverse — the default branch is
+          # never pushed from here). -X ours resolves any data/** conflicts
+          # to this branch's newer collected state (the data branch is the
+          # system of record for data/; a hand edit to collected data on
+          # main is superseded by the next data PR). Non-data files only
+          # ever change on the default branch, so they merge cleanly toward
+          # its content. No history is rewritten: merge commits only, plain
+          # (non-force) pushes only.
+          if ! git -C /tmp/data-tree merge --no-edit -X ours "origin/$DEFAULT_BRANCH"; then
+            echo "::error::failed to merge $DEFAULT_BRANCH into $DATA_BRANCH — inspect the data branch; refusing to continue"
+            exit 1
+          fi
+          # The data branch descends from the default branch and therefore
+          # carries its reviewed tree, but it must never DIVERGE from it
+          # outside data/: its committed changed-paths vs the default branch
+          # must be data-only. (The code it carries is never executed here —
+          # this job always checks out and runs the default branch's code —
+          # and a data-only diff means merging the data PR only ever applies
+          # data changes to the default branch.)
+          bad="$(git -C /tmp/data-tree diff --name-only "origin/$DEFAULT_BRANCH" HEAD -- . ':(exclude)data' | head -n 5 || true)"
           if [ -n "$bad" ]; then
-            echo "::error::$DATA_BRANCH carries non-data files (first: $bad); refusing to continue"
+            echo "::error::$DATA_BRANCH diverges from $DEFAULT_BRANCH outside data/ (first: $bad); refusing to continue"
             exit 1
           fi
 
@@ -147,8 +169,9 @@ jobs:
           # completing a walk) must not resurrect from the checkout, or a
           # later dispatch reuses stale cached reviews and bakes them into a
           # partition stamped with a fresh cutoff. Only when the data branch
-          # exists — on the very first run the orphan worktree is empty and
-          # the checkout's own data/ is the seed.
+          # exists — on the very first run the fresh worktree's data/ is the
+          # default branch's own committed data, identical to the checkout's,
+          # so no overlay is needed.
           if [ "${DATA_BRANCH_EXISTING:-0}" = "1" ]; then
             rsync -a --checksum --delete /tmp/data-tree/data/ data/ || {
               echo "::error::failed to seed data/ from $DATA_BRANCH — refusing to start from scratch"

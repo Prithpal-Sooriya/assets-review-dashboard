@@ -131,15 +131,19 @@ aggregation dedupes by freshest snapshot per PR).
   month; the cutoff is fixed at run start (deterministic aggregate).
 - Runs `bun test tests/collector/` first, on the reviewed default-branch
   code that performs the collection — no data is written on failure.
-- Writes only to an **orphan, data-only branch** `data/auto-refresh`
-  (**never the default branch**, no force-push): the workflow prepares a
-  git worktree of that branch, mirrors `data/` into it with rsync, and
-  pushes. The data branch deliberately carries no code — nothing unreviewed
-  executes in the token-bearing job, its own pushes fire no `on: push`
-  workflows (no workflow files exist on it), merging its data PR never
-  touches source files, and there are no merges/conflicts to reconcile. A
-  guard refuses to continue if the branch ever carries anything outside
-  `data/`.
+- Writes only to `data/auto-refresh` — a branch **descending from the
+  default branch** whose committed diff vs it is guarded to be **data-only**
+  (**never the default branch**, no force-push, merge commits only): the
+  workflow prepares a git worktree of that branch, converges it by merging
+  the default branch in (`-X ours` keeps collected data authoritative),
+  mirrors `data/` into it with rsync, and pushes. GitHub refuses PRs
+  between branches with no common history, so an orphan data branch cannot
+  open a PR — hence the main ancestry. Nothing on the data branch executes
+  in the token-bearing job (the job always checks out and runs the
+  default branch's code; the branch's non-data files are only ever main's
+  own reviewed content), and a guard refuses to continue if the branch's
+  changed paths vs the default branch ever diverge outside `data/` — so
+  merging the data PR only ever applies data changes.
 - Hard collector failures (exit 1) fail the run red immediately with the
   checkpoints already pushed; paused runs finish red with a greppable
   `[EXPECTED-AUTO-RESUME]` annotation (not actionable).
