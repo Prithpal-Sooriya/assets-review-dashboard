@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { dashboard } from './data/dashboardData'
 import {
   aggregateMonths,
@@ -23,21 +23,9 @@ import { CoveragePanel } from './components/CoveragePanel'
 import { MethodologyCard, WarningsCard } from './components/NotesCards'
 import { EmptyState, InvalidState, MissingState } from './components/StateCards'
 import { Footer } from './components/Footer'
-import { TodayPanel } from './components/today/TodayPanel'
-import { parseHash, type Route } from './today/urlstate'
 
 export default function App() {
   const [repoFilter, setRepoFilter] = useState<string | null>(null)
-  // Hash routing: no hash or #/history keeps the original History behaviour
-  // (existing links stay valid); #/today shows the client-only Today view.
-  const [route, setRoute] = useState<Route>(() =>
-    typeof window === 'undefined' ? 'history' : parseHash(window.location.hash).route,
-  )
-  useEffect(() => {
-    const onHash = () => setRoute(parseHash(window.location.hash).route)
-    window.addEventListener('hashchange', onHash)
-    return () => window.removeEventListener('hashchange', onHash)
-  }, [])
   const loaded = dashboard
 
   // Defensive access: in missing/invalid/empty states `data` may be present
@@ -80,21 +68,9 @@ export default function App() {
 
   const selectMonth = (month: string) => setSelectedMonth(month)
 
-  if (route === 'today') {
-    return (
-      <>
-        <Header loaded={loaded} route="today" />
-        <main className="container" id="main">
-          <TodayPanel />
-        </main>
-        <Footer loaded={loaded} />
-      </>
-    )
-  }
-
   return (
     <>
-      <Header loaded={loaded} route="history" />
+      <Header loaded={loaded} />
       <main className="container" id="main">
         <DataNotice loaded={loaded} />
         {!ok && (

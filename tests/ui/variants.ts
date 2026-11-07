@@ -31,9 +31,7 @@ export const UI_VARIANTS: UiVariant[] = [
     fixture: '',
     outDir: 'dist-variants/demo',
     port: 4173,
-    // The Today e2e suite runs against the same demo build (it mocks
-    // api.github.com with page.route — no network, no credentials).
-    testMatch: /dashboard\.e2e\.ts|today\.e2e\.ts/,
+    testMatch: /dashboard\.e2e\.ts/,
   },
   {
     name: 'real',

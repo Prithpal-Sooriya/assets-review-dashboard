@@ -34,19 +34,4 @@ describe('CSP inline-script hash', () => {
     expect(csp).toContain("object-src 'none'")
     expect(csp).toContain("frame-ancestors 'none'")
   })
-
-  /**
-   * The Today view fetches public data directly from the GitHub REST API in
-   * the browser. connect-src is the exact-origin allow-list for that: only
-   * 'self' and https://api.github.com — no wildcards, no other hosts, no
-   * scheme-relative or subdomain loopholes.
-   */
-  test('CSP allow-lists exactly self and api.github.com for connections', () => {
-    const vercel = JSON.parse(readFileSync(new URL('../../vercel.json', import.meta.url), 'utf-8'))
-    const csp: string = vercel.headers[0].headers.find(
-      (h: { key: string; value: string }) => h.key === 'Content-Security-Policy',
-    ).value
-    const connectSrc = /connect-src ([^;]+)/.exec(csp)?.[1]?.trim()
-    expect(connectSrc).toBe("'self' https://api.github.com")
-  })
 })
