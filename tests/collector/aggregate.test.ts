@@ -1,6 +1,6 @@
 /** Deterministic aggregation tests: raw partitions -> exact dashboard contract. */
 import { describe, expect, test } from "bun:test";
-import { aggregate, validateDashboardData } from "../../scripts/lib/aggregate";
+import { aggregate, findMissingCompletePartitions, validateDashboardData } from "../../scripts/lib/aggregate";
 import type { Manifest, RawPartition, RawPrRecord } from "../../scripts/lib/types";
 import { completeEntry, manifestOf, pr, review, testConfig } from "./fixtures";
 
@@ -381,5 +381,33 @@ describe("aggregate", () => {
     const a = JSON.stringify(aggregate(input));
     const b = JSON.stringify(aggregate(input));
     expect(a).toBe(b);
+  });
+});
+
+describe("findMissingCompletePartitions", () => {
+  const repos = ["MetaMask/core", "MetaMask/metamask-extension"];
+  const months = ["2026-01", "2026-02"];
+  const manifest = manifestOf({
+    "MetaMask/core|2026-01": completeEntry("2026-02-01T00:00:00Z", 3),
+    "MetaMask/core|2026-02": { status: "pending" }, // not complete -> not required
+    "MetaMask/metamask-extension|2026-01": completeEntry("2026-02-01T00:00:00Z", 5),
+    "MetaMask/metamask-extension|2026-02": completeEntry("2026-03-01T00:00:00Z", 7),
+  });
+
+  test("all complete partitions have files -> empty", async () => {
+    const hasFile = async () => true;
+    expect(await findMissingCompletePartitions(manifest, repos, months, hasFile)).toEqual([]);
+  });
+
+  test("complete partition with a missing file is named (hand deletion propagated)", async () => {
+    const hasFile = async (repo: string, m: string) => !(repo === "MetaMask/core" && m === "2026-01");
+    expect(await findMissingCompletePartitions(manifest, repos, months, hasFile)).toEqual([
+      "MetaMask/core|2026-01",
+    ]);
+  });
+
+  test("pending partitions without files are not flagged", async () => {
+    const hasFile = async (repo: string, m: string) => !(repo === "MetaMask/core" && m === "2026-02");
+    expect(await findMissingCompletePartitions(manifest, repos, months, hasFile)).toEqual([]);
   });
 });

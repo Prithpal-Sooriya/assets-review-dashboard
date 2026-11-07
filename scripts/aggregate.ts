@@ -11,7 +11,7 @@
 import { mkdir, rename, writeFile } from "node:fs/promises";
 import * as path from "node:path";
 import { loadConfig, addMonths, assertMonth, monthOf, monthRange, repoSlug } from "./lib/config";
-import { aggregate, validateDashboardData } from "./lib/aggregate";
+import { aggregate, findMissingCompletePartitions, validateDashboardData } from "./lib/aggregate";
 import { resolveDataDir, prunePartitions } from "./lib/store";
 import type { DashboardData, Manifest, RawPartition } from "./lib/types";
 
@@ -73,6 +73,24 @@ async function main(): Promise<number> {
         partitions.push(JSON.parse(await Bun.file(file).text()) as RawPartition);
       }
     }
+  }
+
+  // Fail loudly if a manifest-complete partition in the display window has
+  // no raw data file: a silently dropped month would understate coverage on
+  // the dashboard (e.g. a hand deletion of a collector-owned file on main
+  // propagates through the data branch). Recovery: see docs/collection.md
+  // "Data branch repair" — flip the partition's manifest status so the next
+  // run recollects it.
+  const missing = await findMissingCompletePartitions(
+    manifest,
+    cfg.repos,
+    monthsList,
+    (repo, m) => Bun.file(path.join(dataDir, "raw", repoSlug(repo), `${m}.json`)).exists(),
+  );
+  if (missing.length > 0) {
+    throw new Error(
+      `manifest-complete partitions are missing their raw data files: ${missing.join(", ")} (recollect them — see docs/collection.md "Data branch repair")`,
+    );
   }
 
   const data: DashboardData = aggregate({

@@ -159,9 +159,8 @@ aggregation dedupes by freshest snapshot per PR).
   ancestry.
 - The data branch carries the default branch's `.github/workflows` files
   (required by the data-only invariant — deleting them would itself be a
-  non-data divergence). Pushes to it are inert only by **convention**: CI
-  workflows pin `branches: [main]`; any future workflow using `on: push`
-  must keep a branch filter so data-branch pushes stay inert.
+  non-data divergence). Push-inertness is enforced for the current CI
+  workflows (see `data-pr-guard.yml` below).
 - Hard collector failures (exit 1) fail the run red immediately with the
   checkpoints already pushed; paused runs finish red with a greppable
   `[EXPECTED-AUTO-RESUME]` annotation (not actionable).
@@ -191,6 +190,23 @@ aggregation dedupes by freshest snapshot per PR).
   values live in this repo.
 
 `ci-collector.yml` (PRs + pushes touching collector-owned paths, including
+the operational workflows and composite actions):
+`bun install --frozen-lockfile` (shared root package.json), actionlint over
+`.github/workflows/` + `.github/actions/`, typecheck via
+`tsconfig.collector.json`, then `bun test tests/collector/`. UI CI is
+`ci-ui.yml`, owned by the frontend; filenames are deliberately distinct
+so the two roles never edit each other's CI.
+
+`data-pr-guard.yml` runs on every PR (to main) touching `data/**`: it
+fetches the PR head as git objects and certifies it with the default
+branch's own guard script — no branch code is executed (the checkout is
+the default branch's tree). This mechanically closes the TOCTOU window
+between a collect-data push and the human merge: a tampered data-PR head
+shows red checks on every head push. Data-branch pushes are inert for CI
+by enforcement for the current workflows (both CI push triggers pin
+`branches: [main]`, and a data-only push matches no `src/**`/`scripts/**`
+paths); any future workflow using `on: push` must keep a branch filter
+(review convention).
 
 ### Data branch repair
 
@@ -203,13 +219,15 @@ so losing the branch loses nothing that cannot be recollected). A
 refusing run never pushes anything, so a bad branch can never make
 progress silently.
 
-`ci-collector.yml`
-the operational workflows and composite actions):
-`bun install --frozen-lockfile` (shared root package.json), actionlint over
-`.github/workflows/` + `.github/actions/`, typecheck via
-`tsconfig.collector.json`, then `bun test tests/collector/`. UI CI is
-`ci-ui.yml`, owned by the frontend; filenames are deliberately distinct
-so the two roles never edit each other's CI.
+Hand DELETIONS of collector-owned raw data files on main propagate like
+any other main-side data change (the convergence merge adopts them, rsync
+mirrors them) — the next aggregate then fails loudly, naming the
+partition. Recovery: flip that partition's manifest status to `pending`
+(e.g. in a data PR) so the next run recollects it.
+
+Hand edits to *collected* data files on main are superseded by the next
+data PR (the data branch is the system of record); hand-added NEW data
+files are preserved (non-conflicting main-side additions are adopted).
 
 `collect-data-heartbeat.yml` (hourly): thin orchestration around the
 TESTED decision core `scripts/lib/heartbeat.ts` (via `scripts/heartbeat.ts`):

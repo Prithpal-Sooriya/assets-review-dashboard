@@ -11,7 +11,9 @@
  *      A symlink or blob there would slide under the `:(exclude)data`
  *      pathspec while replacing the dashboard's data directory with
  *      something else entirely.
- *   2. No committed path outside `data/` may differ from the main ref —
+ *   2. No symlinks anywhere under data/ — interior symlinks are equally
+ *      invisible to the pathspec and could redirect writes outside data/.
+ *   3. No committed path outside `data/` may differ from the main ref —
  *      no modification, addition, or deletion. This is what makes merging
  *      the data PR apply only data changes to main, and what contains a
  *      malicious/diverged push to the data branch: `git merge -X ours`
@@ -37,7 +39,20 @@ export async function dataBranchViolations(worktree: string, mainRef: string): P
     );
   }
 
-  // 2. Committed changed-paths vs the main ref, outside data/, must be empty.
+  // 2. No symlinks anywhere under data/ — the :(exclude)data pathspec is
+  //    blind to interior symlinks too, and one (e.g. data/raw → ../.github)
+  //    could redirect rsync/collection writes outside data/. data/ must
+  //    contain only real files and directories.
+  const entries = (await $`git -C ${worktree} ls-tree -r HEAD -- data`.quiet().text())
+    .split("\n")
+    .filter((l) => l !== "");
+  const symlinks = entries.filter((l) => l.startsWith("120000"));
+  if (symlinks.length > 0) {
+    const first = symlinks[0]!.split("\t")[1] ?? "?";
+    problems.push(`symlink(s) committed under data/ (first: ${first}) — data/ must contain only real files/directories`);
+  }
+
+  // 3. Committed changed-paths vs the main ref, outside data/, must be empty.
   const diff = await $`git -C ${worktree} diff --name-only ${mainRef} HEAD -- . ':(exclude)data'`.quiet().text();
   const changed = diff.split("\n").filter((l) => l !== "");
   if (changed.length > 0) {

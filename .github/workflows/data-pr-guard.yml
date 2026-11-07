@@ -1,0 +1,51 @@
+# Data-PR guard: mechanical certification of every data PR head push.
+#
+# collect-data.yml guards the data branch tip it pushes, but the PR head
+# stays mutable until merge (TOCTOU): anyone with push access could rewrite
+# data/auto-refresh after a run and before a human merges. This workflow
+# re-runs the SAME guard (main's own scripts/check-data-branch.ts, which
+# also fails closed and rejects symlinks under data/) against the PR head
+# tip on every pull_request push — so a tampered head shows red checks in
+# the merge box.
+#
+# Branch code is NEVER executed here: the checkout is the default branch's
+# tree (the trusted workflow + script source for pull_request events), and
+# the PR head is only fetched as git objects and inspected from a detached
+# worktree. No secrets are exposed (contents: read only).
+name: data-pr-guard
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "data/**"
+
+permissions:
+  contents: read
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          # The PR's base branch (from the pull_request event, not the head):
+          # the trusted tree whose guard script does the checking.
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+      - name: Pin bun version from .bun-version
+        run: echo "BUN_VERSION=$(cat .bun-version)" >> "$GITHUB_ENV"
+      - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+      - name: Guard the PR head tip (data-only diff vs the default branch)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Runtime-derived default branch (API, not event payload) — same
+          # pattern as collect-data.yml.
+          DEFAULT_BRANCH="$(gh repo view --json defaultBranchRef --jq .defaultBranchRef.name)"
+          git fetch --no-tags origin "refs/pull/${{ github.event.number }}/head"
+          git worktree add --detach /tmp/pr-head FETCH_HEAD
+          bun run scripts/check-data-branch.ts /tmp/pr-head "origin/$DEFAULT_BRANCH"

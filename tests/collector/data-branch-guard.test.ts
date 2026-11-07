@@ -82,6 +82,17 @@ describe("dataBranchViolations", () => {
     expect(v.some((p) => p.includes('not a git directory'))).toBe(true);
   });
 
+  test("interior symlink under data/ is a violation (write redirection)", async () => {
+    const { wt } = await newRepo();
+    // data/raw/link -> ../../src would be excluded by the pathspec yet
+    // could redirect rsync/collection writes outside data/.
+    await symlink("../../src", path.join(wt, "data", "raw", "link"));
+    await commitAll(wt, "evil");
+    const v = await dataBranchViolations(wt, "main");
+    expect(v.some((p) => p.includes("symlink(s) committed under data/"))).toBe(true);
+    expect(v.some((p) => p.includes("data/raw/link"))).toBe(true);
+  });
+
   test("fails closed when git cannot evaluate (bad main ref)", async () => {
     const { wt } = await newRepo();
     await writeFile(path.join(wt, "data", "raw", "new.json"), "{}\n");
