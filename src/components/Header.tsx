@@ -1,8 +1,9 @@
 import { useTheme } from '../theme'
 import { formatISOTimestamp } from '../data/format'
 import type { LoadedDashboard } from '../data/loader'
+import type { Route } from '../today/urlstate'
 
-export function Header({ loaded }: { loaded: LoadedDashboard }) {
+export function Header({ loaded, route = 'history' }: { loaded: LoadedDashboard; route?: Route }) {
   const { theme, toggle } = useTheme()
   const next = theme === 'dark' ? 'light' : 'dark'
   return (
@@ -11,13 +12,14 @@ export function Header({ loaded }: { loaded: LoadedDashboard }) {
         <div className="site-header__titles">
           <h1 className="site-title">Assets review workload</h1>
           <p className="site-subtitle">
-            Historical team-level view · MetaMask Core, Mobile and Extension ·
-            internal metrics only, no individual data
+            {route === 'today'
+              ? 'Today · open PRs needing review · client-only collection from public GitHub data'
+              : 'Historical team-level view · MetaMask Core, Mobile and Extension · internal metrics only, no individual data'}
           </p>
         </div>
         <div className="site-header__actions">
           {loaded.status === 'ok' && loaded.data && (
-            <span className="chip chip--complete" title={`Data generated at ${loaded.data.generatedAt}`}>
+            <span className="chip chip--complete" title={`History data generated at ${loaded.data.generatedAt}`}>
               {loaded.isDemo ? 'Sample data' : `Data as of ${formatISOTimestamp(loaded.data.generatedAt)}`}
             </span>
           )}
@@ -31,6 +33,16 @@ export function Header({ loaded }: { loaded: LoadedDashboard }) {
           </button>
         </div>
       </div>
+      <nav className="site-nav" aria-label="Dashboard views">
+        <div className="container site-nav__inner">
+          <a className="site-nav__link" href="#/today" aria-current={route === 'today' ? 'page' : undefined}>
+            Today
+          </a>
+          <a className="site-nav__link" href="#/history" aria-current={route === 'history' ? 'page' : undefined}>
+            History
+          </a>
+        </div>
+      </nav>
     </header>
   )
 }
