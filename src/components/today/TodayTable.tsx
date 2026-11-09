@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { repoDisplayName } from '../../data/format'
 import { ASSETS_TEAM_SLUG } from '../../today/config'
-import { authorshipOf, formatAge, nextActionOf, ROSTER_SET } from '../../today/classify'
+import { authorshipOf, formatAge, isRosterMember, nextActionOf } from '../../today/classify'
 import type { GroupedRows } from '../../today/table'
 import type { Row } from '../../today/table'
 import type { TodayUrlState } from '../../today/urlstate'
@@ -126,7 +126,7 @@ export function TodayTable({
                         </span>
                       ))}
                     {pr.requestedReviewers.map((login) => {
-                      const internalMember = ROSTER_SET.has(login)
+                      const internalMember = isRosterMember(login)
                       return (
                         <span
                           key={login}

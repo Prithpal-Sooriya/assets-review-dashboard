@@ -170,6 +170,29 @@ function seedPr(n: number, overrides: Record<string, unknown> = {}) {
   }
 }
 
+/** Seed the IndexedDB snapshot cache (mirrors today/cache.ts: DB
+ *  `assets-today-cache`, store `snapshots`, keys `current`/`baseline`).
+ *  Single copy for every cache-seeding test — a schema change breaks here
+ *  once, loudly, instead of in N inline copies. */
+async function seedSnapshotCache(page: Page, key: 'current' | 'baseline', snapshot: unknown) {
+  await page.evaluate(([k, snap]) => {
+    const db = new Promise<IDBDatabase>((resolve, reject) => {
+      const req = indexedDB.open('assets-today-cache', 1)
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
+      }
+      req.onsuccess = () => resolve(req.result)
+      req.onerror = () => reject(req.error)
+    })
+    return db.then((database) => new Promise<void>((resolve, reject) => {
+      const tx = database.transaction('snapshots', 'readwrite')
+      tx.objectStore('snapshots').put(snap, k as string)
+      tx.oncomplete = () => { database.close(); resolve() }
+      tx.onerror = () => reject(tx.error)
+    }))
+  }, [key, snapshot])
+}
+
 async function gotoToday(page: Page, hash = '#/today') {
   await page.goto(`/${hash}`)
   await expect(page.getByRole('heading', { name: 'Optional: personal access token' })).toBeVisible()
@@ -441,54 +464,22 @@ test.describe('Today view — anonymous collection and classification', () => {
     // request.
     const freshAt = new Date(Date.now() - 30_000).toISOString()
     await page.goto('/historical') // real origin for IndexedDB; keeps the collector unmounted
-    await page.evaluate(async (collectedAt: string) => {
-      const seed = {
-        schemaVersion: 1,
-        collectedAt,
-        authMode: 'anonymous',
-        repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
-        complete: true,
-        partialReason: null,
-        rate: null,
-        droppedMalformed: 0,
-        missingChecks: [],
-        prs: [
-          {
-            repo: 'MetaMask/core', number: 301, title: 'Team non-draft',
-            url: 'https://github.com/MetaMask/core/pull/301', author: 'salimtb',
-            draft: false, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: [],
-          },
-          {
-            repo: 'MetaMask/core', number: 302, title: 'Team draft',
-            url: 'https://github.com/MetaMask/core/pull/302', author: 'salimtb',
-            draft: true, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: [],
-          },
-          {
-            repo: 'MetaMask/core', number: 303, title: 'Draft with member request',
-            url: 'https://github.com/MetaMask/core/pull/303', author: 'external-author',
-            draft: true, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-        ],
-      }
-      const db = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open('assets-today-cache', 1)
-        req.onupgradeneeded = () => {
-          if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
-        }
-        req.onsuccess = () => resolve(req.result)
-        req.onerror = () => reject(req.error)
-      })
-      await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction('snapshots', 'readwrite')
-        tx.objectStore('snapshots').put(seed, 'current')
-        tx.oncomplete = () => resolve()
-        tx.onerror = () => reject(tx.error)
-      })
-      db.close()
-    }, freshAt)
+    await seedSnapshotCache(page, 'current', {
+      schemaVersion: 1,
+      collectedAt: freshAt,
+      authMode: 'anonymous',
+      repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      missingChecks: [],
+      prs: [
+        seedPr(301, { title: 'Team non-draft', author: 'salimtb' }),
+        seedPr(302, { title: 'Team draft', author: 'salimtb', draft: true }),
+        seedPr(303, { title: 'Draft with member request', draft: true, requestedReviewers: ['salimtb'] }),
+      ],
+    })
 
     await gotoToday(page) // default Team PRs view — cache-first paint
     const table = page.locator('.today-table')
@@ -632,42 +623,20 @@ test.describe('Today view — failure handling', () => {
     // triggers a refresh, recent enough to be worth showing.
     const staleAt = new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
     await page.goto('/historical') // IndexedDB needs a real origin (about:blank denies it); Historical avoids mounting the Daily collector before the seed
-    await page.evaluate(async (collectedAt: string) => {
-      const seed = {
-        schemaVersion: 1,
-        collectedAt,
-        authMode: 'anonymous',
-        repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
-        complete: true,
-        partialReason: null,
-        rate: null,
-        droppedMalformed: 0,
-        missingChecks: [],
-        prs: [
-          {
-            repo: 'MetaMask/core', number: 201, title: 'PR 201',
-            url: 'https://github.com/MetaMask/core/pull/201', author: 'external-author',
-            draft: false, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-        ],
-      }
-      const db = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open('assets-today-cache', 1)
-        req.onupgradeneeded = () => {
-          if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
-        }
-        req.onsuccess = () => resolve(req.result)
-        req.onerror = () => reject(req.error)
-      })
-      await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction('snapshots', 'readwrite')
-        tx.objectStore('snapshots').put(seed, 'current')
-        tx.oncomplete = () => resolve()
-        tx.onerror = () => reject(tx.error)
-      })
-      db.close()
-    }, staleAt)
+    await seedSnapshotCache(page, 'current', {
+      schemaVersion: 1,
+      collectedAt: staleAt,
+      authMode: 'anonymous',
+      repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      missingChecks: [],
+      prs: [
+        seedPr(201, { requestedReviewers: ['salimtb'] }),
+      ],
+    })
 
     failNetwork = true
     // Needs view: the seeded #201 (external, member request) renders from cache.
@@ -700,54 +669,22 @@ test.describe('Today view — since-baseline diff (missing ≠ merged)', () => {
     const counts = await mockGitHub(page)
     const baselineAt = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString()
     await page.goto('/historical') // IndexedDB needs a real origin (about:blank denies it); Historical avoids mounting the Daily collector before the seed
-    await page.evaluate(async (collectedAt: string) => {
-      const seed = {
-        schemaVersion: 1,
-        collectedAt,
-        authMode: 'anonymous',
-        repos: [],
-        complete: true,
-        partialReason: null,
-        rate: null,
-        droppedMalformed: 0,
-        missingChecks: [],
-        prs: [
-          {
-            repo: 'MetaMask/core', number: 201, title: 'PR 201',
-            url: 'https://github.com/MetaMask/core/pull/201', author: 'external-author',
-            draft: false, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-          {
-            repo: 'MetaMask/core', number: 999, title: 'PR 999',
-            url: 'https://github.com/MetaMask/core/pull/999', author: 'external-author',
-            draft: false, createdAt: '2026-10-30T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: ['metamask-assets'], requestedReviewers: [],
-          },
-          {
-            repo: 'MetaMask/core', number: 998, title: 'PR 998',
-            url: 'https://github.com/MetaMask/core/pull/998', author: 'external-author',
-            draft: false, createdAt: '2026-10-30T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-        ],
-      }
-      const db = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open('assets-today-cache', 1)
-        req.onupgradeneeded = () => {
-          if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
-        }
-        req.onsuccess = () => resolve(req.result)
-        req.onerror = () => reject(req.error)
-      })
-      await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction('snapshots', 'readwrite')
-        tx.objectStore('snapshots').put(seed, 'baseline')
-        tx.oncomplete = () => resolve()
-        tx.onerror = () => reject(tx.error)
-      })
-      db.close()
-    }, baselineAt)
+    await seedSnapshotCache(page, 'baseline', {
+      schemaVersion: 1,
+      collectedAt: baselineAt,
+      authMode: 'anonymous',
+      repos: [],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      missingChecks: [],
+      prs: [
+        seedPr(201, { requestedReviewers: ['salimtb'] }),
+        seedPr(999, { createdAt: '2026-10-30T00:00:00Z', requestedTeams: ['metamask-assets'] }),
+        seedPr(998, { createdAt: '2026-10-30T00:00:00Z', requestedReviewers: ['salimtb'] }),
+      ],
+    })
 
     await gotoToday(page)
     const card = page.getByRole('region', { name: 'Changes since previous baseline' })

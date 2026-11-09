@@ -179,6 +179,24 @@ describe('drafts are excluded from both queues — honestly', () => {
     expect(d.awaiting.left[0]?.outcome).toBe('left-queue')
   })
 
+  test('turned-draft PR with NO detail check still labels left-queue via sweep membership', () => {
+    // Realistic collection path: the draft stays in the open-PR sweep (so it
+    // is verifiably open by membership) and the bounded check budget never
+    // produced a missingChecks entry for it. Draft exclusion is still just a
+    // queue exit — never a merge/close claim, never "unverified".
+    const baseline = snap({
+      collectedAt: '2026-11-06T00:00:00Z',
+      prs: [pr({ number: 20, author: MEMBER, requestedReviewers: [MEMBER] })],
+    })
+    const current = snap({
+      prs: [pr({ number: 20, author: MEMBER, requestedReviewers: [MEMBER], draft: true })],
+      missingChecks: [],
+    })
+    const d = diffSnapshots(baseline, current)
+    expect(d.awaiting.left[0]?.outcome).toBe('left-queue')
+    expect(d.needs.left[0]?.outcome).toBe('left-queue')
+  })
+
   test('a draft in the baseline cache never enters the queues (no draft resurrection)', () => {
     // A cached baseline collected by an older build can contain drafts; the
     // diff must recompute queue membership with current rules.

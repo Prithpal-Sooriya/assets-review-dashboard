@@ -64,7 +64,19 @@ export function awaitingInfoOf(pr: TodayPr): AwaitingInfo {
 
 /** Simple next-action text derived only from cheap, list-visible fields.
  *  Drafts never reach rows (both views exclude them), so no draft case. */
+/** Is this GitHub login an Assets team member (roster match)? Centralized
+ *  so components (reviewer chips) and predicates share one notion of
+ *  "internal" — roster matching changes in exactly one place. */
+export function isRosterMember(login: string): boolean {
+  return ROSTER_SET.has(login)
+}
+
 export function nextActionOf(pr: TodayPr, view: 'needs' | 'awaiting'): string {
+  // Invariant: `pr` is NOT a draft — buildRows/viewCounts only ever pass
+  // PRs that passed needsAssetsReview/assetsAuthored, both of which exclude
+  // drafts (drafts never reach any row). The draft case is deliberately
+  // absent: if this function is ever reused outside those queues, guard the
+  // caller — do not silently label drafts as requested here.
   if (view === 'needs') return 'Review requested'
   // Team-PR view: an outstanding request to the Assets team or one of its
   // members is an INTERNAL review need — the team can act on it right now —

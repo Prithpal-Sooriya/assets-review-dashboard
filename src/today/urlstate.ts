@@ -71,6 +71,10 @@ export function parseHash(hash: string): TodayUrlState {
 /** Serialize Today state back into a hash string (round-trips parseHash). */
 export function buildTodayHash(state: TodayUrlState): string {
   const params = new URLSearchParams()
+  // `view` is ALWAYS written explicitly — never elided even when equal to
+  // the default — so every share link ever produced by any build pins its
+  // view. Changing DEFAULT_TODAY_STATE.view therefore cannot retarget old
+  // shared links: `?view=needs` keeps opening Review requests forever.
   params.set('view', state.view)
   if (state.repo !== null) params.set('repo', state.repo)
   if (state.author !== 'all') params.set('author', state.author)
