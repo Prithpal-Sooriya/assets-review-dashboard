@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T23:28:14Z",
+  "generatedAt": "2026-11-09T09:55:17Z",
   "range": {
     "start": "2025-11-01T00:00:00.000Z",
-    "end": "2026-11-07T23:28:14Z"
+    "end": "2026-11-09T09:55:17Z"
   },
   "methodology": {
     "version": "1.0.0",
@@ -582,18 +582,18 @@
       "month": "2026-11",
       "repo": "MetaMask/core",
       "internalReviewedPrs": 7,
-      "externalReviewedPrs": 4,
-      "reviewSubmissions": 35,
+      "externalReviewedPrs": 5,
+      "reviewSubmissions": 36,
       "reviewedUnmergedPrs": 2,
       "mergedInternalPrs": 10,
-      "mergedExternalReviewedPrs": 3
+      "mergedExternalReviewedPrs": 4
     },
     {
       "month": "2026-11",
       "repo": "MetaMask/metamask-extension",
       "internalReviewedPrs": 5,
       "externalReviewedPrs": 4,
-      "reviewSubmissions": 17,
+      "reviewSubmissions": 18,
       "reviewedUnmergedPrs": 2,
       "mergedInternalPrs": 6,
       "mergedExternalReviewedPrs": 3
@@ -602,11 +602,11 @@
       "month": "2026-11",
       "repo": "MetaMask/metamask-mobile",
       "internalReviewedPrs": 19,
-      "externalReviewedPrs": 22,
-      "reviewSubmissions": 82,
+      "externalReviewedPrs": 27,
+      "reviewSubmissions": 88,
       "reviewedUnmergedPrs": 6,
-      "mergedInternalPrs": 26,
-      "mergedExternalReviewedPrs": 20
+      "mergedInternalPrs": 27,
+      "mergedExternalReviewedPrs": 25
     }
   ],
   "prs": [
@@ -9942,7 +9942,7 @@
       "url": "https://github.com/MetaMask/core/pull/10885",
       "ownership": "internal",
       "ownershipReason": "team-author",
-      "state": "OPEN",
+      "state": "CLOSED",
       "mergedAt": null,
       "reviewMonths": [
         "2026-10",
@@ -10740,6 +10740,24 @@
       "ownershipReason": "team-author",
       "state": "MERGED",
       "mergedAt": "2026-11-06T15:10:40Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": []
+    },
+    {
+      "id": "MetaMask/core#11380",
+      "repo": "MetaMask/core",
+      "number": 11380,
+      "title": "feat(social-controllers): type feedItemId on feed items",
+      "url": "https://github.com/MetaMask/core/pull/11380",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-08T00:19:38Z",
       "reviewMonths": [
         "2026-11"
       ],
@@ -24251,7 +24269,8 @@
       "reviewCountsByMonth": {},
       "labels": [
         "size-L",
-        "team-emerging-opportunities"
+        "team-emerging-opportunities",
+        "release-13.57.0"
       ]
     },
     {
@@ -24383,7 +24402,8 @@
       },
       "labels": [
         "team-assets",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ]
     },
     {
@@ -24405,7 +24425,8 @@
       "labels": [
         "type-bug",
         "team-core-extension-ux",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ]
     },
     {
@@ -24426,7 +24447,8 @@
       },
       "labels": [
         "team-assets",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ]
     },
     {
@@ -24447,7 +24469,8 @@
       },
       "labels": [
         "team-networks",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ]
     },
     {
@@ -24468,7 +24491,8 @@
       },
       "labels": [
         "size-S",
-        "team-emerging-opportunities"
+        "team-emerging-opportunities",
+        "release-13.57.0"
       ]
     },
     {
@@ -24489,7 +24513,8 @@
       },
       "labels": [
         "team-assets",
-        "size-L"
+        "size-L",
+        "release-13.57.0"
       ]
     },
     {
@@ -24511,7 +24536,8 @@
       "labels": [
         "team-assets",
         "no-changelog",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ]
     },
     {
@@ -24528,7 +24554,7 @@
         "2026-11"
       ],
       "reviewCountsByMonth": {
-        "2026-11": 1
+        "2026-11": 2
       },
       "labels": [
         "team-core-extension-ux",
@@ -53271,6 +53297,135 @@
       ],
       "reviewCountsByMonth": {
         "2026-11": 2
+      },
+      "labels": [
+        "size-M",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39183",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39183,
+      "title": "feat(social-feed): key all-feed rows on feedItemId",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39183",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-08T00:27:40Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-M",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39184",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39184,
+      "title": "fix(social): show two decimals on profile PnL and volume",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39184",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-07T23:57:48Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39191",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39191,
+      "title": "fix(social-feed): date comment cards by their comment",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39191",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-08T19:54:04Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 2
+      },
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39193",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39193,
+      "title": "feat(social): show X trust mark beside connected traders",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39193",
+      "ownership": "internal",
+      "ownershipReason": "team-label",
+      "state": "MERGED",
+      "mergedAt": "2026-11-09T08:56:58Z",
+      "reviewMonths": [],
+      "reviewCountsByMonth": {},
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39194",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39194,
+      "title": "fix(social): show hold time when posting an open perp",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39194",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-09T09:11:14Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
+      },
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ]
+    },
+    {
+      "id": "MetaMask/metamask-mobile#39199",
+      "repo": "MetaMask/metamask-mobile",
+      "number": 39199,
+      "title": "fix(social-feed): key feed cards on feedItemId in the list",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39199",
+      "ownership": "external",
+      "ownershipReason": "other",
+      "state": "MERGED",
+      "mergedAt": "2026-11-09T09:07:14Z",
+      "reviewMonths": [
+        "2026-11"
+      ],
+      "reviewCountsByMonth": {
+        "2026-11": 1
       },
       "labels": [
         "size-M",
