@@ -10,14 +10,14 @@
     "MetaMask/metamask-mobile|2026-11": {
       "status": "complete",
       "completeness": "asOfCutoff",
-      "collectedAt": "2026-11-07T23:28:14.000Z",
-      "prCount": 800
+      "collectedAt": "2026-11-09T09:55:17.000Z",
+      "prCount": 834
     },
     "MetaMask/metamask-extension|2026-11": {
       "status": "complete",
       "completeness": "asOfCutoff",
-      "collectedAt": "2026-11-07T23:28:14.000Z",
-      "prCount": 426
+      "collectedAt": "2026-11-09T09:55:17.000Z",
+      "prCount": 440
     },
     "MetaMask/metamask-extension|2026-10": {
       "status": "complete",
@@ -28,8 +28,8 @@
     "MetaMask/core|2026-11": {
       "status": "complete",
       "completeness": "asOfCutoff",
-      "collectedAt": "2026-11-07T23:28:14.000Z",
-      "prCount": 242
+      "collectedAt": "2026-11-09T09:55:17.000Z",
+      "prCount": 247
     },
     "MetaMask/core|2026-10": {
       "status": "complete",
