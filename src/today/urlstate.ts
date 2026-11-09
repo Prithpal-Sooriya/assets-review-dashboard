@@ -30,7 +30,12 @@ export interface TodayUrlState {
 }
 
 export const DEFAULT_TODAY_STATE: TodayUrlState = {
-  view: 'needs',
+  // Team PRs land first: the team's own open non-draft PRs (including
+  // internal review needs) are the default landing; the review-requests
+  // view is one click away with its count on the button. The 'needs' /
+  // 'awaiting' URL values are frozen (share links exist in the wild) — only
+  // which one is the default changed.
+  view: 'awaiting',
   repo: null,
   author: 'all',
   group: 'repo',

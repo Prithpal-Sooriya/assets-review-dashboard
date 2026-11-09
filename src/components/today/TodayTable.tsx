@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { repoDisplayName } from '../../data/format'
 import { ASSETS_TEAM_SLUG } from '../../today/config'
-import { authorshipOf, formatAge, nextActionOf } from '../../today/classify'
+import { authorshipOf, formatAge, nextActionOf, ROSTER_SET } from '../../today/classify'
 import type { GroupedRows } from '../../today/table'
 import type { Row } from '../../today/table'
 import type { TodayUrlState } from '../../today/urlstate'
@@ -66,15 +66,15 @@ export function TodayTable({
       ? authMode === 'anonymous'
         ? 'No outstanding review requests visible. Without a token GitHub hides team review requests, so this list only shows direct requests to team members — it may be incomplete rather than truly empty.'
         : 'No outstanding review requests to the Assets team or its members right now.'
-      : 'No open pull requests authored by the Assets team right now.'
+      : 'No open, non-draft pull requests authored by the Assets team right now. (Drafts are never listed.)'
 
   return (
     <div className="table-scroll">
       <table className="data today-table">
         <caption className="hidden-visually">
           {state.view === 'needs'
-            ? 'Open pull requests with outstanding review requests to the Assets team'
-            : 'Open pull requests authored by the Assets team'}
+            ? 'Open, non-draft pull requests with outstanding review requests to the Assets team or its members'
+            : 'Open, non-draft pull requests authored by the Assets team'}
         </caption>
         <thead>
           <tr>
@@ -106,11 +106,6 @@ export function TodayTable({
                       #{pr.number}
                     </a>{' '}
                     {pr.title}
-                    {pr.draft && (
-                      <span className="chip chip--closed" style={{ marginLeft: 8 }} title="Draft pull request">
-                        Draft
-                      </span>
-                    )}
                   </td>
                   <td>
                     <span className={`chip chip--${ownership === 'internal' ? 'internal' : 'external'}`}>
@@ -125,16 +120,27 @@ export function TodayTable({
                         <span
                           key={slug}
                           className={`chip${slug === ASSETS_TEAM_SLUG ? ' chip--internal' : ' chip--external'}`}
-                          title={slug === ASSETS_TEAM_SLUG ? 'The Assets team' : 'Other team (shown by GitHub slug)'}
+                          title={slug === ASSETS_TEAM_SLUG ? 'The Assets team (internal request)' : 'Other team (shown by GitHub slug; outside request)'}
                         >
                           {slug === ASSETS_TEAM_SLUG ? 'Assets team' : slug}
                         </span>
                       ))}
-                    {pr.requestedReviewers.map((login) => (
-                      <span key={login} className="chip chip--open" title="Direct reviewer request">
-                        {login}
-                      </span>
-                    ))}
+                    {pr.requestedReviewers.map((login) => {
+                      const internalMember = ROSTER_SET.has(login)
+                      return (
+                        <span
+                          key={login}
+                          className={`chip${internalMember ? ' chip--internal' : ' chip--external'}`}
+                          title={
+                            internalMember
+                              ? 'Assets team member — internal review request'
+                              : 'Outside reviewer — direct request'
+                          }
+                        >
+                          {login}
+                        </span>
+                      )
+                    })}
                     {pr.requestedTeams.length === 0 && pr.requestedReviewers.length === 0 && (
                       <span className="section__note">—</span>
                     )}

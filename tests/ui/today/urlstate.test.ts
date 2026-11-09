@@ -11,6 +11,16 @@ describe('Today URL state round-trips', () => {
     expect(parseHash('#/today')).toEqual(DEFAULT_TODAY_STATE)
   })
 
+  test('the default landing is the team-PRs view (team work first, not hidden)', () => {
+    // A bare #/today link (or /) lands on Team PRs — the team's own open
+    // non-draft PRs including internal review needs.
+    expect(DEFAULT_TODAY_STATE.view).toBe('awaiting')
+    expect(parseHash('#/today').view).toBe('awaiting')
+    // Legacy share links keep their explicit view — nothing is broken.
+    expect(parseHash('#/today?view=needs').view).toBe('needs')
+    expect(parseHash('#/today?view=awaiting').view).toBe('awaiting')
+  })
+
   test('every filter round-trips through build/parse', () => {
     const state = {
       view: 'awaiting',

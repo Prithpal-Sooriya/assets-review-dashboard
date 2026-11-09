@@ -1,12 +1,13 @@
 /**
  * Pure classification for the Today views.
  *
- * Core principle (from the approved spec): an entry appears in "Needs Assets
- * review" ONLY because of an explicit outstanding review request to the
+ * Core principle (from the approved spec): an entry appears in "Review
+ * requests" ONLY because of an explicit outstanding review request to the
  * configured team or one of its members — authorship, ownership labels and
- * past review participation never prove a request. "Assets PRs awaiting
- * others" is an authorship view (team-authored open PRs) and is reported
- * separately; a PR can legitimately appear in both views.
+ * past review participation never prove a request. "Team PRs" is an
+ * authorship view (team-authored open PRs) and is reported separately; a PR
+ * can legitimately appear in both views. Draft PRs are excluded from BOTH
+ * views (rows and counts): the user asked for open, non-draft PRs only.
  */
 
 import { ASSETS_ROSTER, ASSETS_TEAM_SLUG } from './config'
@@ -30,14 +31,15 @@ export function hasMemberRequest(pr: TodayPr): boolean {
   return pr.requestedReviewers.some((login) => ROSTER_SET.has(login))
 }
 
-/** View 1 membership: explicit outstanding request to team or member. */
+/** View 1 membership: non-draft PR with an explicit outstanding request to
+ *  the team or a member. Drafts never qualify, no matter who requested. */
 export function needsAssetsReview(pr: TodayPr): boolean {
-  return hasTeamRequest(pr) || hasMemberRequest(pr)
+  return !pr.draft && (hasTeamRequest(pr) || hasMemberRequest(pr))
 }
 
-/** View 2 membership: open PR authored by a team member. */
+/** View 2 membership: open, non-draft PR authored by a team member. */
 export function assetsAuthored(pr: TodayPr): boolean {
-  return authorshipOf(pr) === 'internal'
+  return !pr.draft && authorshipOf(pr) === 'internal'
 }
 
 
@@ -60,10 +62,14 @@ export function awaitingInfoOf(pr: TodayPr): AwaitingInfo {
   }
 }
 
-/** Simple next-action text derived only from cheap, list-visible fields. */
+/** Simple next-action text derived only from cheap, list-visible fields.
+ *  Drafts never reach rows (both views exclude them), so no draft case. */
 export function nextActionOf(pr: TodayPr, view: 'needs' | 'awaiting'): string {
-  if (pr.draft) return 'Draft — author action'
   if (view === 'needs') return 'Review requested'
+  // Team-PR view: an outstanding request to the Assets team or one of its
+  // members is an INTERNAL review need — the team can act on it right now —
+  // so it takes priority over anything the PR waits on from outside.
+  if (hasTeamRequest(pr) || hasMemberRequest(pr)) return 'Internal review requested'
   const { otherTeams, otherReviewers } = awaitingInfoOf(pr)
   if (otherTeams.length > 0) {
     return `Awaiting ${otherTeams.join(', ')}`

@@ -34,8 +34,8 @@ export function TokenCard({ today }: { today: TodayController }) {
       <h2 className="section__title">Optional: personal access token</h2>
       <p className="section__desc">
         Anonymous mode cannot see team review requests (GitHub hides them from unauthenticated
-        calls), so the &ldquo;Needs Assets review&rdquo; list only shows direct reviewer requests.
-        A read-only token makes team requests visible and lifts the rate budget.
+        calls), so the review-requests list only shows direct reviewer requests. A read-only
+        token makes team requests visible and lifts the rate budget.
       </p>
       <div className="token-row">
         <label htmlFor={inputId} className="stat__label">
