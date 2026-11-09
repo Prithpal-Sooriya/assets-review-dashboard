@@ -34,7 +34,12 @@ export const DEFAULT_TODAY_STATE: TodayUrlState = {
   // internal review needs) are the default landing; the review-requests
   // view is one click away with its count on the button. The 'needs' /
   // 'awaiting' URL values are frozen (share links exist in the wild) — only
-  // which one is the default changed.
+  // which one is the default changed. The names are historical (they date
+  // from the old view names 'Needs Assets review' / 'Assets PRs awaiting
+  // others') and leak into counts.needs/awaiting, diff.needs/awaiting,
+  // needsAssetsReview and assetsAuthored — deliberate: renaming any of them
+  // would break the frozen URL format or churn every call site for zero
+  // behavioral gain.
   view: 'awaiting',
   repo: null,
   author: 'all',
