@@ -137,8 +137,9 @@ What still holds regardless of visibility:
 - **Per-deploy records** (exact commit, tree composition, deployment id,
   URLs, verification, coverage at deploy time) live in [`docs/deploys/`](./deploys/),
   one file per production deploy ([`TEMPLATE.md`](./deploys/TEMPLATE.md) for
-  the next one). Latest: [2026-11-07 — first real-data
-  deploy](./deploys/2026-11-07.md), pinned by the tag `deploy/2026-11-07`.
+  the next one). Latest: [2026-11-09 — Daily: Team PRs first, non-draft only
+  (PR #22)](./deploys/2026-11-09-pr22.md), pinned by the tag
+  `deploy/2026-11-09-pr22`.
 - **The production tree is merged `main` — the combined app** (Daily at `/`
   and Historical at `/historical`, plus the preserved `#/today` / `#/history`
   legacy hash links — `#/today?…` being the live share-link format for Daily
