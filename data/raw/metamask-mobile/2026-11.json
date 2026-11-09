@@ -3,9 +3,28 @@
   "repo": "MetaMask/metamask-mobile",
   "month": "2026-11",
   "completeness": "asOfCutoff",
-  "collectedAt": "2026-11-07T15:34:41.902Z",
-  "prCount": 795,
+  "collectedAt": "2026-11-09T09:55:17.000Z",
+  "prCount": 834,
   "prs": [
+    {
+      "number": 31139,
+      "title": "fix: use pending block tag when fetching EIP-7702 authorization nonce",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/31139",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-06-05T11:46:16Z",
+      "updatedAt": "2026-11-07T15:47:20Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "matthewwalsh0",
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "team-confirmations",
+        "size-S",
+        "risk:low"
+      ],
+      "reviews": []
+    },
     {
       "number": 32290,
       "title": "refactor: route buy flow through V2 token selection",
@@ -89,11 +108,11 @@
       "number": 33679,
       "title": "feat: Seed remote feature flag controller with defaults from feature flag registry",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/33679",
-      "state": "OPEN",
+      "state": "CLOSED",
       "draft": false,
       "createdAt": "2026-07-22T23:03:27Z",
-      "updatedAt": "2026-11-02T00:33:46Z",
-      "closedAt": null,
+      "updatedAt": "2026-11-09T00:34:07Z",
+      "closedAt": "2026-11-09T00:34:07Z",
       "mergedAt": null,
       "authorLogin": "Cal-L",
       "labels": [
@@ -691,7 +710,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-07-30T23:18:08Z",
-      "updatedAt": "2026-11-07T07:31:01Z",
+      "updatedAt": "2026-11-09T09:27:41Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "tommasini",
@@ -716,13 +735,32 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-07-30T23:18:26Z",
-      "updatedAt": "2026-11-07T01:03:12Z",
+      "updatedAt": "2026-11-09T09:25:23Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "tommasini",
       "labels": [
         "team-mobile-platform",
         "size-L"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 34116,
+      "title": "feat: integrate money account utils",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34116",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-07-31T10:24:25Z",
+      "updatedAt": "2026-11-09T06:16:26Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "Jwhiles",
+      "labels": [
+        "stale",
+        "team-earn",
+        "size-XL",
+        "risk:medium"
       ],
       "reviews": []
     },
@@ -1015,6 +1053,62 @@
       "reviews": []
     },
     {
+      "number": 34511,
+      "title": "chore: stop re-fetching HyperLiquid data the homepage already has",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34511",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-08-07T20:00:01Z",
+      "updatedAt": "2026-11-09T00:33:51Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "juanmigdr",
+      "labels": [
+        "area-performance",
+        "stale",
+        "team-assets",
+        "size-M",
+        "risk:medium"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 34523,
+      "title": "fix(predict): align homepage BTC row title font weight",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34523",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-08-09T19:13:53Z",
+      "updatedAt": "2026-11-08T00:33:57Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "jasonculbertson",
+      "labels": [
+        "stale"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 34529,
+      "title": "refactor(assets): resolve React Compiler bailouts in useNetworkConnectionBanner, useTokensFeed and useTokenTransactions",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34529",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-08-10T08:30:25Z",
+      "updatedAt": "2026-11-09T00:33:48Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cursor[bot]",
+      "labels": [
+        "stale",
+        "team-assets",
+        "no-changelog",
+        "size-L",
+        "agent-assets"
+      ],
+      "reviews": []
+    },
+    {
       "number": 34547,
       "title": "feat(perf): reformat Slack performance reports",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/34547",
@@ -1029,6 +1123,43 @@
         "team-qa",
         "size-M",
         "run-performance-tests"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 34563,
+      "title": "test: validate check-diff CocoaPods specs cache fix (stacked on #34562)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34563",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-08-10T16:29:52Z",
+      "updatedAt": "2026-11-09T00:33:46Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "tommasini",
+      "labels": [
+        "stale",
+        "team-mobile-platform",
+        "size-XS",
+        "pr-not-ready-for-e2e"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 34807,
+      "title": "refactor(toast): migrate account and HW swap toasts to design system",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/34807",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-08-14T12:28:13Z",
+      "updatedAt": "2026-11-09T09:47:28Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "amandaye0h",
+      "labels": [
+        "team-design-system",
+        "size-M",
+        "risk:medium"
       ],
       "reviews": []
     },
@@ -1128,7 +1259,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-09-16T16:56:52Z",
-      "updatedAt": "2026-11-06T23:45:32Z",
+      "updatedAt": "2026-11-09T09:50:21Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "pedronfigueiredo",
@@ -1146,7 +1277,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-09-16T17:04:08Z",
-      "updatedAt": "2026-11-07T09:15:43Z",
+      "updatedAt": "2026-11-09T09:52:23Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "pedronfigueiredo",
@@ -2232,7 +2363,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-10-23T09:34:17Z",
-      "updatedAt": "2026-11-06T21:45:37Z",
+      "updatedAt": "2026-11-09T09:52:02Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "Jwhiles",
@@ -2736,12 +2867,12 @@
     },
     {
       "number": 38388,
-      "title": "feat: implement KYC relaunch marker and resume handling for onboarding flow cp-8.20.0",
+      "title": "fix: resume VBA identity verification after the app is killed during SumSub cp-8.20.0",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/38388",
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-10-28T12:49:36Z",
-      "updatedAt": "2026-11-06T15:53:36Z",
+      "updatedAt": "2026-11-09T09:51:07Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "meltingice1337",
@@ -3670,12 +3801,12 @@
       "number": 38514,
       "title": "release: 8.19.0",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/38514",
-      "state": "OPEN",
-      "draft": true,
+      "state": "MERGED",
+      "draft": false,
       "createdAt": "2026-10-29T20:07:36Z",
-      "updatedAt": "2026-11-06T07:02:38Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-11-09T04:55:54Z",
+      "closedAt": "2026-11-09T04:55:46Z",
+      "mergedAt": "2026-11-09T04:55:46Z",
       "authorLogin": "metamask-ci[bot]",
       "labels": [
         "size-XL",
@@ -7965,9 +8096,9 @@
       "title": "fix(token-details): size the page scroll from the sticky footer height",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/38777",
       "state": "OPEN",
-      "draft": true,
+      "draft": false,
       "createdAt": "2026-11-03T16:36:55Z",
-      "updatedAt": "2026-11-05T14:07:06Z",
+      "updatedAt": "2026-11-09T08:49:39Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "salimtb",
@@ -10639,7 +10770,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-05T02:30:34Z",
-      "updatedAt": "2026-11-05T12:04:28Z",
+      "updatedAt": "2026-11-09T08:12:26Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "DostoevskysPiano",
@@ -11560,11 +11691,11 @@
       "number": 38977,
       "title": "release: 8.18.1 (OTA)",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/38977",
-      "state": "OPEN",
+      "state": "CLOSED",
       "draft": true,
       "createdAt": "2026-11-05T10:48:39Z",
-      "updatedAt": "2026-11-05T23:47:06Z",
-      "closedAt": null,
+      "updatedAt": "2026-11-09T03:40:11Z",
+      "closedAt": "2026-11-09T03:40:01Z",
       "mergedAt": null,
       "authorLogin": "metamask-ci[bot]",
       "labels": [
@@ -11790,7 +11921,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-05T12:08:14Z",
-      "updatedAt": "2026-11-07T12:11:06Z",
+      "updatedAt": "2026-11-09T00:18:57Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "metamask-ci[bot]",
@@ -12867,7 +12998,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-05T20:07:27Z",
-      "updatedAt": "2026-11-07T05:42:07Z",
+      "updatedAt": "2026-11-08T00:49:48Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "metamask-ci[bot]",
@@ -13434,7 +13565,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-05T23:26:11Z",
-      "updatedAt": "2026-11-06T21:57:36Z",
+      "updatedAt": "2026-11-09T09:46:34Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "infiniteflower",
@@ -13954,7 +14085,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T11:25:43Z",
-      "updatedAt": "2026-11-06T18:09:17Z",
+      "updatedAt": "2026-11-09T09:31:44Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "bergarces",
@@ -14079,7 +14210,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T12:19:46Z",
-      "updatedAt": "2026-11-06T17:39:01Z",
+      "updatedAt": "2026-11-09T09:42:53Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "matallui",
@@ -14268,11 +14399,11 @@
       "number": 39126,
       "title": "chore: bump @metamask/wallet to ^21.0.0 and drop obsolete resolutions",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39126",
-      "state": "OPEN",
+      "state": "CLOSED",
       "draft": true,
       "createdAt": "2026-11-06T14:23:29Z",
-      "updatedAt": "2026-11-06T14:47:37Z",
-      "closedAt": null,
+      "updatedAt": "2026-11-09T09:50:30Z",
+      "closedAt": "2026-11-09T09:50:22Z",
       "mergedAt": null,
       "authorLogin": "OGPoyraz",
       "labels": [
@@ -14341,16 +14472,15 @@
       "title": "chore: bump @metamask/wallet to ^19.1.0 (1/3)",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39130",
       "state": "OPEN",
-      "draft": true,
+      "draft": false,
       "createdAt": "2026-11-06T14:52:02Z",
-      "updatedAt": "2026-11-06T16:27:16Z",
+      "updatedAt": "2026-11-09T09:52:19Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "OGPoyraz",
       "labels": [
         "team-confirmations",
-        "size-XL",
-        "pr-not-ready-for-e2e"
+        "size-XL"
       ],
       "reviews": []
     },
@@ -14359,9 +14489,9 @@
       "title": "chore: bump @metamask/wallet to ^20.0.0 (2/3)",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39131",
       "state": "OPEN",
-      "draft": true,
+      "draft": false,
       "createdAt": "2026-11-06T14:52:08Z",
-      "updatedAt": "2026-11-06T15:14:50Z",
+      "updatedAt": "2026-11-09T09:52:52Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "OGPoyraz",
@@ -14377,9 +14507,9 @@
       "title": "chore: bump @metamask/wallet to ^21.0.0 and drop obsolete resolutions (3/3)",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39132",
       "state": "OPEN",
-      "draft": true,
+      "draft": false,
       "createdAt": "2026-11-06T14:52:15Z",
-      "updatedAt": "2026-11-06T15:14:42Z",
+      "updatedAt": "2026-11-09T09:23:59Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "OGPoyraz",
@@ -14433,7 +14563,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-06T15:05:48Z",
-      "updatedAt": "2026-11-06T22:02:11Z",
+      "updatedAt": "2026-11-09T08:23:18Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "ccharly",
@@ -14627,7 +14757,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T17:06:22Z",
-      "updatedAt": "2026-11-07T06:14:54Z",
+      "updatedAt": "2026-11-09T09:51:22Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "amandaye0h",
@@ -14676,16 +14806,17 @@
       "number": 39152,
       "title": "fix(social): share the destination transaction for bridged swap comments",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39152",
-      "state": "OPEN",
+      "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-06T18:17:34Z",
-      "updatedAt": "2026-11-06T21:51:23Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-11-09T09:33:06Z",
+      "closedAt": "2026-11-09T09:30:26Z",
+      "mergedAt": "2026-11-09T09:30:26Z",
       "authorLogin": "joaosantos15",
       "labels": [
         "size-M",
-        "team-social-ai"
+        "team-social-ai",
+        "release-8.21.0"
       ],
       "reviews": []
     },
@@ -14750,7 +14881,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-06T19:02:43Z",
-      "updatedAt": "2026-11-07T15:30:08Z",
+      "updatedAt": "2026-11-07T17:25:57Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "andrewjcohen",
@@ -14874,7 +15005,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-06T21:40:12Z",
-      "updatedAt": "2026-11-07T15:30:06Z",
+      "updatedAt": "2026-11-07T17:29:50Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "andrewjcohen",
@@ -14997,7 +15128,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-07T00:09:42Z",
-      "updatedAt": "2026-11-07T08:29:01Z",
+      "updatedAt": "2026-11-09T09:53:37Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "abretonc7s",
@@ -15011,12 +15142,12 @@
       "number": 39170,
       "title": "perf(perps): let React Compiler optimize the order view and trade screen (TAT-4475)",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39170",
-      "state": "OPEN",
+      "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-07T00:09:50Z",
-      "updatedAt": "2026-11-07T08:29:17Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-11-09T09:17:20Z",
+      "closedAt": "2026-11-09T09:17:11Z",
+      "mergedAt": "2026-11-09T09:17:10Z",
       "authorLogin": "abretonc7s",
       "labels": [
         "team-perps",
@@ -15031,7 +15162,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-07T04:10:31Z",
-      "updatedAt": "2026-11-07T06:38:30Z",
+      "updatedAt": "2026-11-09T06:56:45Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "amandaye0h",
@@ -15048,7 +15179,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-07T04:58:07Z",
-      "updatedAt": "2026-11-07T08:01:35Z",
+      "updatedAt": "2026-11-09T09:39:25Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "amandaye0h",
@@ -15065,7 +15196,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-07T05:05:41Z",
-      "updatedAt": "2026-11-07T06:12:44Z",
+      "updatedAt": "2026-11-09T06:57:24Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "amandaye0h",
@@ -15082,7 +15213,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-07T06:00:09Z",
-      "updatedAt": "2026-11-07T06:13:56Z",
+      "updatedAt": "2026-11-09T06:56:56Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "amandaye0h",
@@ -15099,7 +15230,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-07T06:25:33Z",
-      "updatedAt": "2026-11-07T06:38:42Z",
+      "updatedAt": "2026-11-09T09:20:12Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "amandaye0h",
@@ -15111,17 +15242,17 @@
     },
     {
       "number": 39176,
-      "title": "feat(social): add compact open graph tags to share links",
+      "title": "feat(social): share profiles and positions as Branch short links",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39176",
-      "state": "OPEN",
+      "state": "CLOSED",
       "draft": false,
       "createdAt": "2026-11-07T07:57:21Z",
-      "updatedAt": "2026-11-07T15:23:22Z",
-      "closedAt": null,
+      "updatedAt": "2026-11-09T07:29:00Z",
+      "closedAt": "2026-11-09T07:28:52Z",
       "mergedAt": null,
       "authorLogin": "joaosantos15",
       "labels": [
-        "size-M",
+        "size-L",
         "team-social-ai"
       ],
       "reviews": []
@@ -15147,15 +15278,17 @@
       "number": 39178,
       "title": "test(cv): keep the PerpsHomeView outreach query on one stable key",
       "url": "https://github.com/MetaMask/metamask-mobile/pull/39178",
-      "state": "OPEN",
+      "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-07T09:55:56Z",
-      "updatedAt": "2026-11-07T10:09:19Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-11-09T09:24:02Z",
+      "closedAt": "2026-11-09T09:17:48Z",
+      "mergedAt": "2026-11-09T09:17:48Z",
       "authorLogin": "cursor[bot]",
       "labels": [
-        "size-S"
+        "team-qa",
+        "size-S",
+        "release-8.21.0"
       ],
       "reviews": []
     },
@@ -15184,11 +15317,12 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-07T09:57:08Z",
-      "updatedAt": "2026-11-07T10:10:40Z",
+      "updatedAt": "2026-11-09T09:06:53Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "cursor[bot]",
       "labels": [
+        "team-qa",
         "size-XS"
       ],
       "reviews": []
@@ -15207,6 +15341,600 @@
       "labels": [
         "size-XS",
         "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39182,
+      "title": "fix(social-feed): apply realtime trending updates in place",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39182",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-07T18:19:36Z",
+      "updatedAt": "2026-11-07T19:18:47Z",
+      "closedAt": "2026-11-07T19:15:55Z",
+      "mergedAt": "2026-11-07T19:15:55Z",
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39183,
+      "title": "feat(social-feed): key all-feed rows on feedItemId",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39183",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-07T22:50:45Z",
+      "updatedAt": "2026-11-08T00:31:25Z",
+      "closedAt": "2026-11-08T00:27:40Z",
+      "mergedAt": "2026-11-08T00:27:40Z",
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-M",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": [
+        {
+          "id": 5815715191,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-08T00:18:43Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 39184,
+      "title": "fix(social): show two decimals on profile PnL and volume",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39184",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-07T23:16:20Z",
+      "updatedAt": "2026-11-08T00:00:12Z",
+      "closedAt": "2026-11-07T23:57:48Z",
+      "mergedAt": "2026-11-07T23:57:48Z",
+      "authorLogin": "rizvihaider445",
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": [
+        {
+          "id": 5815628269,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-07T23:51:41Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 39185,
+      "title": "fix(social): keep profile stats and unrealized P&L live",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39185",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-07T23:19:26Z",
+      "updatedAt": "2026-11-07T23:23:39Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "salimtb",
+      "labels": [
+        "team-assets",
+        "size-M"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39186,
+      "title": "perf(wallet): show cached token allocation during refresh",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39186",
+      "state": "CLOSED",
+      "draft": true,
+      "createdAt": "2026-11-08T00:47:31Z",
+      "updatedAt": "2026-11-08T01:24:33Z",
+      "closedAt": "2026-11-08T01:24:23Z",
+      "mergedAt": null,
+      "authorLogin": "jasonculbertson",
+      "labels": [
+        "size-S",
+        "team-core-ux"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39187,
+      "title": "feat(social): use server-rendered og-image cards in share links",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39187",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-08T08:09:38Z",
+      "updatedAt": "2026-11-09T09:28:00Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "joaosantos15",
+      "labels": [
+        "size-XL",
+        "team-social-ai"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39188,
+      "title": "test(social): clear shared messenger call history in the leaderboard CV mock",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39188",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-08T09:40:08Z",
+      "updatedAt": "2026-11-08T09:53:55Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cursor[bot]",
+      "labels": [
+        "size-XS"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39189,
+      "title": "fix: hide copy trade button on user's own posts in feed and live views",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39189",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-08T17:22:07Z",
+      "updatedAt": "2026-11-08T22:38:20Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "salimtb",
+      "labels": [
+        "team-assets",
+        "INVALID-PR-TEMPLATE",
+        "size-S"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39190,
+      "title": "fix(perps): fix off-screen text visibility and safe Perps value observation",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39190",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-08T19:33:34Z",
+      "updatedAt": "2026-11-08T19:47:29Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "abretonc7s",
+      "labels": [
+        "team-perps",
+        "size-L"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39191,
+      "title": "fix(social-feed): date comment cards by their comment",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39191",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-08T19:36:08Z",
+      "updatedAt": "2026-11-08T19:57:12Z",
+      "closedAt": "2026-11-08T19:54:04Z",
+      "mergedAt": "2026-11-08T19:54:04Z",
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": [
+        {
+          "id": 5819412168,
+          "state": "COMMENTED",
+          "submittedAt": "2026-11-08T19:52:13Z",
+          "authorLogin": "salimtb"
+        },
+        {
+          "id": 5819413350,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-08T19:52:21Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 39192,
+      "title": "feat(predict): parse V1 Predict deep links into PredictNext intents (PRED-1411)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39192",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-08T21:04:16Z",
+      "updatedAt": "2026-11-09T09:24:27Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "matallui",
+      "labels": [
+        "size-XL",
+        "team-predict"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39193,
+      "title": "feat(social): show X trust mark beside connected traders",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39193",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-08T22:29:46Z",
+      "updatedAt": "2026-11-09T09:00:21Z",
+      "closedAt": "2026-11-09T08:56:58Z",
+      "mergedAt": "2026-11-09T08:56:58Z",
+      "authorLogin": "salimtb",
+      "labels": [
+        "team-assets",
+        "size-M",
+        "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39194,
+      "title": "fix(social): show hold time when posting an open perp",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39194",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-08T22:31:40Z",
+      "updatedAt": "2026-11-09T09:13:10Z",
+      "closedAt": "2026-11-09T09:11:14Z",
+      "mergedAt": "2026-11-09T09:11:14Z",
+      "authorLogin": "rizvihaider445",
+      "labels": [
+        "size-S",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": [
+        {
+          "id": 5823630625,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-09T09:00:19Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 39195,
+      "title": "fix(predict): keep Team-colored prices readable in dark mode (PRED-1457)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39195",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-08T23:09:47Z",
+      "updatedAt": "2026-11-09T05:01:51Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "caieu",
+      "labels": [
+        "size-M",
+        "team-predict"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39196,
+      "title": "fix(predict): keep an Event usable when one line picker Market is malformed (PRED-1473)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39196",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-08T23:10:44Z",
+      "updatedAt": "2026-11-09T02:07:04Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "caieu",
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-M",
+        "team-predict"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39197,
+      "title": "feat(predict): name threshold positions by their line (PRED-1470, PRED-1471)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39197",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-08T23:43:18Z",
+      "updatedAt": "2026-11-09T02:33:03Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "caieu",
+      "labels": [
+        "size-L",
+        "team-predict"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39198,
+      "title": "feat(predict): restyle standard market cards with Yes and No rows (PRED-1451, PRED-1472)",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39198",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-08T23:54:01Z",
+      "updatedAt": "2026-11-09T02:58:40Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "caieu",
+      "labels": [
+        "size-M",
+        "team-predict"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39199,
+      "title": "fix(social-feed): key feed cards on feedItemId in the list",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39199",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-09T00:10:29Z",
+      "updatedAt": "2026-11-09T09:10:19Z",
+      "closedAt": "2026-11-09T09:07:14Z",
+      "mergedAt": "2026-11-09T09:07:14Z",
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "size-M",
+        "team-social-ai",
+        "release-8.21.0"
+      ],
+      "reviews": [
+        {
+          "id": 5823204024,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-09T08:16:08Z",
+          "authorLogin": "salimtb"
+        }
+      ]
+    },
+    {
+      "number": 39200,
+      "title": "release: sync stable to main for version 8.19.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39200",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-09T04:58:42Z",
+      "updatedAt": "2026-11-09T05:21:30Z",
+      "closedAt": "2026-11-09T05:18:26Z",
+      "mergedAt": "2026-11-09T05:18:26Z",
+      "authorLogin": "metamask-ci[bot]",
+      "labels": [
+        "team-bots",
+        "size-XS",
+        "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39201,
+      "title": "chore: sync stable into release/8.20.0",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39201",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-09T04:58:52Z",
+      "updatedAt": "2026-11-09T07:38:40Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "metamask-ci[bot]",
+      "labels": [
+        "size-XS",
+        "risk:low"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39202,
+      "title": "feat: update Cronos network and native token logos to new brand mark",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39202",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-09T07:30:22Z",
+      "updatedAt": "2026-11-09T08:10:34Z",
+      "closedAt": "2026-11-09T07:57:15Z",
+      "mergedAt": "2026-11-09T07:57:15Z",
+      "authorLogin": "arafetbenmakhlouf",
+      "labels": [
+        "size-XS",
+        "team-emerging-opportunities",
+        "release-8.21.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39203,
+      "title": "perf(predict): trace redesigned home and feed load times",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39203",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-09T08:16:15Z",
+      "updatedAt": "2026-11-09T08:30:24Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cursor[bot]",
+      "labels": [
+        "size-M"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39204,
+      "title": "fix(search): add bottom padding to homepage search header",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39204",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-09T08:51:15Z",
+      "updatedAt": "2026-11-09T09:41:23Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "amandaye0h",
+      "labels": [
+        "team-design-system",
+        "size-XS"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39206,
+      "title": "feat(ramps): add Tron amount validation on BuildQuote screen [DRAFT]",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39206",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-09T09:21:59Z",
+      "updatedAt": "2026-11-09T09:39:25Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "wantedsystem",
+      "labels": [
+        "INVALID-PR-TEMPLATE",
+        "size-L",
+        "team-emerging-opportunities"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39207,
+      "title": "fix(social-feed): tint position card border with the wash and match Figma angle",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39207",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:29:38Z",
+      "updatedAt": "2026-11-09T09:54:32Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "xavier-brochard",
+      "labels": [
+        "size-M",
+        "team-social-ai"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39208,
+      "title": "chore(component-library): remove unused ButtonHero component",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39208",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:36:55Z",
+      "updatedAt": "2026-11-09T09:53:08Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-M"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39209,
+      "title": "chore(component-library): remove unused Select barrels",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39209",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:36:56Z",
+      "updatedAt": "2026-11-09T09:54:27Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-XS"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39210,
+      "title": "chore(component-library): remove unused overlay barrels",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39210",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:36:57Z",
+      "updatedAt": "2026-11-09T09:54:33Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-XS"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39211,
+      "title": "chore(component-library): remove unused button sample constants",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39211",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:36:59Z",
+      "updatedAt": "2026-11-09T09:53:43Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-S"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39212,
+      "title": "chore(component-library): remove unused component barrels",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39212",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:37:01Z",
+      "updatedAt": "2026-11-09T09:48:22Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-XS"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39213,
+      "title": "test(cv): deliver the market long fill so PerpsOrderView clears the trade config without the 1s confirm timeout",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39213",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:40:43Z",
+      "updatedAt": "2026-11-09T09:41:35Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cursor[bot]",
+      "labels": [
+        "size-S"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 39214,
+      "title": "test(cv): give the PerpsOrderView pending order book CTA wait the file's async budget",
+      "url": "https://github.com/MetaMask/metamask-mobile/pull/39214",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:41:27Z",
+      "updatedAt": "2026-11-09T09:41:39Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "cursor[bot]",
+      "labels": [
+        "size-XS"
       ],
       "reviews": []
     }

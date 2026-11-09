@@ -3,8 +3,8 @@
   "repo": "MetaMask/metamask-extension",
   "month": "2026-11",
   "completeness": "asOfCutoff",
-  "collectedAt": "2026-11-07T17:38:15.198Z",
-  "prCount": 425,
+  "collectedAt": "2026-11-09T09:55:17.000Z",
+  "prCount": 440,
   "prs": [
     {
       "number": 11188,
@@ -631,6 +631,26 @@
       "reviews": []
     },
     {
+      "number": 45342,
+      "title": "test: fix flaky test `Ledger Hardware unlocks multiple accounts at once and removes one`",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/45342",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-08-10T08:58:55Z",
+      "updatedAt": "2026-11-09T00:36:33Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "seaona",
+      "labels": [
+        "stale",
+        "flaky tests",
+        "team-qa",
+        "size-S",
+        "risk:low"
+      ],
+      "reviews": []
+    },
+    {
       "number": 45375,
       "title": "chore: add mobile-parity props to activity details opened",
       "url": "https://github.com/MetaMask/metamask-extension/pull/45375",
@@ -763,7 +783,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-08-14T08:48:14Z",
-      "updatedAt": "2026-11-05T18:28:33Z",
+      "updatedAt": "2026-11-09T09:27:16Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "MajorLift",
@@ -801,7 +821,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-08-14T14:31:15Z",
-      "updatedAt": "2026-11-05T18:30:00Z",
+      "updatedAt": "2026-11-09T09:28:49Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "MajorLift",
@@ -952,14 +972,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-09-08T14:14:28Z",
-      "updatedAt": "2026-11-04T19:31:35Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-04T19:31:24Z",
       "mergedAt": "2026-11-04T19:31:24Z",
       "authorLogin": "alidotforrest",
       "labels": [
         "team-core-extension-ux",
         "size-S",
-        "risk:low"
+        "risk:low",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -1248,7 +1269,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-09-16T16:58:28Z",
-      "updatedAt": "2026-11-07T16:17:19Z",
+      "updatedAt": "2026-11-09T10:00:17Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "pedronfigueiredo",
@@ -1265,7 +1286,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-09-16T17:03:25Z",
-      "updatedAt": "2026-11-07T16:16:35Z",
+      "updatedAt": "2026-11-09T09:59:17Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "pedronfigueiredo",
@@ -1369,7 +1390,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-09-29T00:24:39Z",
-      "updatedAt": "2026-11-07T00:23:26Z",
+      "updatedAt": "2026-11-09T00:24:41Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "metamask-ci[bot]",
@@ -1385,7 +1406,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-10-01T12:49:41Z",
-      "updatedAt": "2026-11-02T10:03:00Z",
+      "updatedAt": "2026-11-08T07:22:11Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "farmlabspltd",
@@ -1401,7 +1422,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-10-02T09:30:00Z",
-      "updatedAt": "2026-11-02T13:46:37Z",
+      "updatedAt": "2026-11-09T10:05:50Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "ricosmoss",
@@ -1409,7 +1430,7 @@
         "area-privacy",
         "team-extension-platform",
         "team-qa",
-        "size-L",
+        "size-XL",
         "team-extension-ux"
       ],
       "reviews": []
@@ -1628,13 +1649,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-15T10:17:54Z",
-      "updatedAt": "2026-11-02T14:28:59Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-02T14:28:51Z",
       "mergedAt": "2026-11-02T14:28:51Z",
       "authorLogin": "LeVinhGithub",
       "labels": [
         "team-qa",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -1645,13 +1667,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-15T13:54:26Z",
-      "updatedAt": "2026-11-05T16:56:53Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-05T16:56:35Z",
       "mergedAt": "2026-11-05T16:56:35Z",
       "authorLogin": "dan437",
       "labels": [
         "team-confirmations",
-        "size-XL"
+        "size-XL",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -1827,13 +1850,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-20T16:21:09Z",
-      "updatedAt": "2026-11-05T18:07:33Z",
+      "updatedAt": "2026-11-09T10:06:41Z",
       "closedAt": "2026-11-05T18:07:20Z",
       "mergedAt": "2026-11-05T18:07:20Z",
       "authorLogin": "ameliejyc",
       "labels": [
         "team-core-extension-ux",
-        "size-XL"
+        "size-XL",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -2277,7 +2301,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-10-22T16:58:30Z",
-      "updatedAt": "2026-11-06T23:56:13Z",
+      "updatedAt": "2026-11-09T09:17:08Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "davidmurdoch",
@@ -2308,14 +2332,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-22T16:59:16Z",
-      "updatedAt": "2026-11-05T16:56:38Z",
+      "updatedAt": "2026-11-09T10:06:41Z",
       "closedAt": "2026-11-05T16:56:35Z",
       "mergedAt": "2026-11-05T16:56:35Z",
       "authorLogin": "davidmurdoch",
       "labels": [
         "team-extension-platform",
         "INVALID-PR-TEMPLATE",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -2352,6 +2377,24 @@
         "team-core-extension-ux",
         "size-S",
         "release-13.56.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47298,
+      "title": "chore: Migrate Web3Auth-referenced legacy API method calls to messengers",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47298",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-10-22T18:31:37Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
+      "closedAt": "2026-10-30T14:07:11Z",
+      "mergedAt": "2026-10-30T14:07:11Z",
+      "authorLogin": "mcmire",
+      "labels": [
+        "size-M",
+        "team-core-platform",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -2436,13 +2479,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-23T04:05:59Z",
-      "updatedAt": "2026-11-03T16:27:22Z",
+      "updatedAt": "2026-11-09T10:06:45Z",
       "closedAt": "2026-11-03T16:27:13Z",
       "mergedAt": "2026-11-03T16:27:13Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -2600,13 +2644,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-23T18:43:16Z",
-      "updatedAt": "2026-11-02T19:19:24Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-02T19:19:15Z",
       "mergedAt": "2026-11-02T19:19:15Z",
       "authorLogin": "mcmire",
       "labels": [
         "size-S",
-        "team-core-platform"
+        "team-core-platform",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -3039,14 +3084,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-27T01:21:57Z",
-      "updatedAt": "2026-11-02T07:03:49Z",
+      "updatedAt": "2026-11-09T10:06:45Z",
       "closedAt": "2026-11-02T07:03:42Z",
       "mergedAt": "2026-11-02T07:03:42Z",
       "authorLogin": "github-actions[bot]",
       "labels": [
         "team-qa",
         "no-changelog",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -3207,13 +3253,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-27T10:02:47Z",
-      "updatedAt": "2026-11-04T17:59:53Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-04T17:59:20Z",
       "mergedAt": "2026-11-04T17:59:20Z",
       "authorLogin": "dawnseeker8",
       "labels": [
         "size-L",
-        "team-emerging-opportunities"
+        "team-emerging-opportunities",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -3729,13 +3776,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T05:07:10Z",
-      "updatedAt": "2026-11-04T00:16:50Z",
+      "updatedAt": "2026-11-09T10:06:41Z",
       "closedAt": "2026-11-03T23:09:01Z",
       "mergedAt": "2026-11-03T23:09:01Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-XL"
+        "size-XL",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -3764,13 +3812,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T06:55:24Z",
-      "updatedAt": "2026-11-04T15:38:27Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-04T15:38:17Z",
       "mergedAt": "2026-11-04T15:38:17Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -3781,13 +3830,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T06:59:41Z",
-      "updatedAt": "2026-11-05T08:34:13Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-05T08:34:04Z",
       "mergedAt": "2026-11-05T08:34:04Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -3798,13 +3848,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T07:10:13Z",
-      "updatedAt": "2026-11-05T09:15:15Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T09:15:06Z",
       "mergedAt": "2026-11-05T09:15:06Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4041,14 +4092,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T14:22:43Z",
-      "updatedAt": "2026-11-05T11:55:27Z",
+      "updatedAt": "2026-11-09T10:07:02Z",
       "closedAt": "2026-11-05T11:55:18Z",
       "mergedAt": "2026-11-05T11:55:18Z",
       "authorLogin": "FrederikBolding",
       "labels": [
         "INVALID-PR-TEMPLATE",
         "size-S",
-        "team-core-platform"
+        "team-core-platform",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4090,14 +4142,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T15:13:30Z",
-      "updatedAt": "2026-11-05T10:46:56Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-05T10:46:44Z",
       "mergedAt": "2026-11-05T10:46:44Z",
       "authorLogin": "FrederikBolding",
       "labels": [
         "INVALID-PR-TEMPLATE",
         "size-S",
-        "team-core-platform"
+        "team-core-platform",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4108,13 +4161,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-28T15:44:00Z",
-      "updatedAt": "2026-11-02T21:28:00Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-02T21:27:40Z",
       "mergedAt": "2026-11-02T21:27:40Z",
       "authorLogin": "gauthierpetetin",
       "labels": [
         "team-extension-platform",
-        "size-XL"
+        "size-XL",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4231,6 +4285,24 @@
         "team-design-system",
         "size-S",
         "release-13.56.0"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47465,
+      "title": "chore(perps): set Perps balance and prices in Grotzec Hero cp-13.56.0",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47465",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-10-28T22:32:33Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
+      "closedAt": "2026-10-29T21:14:48Z",
+      "mergedAt": "2026-10-29T21:14:48Z",
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4365,12 +4437,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T09:40:56Z",
-      "updatedAt": "2026-11-02T22:31:13Z",
+      "updatedAt": "2026-11-09T10:06:40Z",
       "closedAt": "2026-11-02T22:31:04Z",
       "mergedAt": "2026-11-02T22:31:04Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4381,12 +4454,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T09:41:06Z",
-      "updatedAt": "2026-11-02T22:18:20Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-02T22:18:11Z",
       "mergedAt": "2026-11-02T22:18:11Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4397,12 +4471,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T09:41:09Z",
-      "updatedAt": "2026-11-02T22:31:24Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-02T22:31:04Z",
       "mergedAt": "2026-11-02T22:31:04Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4413,13 +4488,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T09:41:17Z",
-      "updatedAt": "2026-11-03T04:14:12Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-03T04:14:04Z",
       "mergedAt": "2026-11-03T04:14:04Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4473,13 +4549,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T12:18:50Z",
-      "updatedAt": "2026-11-02T10:00:00Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-02T09:59:48Z",
       "mergedAt": "2026-11-02T09:59:48Z",
       "authorLogin": "ameliejyc",
       "labels": [
         "team-core-extension-ux",
-        "size-L"
+        "size-L",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4510,13 +4587,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T13:15:21Z",
-      "updatedAt": "2026-11-02T17:29:40Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-02T17:29:30Z",
       "mergedAt": "2026-11-02T17:29:30Z",
       "authorLogin": "Prithpal-Sooriya",
       "labels": [
         "team-assets",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -4574,14 +4652,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T14:47:15Z",
-      "updatedAt": "2026-11-02T13:36:47Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-02T13:36:29Z",
       "mergedAt": "2026-11-02T13:36:29Z",
       "authorLogin": "NidhiKJha",
       "labels": [
         "type-bug",
         "team-core-extension-ux",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -4615,13 +4694,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T16:39:09Z",
-      "updatedAt": "2026-11-05T16:56:38Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T16:56:35Z",
       "mergedAt": "2026-11-05T16:56:35Z",
       "authorLogin": "davidmurdoch",
       "labels": [
         "team-extension-platform",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4649,13 +4729,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T18:24:43Z",
-      "updatedAt": "2026-11-03T00:01:12Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-03T00:01:03Z",
       "mergedAt": "2026-11-03T00:01:03Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4683,7 +4764,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-10-29T19:14:55Z",
-      "updatedAt": "2026-11-06T15:00:20Z",
+      "updatedAt": "2026-11-07T21:09:46Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "cryptodev-2s",
@@ -4716,7 +4797,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-10-29T20:04:48Z",
-      "updatedAt": "2026-11-06T01:53:03Z",
+      "updatedAt": "2026-11-09T04:10:51Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "metamaskbot",
@@ -4733,13 +4814,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-29T20:05:48Z",
-      "updatedAt": "2026-11-03T08:30:40Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T08:30:31Z",
       "mergedAt": "2026-11-03T08:30:31Z",
       "authorLogin": "metamaskbot",
       "labels": [
         "team-bots",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4785,7 +4867,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-10-29T21:51:22Z",
-      "updatedAt": "2026-11-06T15:29:32Z",
+      "updatedAt": "2026-11-09T05:00:00Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "mcmire",
@@ -4802,13 +4884,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-10-30T09:20:03Z",
-      "updatedAt": "2026-11-03T04:14:17Z",
+      "updatedAt": "2026-11-09T10:06:42Z",
       "closedAt": "2026-11-03T04:14:04Z",
       "mergedAt": "2026-11-03T04:14:04Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4908,14 +4991,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-01T15:59:58Z",
-      "updatedAt": "2026-11-04T17:15:42Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-04T17:15:33Z",
       "mergedAt": "2026-11-04T17:15:33Z",
       "authorLogin": "cryptotavares",
       "labels": [
         "team-confirmations",
         "no-changelog",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4926,13 +5010,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-01T21:41:16Z",
-      "updatedAt": "2026-11-03T03:53:15Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T03:53:05Z",
       "mergedAt": "2026-11-03T03:53:05Z",
       "authorLogin": "DDDDDanica",
       "labels": [
         "team-extension-platform",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -4943,13 +5028,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T04:01:59Z",
-      "updatedAt": "2026-11-03T09:01:18Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T09:01:09Z",
       "mergedAt": "2026-11-03T09:01:08Z",
       "authorLogin": "stanleyyconsensys",
       "labels": [
         "team-networks",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5011,13 +5097,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T10:06:03Z",
-      "updatedAt": "2026-11-03T13:50:56Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T13:50:45Z",
       "mergedAt": "2026-11-03T13:50:45Z",
       "authorLogin": "dan437",
       "labels": [
         "team-confirmations",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5028,13 +5115,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T10:19:01Z",
-      "updatedAt": "2026-11-04T13:37:20Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-04T13:37:10Z",
       "mergedAt": "2026-11-04T13:37:10Z",
       "authorLogin": "dan437",
       "labels": [
         "team-confirmations",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5081,13 +5169,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T10:56:59Z",
-      "updatedAt": "2026-11-02T12:18:34Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-02T12:18:25Z",
       "mergedAt": "2026-11-02T12:18:25Z",
       "authorLogin": "mathieuartu",
       "labels": [
         "team-accounts-framework",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5115,13 +5204,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T14:14:19Z",
-      "updatedAt": "2026-11-03T06:44:07Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-03T06:43:55Z",
       "mergedAt": "2026-11-03T06:43:55Z",
       "authorLogin": "mathieuartu",
       "labels": [
         "team-accounts-framework",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5132,13 +5222,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T15:13:27Z",
-      "updatedAt": "2026-11-02T18:12:40Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-02T18:12:32Z",
       "mergedAt": "2026-11-02T18:12:32Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5166,13 +5257,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T16:28:20Z",
-      "updatedAt": "2026-11-04T09:33:50Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-04T09:33:36Z",
       "mergedAt": "2026-11-04T09:33:36Z",
       "authorLogin": "ameliejyc",
       "labels": [
         "team-core-extension-ux",
-        "size-L"
+        "size-L",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5199,13 +5291,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T18:21:59Z",
-      "updatedAt": "2026-11-02T21:30:34Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-02T21:30:24Z",
       "mergedAt": "2026-11-02T21:30:24Z",
       "authorLogin": "metamaskbot",
       "labels": [
         "team-bots",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5284,13 +5377,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T20:38:48Z",
-      "updatedAt": "2026-11-03T01:37:54Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T01:37:45Z",
       "mergedAt": "2026-11-03T01:37:45Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5318,13 +5412,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T22:29:01Z",
-      "updatedAt": "2026-11-04T12:39:22Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-04T12:39:13Z",
       "mergedAt": "2026-11-04T12:39:13Z",
       "authorLogin": "Prithpal-Sooriya",
       "labels": [
         "team-assets",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -5348,13 +5443,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T22:57:04Z",
-      "updatedAt": "2026-11-04T14:44:56Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-04T14:44:48Z",
       "mergedAt": "2026-11-04T14:44:47Z",
       "authorLogin": "mcmire",
       "labels": [
         "size-S",
-        "team-core-platform"
+        "team-core-platform",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5365,13 +5461,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-02T22:58:19Z",
-      "updatedAt": "2026-11-05T16:14:15Z",
+      "updatedAt": "2026-11-09T10:06:40Z",
       "closedAt": "2026-11-05T16:14:03Z",
       "mergedAt": "2026-11-05T16:14:03Z",
       "authorLogin": "mcmire",
       "labels": [
         "size-S",
-        "team-core-platform"
+        "team-core-platform",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5417,13 +5514,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T00:30:21Z",
-      "updatedAt": "2026-11-05T19:51:10Z",
+      "updatedAt": "2026-11-09T10:06:41Z",
       "closedAt": "2026-11-05T19:50:54Z",
       "mergedAt": "2026-11-05T19:50:54Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5434,13 +5532,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T00:30:23Z",
-      "updatedAt": "2026-11-05T19:49:06Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-05T19:48:57Z",
       "mergedAt": "2026-11-05T19:48:57Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5468,13 +5567,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T00:42:43Z",
-      "updatedAt": "2026-11-04T03:21:56Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-04T03:21:47Z",
       "mergedAt": "2026-11-04T03:21:47Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5499,14 +5599,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T01:03:26Z",
-      "updatedAt": "2026-11-03T05:50:21Z",
+      "updatedAt": "2026-11-09T10:06:45Z",
       "closedAt": "2026-11-03T05:50:11Z",
       "mergedAt": "2026-11-03T05:50:11Z",
       "authorLogin": "github-actions[bot]",
       "labels": [
         "team-qa",
         "no-changelog",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5517,13 +5618,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T01:32:35Z",
-      "updatedAt": "2026-11-05T16:56:45Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T16:56:35Z",
       "mergedAt": "2026-11-05T16:56:35Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-XL"
+        "size-XL",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5603,14 +5705,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T05:11:16Z",
-      "updatedAt": "2026-11-04T10:06:11Z",
+      "updatedAt": "2026-11-09T10:06:41Z",
       "closedAt": "2026-11-04T10:06:01Z",
       "mergedAt": "2026-11-04T10:06:01Z",
       "authorLogin": "jpuri",
       "labels": [
         "team-confirmations",
         "no-changelog",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5621,13 +5724,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T06:02:30Z",
-      "updatedAt": "2026-11-03T11:24:02Z",
+      "updatedAt": "2026-11-09T10:06:44Z",
       "closedAt": "2026-11-03T09:58:11Z",
       "mergedAt": "2026-11-03T09:58:11Z",
       "authorLogin": "NidhiKJha",
       "labels": [
         "team-core-extension-ux",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5638,13 +5742,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T07:15:21Z",
-      "updatedAt": "2026-11-04T10:48:51Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-04T10:48:41Z",
       "mergedAt": "2026-11-04T10:48:41Z",
       "authorLogin": "gauthierpetetin",
       "labels": [
         "team-extension-platform",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5672,7 +5777,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-03T08:51:14Z",
-      "updatedAt": "2026-11-06T14:26:25Z",
+      "updatedAt": "2026-11-09T09:10:24Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "seaona",
@@ -5690,12 +5795,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T09:33:21Z",
-      "updatedAt": "2026-11-03T18:27:38Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-03T18:27:28Z",
       "mergedAt": "2026-11-03T18:27:28Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5706,12 +5812,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T09:33:31Z",
-      "updatedAt": "2026-11-03T18:34:56Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-03T18:34:54Z",
       "mergedAt": "2026-11-03T18:34:54Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5722,12 +5829,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T09:33:33Z",
-      "updatedAt": "2026-11-03T18:35:18Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T18:34:54Z",
       "mergedAt": "2026-11-03T18:34:54Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5738,13 +5846,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T09:33:34Z",
-      "updatedAt": "2026-11-03T23:31:04Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-03T23:30:44Z",
       "mergedAt": "2026-11-03T23:30:44Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5755,12 +5864,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T09:33:37Z",
-      "updatedAt": "2026-11-03T20:35:10Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-03T20:35:02Z",
       "mergedAt": "2026-11-03T20:35:02Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5771,14 +5881,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T09:47:50Z",
-      "updatedAt": "2026-11-04T12:54:45Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-04T12:54:37Z",
       "mergedAt": "2026-11-04T12:54:37Z",
       "authorLogin": "jpuri",
       "labels": [
         "team-confirmations",
         "no-changelog",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5789,13 +5900,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T10:09:35Z",
-      "updatedAt": "2026-11-03T17:00:43Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T17:00:29Z",
       "mergedAt": "2026-11-03T17:00:29Z",
       "authorLogin": "ameliejyc",
       "labels": [
         "team-core-extension-ux",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5806,13 +5918,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T10:43:10Z",
-      "updatedAt": "2026-11-03T16:21:33Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-03T16:21:23Z",
       "mergedAt": "2026-11-03T16:21:23Z",
       "authorLogin": "maxime-oe",
       "labels": [
         "size-XS",
-        "team-emerging-opportunities"
+        "team-emerging-opportunities",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5857,13 +5970,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T14:01:59Z",
-      "updatedAt": "2026-11-03T23:38:35Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-03T23:38:25Z",
       "mergedAt": "2026-11-03T23:38:25Z",
       "authorLogin": "Battambang",
       "labels": [
         "team-networks",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5891,14 +6005,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T15:14:46Z",
-      "updatedAt": "2026-11-03T16:58:28Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-03T16:58:18Z",
       "mergedAt": "2026-11-03T16:58:18Z",
       "authorLogin": "seaona",
       "labels": [
         "team-qa",
         "no-changelog",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -5909,13 +6024,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T16:08:10Z",
-      "updatedAt": "2026-11-04T11:24:52Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-04T11:24:42Z",
       "mergedAt": "2026-11-04T11:24:42Z",
       "authorLogin": "taran-a",
       "labels": [
         "team-networks",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -5967,12 +6083,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T17:35:02Z",
-      "updatedAt": "2026-11-05T05:07:20Z",
+      "updatedAt": "2026-11-09T10:06:41Z",
       "closedAt": "2026-11-05T05:07:11Z",
       "mergedAt": "2026-11-05T05:07:11Z",
       "authorLogin": "bschorchit",
       "labels": [
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6000,13 +6117,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T19:41:57Z",
-      "updatedAt": "2026-11-05T07:34:28Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-05T07:34:19Z",
       "mergedAt": "2026-11-05T07:34:19Z",
       "authorLogin": "mathieuartu",
       "labels": [
         "team-accounts-framework",
-        "size-L"
+        "size-L",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6068,7 +6186,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-03T21:47:26Z",
-      "updatedAt": "2026-11-07T00:13:52Z",
+      "updatedAt": "2026-11-09T07:12:30Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "georgewrmarshall",
@@ -6085,13 +6203,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T21:54:58Z",
-      "updatedAt": "2026-11-04T18:13:54Z",
+      "updatedAt": "2026-11-09T10:06:42Z",
       "closedAt": "2026-11-04T18:13:46Z",
       "mergedAt": "2026-11-04T18:13:45Z",
       "authorLogin": "ameliejyc",
       "labels": [
         "team-core-extension-ux",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6122,13 +6241,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-03T22:47:53Z",
-      "updatedAt": "2026-11-04T14:10:45Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-04T04:59:34Z",
       "mergedAt": "2026-11-04T04:59:34Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6177,13 +6297,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T03:27:58Z",
-      "updatedAt": "2026-11-05T05:05:29Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T05:05:17Z",
       "mergedAt": "2026-11-05T05:05:17Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6246,13 +6367,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T07:43:11Z",
-      "updatedAt": "2026-11-05T12:16:59Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T12:16:49Z",
       "mergedAt": "2026-11-05T12:16:49Z",
       "authorLogin": "maxime-oe",
       "labels": [
         "size-S",
-        "team-emerging-opportunities"
+        "team-emerging-opportunities",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -6282,12 +6404,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T09:28:10Z",
-      "updatedAt": "2026-11-05T04:22:16Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T04:22:00Z",
       "mergedAt": "2026-11-05T04:22:00Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6298,12 +6421,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T09:28:19Z",
-      "updatedAt": "2026-11-05T04:22:09Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T04:22:00Z",
       "mergedAt": "2026-11-05T04:22:00Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6314,12 +6438,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T09:28:21Z",
-      "updatedAt": "2026-11-05T05:58:06Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T05:57:58Z",
       "mergedAt": "2026-11-05T05:57:58Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6330,12 +6455,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T09:28:25Z",
-      "updatedAt": "2026-11-05T04:52:37Z",
+      "updatedAt": "2026-11-09T10:06:40Z",
       "closedAt": "2026-11-05T04:52:29Z",
       "mergedAt": "2026-11-05T04:52:29Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
-        "team-design-system"
+        "team-design-system",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6346,7 +6472,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-04T11:14:14Z",
-      "updatedAt": "2026-11-06T01:44:48Z",
+      "updatedAt": "2026-11-09T10:12:15Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "ameliejyc",
@@ -6380,13 +6506,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T12:39:37Z",
-      "updatedAt": "2026-11-05T10:29:13Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-05T10:29:04Z",
       "mergedAt": "2026-11-05T10:29:04Z",
       "authorLogin": "pedronfigueiredo",
       "labels": [
         "team-confirmations",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6397,13 +6524,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T13:31:25Z",
-      "updatedAt": "2026-11-05T18:07:37Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-05T18:07:20Z",
       "mergedAt": "2026-11-05T18:07:20Z",
       "authorLogin": "michalconsensys",
       "labels": [
         "size-M",
-        "team-perps"
+        "team-perps",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6414,13 +6542,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T14:02:51Z",
-      "updatedAt": "2026-11-05T12:01:15Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-05T12:01:05Z",
       "mergedAt": "2026-11-05T12:01:05Z",
       "authorLogin": "bfullam",
       "labels": [
         "team-swaps-and-bridge",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6467,13 +6596,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T15:14:56Z",
-      "updatedAt": "2026-11-04T17:26:47Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-04T17:26:39Z",
       "mergedAt": "2026-11-04T17:26:39Z",
       "authorLogin": "taran-a",
       "labels": [
         "team-networks",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6555,13 +6685,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-04T18:00:35Z",
-      "updatedAt": "2026-11-05T14:50:37Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-05T14:50:34Z",
       "mergedAt": "2026-11-05T14:50:34Z",
       "authorLogin": "ffmcgee725",
       "labels": [
         "team-earn",
-        "size-XL"
+        "size-XL",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6625,13 +6756,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T00:35:08Z",
-      "updatedAt": "2026-11-05T11:42:53Z",
+      "updatedAt": "2026-11-09T10:06:40Z",
       "closedAt": "2026-11-05T11:42:45Z",
       "mergedAt": "2026-11-05T11:42:45Z",
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
-        "size-XS"
+        "size-XS",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6642,13 +6774,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T01:45:51Z",
-      "updatedAt": "2026-11-05T02:49:55Z",
+      "updatedAt": "2026-11-09T10:06:49Z",
       "closedAt": "2026-11-05T02:49:45Z",
       "mergedAt": "2026-11-05T02:49:45Z",
       "authorLogin": "georgewrmarshall",
       "labels": [
         "team-design-system",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6659,13 +6792,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T09:00:55Z",
-      "updatedAt": "2026-11-05T14:32:22Z",
+      "updatedAt": "2026-11-09T10:06:46Z",
       "closedAt": "2026-11-05T14:32:14Z",
       "mergedAt": "2026-11-05T14:32:14Z",
       "authorLogin": "sahar-fehri",
       "labels": [
         "team-assets",
-        "size-L"
+        "size-L",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -6788,13 +6922,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T09:38:30Z",
-      "updatedAt": "2026-11-05T14:50:46Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-05T14:50:34Z",
       "mergedAt": "2026-11-05T14:50:34Z",
       "authorLogin": "mathieuartu",
       "labels": [
         "team-accounts-framework",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6805,13 +6940,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T10:54:12Z",
-      "updatedAt": "2026-11-05T19:51:06Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T19:50:53Z",
       "mergedAt": "2026-11-05T19:50:53Z",
       "authorLogin": "bfullam",
       "labels": [
         "team-swaps-and-bridge",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6822,13 +6958,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T11:40:48Z",
-      "updatedAt": "2026-11-05T17:24:59Z",
+      "updatedAt": "2026-11-09T10:06:42Z",
       "closedAt": "2026-11-05T17:24:47Z",
       "mergedAt": "2026-11-05T17:24:47Z",
       "authorLogin": "javiergarciavera",
       "labels": [
         "team-qa",
-        "size-M"
+        "size-M",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6874,13 +7011,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T13:28:25Z",
-      "updatedAt": "2026-11-05T16:56:47Z",
+      "updatedAt": "2026-11-09T10:06:47Z",
       "closedAt": "2026-11-05T16:56:35Z",
       "mergedAt": "2026-11-05T16:56:35Z",
       "authorLogin": "mathieuartu",
       "labels": [
         "team-accounts-framework",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -6925,7 +7063,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-05T15:03:14Z",
-      "updatedAt": "2026-11-06T17:38:24Z",
+      "updatedAt": "2026-11-09T09:53:02Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "Battambang",
@@ -6960,7 +7098,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-05T15:46:38Z",
-      "updatedAt": "2026-11-05T20:15:09Z",
+      "updatedAt": "2026-11-09T09:28:55Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "aorlovskiy",
@@ -6996,14 +7134,15 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T16:01:05Z",
-      "updatedAt": "2026-11-05T18:43:18Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-05T18:43:07Z",
       "mergedAt": "2026-11-05T18:43:07Z",
       "authorLogin": "Prithpal-Sooriya",
       "labels": [
         "team-assets",
         "no-changelog",
-        "size-S"
+        "size-S",
+        "release-13.57.0"
       ],
       "reviews": [
         {
@@ -7025,9 +7164,9 @@
       "title": "fix(assets): show copied message in token header contract address copy",
       "url": "https://github.com/MetaMask/metamask-extension/pull/47656",
       "state": "OPEN",
-      "draft": true,
+      "draft": false,
       "createdAt": "2026-11-05T16:06:21Z",
-      "updatedAt": "2026-11-06T15:45:59Z",
+      "updatedAt": "2026-11-09T10:01:21Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "angelapotter",
@@ -7040,6 +7179,18 @@
           "id": 5799296056,
           "state": "DISMISSED",
           "submittedAt": "2026-11-06T11:12:04Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 5823875208,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-09T09:24:12Z",
+          "authorLogin": "sahar-fehri"
+        },
+        {
+          "id": 5824260118,
+          "state": "APPROVED",
+          "submittedAt": "2026-11-09T10:01:21Z",
           "authorLogin": "Prithpal-Sooriya"
         }
       ]
@@ -7085,7 +7236,7 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-05T16:24:00Z",
-      "updatedAt": "2026-11-05T18:22:05Z",
+      "updatedAt": "2026-11-09T09:03:12Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "aorlovskiy",
@@ -7239,11 +7390,13 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T20:21:41Z",
-      "updatedAt": "2026-11-06T17:24:24Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-06T17:24:15Z",
       "mergedAt": "2026-11-06T17:24:15Z",
       "authorLogin": "metamask-ci[bot]",
-      "labels": [],
+      "labels": [
+        "release-13.57.0"
+      ],
       "reviews": []
     },
     {
@@ -7253,12 +7406,13 @@
       "state": "OPEN",
       "draft": true,
       "createdAt": "2026-11-05T20:23:57Z",
-      "updatedAt": "2026-11-07T02:11:33Z",
+      "updatedAt": "2026-11-09T10:02:51Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "metamaskbot",
       "labels": [
-        "team-bots"
+        "team-bots",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -7286,13 +7440,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T20:25:46Z",
-      "updatedAt": "2026-11-07T01:47:06Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-07T01:46:56Z",
       "mergedAt": "2026-11-07T01:46:56Z",
       "authorLogin": "runway-github[bot]",
       "labels": [
         "team-bots",
-        "risk:high"
+        "risk:high",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -7405,13 +7560,14 @@
       "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-05T20:41:26Z",
-      "updatedAt": "2026-11-06T15:14:37Z",
+      "updatedAt": "2026-11-09T10:06:48Z",
       "closedAt": "2026-11-06T15:14:28Z",
       "mergedAt": "2026-11-06T15:14:28Z",
       "authorLogin": "runway-github[bot]",
       "labels": [
         "team-bots",
-        "risk:medium"
+        "risk:medium",
+        "release-13.57.0"
       ],
       "reviews": []
     },
@@ -7493,7 +7649,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T00:09:43Z",
-      "updatedAt": "2026-11-07T12:05:05Z",
+      "updatedAt": "2026-11-09T00:10:21Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "metamaskbot",
@@ -7578,7 +7734,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T09:10:15Z",
-      "updatedAt": "2026-11-06T14:23:28Z",
+      "updatedAt": "2026-11-09T10:08:48Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "jpuri",
@@ -7593,12 +7749,12 @@
       "number": 47691,
       "title": "test: add route to page object registry and route coverage QA stats",
       "url": "https://github.com/MetaMask/metamask-extension/pull/47691",
-      "state": "OPEN",
+      "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-06T09:35:15Z",
-      "updatedAt": "2026-11-06T17:14:24Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-11-09T08:45:13Z",
+      "closedAt": "2026-11-09T08:45:05Z",
+      "mergedAt": "2026-11-09T08:45:05Z",
       "authorLogin": "seaona",
       "labels": [
         "team-qa",
@@ -7629,12 +7785,12 @@
       "number": 47694,
       "title": "fix(swaps): keep selected EVM network as swap source",
       "url": "https://github.com/MetaMask/metamask-extension/pull/47694",
-      "state": "OPEN",
+      "state": "MERGED",
       "draft": false,
       "createdAt": "2026-11-06T11:03:09Z",
-      "updatedAt": "2026-11-06T18:02:01Z",
-      "closedAt": null,
-      "mergedAt": null,
+      "updatedAt": "2026-11-09T09:50:02Z",
+      "closedAt": "2026-11-09T09:49:52Z",
+      "mergedAt": "2026-11-09T09:49:52Z",
       "authorLogin": "NidhiKJha",
       "labels": [
         "team-core-extension-ux",
@@ -7649,7 +7805,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T12:07:56Z",
-      "updatedAt": "2026-11-06T18:17:24Z",
+      "updatedAt": "2026-11-08T17:03:51Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "aganglada",
@@ -7730,7 +7886,7 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-06T15:37:22Z",
-      "updatedAt": "2026-11-06T18:38:29Z",
+      "updatedAt": "2026-11-09T09:56:42Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "Prithpal-Sooriya",
@@ -7762,6 +7918,12 @@
           "id": 5804876635,
           "state": "COMMENTED",
           "submittedAt": "2026-11-06T18:16:44Z",
+          "authorLogin": "Prithpal-Sooriya"
+        },
+        {
+          "id": 5824213444,
+          "state": "COMMENTED",
+          "submittedAt": "2026-11-09T09:56:42Z",
           "authorLogin": "Prithpal-Sooriya"
         }
       ]
@@ -7891,12 +8053,211 @@
       "state": "OPEN",
       "draft": false,
       "createdAt": "2026-11-07T02:50:39Z",
-      "updatedAt": "2026-11-07T03:13:08Z",
+      "updatedAt": "2026-11-09T01:47:13Z",
       "closedAt": null,
       "mergedAt": null,
       "authorLogin": "n3ps",
       "labels": [
         "team-core-extension-ux",
+        "size-S"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47711,
+      "title": "fix: allow selecting card payment method on monthly shield plan",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47711",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-07T18:54:44Z",
+      "updatedAt": "2026-11-07T18:59:28Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "TONYSTARK-EDITH",
+      "labels": [
+        "external-contributor"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47712,
+      "title": "fix(github): send X-GitHub-Api-Version 2026-03-10 when posting PR",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47712",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-08T06:06:22Z",
+      "updatedAt": "2026-11-09T00:47:12Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "brunobuddy",
+      "labels": [
+        "external-contributor"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47713,
+      "title": "refactor: migrate Popover usages to MMDS native Popover preview (DX test)",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47713",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-09T05:53:28Z",
+      "updatedAt": "2026-11-09T06:44:45Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-M"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47714,
+      "title": "feat: update Cronos network and native token logos to new brand mark",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47714",
+      "state": "MERGED",
+      "draft": false,
+      "createdAt": "2026-11-09T06:00:33Z",
+      "updatedAt": "2026-11-09T09:10:04Z",
+      "closedAt": "2026-11-09T09:09:54Z",
+      "mergedAt": "2026-11-09T09:09:54Z",
+      "authorLogin": "arafetbenmakhlouf",
+      "labels": [
+        "size-M",
+        "team-emerging-opportunities"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47715,
+      "title": "feat(networks): add Kinetiq Elysium network logo",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47715",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T07:23:42Z",
+      "updatedAt": "2026-11-09T10:09:14Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "NidhiKJha",
+      "labels": [
+        "team-core-extension-ux",
+        "size-XS"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47716,
+      "title": "fix(money): align Money FTUE splash with Figma hero and heading",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47716",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T08:56:36Z",
+      "updatedAt": "2026-11-09T09:59:57Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "ffmcgee725",
+      "labels": [
+        "team-money-movement",
+        "size-M",
+        "retry-ci"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47717,
+      "title": "chore(multichain): remove unused DiscoverMenuItem component",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47717",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:51:16Z",
+      "updatedAt": "2026-11-09T10:06:30Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47718,
+      "title": "chore(multichain): remove unused modal stylesheets",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47718",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:51:16Z",
+      "updatedAt": "2026-11-09T10:05:26Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system",
+        "size-S"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47719,
+      "title": "chore(network-manager): remove unused networks button icon class",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47719",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:51:17Z",
+      "updatedAt": "2026-11-09T10:07:10Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47720,
+      "title": "chore(permissions-connect): remove unused snap update scroll button class",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47720",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:51:19Z",
+      "updatedAt": "2026-11-09T10:06:16Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47721,
+      "title": "chore(details): remove unused PerpsFiatRows component",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47721",
+      "state": "OPEN",
+      "draft": false,
+      "createdAt": "2026-11-09T09:51:21Z",
+      "updatedAt": "2026-11-09T10:08:15Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "georgewrmarshall",
+      "labels": [
+        "team-design-system"
+      ],
+      "reviews": []
+    },
+    {
+      "number": 47723,
+      "title": "feat: update Perps withdraw transaction fee tooltip copy",
+      "url": "https://github.com/MetaMask/metamask-extension/pull/47723",
+      "state": "OPEN",
+      "draft": true,
+      "createdAt": "2026-11-09T10:01:19Z",
+      "updatedAt": "2026-11-09T10:01:42Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "authorLogin": "dan437",
+      "labels": [
+        "team-confirmations",
         "size-S"
       ],
       "reviews": []
