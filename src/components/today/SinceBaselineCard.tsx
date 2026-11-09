@@ -65,7 +65,8 @@ export function SinceBaselineCard({
         Compared against this browser&rsquo;s local baseline snapshot from{' '}
         <strong>{formatISOTimestamp(baseline.collectedAt)}</strong> ({formatISODate(baseline.collectedAt)}).
         Only PRs whose state was verified are called merged or closed; the rest are labelled
-        unverified — leaving the queue is not the same as merging.
+        unverified — leaving the queue is not the same as merging. Draft PRs are excluded from
+        both queues, so a PR that became a draft counts as leaving the queue while still open.
       </p>
       {diff.checksStoppedReason !== null && (
         <p className="section__note" role="note">
@@ -75,8 +76,8 @@ export function SinceBaselineCard({
         </p>
       )}
       <div className="mini-metrics">
-        {section('Needs Assets review', diff.needs, 'No change against the baseline.')}
-        {section('Assets PRs awaiting others', diff.awaiting, 'No change against the baseline.')}
+        {section('Team PRs', diff.awaiting, 'No change against the baseline.')}
+        {section('Review requests', diff.needs, 'No change against the baseline.')}
       </div>
     </section>
   )

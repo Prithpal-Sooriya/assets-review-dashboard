@@ -12,6 +12,7 @@ import { AxeBuilder } from '@axe-core/playwright'
  */
 
 const MEMBER = 'salimtb' // roster member
+const MEMBER2 = 'Prithpal-Sooriya' // another roster member (author of the internal-request team PR)
 const RESET_AT = Math.floor(Date.now() / 1000) + 3600
 
 const ANON_RATE_HEADERS = {
@@ -55,9 +56,14 @@ function pr(n: number, overrides: Partial<RawPull> = {}): RawPull {
 }
 
 // Anonymous-visible PRs:
-//  #201 — direct reviewer request to a roster member → Needs view
-//  #202 — authored by a roster member, requested by another team → Awaiting view
+//  #201 — external author, direct reviewer request to a roster member → Review requests
+//  #202 — roster author, requested by another team → Team PRs ("Awaiting core-platform")
 //  #203 — external author, no visible requests → neither view
+//  #204 — roster author, direct reviewer request to another roster member → BOTH views
+//         (team PR with an internal review need — "Internal review requested")
+//  #205 — roster author, no visible requests → Team PRs, honestly "No visible requests"
+//  #206 — DRAFT, external author, direct reviewer request to a roster member → excluded (draft)
+//  #207 — DRAFT, roster author → excluded (draft)
 const ANON_PRS: RawPull[] = [
   pr(201, { requested_reviewers: [{ login: MEMBER }] }),
   pr(202, {
@@ -66,6 +72,13 @@ const ANON_PRS: RawPull[] = [
     requested_teams: [{ slug: 'core-platform' }], // visible to anonymous too
   }),
   pr(203),
+  pr(204, {
+    user: { login: MEMBER2 },
+    requested_reviewers: [{ login: MEMBER }],
+  }),
+  pr(205, { user: { login: MEMBER } }),
+  pr(206, { requested_reviewers: [{ login: MEMBER }], draft: true }),
+  pr(207, { user: { login: MEMBER }, draft: true }),
 ]
 // Token-only additions:
 //  #101 — team request to metamask-assets (anonymous API hides it) → Needs view
@@ -155,6 +168,29 @@ function seedPr(n: number, overrides: Record<string, unknown> = {}) {
     requestedReviewers: [] as string[],
     ...overrides,
   }
+}
+
+/** Seed the IndexedDB snapshot cache (mirrors today/cache.ts: DB
+ *  `assets-today-cache`, store `snapshots`, keys `current`/`baseline`).
+ *  Single copy for every cache-seeding test — a schema change breaks here
+ *  once, loudly, instead of in N inline copies. */
+async function seedSnapshotCache(page: Page, key: 'current' | 'baseline', snapshot: unknown) {
+  await page.evaluate(([k, snap]) => {
+    const db = new Promise<IDBDatabase>((resolve, reject) => {
+      const req = indexedDB.open('assets-today-cache', 1)
+      req.onupgradeneeded = () => {
+        if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
+      }
+      req.onsuccess = () => resolve(req.result)
+      req.onerror = () => reject(req.error)
+    })
+    return db.then((database) => new Promise<void>((resolve, reject) => {
+      const tx = database.transaction('snapshots', 'readwrite')
+      tx.objectStore('snapshots').put(snap, k as string)
+      tx.oncomplete = () => { database.close(); resolve() }
+      tx.onerror = () => reject(tx.error)
+    }))
+  }, [key, snapshot])
 }
 
 async function gotoToday(page: Page, hash = '#/today') {
@@ -283,11 +319,13 @@ test.describe('Navigation — Daily and Historical pages', () => {
     await expect(dailyMarker).toHaveCount(0)
   })
 
-  test('shared Daily filter links apply their state', async ({ page }) => {
+  test('shared Daily filter links apply their state (legacy view values keep working)', async ({ page }) => {
     await mockGitHub(page)
-    await page.goto('/#/today?view=awaiting&sort=newest')
+    // view=needs is the OLD default's share-link format — it must keep
+    // landing on the review-requests view, not the new default.
+    await page.goto('/#/today?view=needs&sort=newest')
     await expect(page.locator('.today-meta')).toBeVisible()
-    await expect(page.getByRole('button', { name: /Assets PRs awaiting others/ })).toHaveAttribute('aria-pressed', 'true')
+    await expect(page.getByRole('button', { name: /Review requests/ })).toHaveAttribute('aria-pressed', 'true')
     await expect(page.getByRole('button', { name: 'Newest first' })).toHaveAttribute('aria-pressed', 'true')
     // Changing a filter keeps the URL shareable (hash query round-trip).
     await page.getByRole('button', { name: 'Oldest first' }).click()
@@ -319,38 +357,87 @@ test.describe('Navigation — Daily and Historical pages', () => {
 })
 
 test.describe('Today view — anonymous collection and classification', () => {
-  test('needs view lists direct reviewer requests only, with honest visibility note', async ({ page }) => {
+  test('default landing is Team PRs: all non-draft team PRs immediately visible, honest next actions', async ({ page }) => {
     await mockGitHub(page)
+    // No view param — the bare landing (what / and #/today resolve to).
     await gotoToday(page)
+    await expect(page.getByRole('button', { name: /Team PRs/ })).toHaveAttribute('aria-pressed', 'true')
     const table = page.locator('.today-table')
     await expect(table).toBeVisible()
-    // #201 (member request) qualifies; #202/#203 do not.
-    await expect(table.locator('tbody tr td a.pr-link')).toHaveCount(1)
-    await expect(table).toContainText('#201')
-    await expect(table).not.toContainText('#202')
-    await expect(table).not.toContainText('#101')
-    // Anonymous visibility honesty note on the needs view.
+    // Team-authored non-draft PRs: #202 (awaiting another team), #204
+    // (internal review need), #205 (no visible requests) — all listed.
+    await expect(table).toContainText('#202')
+    await expect(table).toContainText('Awaiting core-platform')
+    await expect(table).toContainText('#205')
+    // A team PR with no visible request never implies one.
+    await expect(table).toContainText('No visible requests — check PR')
+    // External-authored PRs are not in this view.
+    await expect(table).not.toContainText('#201')
+    await expect(table).not.toContainText('#203')
+    // The count on the button matches the rows rendered (counts align).
+    await expect(page.getByRole('button', { name: 'Team PRs (3)' })).toBeVisible()
+    expect(await table.locator('tbody tr td a.pr-link').count()).toBe(3)
+    // The review-requests view is cross-referenced right on the landing.
+    await expect(page.getByText(/explicit review requests? (is|are) open/)).toBeVisible()
+    // Anonymous visibility caveat is shown on this view too (a team PR's
+    // team-slug request would be invisible here without a token).
     await expect(page.getByText('Limited visibility')).toBeVisible()
   })
 
-  test('awaiting view lists team-authored PRs with what they wait on', async ({ page }) => {
+  test('team PR with an internal review request is prominent on initial load', async ({ page }) => {
     await mockGitHub(page)
-    await gotoToday(page, '#/today?view=awaiting')
+    await gotoToday(page) // default Team PRs view, no clicks
+    const table = page.locator('.today-table')
+    // #204: team-authored, direct request to a roster member — an internal
+    // review need, labelled as such (not "awaiting others").
+    await expect(table).toContainText('#204')
+    const row = table.locator('tbody tr').filter({ hasText: '#204' })
+    await expect(row).toContainText('Internal review requested')
+    // The requested roster member is visually marked internal (chip).
+    await expect(row.locator('.chip--internal', { hasText: MEMBER })).toBeVisible()
+    // It also appears in the review-requests view (explicit request).
+    await page.getByRole('button', { name: /Review requests/ }).click()
+    await expect(page.locator('.today-table')).toContainText('#204')
+  })
+
+  test('drafts are excluded from rows and counts in both views (regression)', async ({ page }) => {
+    await mockGitHub(page)
+    await gotoToday(page) // default Team PRs view
+    const table = page.locator('.today-table')
+    // #207 is a team-authored draft; #206 is a draft with a member request.
+    await expect(table).not.toContainText('#207')
+    await expect(page.getByRole('button', { name: 'Team PRs (3)' })).toBeVisible()
+    await page.getByRole('button', { name: /Review requests/ }).click()
+    await expect(page.locator('.today-table')).not.toContainText('#206')
+    await expect(page.getByRole('button', { name: 'Review requests (2)' })).toBeVisible()
+    expect(await page.locator('.today-table').locator('tbody tr td a.pr-link').count()).toBe(2) // #201, #204
+  })
+
+  test('review-requests view lists explicit requests (external requests retained), with honest visibility note', async ({ page }) => {
+    await mockGitHub(page)
+    await gotoToday(page, '#/today?view=needs')
     const table = page.locator('.today-table')
     await expect(table).toBeVisible()
-    await expect(table).toContainText('#202')
-    await expect(table).toContainText('Awaiting core-platform')
-    await expect(table).not.toContainText('#201')
+    // #201 (external, member request) and #204 (team PR, internal request)
+    // qualify; #202/#203 do not; drafts never qualify.
+    expect(await table.locator('tbody tr td a.pr-link').count()).toBe(2)
+    await expect(table).toContainText('#201')
+    await expect(table).toContainText('#204')
+    await expect(table).not.toContainText('#202')
     await expect(table).not.toContainText('#203')
+    await expect(table).not.toContainText('#101') // team requests need a token
+    // Anonymous visibility honesty note on the requests view.
+    await expect(page.getByText('Limited visibility')).toBeVisible()
   })
 
   test('authorship filter and grouping reflect in the URL and the table', async ({ page }) => {
     await mockGitHub(page)
-    await gotoToday(page)
+    await gotoToday(page, '#/today?view=needs')
     await page.getByRole('button', { name: 'External authors' }).click()
     expect(page.url()).toContain('author=external')
-    // #201 is external-authored and member-requested.
+    // #201 is external-authored and member-requested; #204 is team-authored.
     await expect(page.locator('.today-table')).toContainText('#201')
+    await expect(page.locator('.today-table')).not.toContainText('#204')
 
     await page.getByRole('button', { name: 'Group: requested team' }).click()
     expect(page.url()).toContain('group=team')
@@ -368,6 +455,41 @@ test.describe('Today view — anonymous collection and classification', () => {
     await expect(table).toContainText('#202')
     await expect(page.locator('.today-group-head').first()).toContainText('Core')
   })
+
+  test('cached snapshots never reintroduce drafts (old-cache regression)', async ({ page }) => {
+    await mockGitHub(page)
+    // Seed a FRESH complete anonymous snapshot (collected "just now" — no
+    // refresh is triggered) containing draft PRs that would have rendered
+    // under the old rules: a team-authored draft and a draft with a member
+    // request.
+    const freshAt = new Date(Date.now() - 30_000).toISOString()
+    await page.goto('/historical') // real origin for IndexedDB; keeps the collector unmounted
+    await seedSnapshotCache(page, 'current', {
+      schemaVersion: 1,
+      collectedAt: freshAt,
+      authMode: 'anonymous',
+      repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      missingChecks: [],
+      prs: [
+        seedPr(301, { title: 'Team non-draft', author: 'salimtb' }),
+        seedPr(302, { title: 'Team draft', author: 'salimtb', draft: true }),
+        seedPr(303, { title: 'Draft with member request', draft: true, requestedReviewers: ['salimtb'] }),
+      ],
+    })
+
+    await gotoToday(page) // default Team PRs view — cache-first paint
+    const table = page.locator('.today-table')
+    await expect(table).toContainText('#301')
+    await expect(table).not.toContainText('#302')
+    await expect(page.getByRole('button', { name: 'Team PRs (1)' })).toBeVisible()
+    await page.getByRole('button', { name: /Review requests/ }).click()
+    await expect(page.locator('.today-table')).not.toContainText('#303')
+    await expect(page.getByRole('button', { name: 'Review requests (0)' })).toBeVisible()
+  })
 })
 
 test.describe('Today view — token flow', () => {
@@ -375,7 +497,7 @@ test.describe('Today view — token flow', () => {
 
   test('token unlocks team requests and is never persisted anywhere', async ({ page }) => {
     await mockGitHub(page)
-    await gotoToday(page)
+    await gotoToday(page, '#/today?view=needs')
     await page.locator('.token-input').fill(TOKEN)
     await page.getByRole('button', { name: 'Use token' }).click()
 
@@ -462,7 +584,7 @@ test.describe('Today view — token flow', () => {
 
   test('clear token drops to anonymous data immediately', async ({ page }) => {
     await mockGitHub(page)
-    await gotoToday(page)
+    await gotoToday(page, '#/today?view=needs')
     await page.locator('.token-input').fill('github_pat_E2E_TRANSIENT_1')
     await page.getByRole('button', { name: 'Use token' }).click()
     await expect(page.locator('.today-table')).toContainText('#101')
@@ -475,7 +597,7 @@ test.describe('Today view — token flow', () => {
 
   test('rejected token (401) shows an honest error and returns to anonymous', async ({ page }) => {
     await mockGitHub(page, { tokenRejected: true })
-    await gotoToday(page)
+    await gotoToday(page, '#/today?view=needs')
     await page.locator('.token-input').fill('github_pat_BAD_TOKEN_1')
     await page.getByRole('button', { name: 'Use token' }).click()
     await expect(page.getByText('Token rejected')).toBeVisible()
@@ -485,7 +607,7 @@ test.describe('Today view — token flow', () => {
     // seeing why they are back on anonymous data (never a silent downgrade).
     const table = page.locator('.today-table')
     await expect(table).toBeVisible()
-    await expect(table.locator('tbody tr td a.pr-link')).toHaveCount(1) // #201 back in the needs queue
+    await expect(table.locator('tbody tr td a.pr-link')).toHaveCount(2) // #201 + #204 back in the queue
     await expect(table).toContainText('#201')
     await expect(page.getByText('Token rejected')).toBeVisible()
   })
@@ -501,45 +623,24 @@ test.describe('Today view — failure handling', () => {
     // triggers a refresh, recent enough to be worth showing.
     const staleAt = new Date(Date.now() - 4 * 60 * 60 * 1000).toISOString()
     await page.goto('/historical') // IndexedDB needs a real origin (about:blank denies it); Historical avoids mounting the Daily collector before the seed
-    await page.evaluate(async (collectedAt: string) => {
-      const seed = {
-        schemaVersion: 1,
-        collectedAt,
-        authMode: 'anonymous',
-        repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
-        complete: true,
-        partialReason: null,
-        rate: null,
-        droppedMalformed: 0,
-        missingChecks: [],
-        prs: [
-          {
-            repo: 'MetaMask/core', number: 201, title: 'PR 201',
-            url: 'https://github.com/MetaMask/core/pull/201', author: 'external-author',
-            draft: false, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-        ],
-      }
-      const db = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open('assets-today-cache', 1)
-        req.onupgradeneeded = () => {
-          if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
-        }
-        req.onsuccess = () => resolve(req.result)
-        req.onerror = () => reject(req.error)
-      })
-      await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction('snapshots', 'readwrite')
-        tx.objectStore('snapshots').put(seed, 'current')
-        tx.oncomplete = () => resolve()
-        tx.onerror = () => reject(tx.error)
-      })
-      db.close()
-    }, staleAt)
+    await seedSnapshotCache(page, 'current', {
+      schemaVersion: 1,
+      collectedAt: staleAt,
+      authMode: 'anonymous',
+      repos: [{ repo: 'MetaMask/core', pagesFetched: 1, complete: true }],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      missingChecks: [],
+      prs: [
+        seedPr(201, { requestedReviewers: ['salimtb'] }),
+      ],
+    })
 
     failNetwork = true
-    await gotoToday(page)
+    // Needs view: the seeded #201 (external, member request) renders from cache.
+    await gotoToday(page, '#/today?view=needs')
     // Cache-first paint: rows appear immediately from the cache…
     await expect(page.locator('.today-table')).toContainText('#201')
     // …then the stale refresh fails, a banner explains, and rows persist.
@@ -568,54 +669,22 @@ test.describe('Today view — since-baseline diff (missing ≠ merged)', () => {
     const counts = await mockGitHub(page)
     const baselineAt = new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString()
     await page.goto('/historical') // IndexedDB needs a real origin (about:blank denies it); Historical avoids mounting the Daily collector before the seed
-    await page.evaluate(async (collectedAt: string) => {
-      const seed = {
-        schemaVersion: 1,
-        collectedAt,
-        authMode: 'anonymous',
-        repos: [],
-        complete: true,
-        partialReason: null,
-        rate: null,
-        droppedMalformed: 0,
-        missingChecks: [],
-        prs: [
-          {
-            repo: 'MetaMask/core', number: 201, title: 'PR 201',
-            url: 'https://github.com/MetaMask/core/pull/201', author: 'external-author',
-            draft: false, createdAt: '2026-10-31T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-          {
-            repo: 'MetaMask/core', number: 999, title: 'PR 999',
-            url: 'https://github.com/MetaMask/core/pull/999', author: 'external-author',
-            draft: false, createdAt: '2026-10-30T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: ['metamask-assets'], requestedReviewers: [],
-          },
-          {
-            repo: 'MetaMask/core', number: 998, title: 'PR 998',
-            url: 'https://github.com/MetaMask/core/pull/998', author: 'external-author',
-            draft: false, createdAt: '2026-10-30T00:00:00Z', updatedAt: '2026-11-01T00:00:00Z',
-            labels: [], requestedTeams: [], requestedReviewers: ['salimtb'],
-          },
-        ],
-      }
-      const db = await new Promise<IDBDatabase>((resolve, reject) => {
-        const req = indexedDB.open('assets-today-cache', 1)
-        req.onupgradeneeded = () => {
-          if (!req.result.objectStoreNames.contains('snapshots')) req.result.createObjectStore('snapshots')
-        }
-        req.onsuccess = () => resolve(req.result)
-        req.onerror = () => reject(req.error)
-      })
-      await new Promise<void>((resolve, reject) => {
-        const tx = db.transaction('snapshots', 'readwrite')
-        tx.objectStore('snapshots').put(seed, 'baseline')
-        tx.oncomplete = () => resolve()
-        tx.onerror = () => reject(tx.error)
-      })
-      db.close()
-    }, baselineAt)
+    await seedSnapshotCache(page, 'baseline', {
+      schemaVersion: 1,
+      collectedAt: baselineAt,
+      authMode: 'anonymous',
+      repos: [],
+      complete: true,
+      partialReason: null,
+      rate: null,
+      droppedMalformed: 0,
+      missingChecks: [],
+      prs: [
+        seedPr(201, { requestedReviewers: ['salimtb'] }),
+        seedPr(999, { createdAt: '2026-10-30T00:00:00Z', requestedTeams: ['metamask-assets'] }),
+        seedPr(998, { createdAt: '2026-10-30T00:00:00Z', requestedReviewers: ['salimtb'] }),
+      ],
+    })
 
     await gotoToday(page)
     const card = page.getByRole('region', { name: 'Changes since previous baseline' })
@@ -639,7 +708,7 @@ test.describe('Today view — cross-tab coordination', () => {
     const totals = { preflight: 0, pulls: 0, detail: 0 }
     await mockGitHub(page, { delayMs: 700 }, totals)
     await gotoToday(page)
-    await expect(page.locator('.today-table')).toContainText('#201')
+    await expect(page.locator('.today-table')).toContainText('#202')
     // Tab A's mount: one pre-flight + one sweep (one page per repo, 3 repos).
     expect(totals.preflight).toBe(1)
     expect(totals.pulls).toBe(3)
@@ -648,7 +717,7 @@ test.describe('Today view — cross-tab coordination', () => {
     await mockGitHub(pageB, { delayMs: 700 }, totals)
     await pageB.goto('/#/today')
     // B shows the same data (broadcast or shared cache) without collecting:
-    await expect(pageB.locator('.today-table')).toContainText('#201', { timeout: 15_000 })
+    await expect(pageB.locator('.today-table')).toContainText('#202', { timeout: 15_000 })
     // Exact coordination proof: B's mount added ZERO requests — the
     // pre-flight, sweep and detail checks all ran exactly once, for A.
     expect(totals.preflight).toBe(1)

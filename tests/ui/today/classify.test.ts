@@ -90,6 +90,30 @@ describe('assetsAuthored — authorship view', () => {
   })
 })
 
+describe('drafts are excluded from both views (rows and counts)', () => {
+  test('a draft with a team request never qualifies for the requests view', () => {
+    expect(needsAssetsReview(pr({ draft: true, requestedTeams: [ASSETS_TEAM_SLUG] }))).toBe(false)
+  })
+
+  test('a draft with a direct member request never qualifies for the requests view', () => {
+    const member = ASSETS_ROSTER[0]!
+    expect(needsAssetsReview(pr({ draft: true, requestedReviewers: [member] }))).toBe(false)
+  })
+
+  test('a team-authored draft never qualifies for the team view', () => {
+    const member = ASSETS_ROSTER[1]!
+    expect(assetsAuthored(pr({ draft: true, author: member }))).toBe(false)
+  })
+
+  test('the underlying request facts stay visible (draft is a view rule, not a data rule)', () => {
+    const member = ASSETS_ROSTER[0]!
+    const p = pr({ draft: true, requestedReviewers: [member], requestedTeams: [ASSETS_TEAM_SLUG] })
+    expect(hasTeamRequest(p)).toBe(true)
+    expect(hasMemberRequest(p)).toBe(true)
+    expect(authorshipOf(pr({ draft: true, author: member }))).toBe('internal')
+  })
+})
+
 describe('awaitingInfoOf — unknown teams stay unknown', () => {
   test('other team slugs are surfaced raw, never mapped or guessed', () => {
     const p = pr({ requestedTeams: [ASSETS_TEAM_SLUG, 'core-platform', 'some-unknown-team'] })
@@ -106,13 +130,20 @@ describe('awaitingInfoOf — unknown teams stay unknown', () => {
 })
 
 describe('nextActionOf — simple, honest states', () => {
-  test('draft shows author action in both views', () => {
-    expect(nextActionOf(pr({ draft: true }), 'needs')).toBe('Draft — author action')
-    expect(nextActionOf(pr({ draft: true }), 'awaiting')).toBe('Draft — author action')
-  })
-
   test('needs view says review requested', () => {
     expect(nextActionOf(pr(), 'needs')).toBe('Review requested')
+  })
+
+  test('team view prioritizes internal review requests over outside waits', () => {
+    const member = ASSETS_ROSTER[0]!
+    // Internal member request + an outside reviewer: the internal need wins.
+    expect(nextActionOf(pr({ requestedReviewers: [member, 'outsider'] }), 'awaiting')).toBe(
+      'Internal review requested',
+    )
+    // Team-slug request is an internal need too.
+    expect(nextActionOf(pr({ requestedTeams: [ASSETS_TEAM_SLUG] }), 'awaiting')).toBe(
+      'Internal review requested',
+    )
   })
 
   test('awaiting view names other teams when requested', () => {

@@ -27,9 +27,13 @@ function pr(overrides: Partial<TodayPr>): TodayPr {
 const PRS: TodayPr[] = [
   pr({ number: 11, requestedTeams: [ASSETS_TEAM_SLUG], createdAt: '2026-10-01T00:00:00Z' }), // needs, old (37d)
   pr({ number: 12, requestedReviewers: [MEMBER], createdAt: '2026-11-06T00:00:00Z' }), // needs via member (1d)
-  pr({ number: 13, author: MEMBER, createdAt: '2026-11-05T00:00:00Z', repo: 'MetaMask/metamask-mobile' }), // awaiting (2d)
+  pr({ number: 13, author: MEMBER, createdAt: '2026-11-05T00:00:00Z', repo: 'MetaMask/metamask-mobile' }), // team (2d)
   pr({ number: 14, author: 'external' }), // neither view
   pr({ number: 15, author: MEMBER, requestedTeams: [ASSETS_TEAM_SLUG, 'core-platform'], createdAt: '2026-11-02T00:00:00Z' }), // both views (5d)
+  // Drafts: would qualify for a view if drafts were listed — they must not be.
+  pr({ number: 16, draft: true, requestedTeams: [ASSETS_TEAM_SLUG] }), // draft + team request
+  pr({ number: 17, draft: true, author: MEMBER }), // draft + team-authored
+  pr({ number: 18, draft: true, author: 'external' }), // draft, neither view anyway
 ]
 
 function query(patch: Partial<TableQuery>): TableQuery {
@@ -37,18 +41,18 @@ function query(patch: Partial<TableQuery>): TableQuery {
 }
 
 describe('buildRows — view membership', () => {
-  test('needs view: only explicit requests, oldest first by default', () => {
+  test('needs view: only explicit requests on non-drafts, oldest first by default', () => {
     const rows = buildRows(PRS, query({ view: 'needs' }), NOW)
     expect(rows[0]!.rows.map((r) => r.pr.number)).toEqual([11, 15, 12]) // 37d, 5d, 1d
     expect(rows[0]!.rows[0]!.ageDays).toBe(37)
   })
 
-  test('awaiting view: only team-authored PRs', () => {
+  test('team view: only team-authored non-drafts', () => {
     const rows = buildRows(PRS, query({ view: 'awaiting' }), NOW)
     expect(rows[0]!.rows.map((r) => r.pr.number)).toEqual([15, 13]) // 5d, 2d
   })
 
-  test('viewCounts matches view sizes before filtering', () => {
+  test('viewCounts matches view sizes before filtering, drafts excluded', () => {
     expect(viewCounts(PRS)).toEqual({ needs: 3, awaiting: 2 })
   })
 })
@@ -64,9 +68,24 @@ describe('buildRows — filters', () => {
     expect(internal[0]!.rows.map((r) => r.pr.number)).toEqual([15]) // #11/#12 are external
     const external = buildRows(PRS, query({ author: 'external' }), NOW)
     expect(external[0]!.rows.map((r) => r.pr.number)).toEqual([11, 12])
-    // Awaiting view ignores the author filter (all rows are internal there).
+    // Team view ignores the author filter (all rows are internal there).
     const awaiting = buildRows(PRS, query({ view: 'awaiting', author: 'external' }), NOW)
     expect(awaiting[0]!.rows.length).toBe(2)
+  })
+
+  test('drafts stay excluded under every filter combination', () => {
+    // Even an explicit author/repo/group/sort combination must not let a
+    // draft back in — URL filters can only narrow, never widen, the queues.
+    for (const author of ['all', 'internal', 'external'] as const) {
+      for (const repo of [null, 'MetaMask/core', 'MetaMask/metamask-mobile'] as const) {
+        const needs = buildRows(PRS, query({ view: 'needs', author, repo, group: 'repo', sort: 'newest' }), NOW)
+        const team = buildRows(PRS, query({ view: 'awaiting', author, repo, group: 'team', sort: 'author' }), NOW)
+        const numbers = [...needs, ...team].flatMap((g) => g.rows.map((r) => r.pr.number))
+        expect(numbers).not.toContain(16)
+        expect(numbers).not.toContain(17)
+        expect(numbers).not.toContain(18)
+      }
+    }
   })
 })
 

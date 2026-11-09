@@ -9,8 +9,10 @@
  *    bounded missing-PR state checks classify some as MERGED/CLOSED/still
  *    open ("left review queue"); everything beyond the bounded check budget
  *    is labelled unverified, never guessed.
- *  - Diffs are computed per view (needs review / awaiting others) so each
- *    number answers exactly one question.
+ *  - Diffs are computed per view (review requests / team PRs) so each
+ *    number answers exactly one question. Draft PRs are excluded from both
+ *    queues — a PR that turned draft counts as leaving the queue (still
+ *    open), never as merged or closed.
  */
 
 import { assetsAuthored, needsAssetsReview } from './classify'

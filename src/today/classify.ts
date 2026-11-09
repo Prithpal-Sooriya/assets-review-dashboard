@@ -1,12 +1,13 @@
 /**
  * Pure classification for the Today views.
  *
- * Core principle (from the approved spec): an entry appears in "Needs Assets
- * review" ONLY because of an explicit outstanding review request to the
+ * Core principle (from the approved spec): an entry appears in "Review
+ * requests" ONLY because of an explicit outstanding review request to the
  * configured team or one of its members — authorship, ownership labels and
- * past review participation never prove a request. "Assets PRs awaiting
- * others" is an authorship view (team-authored open PRs) and is reported
- * separately; a PR can legitimately appear in both views.
+ * past review participation never prove a request. "Team PRs" is an
+ * authorship view (team-authored open PRs) and is reported separately; a PR
+ * can legitimately appear in both views. Draft PRs are excluded from BOTH
+ * views (rows and counts): the user asked for open, non-draft PRs only.
  */
 
 import { ASSETS_ROSTER, ASSETS_TEAM_SLUG } from './config'
@@ -14,10 +15,17 @@ import type { TodayPr } from './normalize'
 
 export const ROSTER_SET: ReadonlySet<string> = new Set(ASSETS_ROSTER)
 
+/** Is this GitHub login an Assets team member (roster match)? Centralized
+ *  so components (reviewer chips) and predicates share one notion of
+ *  "internal" — roster matching changes in exactly one place. */
+export function isRosterMember(login: string): boolean {
+  return ROSTER_SET.has(login)
+}
+
 export type Authorship = 'internal' | 'external'
 
 export function authorshipOf(pr: TodayPr): Authorship {
-  return ROSTER_SET.has(pr.author) ? 'internal' : 'external'
+  return isRosterMember(pr.author) ? 'internal' : 'external'
 }
 
 /** Explicit outstanding request to the Assets team slug? (invisible anonymously) */
@@ -27,17 +35,26 @@ export function hasTeamRequest(pr: TodayPr): boolean {
 
 /** Explicit outstanding request to an individual team member? */
 export function hasMemberRequest(pr: TodayPr): boolean {
-  return pr.requestedReviewers.some((login) => ROSTER_SET.has(login))
+  return pr.requestedReviewers.some(isRosterMember)
 }
 
-/** View 1 membership: explicit outstanding request to team or member. */
-export function needsAssetsReview(pr: TodayPr): boolean {
+/** Explicit outstanding review request to the Assets team or one of its
+ *  members (team slug OR roster member). Single predicate so the
+ *  Review-requests view (needsAssetsReview) and the "Internal review
+ *  requested" next-action label can never drift apart. */
+export function hasAssetsRequest(pr: TodayPr): boolean {
   return hasTeamRequest(pr) || hasMemberRequest(pr)
 }
 
-/** View 2 membership: open PR authored by a team member. */
+/** View 1 membership: non-draft PR with an explicit outstanding request to
+ *  the team or a member. Drafts never qualify, no matter who requested. */
+export function needsAssetsReview(pr: TodayPr): boolean {
+  return !pr.draft && hasAssetsRequest(pr)
+}
+
+/** View 2 membership: open, non-draft PR authored by a team member. */
 export function assetsAuthored(pr: TodayPr): boolean {
-  return authorshipOf(pr) === 'internal'
+  return !pr.draft && authorshipOf(pr) === 'internal'
 }
 
 
@@ -56,14 +73,23 @@ export interface AwaitingInfo {
 export function awaitingInfoOf(pr: TodayPr): AwaitingInfo {
   return {
     otherTeams: pr.requestedTeams.filter((slug) => slug !== ASSETS_TEAM_SLUG),
-    otherReviewers: pr.requestedReviewers.filter((login) => !ROSTER_SET.has(login)),
+    otherReviewers: pr.requestedReviewers.filter((login) => !isRosterMember(login)),
   }
 }
 
-/** Simple next-action text derived only from cheap, list-visible fields. */
+/** Simple next-action text derived only from cheap, list-visible fields.
+ *
+ *  Invariant: `pr` is NOT a draft — buildRows/viewCounts only ever pass PRs
+ *  that passed needsAssetsReview/assetsAuthored, both of which exclude
+ *  drafts (drafts never reach any row). The draft case is deliberately
+ *  absent: if this function is ever reused outside those queues, guard the
+ *  caller — do not silently label drafts as requested here. */
 export function nextActionOf(pr: TodayPr, view: 'needs' | 'awaiting'): string {
-  if (pr.draft) return 'Draft — author action'
   if (view === 'needs') return 'Review requested'
+  // Team-PR view: an outstanding request to the Assets team or one of its
+  // members is an INTERNAL review need — the team can act on it right now —
+  // so it takes priority over anything the PR waits on from outside.
+  if (hasAssetsRequest(pr)) return 'Internal review requested'
   const { otherTeams, otherReviewers } = awaitingInfoOf(pr)
   if (otherTeams.length > 0) {
     return `Awaiting ${otherTeams.join(', ')}`

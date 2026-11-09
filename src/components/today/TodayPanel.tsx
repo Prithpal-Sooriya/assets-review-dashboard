@@ -19,16 +19,18 @@ import { SinceBaselineCard } from './SinceBaselineCard'
  * Daily page (the "Daily review queue"): client-only collection from public
  * GitHub REST data, mounted at / (legacy #/today hash links still land here).
  *
- * Views:
- *  - "Needs Assets review" — explicit outstanding review requests to the
- *    metamask-assets team or its members (authorship is irrelevant here).
- *  - "Assets PRs awaiting others" — open PRs authored by team members; what
- *    they wait on is shown per PR (other teams / outside reviewers / no
- *    visible requests).
+ * Views (Team PRs first — the default landing):
+ *  - "Team PRs" — ALL open, non-draft PRs authored by team members, including
+ *    internal review needs (outstanding requests to the team or its members)
+ *    and what each PR waits on from outside.
+ *  - "Review requests" — open, non-draft PRs with an explicit outstanding
+ *    review request to the metamask-assets team or its members (authorship
+ *    is irrelevant here; team PRs with internal requests appear in both).
  *
- * All filters, grouping and sort live in the URL hash (shareable). Anonymous
- * mode carries an explicit incompleteness warning because GitHub hides team
- * review requests from unauthenticated API calls.
+ * Draft PRs are excluded from both views and their counts. All filters,
+ * grouping and sort live in the URL hash (shareable). Anonymous mode carries
+ * an explicit incompleteness warning because GitHub hides team review
+ * requests from unauthenticated API calls.
  */
 export function TodayPanel() {
   const today = useTodayData()
@@ -64,20 +66,23 @@ export function TodayPanel() {
   )
 
   const authMode: AuthMode = today.authMode
-  // The notice describes the DATA being shown: a cached token-collected
+  // The notice describes the DATA being shown: anonymous GitHub responses
+  // omit team review requests entirely, which affects BOTH views (the
+  // review-requests list may be missing rows, and a team PR with an invisible
+  // team request renders as “No visible requests”). A cached token-collected
   // snapshot legitimately contains team requests even while the live token
   // slot is empty (memory-only token, page reloaded).
-  const anonymousLimited = urlState.view === 'needs' && display !== null && display.authMode === 'anonymous'
+  const anonymousLimited = display !== null && display.authMode === 'anonymous'
 
   return (
     <>
       <section className="section" aria-labelledby="daily-queue-heading">
         <h2 className="section__title" id="daily-queue-heading">Daily review queue</h2>
         <p className="section__desc">
-          What needs Assets review right now: open PRs across MetaMask Core, Mobile and Extension
-          with an explicit outstanding review request to the team or one of its members, plus
-          team-authored PRs waiting on other teams or outside reviewers. Collected live in this
-          browser from public GitHub data — see the status card below for how fresh it is.
+          The team&rsquo;s own open PRs — including internal review needs — plus explicit
+          review requests to the Assets team or its members, across MetaMask Core, Mobile and
+          Extension. Draft PRs are never listed. Collected live in this browser from public
+          GitHub data — see the status card below for how fresh it is.
         </p>
       </section>
       <TodayStatus today={today} nowMs={nowMs} />
@@ -99,18 +104,18 @@ export function TodayPanel() {
             <button
               type="button"
               className="btn"
-              aria-pressed={urlState.view === 'needs'}
-              onClick={() => update({ view: 'needs' })}
+              aria-pressed={urlState.view === 'awaiting'}
+              onClick={() => update({ view: 'awaiting' })}
             >
-              Needs Assets review ({counts.needs})
+              Team PRs ({counts.awaiting})
             </button>
             <button
               type="button"
               className="btn"
-              aria-pressed={urlState.view === 'awaiting'}
-              onClick={() => update({ view: 'awaiting' })}
+              aria-pressed={urlState.view === 'needs'}
+              onClick={() => update({ view: 'needs' })}
             >
-              Assets PRs awaiting others ({counts.awaiting})
+              Review requests ({counts.needs})
             </button>
           </div>
           <div className="segmented" role="group" aria-label="Repository filter">
@@ -179,9 +184,9 @@ export function TodayPanel() {
           </div>
         </div>
         <p className="section__note">
-          {urlState.view === 'needs'
-            ? 'Open PRs with an explicit outstanding review request to the Assets team or one of its members. Team requests (invisible without a token) and direct reviewer requests both qualify — ownership labels or authorship alone never do.'
-            : 'Open PRs authored by Assets team members. The Requested column shows what each PR is waiting on from other teams or outside reviewers.'}
+          {urlState.view === 'awaiting'
+            ? `Open, non-draft PRs authored by Assets team members — including those with internal review requests (shown per row). Every team PR is listed, even with no visible request; nothing here implies a request that GitHub does not show.${counts.needs > 0 ? ` ${counts.needs} explicit review request${counts.needs === 1 ? ' is' : 's are'} open to the team or its members — see the Review requests view.` : ''}`
+            : 'Open, non-draft PRs with an explicit outstanding review request to the Assets team or one of its members — from outside authors or from team members’ own PRs (those also appear in Team PRs, so counts can overlap). Ownership labels or authorship alone never qualify a PR.'}
         </p>
       </section>
 
@@ -192,9 +197,10 @@ export function TodayPanel() {
           <span className="notice__label">Limited visibility</span>
           <div className="notice__body">
             <p>
-              Without a token, GitHub hides team review requests from the API, so this list shows
-              only <strong>direct reviewer requests</strong> to team members. It may be incomplete
-              rather than empty — add an optional read-only token below to see team requests.
+              Without a token, GitHub hides team review requests from the API, so only{' '}
+              <strong>direct reviewer requests</strong> to team members are visible. Rows and
+              &ldquo;No visible requests&rdquo; labels may be incomplete rather than truly empty —
+              add an optional read-only token below to see team requests.
             </p>
           </div>
         </div>

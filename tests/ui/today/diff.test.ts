@@ -156,3 +156,62 @@ describe('missing PRs are never silently merged', () => {
     expect(diffSnapshots(base, currentGone).awaiting.left[0]?.outcome).toBe('unverified')
   })
 })
+
+describe('drafts are excluded from both queues — honestly', () => {
+  test('a PR that became a draft left the queue but is never called merged or closed', () => {
+    // Baseline: non-draft team PR with a member request (in both queues).
+    const baseline = snap({
+      collectedAt: '2026-11-06T00:00:00Z',
+      prs: [pr({ number: 20, author: MEMBER, requestedReviewers: [MEMBER] })],
+    })
+    // Current sweep still lists it (GitHub state=open includes drafts) but
+    // it is now a draft → excluded from both current queues.
+    const current = snap({
+      prs: [pr({ number: 20, author: MEMBER, requestedReviewers: [MEMBER], draft: true })],
+      missingChecks: [{ repo: 'MetaMask/core', number: 20, state: 'OPEN' }],
+    })
+    const d = diffSnapshots(baseline, current)
+    expect(d.needs.left).toHaveLength(1)
+    expect(d.awaiting.left).toHaveLength(1)
+    // Still open (verified) — draft exclusion is a queue change, NOT a
+    // merge/close claim.
+    expect(d.needs.left[0]?.outcome).toBe('left-queue')
+    expect(d.awaiting.left[0]?.outcome).toBe('left-queue')
+  })
+
+  test('turned-draft PR with NO detail check still labels left-queue via sweep membership', () => {
+    // Realistic collection path: the draft stays in the open-PR sweep (so it
+    // is verifiably open by membership) and the bounded check budget never
+    // produced a missingChecks entry for it. Draft exclusion is still just a
+    // queue exit — never a merge/close claim, never "unverified".
+    const baseline = snap({
+      collectedAt: '2026-11-06T00:00:00Z',
+      prs: [pr({ number: 20, author: MEMBER, requestedReviewers: [MEMBER] })],
+    })
+    const current = snap({
+      prs: [pr({ number: 20, author: MEMBER, requestedReviewers: [MEMBER], draft: true })],
+      missingChecks: [],
+    })
+    const d = diffSnapshots(baseline, current)
+    expect(d.awaiting.left[0]?.outcome).toBe('left-queue')
+    expect(d.needs.left[0]?.outcome).toBe('left-queue')
+  })
+
+  test('a draft in the baseline cache never enters the queues (no draft resurrection)', () => {
+    // A cached baseline collected by an older build can contain drafts; the
+    // diff must recompute queue membership with current rules.
+    const baseline = snap({
+      collectedAt: '2026-11-06T00:00:00Z',
+      prs: [
+        pr({ number: 21, draft: true, author: MEMBER }),
+        pr({ number: 22, draft: true, requestedTeams: [ASSETS_TEAM_SLUG] }),
+      ],
+    })
+    const current = snap({ prs: [] })
+    const d = diffSnapshots(baseline, current)
+    expect(d.needs.left).toHaveLength(0)
+    expect(d.awaiting.left).toHaveLength(0)
+    expect(d.needs.newCount).toBe(0)
+    expect(d.awaiting.newCount).toBe(0)
+  })
+})

@@ -30,7 +30,17 @@ export interface TodayUrlState {
 }
 
 export const DEFAULT_TODAY_STATE: TodayUrlState = {
-  view: 'needs',
+  // Team PRs land first: the team's own open non-draft PRs (including
+  // internal review needs) are the default landing; the review-requests
+  // view is one click away with its count on the button. The 'needs' /
+  // 'awaiting' URL values are frozen (share links exist in the wild) — only
+  // which one is the default changed. The names are historical (they date
+  // from the old view names 'Needs Assets review' / 'Assets PRs awaiting
+  // others') and leak into counts.needs/awaiting, diff.needs/awaiting,
+  // needsAssetsReview and assetsAuthored — deliberate: renaming any of them
+  // would break the frozen URL format or churn every call site for zero
+  // behavioral gain.
+  view: 'awaiting',
   repo: null,
   author: 'all',
   group: 'repo',
@@ -66,6 +76,10 @@ export function parseHash(hash: string): TodayUrlState {
 /** Serialize Today state back into a hash string (round-trips parseHash). */
 export function buildTodayHash(state: TodayUrlState): string {
   const params = new URLSearchParams()
+  // `view` is ALWAYS written explicitly — never elided even when equal to
+  // the default — so every share link ever produced by any build pins its
+  // view. Changing DEFAULT_TODAY_STATE.view therefore cannot retarget old
+  // shared links: `?view=needs` keeps opening Review requests forever.
   params.set('view', state.view)
   if (state.repo !== null) params.set('repo', state.repo)
   if (state.author !== 'all') params.set('author', state.author)

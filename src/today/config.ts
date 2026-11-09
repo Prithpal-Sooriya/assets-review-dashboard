@@ -19,7 +19,7 @@ export const TODAY_REPOS: readonly string[] = [
   'MetaMask/metamask-extension',
 ]
 
-/** GitHub team slug whose review requests mark "Needs Assets review". */
+/** GitHub team slug whose review requests mark the "Review requests" view. */
 export const ASSETS_TEAM_SLUG = 'metamask-assets'
 
 /**
