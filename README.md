@@ -10,9 +10,10 @@ two pages, one app:
   read-only personal access token (held in memory only, never stored or sent
   anywhere else) makes team review requests visible.
 - **Historical** — <https://metamask-assets-dashboard-ui.vercel.app/historical>
-  Team-level monthly aggregates across the full collection window (reviews,
-  merges, unmerged PRs, coverage), plus who on the Assets roster reviewed,
-  review pace, and pull request size where the snapshot recorded it.
+  Team-level monthly and weekly aggregates across the full collection window
+  (reviews, merges, unmerged PRs, time to first review, time to merge for
+  team PRs, coverage), plus who on the Assets roster reviewed, review pace,
+  and pull request size where the snapshot recorded it.
   Embedded at build time from `data/dashboard.json`. Review text and anyone
   outside the roster are not included.
 

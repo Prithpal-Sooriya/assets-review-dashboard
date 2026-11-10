@@ -99,7 +99,16 @@ export function loadDashboard(input: {
     }
   }
 
+  // Pre-1.1.0 dashboard.json on main has no weeks / firstReviews /
+  // teamMerges. Feature PRs must not rewrite data/ (data-pr-guard), so the
+  // loader fills empty arrays until the next data-branch aggregate lands.
+  // A present-but-wrong value still fails validation — only absence is
+  // softened.
   const data = parsed.data
+  const root = data as unknown as Record<string, unknown>
+  if (!Object.prototype.hasOwnProperty.call(root, 'weeks')) root.weeks = []
+  if (!Object.prototype.hasOwnProperty.call(root, 'firstReviews')) root.firstReviews = []
+  if (!Object.prototype.hasOwnProperty.call(root, 'teamMerges')) root.teamMerges = []
   const { errors, warnings } = validateDashboardData(data)
   if (input.loadError) {
     warnings.push({ path: input.dataPath, message: input.loadError })

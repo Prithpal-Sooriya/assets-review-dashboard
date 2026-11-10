@@ -1,6 +1,7 @@
 /** Deterministic aggregation tests: raw partitions -> exact dashboard contract. */
 import { describe, expect, test } from "bun:test";
 import { aggregate, findMissingCompletePartitions, validateDashboardData } from "../../scripts/lib/aggregate";
+import { isoWeekKey } from "../../scripts/lib/config";
 import type { Manifest, RawPartition, RawPrRecord } from "../../scripts/lib/types";
 import { completeEntry, manifestOf, pr, review, testConfig } from "./fixtures";
 
@@ -180,6 +181,9 @@ describe("aggregate", () => {
       "reviewers",
       "trends",
       "prs",
+      "weeks",
+      "firstReviews",
+      "teamMerges",
     ]);
     expect(data.schemaVersion).toBe(1);
     expect(data.generatedAt).toBe(AS_OF);
@@ -346,6 +350,99 @@ describe("aggregate", () => {
     expect(data.reviewers.some((r) => r.login === "Alice" || r.login === "ALICE")).toBe(false);
   });
 
+  test("weeks match month totals, and timing samples use first review and team merge", () => {
+    const data = aggregate({
+      config: testConfig,
+      asOf: AS_OF,
+      manifest: coreManifest(),
+      partitions: [...corePartitions(), ...extensionPartitions()],
+    });
+    const sum = (
+      rows: { repo: string; reviewSubmissions: number; mergedInternalPrs: number; mergedExternalReviewedPrs: number }[],
+      repo: string,
+      field: "reviewSubmissions" | "mergedInternalPrs" | "mergedExternalReviewedPrs",
+    ) => rows.filter((r) => r.repo === repo).reduce((s, r) => s + r[field], 0);
+    for (const repo of ["MetaMask/core", "MetaMask/metamask-extension"]) {
+      for (const field of ["reviewSubmissions", "mergedInternalPrs", "mergedExternalReviewedPrs"] as const) {
+        expect(sum(data.weeks, repo, field)).toBe(sum(data.months, repo, field));
+      }
+    }
+
+    // Leading week (Mon 29 Dec 2025) is clipped by the 1 Jan window start.
+    // The week containing asOf (15 Mar, a Sunday) runs Mon 9 Mar–Mon 16 Mar.
+    const coreWeeks = data.weeks.filter((w) => w.repo === "MetaMask/core");
+    expect(coreWeeks[0]?.week).toBe("2026-W01");
+    expect(coreWeeks[0]?.weekStart).toBe("2025-12-29T00:00:00.000Z");
+    expect(coreWeeks[0]?.partial).toBe(true);
+    expect(coreWeeks.at(-1)?.week).toBe(isoWeekKey(Date.parse(AS_OF)));
+    expect(coreWeeks.at(-1)?.partial).toBe(true);
+
+    // PR2 review 6 Jan (Tue) sits in the week of Mon 5 Jan. PR1 review 10 Jan too.
+    const w02 = coreWeeks.find((w) => w.week === isoWeekKey(Date.parse("2026-01-06T10:00:00Z")))!;
+    expect(w02.week).toBe("2026-W02");
+    expect(w02.partial).toBe(false);
+    expect(w02.internalReviewedPrs).toBe(1); // PR2
+    expect(w02.externalReviewedPrs).toBe(1); // PR1
+    expect(w02.reviewSubmissions).toBe(2);
+
+    // Extension January is pending, so weeks that overlap January are partial
+    // (January events dropped) and weeks wholly inside January are omitted.
+    const extWeeks = data.weeks.filter((w) => w.repo === "MetaMask/metamask-extension");
+    expect(extWeeks.some((w) => w.week === "2026-W01")).toBe(false);
+    const extBoundary = extWeeks.find((w) => w.week === isoWeekKey(Date.parse("2026-02-01T00:00:00Z")))!;
+    expect(extBoundary.partial).toBe(true);
+    const extReviewWeek = extWeeks.find((w) => w.week === isoWeekKey(Date.parse("2026-02-12T10:00:00Z")))!;
+    expect(extReviewWeek.partial).toBe(false);
+    expect(extReviewWeek.externalReviewedPrs).toBe(1);
+    expect(extReviewWeek.reviewSubmissions).toBe(1);
+
+    const minutes = (from: string, to: string) => Math.round((Date.parse(to) - Date.parse(from)) / 60_000);
+    // Default fixture createdAt is 2025-12-01. Self-review / excluded-reviewer
+    // PR4 has a merge sample and no first-review sample.
+    expect(data.firstReviews.map((s) => `${s.repo}#${s.ownership}@${s.at}`)).toEqual([
+      "MetaMask/core#internal@2026-01-06T10:00:00Z", // PR2
+      "MetaMask/core#external@2026-01-10T10:00:00Z", // PR1
+      "MetaMask/core#external@2026-01-20T10:00:00Z", // PR9
+      "MetaMask/core#internal@2026-02-01T10:00:00Z", // PR3
+      "MetaMask/metamask-extension#external@2026-02-12T10:00:00Z", // PR100
+      "MetaMask/core#external@2026-03-02T10:00:00Z", // PR7
+    ]);
+    expect(data.firstReviews[0]?.minutes).toBe(minutes("2025-12-01T00:00:00Z", "2026-01-06T10:00:00Z"));
+    expect(data.firstReviews.find((s) => s.at === "2026-01-06T10:00:00Z")?.minutes).toBe(52440);
+    // PR11's only review is pre-window; PR4's reviews are self/excluded.
+    expect(data.firstReviews.some((s) => s.at.startsWith("2025-12"))).toBe(false);
+
+    expect(data.teamMerges).toEqual([
+      { repo: "MetaMask/core", mergedAt: "2026-01-15T09:00:00Z", minutes: minutes("2025-12-01T00:00:00Z", "2026-01-15T09:00:00Z") },
+      { repo: "MetaMask/core", mergedAt: "2026-02-03T09:00:00Z", minutes: minutes("2025-12-01T00:00:00Z", "2026-02-03T09:00:00Z") },
+    ]);
+    expect(data.teamMerges[0]?.minutes).toBe(65340);
+    expect(data.teamMerges[1]?.minutes).toBe(92700);
+  });
+
+  test("a review before createdAt is dropped from timing samples", () => {
+    const partitions = [
+      partition("MetaMask/core", "2026-02", "monthEnd", "2026-03-01T00:00:00Z", [
+        pr(70, {
+          authorLogin: "carol",
+          createdAt: "2026-02-10T00:00:00Z",
+          updatedAt: "2026-02-10T00:00:00Z",
+          reviews: [review(70, "alice", "APPROVED", "2026-02-01T00:00:00Z")],
+        }),
+      ]),
+      partition("MetaMask/core", "2026-03", "asOfCutoff", "2026-03-15T11:00:00Z", []),
+    ];
+    const manifest = manifestOf({
+      "MetaMask/core|2026-01": completeEntry("2026-02-01T00:00:00Z", 0),
+      "MetaMask/core|2026-02": completeEntry("2026-03-01T00:00:00Z", 1),
+      "MetaMask/core|2026-03": completeEntry("2026-03-15T11:00:00Z", 0, "asOfCutoff"),
+    });
+    const data = aggregate({ config: testConfig, asOf: AS_OF, manifest, partitions });
+    expect(data.months.find((r) => r.month === "2026-02")?.externalReviewedPrs).toBe(1);
+    expect(data.firstReviews).toEqual([]);
+    expect(validateDashboardData(data)).toEqual([]);
+  });
+
   test("empty input -> valid empty dashboard with pending coverage", () => {
     const data = aggregate({
       config: testConfig,
@@ -355,6 +452,9 @@ describe("aggregate", () => {
     });
     expect(data.months).toEqual([]);
     expect(data.prs).toEqual([]);
+    expect(data.weeks).toEqual([]);
+    expect(data.firstReviews).toEqual([]);
+    expect(data.teamMerges).toEqual([]);
     expect(data.coverage).toHaveLength(6); // 2 repos x 3 months, all pending
     expect(data.coverage.every((c) => c.status === "pending")).toBe(true);
     expect(validateDashboardData(data)).toEqual([]);

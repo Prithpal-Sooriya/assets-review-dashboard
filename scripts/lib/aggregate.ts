@@ -21,9 +21,11 @@
  */
 import {
   ALL_REPOS,
+  type ActivityCounts,
   type CollectorConfig,
   type CoverageEntry,
   type DashboardData,
+  type FirstReviewSample,
   type Manifest,
   type MonthRow,
   type PrEntry,
@@ -31,17 +33,24 @@ import {
   type RawPrRecord,
   type RawReview,
   type ReviewerMonthRow,
+  type TeamMergeSample,
   type TrendMonthRow,
+  type WeekRow,
 } from "./types";
 import { changedLines, parseDiffSize, sizeBucket } from "./diff-size";
 import {
   addMonths,
+  isoWeekKey,
   loginSetLower,
   monthOf,
   monthRange,
   partitionKey,
+  startOfIsoWeekMs,
   startOfMonthIso,
 } from "./config";
+
+const DAY_MS = 86_400_000;
+const WEEK_MS = 7 * DAY_MS;
 
 /**
  * Manifest-complete partitions in the display window must have their raw
@@ -517,6 +526,22 @@ export function aggregate(input: AggregateInput): DashboardData {
     }
   }
 
+  // Prepared once per repo so month rows, week rows and timing samples
+  // share one definition of "qualifying review" and one cutoff.
+  const preparedByRepo = new Map<string, PreparedPr[]>();
+  const depsCompleteFor = (repo: string, month: string): boolean =>
+    monthRange(month, currentMonth).every((dm) => {
+      const key = partitionKey(repo, dm);
+      const st = manifest.partitions[key];
+      return st?.status === "complete" && loadedKeys.has(key);
+    });
+  for (const repo of cfg.repos) {
+    preparedByRepo.set(
+      repo,
+      (repoRecords.get(repo) ?? []).map((rp) => preparePr(cfg, rp)),
+    );
+  }
+
   // ---- Month rows (dependency-complete months only) -----------------------
   const roster = rosterOrder(cfg);
   const monthRows: MonthRow[] = [];
@@ -524,26 +549,16 @@ export function aggregate(input: AggregateInput): DashboardData {
   const trendRows: TrendMonthRow[] = [];
   const statsByKey = new Map<string, MonthStats>();
   for (const repo of cfg.repos) {
+    const prepared = preparedByRepo.get(repo)!;
     const resolved = repoRecords.get(repo)!;
     for (const m of monthsList) {
-      const depsComplete = monthRange(m, currentMonth).every((dm) => {
-        const key = partitionKey(repo, dm);
-        const st = manifest.partitions[key];
-        return st?.status === "complete" && loadedKeys.has(key);
-      });
-      if (!depsComplete) continue;
+      if (!depsCompleteFor(repo, m)) continue;
+      const monthStartMs = Date.parse(startOfMonthIso(m));
+      const monthEndMs = Math.min(Date.parse(startOfMonthIso(addMonths(m, 1))), asOfMs);
+      const counts = countActivity(prepared, monthStartMs, monthEndMs, () => true);
+      monthRows.push({ month: m, repo, ...counts });
       const stats = measureMonth(cfg, roster, resolved, m, asOfMs);
       statsByKey.set(`${repo}|${m}`, stats);
-      monthRows.push({
-        month: m,
-        repo,
-        internalReviewedPrs: stats.internalReviewedPrs,
-        externalReviewedPrs: stats.externalReviewedPrs,
-        reviewSubmissions: stats.reviewSubmissions,
-        reviewedUnmergedPrs: stats.reviewedUnmergedPrs,
-        mergedInternalPrs: stats.mergedInternalPrs,
-        mergedExternalReviewedPrs: stats.mergedExternalReviewedPrs,
-      });
       reviewerRows.push(...reviewerRowsFor(m, repo, roster, stats));
       trendRows.push(toTrendRow(m, repo, stats));
     }
@@ -566,6 +581,71 @@ export function aggregate(input: AggregateInput): DashboardData {
     return roster.indexOf(a.login) - roster.indexOf(b.login);
   });
   trendRows.sort(rowOrder);
+
+  // ---- Week rows -----------------------------------------------------------
+  // A week is emitted when at least one collection-window month it overlaps
+  // is dependency-complete. Events in months that are not complete are left
+  // out, and the week is marked partial — so weekly sums of submissions and
+  // merges equal the monthly sums for the same repo.
+  const rangeStartMs = Date.parse(rangeStartIso);
+  const weekRows: WeekRow[] = [];
+  const weekSpans = weeksOverlapping(rangeStartMs, asOfMs);
+  for (const repo of cfg.repos) {
+    const prepared = preparedByRepo.get(repo)!;
+    const allow = (month: string) => monthSet.has(month) && depsCompleteFor(repo, month);
+    for (const span of weekSpans) {
+      const clippedStart = Math.max(span.startMs, rangeStartMs);
+      const clippedEnd = Math.min(span.endMs, asOfMs);
+      if (clippedStart >= clippedEnd) continue;
+      const touched = monthsTouched(span.startMs, span.endMs);
+      const overlapsComplete = touched.some((m) => allow(m));
+      if (!overlapsComplete) continue;
+      const overlapsIncomplete = touched.some((m) => monthSet.has(m) && !depsCompleteFor(repo, m));
+      const counts = countActivity(prepared, clippedStart, clippedEnd, allow);
+      weekRows.push({
+        week: span.week,
+        weekStart: new Date(span.startMs).toISOString(),
+        repo,
+        partial: overlapsIncomplete || span.startMs < rangeStartMs || span.endMs > asOfMs,
+        ...counts,
+      });
+    }
+  }
+  weekRows.sort((a, b) => (a.week === b.week ? a.repo.localeCompare(b.repo) : a.week.localeCompare(b.week)));
+
+  // ---- Timing samples (no PR identity) ------------------------------------
+  const firstReviews: FirstReviewSample[] = [];
+  const teamMerges: TeamMergeSample[] = [];
+  for (const repo of cfg.repos) {
+    for (const pr of preparedByRepo.get(repo)!) {
+      const first = pr.qReviews[0];
+      if (first && first.at >= rangeStartMs && first.at < asOfMs) {
+        const reviewMonth = monthOf(new Date(first.at).toISOString());
+        if (depsCompleteFor(repo, reviewMonth)) {
+          const minutes = elapsedMinutes(pr.createdAt, first.at);
+          if (minutes !== null) {
+            firstReviews.push({
+              repo,
+              ownership: pr.internal ? "internal" : "external",
+              at: first.submittedAt,
+              minutes,
+            });
+          }
+        }
+      }
+      if (pr.internal && pr.mergedMs !== null && pr.mergedMs >= rangeStartMs && pr.mergedMs < asOfMs) {
+        const mergeMonth = monthOf(new Date(pr.mergedMs).toISOString());
+        if (depsCompleteFor(repo, mergeMonth)) {
+          const minutes = elapsedMinutes(pr.createdAt, pr.mergedMs);
+          if (minutes !== null) {
+            teamMerges.push({ repo, mergedAt: pr.mergedAt!, minutes });
+          }
+        }
+      }
+    }
+  }
+  firstReviews.sort(compareFirstReview);
+  teamMerges.sort(compareTeamMerge);
 
   // ---- Coverage ------------------------------------------------------------
   const coverage: CoverageEntry[] = [];
@@ -599,7 +679,149 @@ export function aggregate(input: AggregateInput): DashboardData {
     reviewers: reviewerRows,
     trends: trendRows,
     prs: prEntries,
+    weeks: weekRows,
+    firstReviews,
+    teamMerges,
   };
+}
+
+interface PreparedReview {
+  at: number;
+  submittedAt: string;
+}
+
+interface PreparedPr {
+  internal: boolean;
+  createdAt: string;
+  mergedAt: string | null;
+  mergedMs: number | null;
+  state: RawPrRecord["state"];
+  /** Qualifying reviews, earliest first. */
+  qReviews: PreparedReview[];
+}
+
+function preparePr(cfg: CollectorConfig, rp: ResolvedPr): PreparedPr {
+  const cutoffMs = Date.parse(rp.partitionCollectedAt);
+  const qReviews = qualifyingReviews(cfg, rp.record, cutoffMs)
+    .map((r) => ({ at: Date.parse(r.submittedAt!), submittedAt: r.submittedAt! }))
+    .filter((r) => Number.isFinite(r.at))
+    .sort((a, b) => a.at - b.at || a.submittedAt.localeCompare(b.submittedAt));
+  const mergedMs = rp.record.mergedAt === null ? null : Date.parse(rp.record.mergedAt);
+  return {
+    internal: isInternal(cfg, rp.record),
+    createdAt: rp.record.createdAt,
+    mergedAt: rp.record.mergedAt,
+    mergedMs: mergedMs !== null && Number.isFinite(mergedMs) ? mergedMs : null,
+    state: rp.record.state,
+    qReviews,
+  };
+}
+
+function emptyCounts(): ActivityCounts {
+  return {
+    internalReviewedPrs: 0,
+    externalReviewedPrs: 0,
+    reviewSubmissions: 0,
+    reviewedUnmergedPrs: 0,
+    mergedInternalPrs: 0,
+    mergedExternalReviewedPrs: 0,
+  };
+}
+
+/**
+ * Activity whose timestamp falls in [startMs, endMs) AND whose calendar
+ * month passes `allowMonth`. One PR counts once per call even if it has
+ * several reviews in the interval.
+ */
+function countActivity(
+  prepared: PreparedPr[],
+  startMs: number,
+  endMs: number,
+  allowMonth: (month: string) => boolean,
+): ActivityCounts {
+  const counts = emptyCounts();
+  if (!(startMs < endMs)) return counts;
+  const included = (t: number): boolean => {
+    if (t < startMs || t >= endMs) return false;
+    return allowMonth(monthOf(new Date(t).toISOString()));
+  };
+  for (const pr of prepared) {
+    const inPeriod = pr.qReviews.filter((r) => included(r.at));
+    if (inPeriod.length > 0) {
+      if (pr.internal) counts.internalReviewedPrs++;
+      else counts.externalReviewedPrs++;
+      counts.reviewSubmissions += inPeriod.length;
+      if (pr.state !== "MERGED") counts.reviewedUnmergedPrs++;
+    }
+    if (pr.mergedMs !== null && included(pr.mergedMs)) {
+      if (pr.internal) {
+        counts.mergedInternalPrs++;
+      } else if (pr.qReviews.some((r) => r.at <= pr.mergedMs!)) {
+        counts.mergedExternalReviewedPrs++;
+      }
+    }
+  }
+  return counts;
+}
+
+interface WeekSpan {
+  week: string;
+  startMs: number;
+  endMs: number;
+}
+
+/** ISO weeks that overlap [rangeStartMs, asOfMs). */
+function weeksOverlapping(rangeStartMs: number, asOfMs: number): WeekSpan[] {
+  const out: WeekSpan[] = [];
+  let startMs = startOfIsoWeekMs(rangeStartMs);
+  // Guard against a corrupt range walking forever.
+  for (let i = 0; i < 600 && startMs < asOfMs; i++) {
+    const endMs = startMs + WEEK_MS;
+    out.push({ week: isoWeekKey(startMs), startMs, endMs });
+    startMs = endMs;
+  }
+  return out;
+}
+
+/** Calendar months touched by [startMs, endMs), in order. */
+function monthsTouched(startMs: number, endMs: number): string[] {
+  const out: string[] = [];
+  let cursor = startMs;
+  for (let i = 0; i < 24 && cursor < endMs; i++) {
+    const month = monthOf(new Date(cursor).toISOString());
+    out.push(month);
+    const next = Date.parse(startOfMonthIso(addMonths(month, 1)));
+    if (!(next > cursor)) break;
+    cursor = next;
+  }
+  return out;
+}
+
+/** Nearest whole minute. Negative or non-finite spans are dropped. */
+function elapsedMinutes(fromIso: string, toMs: number): number | null {
+  const from = Date.parse(fromIso);
+  if (!Number.isFinite(from) || !Number.isFinite(toMs)) return null;
+  const minutes = Math.round((toMs - from) / 60_000);
+  if (!Number.isFinite(minutes) || minutes < 0) return null;
+  return minutes;
+}
+
+function compareFirstReview(a: FirstReviewSample, b: FirstReviewSample): number {
+  const dt = Date.parse(a.at) - Date.parse(b.at);
+  if (dt !== 0) return dt;
+  const repo = a.repo.localeCompare(b.repo);
+  if (repo !== 0) return repo;
+  const own = a.ownership.localeCompare(b.ownership);
+  if (own !== 0) return own;
+  return a.minutes - b.minutes;
+}
+
+function compareTeamMerge(a: TeamMergeSample, b: TeamMergeSample): number {
+  const dt = Date.parse(a.mergedAt) - Date.parse(b.mergedAt);
+  if (dt !== 0) return dt;
+  const repo = a.repo.localeCompare(b.repo);
+  if (repo !== 0) return repo;
+  return a.minutes - b.minutes;
 }
 
 /** Invariant checks used by tests and CI smoke runs. */
@@ -765,5 +987,93 @@ export function validateDashboardData(data: DashboardData): string[] {
       if (outcomes !== submissions) problems.push(`rollup trend ${m} outcomes do not match summed month rows`);
     }
   }
+
+  const countFields = [
+    "internalReviewedPrs",
+    "externalReviewedPrs",
+    "reviewSubmissions",
+    "reviewedUnmergedPrs",
+    "mergedInternalPrs",
+    "mergedExternalReviewedPrs",
+  ] as const;
+  if (!Array.isArray(data.weeks)) {
+    problems.push("weeks must be an array");
+  } else {
+    const seenWeeks = new Set<string>();
+    for (const w of data.weeks) {
+      const key = `${w.repo}|${w.week}`;
+      if (!WEEK_KEY_RE.test(w.week)) problems.push(`bad week key ${w.week}`);
+      const startMs = Date.parse(w.weekStart);
+      if (!Number.isFinite(startMs)) {
+        problems.push(`bad weekStart for ${key}`);
+      } else {
+        const d = new Date(startMs);
+        const midnightMonday =
+          d.getUTCDay() === 1 &&
+          d.getUTCHours() === 0 &&
+          d.getUTCMinutes() === 0 &&
+          d.getUTCSeconds() === 0 &&
+          d.getUTCMilliseconds() === 0 &&
+          d.toISOString() === w.weekStart;
+        if (!midnightMonday) problems.push(`weekStart ${w.weekStart} is not Monday 00:00:00.000Z`);
+        if (isoWeekKey(startMs) !== w.week) problems.push(`week ${w.week} does not match ${w.weekStart}`);
+      }
+      if (typeof w.partial !== "boolean") problems.push(`${key} partial must be boolean`);
+      if (seenWeeks.has(key)) problems.push(`duplicate week ${key}`);
+      seenWeeks.add(key);
+      for (const field of countFields) {
+        const v = w[field];
+        if (!Number.isInteger(v) || v < 0) problems.push(`bad ${field} on ${key}`);
+      }
+    }
+    const sortedWeeks = [...data.weeks].sort((a, b) =>
+      a.week === b.week ? a.repo.localeCompare(b.repo) : a.week.localeCompare(b.week),
+    );
+    if (JSON.stringify(sortedWeeks) !== JSON.stringify(data.weeks)) problems.push("weeks not sorted");
+
+    // Submissions and merges each have one timestamp, so the weekly totals
+    // equal the monthly totals for the same repo (boundary weeks keep the
+    // events that fall in collected months).
+    const reposWithMonths = [...new Set(data.months.map((r) => r.repo))];
+    for (const repo of reposWithMonths) {
+      for (const field of ["reviewSubmissions", "mergedInternalPrs", "mergedExternalReviewedPrs"] as const) {
+        const monthSum = data.months.filter((r) => r.repo === repo).reduce((s, r) => s + r[field], 0);
+        const weekSum = data.weeks.filter((r) => r.repo === repo).reduce((s, r) => s + r[field], 0);
+        if (monthSum !== weekSum) problems.push(`${repo} ${field}: weeks ${weekSum} != months ${monthSum}`);
+      }
+    }
+  }
+
+  const rangeStartMs = Date.parse(data.range.start);
+  const rangeEndMs = Date.parse(data.range.end);
+  if (!Array.isArray(data.firstReviews)) {
+    problems.push("firstReviews must be an array");
+  } else {
+    data.firstReviews.forEach((s, i) => {
+      const t = Date.parse(s.at);
+      if (!Number.isFinite(t)) problems.push(`firstReviews[${i}] bad at`);
+      else if (Number.isFinite(rangeStartMs) && (t < rangeStartMs || t >= rangeEndMs)) {
+        problems.push(`firstReviews[${i}] outside range`);
+      }
+      if (s.ownership !== "internal" && s.ownership !== "external") problems.push(`firstReviews[${i}] bad ownership`);
+      if (!Number.isInteger(s.minutes) || s.minutes < 0) problems.push(`firstReviews[${i}] bad minutes`);
+      if (i > 0 && compareFirstReview(data.firstReviews[i - 1]!, s) > 0) problems.push("firstReviews not sorted");
+    });
+  }
+  if (!Array.isArray(data.teamMerges)) {
+    problems.push("teamMerges must be an array");
+  } else {
+    data.teamMerges.forEach((s, i) => {
+      const t = Date.parse(s.mergedAt);
+      if (!Number.isFinite(t)) problems.push(`teamMerges[${i}] bad mergedAt`);
+      else if (Number.isFinite(rangeStartMs) && (t < rangeStartMs || t >= rangeEndMs)) {
+        problems.push(`teamMerges[${i}] outside range`);
+      }
+      if (!Number.isInteger(s.minutes) || s.minutes < 0) problems.push(`teamMerges[${i}] bad minutes`);
+      if (i > 0 && compareTeamMerge(data.teamMerges[i - 1]!, s) > 0) problems.push("teamMerges not sorted");
+    });
+  }
   return problems;
 }
+
+const WEEK_KEY_RE = /^\d{4}-W(0[1-9]|[1-4]\d|5[0-3])$/;

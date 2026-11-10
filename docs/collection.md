@@ -105,17 +105,39 @@ aggregation dedupes by freshest snapshot per PR).
   at/before merge (pre-window review evidence retained in `reviewMonths`).
 - Roster is fixed across the whole window (dawnseeker8's join date is
   unknown/disclosed — assumed full-window).
+- `weeks[]` repeats the month-row counts on ISO weeks (Monday 00:00 UTC
+  through the next Monday). A week is emitted for a repo when at least one
+  collection-window month it overlaps is dependency-complete. Events that
+  fall in a month without a month row are omitted and the week is
+  `partial`. The week clipped by the window start or the cutoff is partial
+  too. Each submission and each merge has one timestamp, so those weekly
+  totals equal the monthly totals for the same repo. A PR reviewed in two
+  weeks counts in both, same as months.
+- `firstReviews[]` is one sample per PR whose earliest qualifying team
+  review falls inside the window and in a dependency-complete month:
+  `{ repo, ownership, at, minutes }`. `minutes` is the nearest whole minute
+  from `createdAt` to that review. There is no PR id, title, author or
+  reviewer. PRs with no qualifying review are absent (the metric is the
+  wait among reviews that happened). A negative span (review timestamp
+  before `createdAt`) is dropped. The UI buckets samples by the week and
+  the month of `at` and summarises each bucket with the median and the
+  75th percentile (linear interpolation).
+- `teamMerges[]` is one sample per internal PR merged inside the window,
+  in a dependency-complete month: `{ repo, mergedAt, minutes }` from
+  `createdAt` to `mergedAt`. Team PRs merged without a qualifying review
+  are included. Open team PRs are not. Same median / 75th percentile
+  summary, bucketed by the merge.
 - `reviewers[]` is one row per roster member per emitted repo-month, plus a
   cross-repo rollup (`repo: "*"`). Counts are qualifying reviews only
   (same exclusions as the team totals). A member with no reviews is stored
   at zero so a quiet month stays visible. Login spelling is the roster's.
 - `trends[]` is one row per emitted repo-month, plus the same `"*"` rollup.
-  Outcome counts sum to `reviewSubmissions`. Time to first review is
-  `createdAt` → earliest qualifying review, in that review's month, draft
-  time included. Review-to-merge is the earliest qualifying review at or
-  before merge → `mergedAt`, in the merge month. Medians are whole minutes;
-  null means the sample was empty. The rollup recomputes medians from the
-  pooled samples.
+  Outcome counts sum to `reviewSubmissions`. Time to first review on a
+  trend row is `createdAt` → earliest qualifying review, in that review's
+  month, draft time included. Review-to-merge is the earliest qualifying
+  review at or before merge → `mergedAt`, in the merge month. Medians are
+  whole minutes; null means the sample was empty. The rollup recomputes
+  medians from the pooled samples.
 - `multiReviewerPrs` counts reviewed PRs with qualifying reviews from two
   or more roster members in that month.
 - Diff size (`additions`, `deletions`, `changedFiles` on the raw PR) is the

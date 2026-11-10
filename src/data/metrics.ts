@@ -2,12 +2,15 @@ import {
   ALL_REPOS,
   type CoverageEntry,
   type CoverageStatus,
+  type FirstReviewSample,
   type MonthEntry,
   type PrEntry,
   type ReviewerMonthEntry,
+  type TeamMergeSample,
   type TrendMonthEntry,
+  type WeekEntry,
 } from './types'
-import { compareRepos } from './format'
+import { compareRepos, isoWeekKeyFromIso, monthExtendsPastRange, monthKeyOfISO } from './format'
 
 export interface MonthAggregate {
   month: string
@@ -345,4 +348,188 @@ export function trendMonths(
       sizeXLarge: row.sizeXLarge,
     }
   })
+}
+
+export type TimeGrain = 'week' | 'month'
+
+export interface WeekAggregate {
+  week: string
+  weekStart: string
+  partial: boolean
+  internalReviewedPrs: number
+  externalReviewedPrs: number
+  reviewSubmissions: number
+  reviewedUnmergedPrs: number
+  mergedInternalPrs: number
+  mergedExternalReviewedPrs: number
+}
+
+export interface Period {
+  key: string
+  start: string
+  partial: boolean
+}
+
+const DAY_MS = 86_400_000
+
+/** True when any of the seven UTC days of the week falls in `months`. */
+export function weekOverlapsMonths(weekStartIso: string, months: ReadonlySet<string>): boolean {
+  const start = Date.parse(weekStartIso)
+  if (!Number.isFinite(start)) return false
+  for (let i = 0; i < 7; i++) {
+    const key = monthKeyOfISO(new Date(start + i * DAY_MS).toISOString())
+    if (key && months.has(key)) return true
+  }
+  return false
+}
+
+/**
+ * ISO weeks that overlap the displayed months. A week is partial if any
+ * contributing repo marked it partial (clipped window, cutoff, or a month
+ * inside the week that was not collected).
+ */
+export function weekPeriods(weeks: WeekEntry[], windowMonths: string[]): Period[] {
+  const months = new Set(windowMonths)
+  const byWeek = new Map<string, Period>()
+  for (const row of weeks) {
+    if (!weekOverlapsMonths(row.weekStart, months)) continue
+    const existing = byWeek.get(row.week)
+    if (!existing) {
+      byWeek.set(row.week, { key: row.week, start: row.weekStart, partial: row.partial })
+    } else if (row.partial) {
+      existing.partial = true
+    }
+  }
+  return [...byWeek.values()].sort((a, b) => a.start.localeCompare(b.start) || a.key.localeCompare(b.key))
+}
+
+export function monthPeriods(windowMonths: string[], rangeEnd: string): Period[] {
+  return windowMonths.map((month) => ({
+    key: month,
+    start: `${month}-01T00:00:00.000Z`,
+    partial: monthExtendsPastRange(month, rangeEnd),
+  }))
+}
+
+export function aggregateWeeks(
+  weeks: WeekEntry[],
+  repoFilter: string | null,
+  periods: Period[],
+): WeekAggregate[] {
+  const byWeek = new Map<string, WeekAggregate>()
+  for (const period of periods) {
+    byWeek.set(period.key, {
+      week: period.key,
+      weekStart: period.start,
+      partial: period.partial,
+      internalReviewedPrs: 0,
+      externalReviewedPrs: 0,
+      reviewSubmissions: 0,
+      reviewedUnmergedPrs: 0,
+      mergedInternalPrs: 0,
+      mergedExternalReviewedPrs: 0,
+    })
+  }
+  for (const row of weeks) {
+    if (repoFilter !== null && row.repo !== repoFilter) continue
+    const agg = byWeek.get(row.week)
+    if (!agg) continue
+    agg.internalReviewedPrs += row.internalReviewedPrs
+    agg.externalReviewedPrs += row.externalReviewedPrs
+    agg.reviewSubmissions += row.reviewSubmissions
+    agg.reviewedUnmergedPrs += row.reviewedUnmergedPrs
+    agg.mergedInternalPrs += row.mergedInternalPrs
+    agg.mergedExternalReviewedPrs += row.mergedExternalReviewedPrs
+    if (row.partial) agg.partial = true
+  }
+  return periods.map((period) => byWeek.get(period.key)!)
+}
+
+export interface DurationPoint {
+  key: string
+  start: string
+  partial: boolean
+  count: number
+  medianMinutes: number | null
+  p75Minutes: number | null
+}
+
+export interface DurationSummary {
+  count: number
+  medianMinutes: number | null
+  p75Minutes: number | null
+}
+
+/**
+ * Percentile of integer minute samples. Linear interpolation between the
+ * closest ranks (the same definition as Excel PERCENTILE and numpy's
+ * linear method). The result is rounded to the nearest minute. `p` is in
+ * [0, 1]; the median is 0.5 and the 75th percentile is 0.75.
+ */
+export function percentileMinutes(values: readonly number[], p: number): number | null {
+  if (values.length === 0) return null
+  const sorted = [...values].sort((a, b) => a - b)
+  if (sorted.length === 1) return sorted[0]!
+  const clamped = Math.min(1, Math.max(0, p))
+  const rank = clamped * (sorted.length - 1)
+  const lo = Math.floor(rank)
+  const hi = Math.ceil(rank)
+  const weight = rank - lo
+  return Math.round(sorted[lo]! * (1 - weight) + sorted[hi]! * weight)
+}
+
+export interface TimedSample {
+  repo: string
+  at: string
+  minutes: number
+}
+
+/**
+ * Bucket samples onto `periods` for the selected grain. The summary is the
+ * median of the samples that landed on a displayed period — not an average
+ * of the per-period medians. Samples whose week or month is not on the axis
+ * are left out (a week withheld for incomplete coverage stays out of the
+ * weekly series).
+ */
+export function durationSeries(
+  samples: readonly TimedSample[],
+  grain: TimeGrain,
+  periods: readonly Period[],
+  repoFilter: string | null,
+): { points: DurationPoint[]; summary: DurationSummary } {
+  const buckets = new Map<string, number[]>(periods.map((period) => [period.key, []]))
+  const included: number[] = []
+  for (const sample of samples) {
+    if (repoFilter !== null && sample.repo !== repoFilter) continue
+    const key = grain === 'month' ? monthKeyOfISO(sample.at) : isoWeekKeyFromIso(sample.at)
+    if (key === null || !buckets.has(key)) continue
+    buckets.get(key)!.push(sample.minutes)
+    included.push(sample.minutes)
+  }
+  return {
+    points: periods.map((period) => {
+      const values = buckets.get(period.key) ?? []
+      return {
+        key: period.key,
+        start: period.start,
+        partial: period.partial,
+        count: values.length,
+        medianMinutes: percentileMinutes(values, 0.5),
+        p75Minutes: percentileMinutes(values, 0.75),
+      }
+    }),
+    summary: {
+      count: included.length,
+      medianMinutes: percentileMinutes(included, 0.5),
+      p75Minutes: percentileMinutes(included, 0.75),
+    },
+  }
+}
+
+export function firstReviewSamples(samples: readonly FirstReviewSample[]): TimedSample[] {
+  return samples.map((sample) => ({ repo: sample.repo, at: sample.at, minutes: sample.minutes }))
+}
+
+export function teamMergeSamples(samples: readonly TeamMergeSample[]): TimedSample[] {
+  return samples.map((sample) => ({ repo: sample.repo, at: sample.mergedAt, minutes: sample.minutes }))
 }

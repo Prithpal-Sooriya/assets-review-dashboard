@@ -1,5 +1,7 @@
+import { useEffect } from 'react'
 import { useMeasure } from '../hooks/useMeasure'
 import { DEFAULT_PADDING, barLayout, labelStep, niceMax, niceTicks } from './chartUtils'
+import { YAxis } from './YAxis'
 import { formatInt, formatMonthShort } from '../data/format'
 
 export interface Series {
@@ -15,23 +17,58 @@ interface GroupedBarChartProps {
   series: Series[]
   height?: number
   yLabel?: string
-  /** Axis tick labels. Defaults to grouped thousands. */
-  formatTick?: (value: number) => string
+  /** Y-axis tick labels. Defaults to grouped thousands. */
+  formatYTick?: (value: number) => string
+  /** X-axis tick. Defaults to the short month name. */
+  formatTick?: (key: string, index: number) => string
+  /**
+   * Minimum pixels per group. When the groups need more room than the
+   * container, the chart scrolls horizontally instead of crushing the labels.
+   */
+  minGroupPx?: number
+  ariaLabel?: string
 }
 
 /**
  * Side-by-side monthly bars for 1-2 series (merge-vs-review comparisons,
  * unmerged snapshot). Purely presentational — no interaction.
  */
-export function GroupedBarChart({ months, series, height = 220, formatTick = formatInt }: GroupedBarChartProps) {
+export function GroupedBarChart({
+  months,
+  series,
+  height = 220,
+  formatYTick = formatInt,
+  formatTick,
+  minGroupPx,
+  ariaLabel,
+}: GroupedBarChartProps) {
   const [wrapRef, size] = useMeasure<HTMLDivElement>()
+  // Latest weeks sit on the right. Start there when the axis scrolls.
+  useEffect(() => {
+    if (!minGroupPx) return
+    const el = wrapRef.current
+    if (!el) return
+    el.scrollLeft = el.scrollWidth
+  }, [minGroupPx, size.width, months.length, wrapRef])
 
   if (size.width <= 0) {
-    return <div className="chart-wrap" ref={wrapRef} style={{ height }} aria-hidden="true" />
+    // Keep the same DOM shape as the measured chart so the observer stays
+    // attached to the scrolling plot, not a placeholder that gets replaced.
+    if (!minGroupPx) {
+      return <div className="chart-wrap" ref={wrapRef} style={{ height }} aria-hidden="true" />
+    }
+    return (
+      <div className="chart-row" aria-hidden="true">
+        <div className="chart-yaxis" style={{ width: 48, height }} />
+        <div className="chart-scroll" ref={wrapRef} style={{ height }} />
+      </div>
+    )
   }
 
-  const pad = DEFAULT_PADDING
-  const layout = barLayout(size.width, height, months.length, pad)
+  const scrolling = minGroupPx !== undefined
+  const pad = scrolling ? { ...DEFAULT_PADDING, left: 8 } : DEFAULT_PADDING
+  const svgWidth = scrolling ? Math.max(size.width, months.length * minGroupPx) : size.width
+  const layout = barLayout(svgWidth, height, months.length, pad)
   const max = Math.max(1, ...series.flatMap((s) => s.values))
   const yMax = niceMax(max)
   const ticks = niceTicks(yMax)
@@ -41,21 +78,37 @@ export function GroupedBarChart({ months, series, height = 220, formatTick = for
   const step = labelStep(layout.groupWidth, 30)
 
   const totalBySeries = series.map((s) => s.values.reduce((a, b) => a + b, 0))
-  const summary = `Grouped bar chart by month: ${series
+  const summary = ariaLabel ?? `Grouped bar chart by month: ${series
     .map((s, i) => `${s.label} total ${formatInt(totalBySeries[i]!)}`)
     .join('; ')}.`
 
-  return (
-    <div className="chart-wrap" ref={wrapRef}>
-      <svg className="chart" height={height} role="img" aria-label={summary} focusable="false">
+  const plot = (
+    <div
+      className={scrolling ? 'chart-scroll' : 'chart-wrap'}
+      ref={wrapRef}
+      tabIndex={scrolling ? 0 : undefined}
+      role={scrolling ? 'region' : undefined}
+      aria-label={scrolling ? `${summary} Scroll horizontally for earlier weeks.` : undefined}
+    >
+      <svg
+        className="chart"
+        height={height}
+        width={minGroupPx ? svgWidth : undefined}
+        style={minGroupPx ? { width: svgWidth } : undefined}
+        role="img"
+        aria-label={summary}
+        focusable="false"
+      >
         {ticks.map((t) => {
           const y = layout.y0 - scale(t)
           return (
             <g key={t}>
               <line className="gridline" x1={layout.x0} x2={layout.x0 + layout.plotWidth} y1={y} y2={y} />
-              <text x={layout.x0 - 8} y={y + 4} textAnchor="end">
-                {formatTick(t)}
-              </text>
+              {!scrolling && (
+                <text x={layout.x0 - 8} y={y + 4} textAnchor="end">
+                  {formatYTick(t)}
+                </text>
+              )}
             </g>
           )
         })}
@@ -84,13 +137,28 @@ export function GroupedBarChart({ months, series, height = 220, formatTick = for
               })}
               {showLabel && (
                 <text x={cx} y={layout.y0 + 16} textAnchor="middle">
-                  {formatMonthShort(month)}
+                  {formatTick ? formatTick(month, i) : formatMonthShort(month)}
                 </text>
               )}
             </g>
           )
         })}
       </svg>
+    </div>
+  )
+
+  if (!scrolling) return plot
+  return (
+    <div className="chart-row">
+      <YAxis
+        height={height}
+        padTop={pad.top}
+        padBottom={pad.bottom}
+        ticks={ticks}
+        scale={scale}
+        format={(tick) => formatYTick(tick)}
+      />
+      {plot}
     </div>
   )
 }

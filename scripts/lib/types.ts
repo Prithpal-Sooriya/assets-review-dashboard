@@ -122,15 +122,55 @@ export interface CoverageEntry {
   detail?: string;
 }
 
-export interface MonthRow {
-  month: string;
-  repo: string;
+/** Counts shared by a month row and a week row. */
+export interface ActivityCounts {
   internalReviewedPrs: number;
   externalReviewedPrs: number;
   reviewSubmissions: number;
   reviewedUnmergedPrs: number;
   mergedInternalPrs: number;
   mergedExternalReviewedPrs: number;
+}
+
+export interface MonthRow extends ActivityCounts {
+  month: string;
+  repo: string;
+}
+
+/**
+ * One ISO week (Monday 00:00 UTC through the next Monday) for one repo.
+ * `partial` is true when the week is clipped by the window or the cutoff,
+ * or when part of the week falls in a month that was not collected.
+ */
+export interface WeekRow extends ActivityCounts {
+  week: string; // "YYYY-Www"
+  weekStart: string; // Monday 00:00:00.000Z
+  repo: string;
+  partial: boolean;
+}
+
+/**
+ * Wait from PR creation to the earliest qualifying team review.
+ * No PR identity — team-level only. Bucketed in the UI by `at`.
+ */
+export interface FirstReviewSample {
+  repo: string;
+  ownership: "internal" | "external";
+  /** ISO timestamp of the earliest qualifying team review. */
+  at: string;
+  /** Whole minutes from createdAt to `at` (nearest minute). */
+  minutes: number;
+}
+
+/**
+ * Wait from creation to merge for one internal (team) PR.
+ * No PR identity. Bucketed in the UI by `mergedAt`.
+ */
+export interface TeamMergeSample {
+  repo: string;
+  mergedAt: string;
+  /** Whole minutes from createdAt to mergedAt (nearest minute). */
+  minutes: number;
 }
 
 /**
@@ -220,4 +260,10 @@ export interface DashboardData {
   /** One row per emitted repo-month, plus an ALL_REPOS rollup. */
   trends: TrendMonthRow[];
   prs: PrEntry[];
+  /** ISO weeks overlapping the window. Same activity rules as `months`. */
+  weeks: WeekRow[];
+  /** One sample per PR whose first qualifying team review falls in the window. */
+  firstReviews: FirstReviewSample[];
+  /** One sample per internal PR merged in the window. */
+  teamMerges: TeamMergeSample[];
 }

@@ -75,7 +75,7 @@ export function TrendSection({ rows, repoFilter, windowMonths }: TrendSectionPro
       </p>
       <GroupedBarChart
         months={months}
-        formatTick={(n) => formatDurationMinutes(n)}
+        formatYTick={(n) => formatDurationMinutes(n)}
         series={[
           {
             key: 'first',

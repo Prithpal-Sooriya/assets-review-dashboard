@@ -121,6 +121,44 @@ export function tsLt(a: string, b: string): boolean {
   return Date.parse(a) < Date.parse(b);
 }
 
+// ============================================================================
+// ISO weeks (UTC, Monday 00:00). Keep in lockstep with src/data/format.ts.
+// ============================================================================
+
+const DAY_MS = 86_400_000;
+
+/** Monday 00:00:00.000 UTC of the ISO week containing `ms`. */
+export function startOfIsoWeekMs(ms: number): number {
+  const d = new Date(ms);
+  const daysFromMonday = (d.getUTCDay() + 6) % 7;
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - daysFromMonday);
+}
+
+/**
+ * ISO week-year and week number. The week-year is the year of that week's
+ * Thursday (the week containing 4 January).
+ */
+export function isoWeekParts(ms: number): { year: number; week: number; startMs: number } {
+  const startMs = startOfIsoWeekMs(ms);
+  const thursday = startMs + 3 * DAY_MS;
+  const year = new Date(thursday).getUTCFullYear();
+  const week1Start = startOfIsoWeekMs(Date.UTC(year, 0, 4));
+  const week = Math.round((startMs - week1Start) / (7 * DAY_MS)) + 1;
+  return { year, week, startMs };
+}
+
+/** "YYYY-Www" (ISO week-year, week 01–53). */
+export function isoWeekKey(ms: number): string {
+  const { year, week } = isoWeekParts(ms);
+  return `${year}-W${String(week).padStart(2, "0")}`;
+}
+
+export function isoWeekKeyFromIso(iso: string): string | null {
+  const ms = Date.parse(iso);
+  if (!Number.isFinite(ms)) return null;
+  return isoWeekKey(ms);
+}
+
 export function repoSlug(repo: string): string {
   return repo.split("/")[1] ?? repo.replace(/[^A-Za-z0-9_.-]/g, "_");
 }

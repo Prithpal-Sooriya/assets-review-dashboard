@@ -3,13 +3,18 @@ import { AxeBuilder } from '@axe-core/playwright'
 import demoJson from '../../src/data/demo-fixture.json' with { type: 'json' }
 import {
   aggregateMonths,
+  durationSeries,
   displayWindow,
+  firstReviewSamples,
+  monthPeriods,
   orderedMonthKeys,
   prsReviewedIn,
+  teamMergeSamples,
   totalAggregate,
+  weekPeriods,
 } from '../../src/data/metrics'
 import type { DashboardData } from '../../src/data/types'
-import { formatMonthKey } from '../../src/data/format'
+import { formatDurationMinutes, formatMonthKey } from '../../src/data/format'
 
 const demo = demoJson as unknown as DashboardData
 const monthKeys = orderedMonthKeys(demo.months)
@@ -194,6 +199,48 @@ test('has no detectable accessibility violations (axe)', async ({ page }) => {
     .analyze()
   const serious = results.violations.filter((v) => v.impact === 'serious' || v.impact === 'critical')
   expect(serious).toEqual([])
+})
+
+test('weekly breakdown, time to first review and team time to merge are on the page', async ({ page }) => {
+  const weekly = page.locator('section', { has: page.getByRole('heading', { name: 'Reviewed PRs per week' }) })
+  await expect(weekly).toBeVisible()
+  await expect(weekly.getByRole('img', { name: /Reviewed pull requests per week/ })).toBeVisible()
+
+  const weekAxis = weekPeriods(demo.weeks, windowMonths)
+  const internal = durationSeries(
+    firstReviewSamples(demo.firstReviews.filter((s) => s.ownership === 'internal')),
+    'week',
+    weekAxis,
+    null,
+  )
+  const firstReview = page.locator('section', { has: page.getByRole('heading', { name: 'Time to first review' }) })
+  await expect(firstReview.getByRole('button', { name: 'Week' })).toHaveAttribute('aria-pressed', 'true')
+  await expect(firstReview.locator('.timing-summary__value').first()).toHaveText(
+    formatDurationMinutes(internal.summary.medianMinutes),
+  )
+  await firstReview.getByRole('button', { name: 'Month' }).click()
+  await expect(firstReview.getByRole('button', { name: 'Month' })).toHaveAttribute('aria-pressed', 'true')
+  await expect(firstReview.getByRole('img', { name: /Time to first review by month/ })).toBeVisible()
+  const monthAxis = monthPeriods(windowMonths, demo.range.end)
+  const internalMonth = durationSeries(
+    firstReviewSamples(demo.firstReviews.filter((s) => s.ownership === 'internal')),
+    'month',
+    monthAxis,
+    null,
+  )
+  await expect(firstReview.locator('.timing-summary__value').first()).toHaveText(
+    formatDurationMinutes(internalMonth.summary.medianMinutes),
+  )
+
+  const merge = page.locator('section', { has: page.getByRole('heading', { name: 'Time to merge, team PRs' }) })
+  const weeklyMerge = durationSeries(teamMergeSamples(demo.teamMerges), 'week', weekAxis, null)
+  await expect(merge.getByRole('img', { name: /Time to merge for team pull requests by week/ })).toBeVisible()
+  await expect(merge.locator('.timing-summary__value')).toHaveText(formatDurationMinutes(weeklyMerge.summary.medianMinutes))
+  await merge.getByRole('button', { name: 'Month' }).click()
+  await expect(merge.getByRole('button', { name: 'Month' })).toHaveAttribute('aria-pressed', 'true')
+  await expect(merge.getByRole('img', { name: /Time to merge for team pull requests by month/ })).toBeVisible()
+  const monthlyMerge = durationSeries(teamMergeSamples(demo.teamMerges), 'month', monthAxis, null)
+  await expect(merge.locator('.timing-summary__value')).toHaveText(formatDurationMinutes(monthlyMerge.summary.medianMinutes))
 })
 
 test('window caption reflects the rolling 12+partial month default', async ({ page }) => {
