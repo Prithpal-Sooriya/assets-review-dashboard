@@ -40,8 +40,9 @@ export function MethodologyCard({ loaded }: { loaded: LoadedDashboard }) {
         </ul>
       )}
       <p className="section__note">
-        This dashboard shows team-level aggregates and minimal PR metadata only. No individual
-        reviewer data, rankings or comparisons are collected or displayed.
+        Reviewer charts name the configured Assets roster only. Review text, emails, and anyone
+        outside that roster are not included. Pull request size is the diff on the collected
+        snapshot.
       </p>
     </section>
   )

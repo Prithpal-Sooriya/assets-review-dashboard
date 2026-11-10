@@ -66,6 +66,24 @@ export function formatInt(n: number): string {
   return intFormatter.format(n)
 }
 
+/**
+ * Compact duration for medians stored as whole minutes.
+ * Under an hour stays in minutes, under two days in hours, then days.
+ */
+export function formatDurationMinutes(minutes: number | null): string {
+  if (minutes === null || !Number.isFinite(minutes)) return '—'
+  const whole = Math.max(0, Math.round(minutes))
+  if (whole < 60) return `${whole}m`
+  if (whole < 48 * 60) {
+    const hours = whole / 60
+    const text = hours >= 10 ? String(Math.round(hours)) : String(Math.round(hours * 10) / 10)
+    return `${text.replace(/\.0$/, '')}h`
+  }
+  const days = whole / (60 * 24)
+  const text = days >= 10 ? String(Math.round(days)) : String(Math.round(days * 10) / 10)
+  return `${text.replace(/\.0$/, '')}d`
+}
+
 /** Hard cap so a corrupt range can never loop the month walk. */
 const COVERAGE_WINDOW_MONTHS_CAP = 1200
 

@@ -19,17 +19,21 @@
  *    in month M may live in any later partition because later activity
  *    moves its updated_at).
  */
-import type {
-  CollectorConfig,
-  CoverageEntry,
-  DashboardData,
-  Manifest,
-  MonthRow,
-  PrEntry,
-  RawPartition,
-  RawPrRecord,
-  RawReview,
+import {
+  ALL_REPOS,
+  type CollectorConfig,
+  type CoverageEntry,
+  type DashboardData,
+  type Manifest,
+  type MonthRow,
+  type PrEntry,
+  type RawPartition,
+  type RawPrRecord,
+  type RawReview,
+  type ReviewerMonthRow,
+  type TrendMonthRow,
 } from "./types";
+import { changedLines, parseDiffSize, sizeBucket } from "./diff-size";
 import {
   addMonths,
   loginSetLower,
@@ -118,6 +122,309 @@ function qualifyingReviews(cfg: CollectorConfig, record: RawPrRecord, cutoffMs: 
     if (Date.parse(r.submittedAt) >= cutoffMs) return false; // at/after partition cutoff
     return true;
   });
+}
+
+interface ReviewerAcc {
+  reviewSubmissions: number;
+  reviewedPrs: number;
+  approvals: number;
+  changesRequested: number;
+  comments: number;
+  dismissed: number;
+}
+
+interface MonthStats {
+  internalReviewedPrs: number;
+  externalReviewedPrs: number;
+  reviewSubmissions: number;
+  reviewedUnmergedPrs: number;
+  mergedInternalPrs: number;
+  mergedExternalReviewedPrs: number;
+  reviewers: Map<string, ReviewerAcc>;
+  multiReviewerPrs: number;
+  firstReviewMinutes: number[];
+  reviewedMerges: number;
+  reviewToMergeMinutes: number[];
+  changedLines: number[];
+  changedFiles: number[];
+  sizeSmall: number;
+  sizeMedium: number;
+  sizeLarge: number;
+  sizeXLarge: number;
+}
+
+function emptyAcc(): ReviewerAcc {
+  return {
+    reviewSubmissions: 0,
+    reviewedPrs: 0,
+    approvals: 0,
+    changesRequested: 0,
+    comments: 0,
+    dismissed: 0,
+  };
+}
+
+function rosterOrder(cfg: CollectorConfig): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const login of cfg.roster) {
+    const lc = login.toLowerCase();
+    if (seen.has(lc)) continue;
+    seen.add(lc);
+    out.push(login);
+  }
+  return out;
+}
+
+function canonicalLogin(roster: string[], login: string): string | null {
+  const lc = login.toLowerCase();
+  return roster.find((name) => name.toLowerCase() === lc) ?? null;
+}
+
+/** Median, rounding a tie of the two middle values to the nearest integer. */
+function median(values: number[]): number | null {
+  if (values.length === 0) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  if (sorted.length % 2 === 1) return sorted[mid]!;
+  return Math.round((sorted[mid - 1]! + sorted[mid]!) / 2);
+}
+
+function bumpState(acc: ReviewerAcc, state: string): void {
+  if (state === "APPROVED") acc.approvals++;
+  else if (state === "CHANGES_REQUESTED") acc.changesRequested++;
+  else if (state === "COMMENTED") acc.comments++;
+  else if (state === "DISMISSED") acc.dismissed++;
+}
+
+/**
+ * Month counters for one repo. Same qualifying-review rules as the
+ * historical month row, plus per-person attribution, pace samples, and
+ * diff-size samples. Pace uses the earliest qualifying review on the
+ * freshest snapshot (including reviews submitted before the window).
+ */
+function measureMonth(
+  cfg: CollectorConfig,
+  roster: string[],
+  resolved: ResolvedPr[],
+  month: string,
+  asOfMs: number,
+): MonthStats {
+  const monthStartMs = Date.parse(startOfMonthIso(month));
+  const monthEndMs = Date.parse(startOfMonthIso(addMonths(month, 1)));
+  const reviewers = new Map<string, ReviewerAcc>();
+  for (const login of roster) reviewers.set(login, emptyAcc());
+  const stats: MonthStats = {
+    internalReviewedPrs: 0,
+    externalReviewedPrs: 0,
+    reviewSubmissions: 0,
+    reviewedUnmergedPrs: 0,
+    mergedInternalPrs: 0,
+    mergedExternalReviewedPrs: 0,
+    reviewers,
+    multiReviewerPrs: 0,
+    firstReviewMinutes: [],
+    reviewedMerges: 0,
+    reviewToMergeMinutes: [],
+    changedLines: [],
+    changedFiles: [],
+    sizeSmall: 0,
+    sizeMedium: 0,
+    sizeLarge: 0,
+    sizeXLarge: 0,
+  };
+
+  for (const rp of resolved) {
+    const record = rp.record;
+    const cutoffMs = Date.parse(rp.partitionCollectedAt);
+    const qReviews = qualifyingReviews(cfg, record, cutoffMs);
+    const inMonth = qReviews.filter((r) => {
+      const t = Date.parse(r.submittedAt!);
+      return t >= monthStartMs && t < monthEndMs && t < asOfMs;
+    });
+    if (inMonth.length > 0) {
+      const internal = isInternal(cfg, record);
+      if (internal) stats.internalReviewedPrs++;
+      else stats.externalReviewedPrs++;
+      stats.reviewSubmissions += inMonth.length;
+      if (record.state !== "MERGED") stats.reviewedUnmergedPrs++;
+
+      const distinct = new Set<string>();
+      const seenPr = new Set<string>();
+      for (const r of inMonth) {
+        const login = canonicalLogin(roster, r.authorLogin);
+        if (!login) continue;
+        distinct.add(login);
+        const acc = reviewers.get(login)!;
+        acc.reviewSubmissions++;
+        const prKey = `${login}#${record.number}`;
+        if (!seenPr.has(prKey)) {
+          seenPr.add(prKey);
+          acc.reviewedPrs++;
+        }
+        bumpState(acc, r.state);
+      }
+      if (distinct.size >= 2) stats.multiReviewerPrs++;
+
+      const size = parseDiffSize(record);
+      if (size) {
+        const lines = changedLines(size);
+        stats.changedLines.push(lines);
+        stats.changedFiles.push(size.changedFiles);
+        const bucket = sizeBucket(lines);
+        if (bucket === "small") stats.sizeSmall++;
+        else if (bucket === "medium") stats.sizeMedium++;
+        else if (bucket === "large") stats.sizeLarge++;
+        else stats.sizeXLarge++;
+      }
+    }
+    if (record.mergedAt !== null) {
+      const mergedMs = Date.parse(record.mergedAt);
+      const mergedInMonth = mergedMs >= monthStartMs && mergedMs < monthEndMs && mergedMs < asOfMs;
+      if (mergedInMonth) {
+        if (isInternal(cfg, record)) {
+          stats.mergedInternalPrs++;
+        } else if (qReviews.some((r) => Date.parse(r.submittedAt!) <= mergedMs)) {
+          stats.mergedExternalReviewedPrs++;
+        }
+        const prior = qReviews.filter((r) => Date.parse(r.submittedAt!) <= mergedMs);
+        if (prior.length > 0) {
+          let firstMs = Infinity;
+          for (const r of prior) firstMs = Math.min(firstMs, Date.parse(r.submittedAt!));
+          if (Number.isFinite(firstMs) && mergedMs >= firstMs) {
+            stats.reviewedMerges++;
+            stats.reviewToMergeMinutes.push(Math.round((mergedMs - firstMs) / 60000));
+          }
+        }
+      }
+    }
+    if (qReviews.length > 0) {
+      let firstMs = Infinity;
+      for (const r of qReviews) firstMs = Math.min(firstMs, Date.parse(r.submittedAt!));
+      const createdMs = Date.parse(record.createdAt);
+      if (
+        firstMs >= monthStartMs &&
+        firstMs < monthEndMs &&
+        firstMs < asOfMs &&
+        Number.isFinite(createdMs) &&
+        firstMs >= createdMs
+      ) {
+        stats.firstReviewMinutes.push(Math.round((firstMs - createdMs) / 60000));
+      }
+    }
+  }
+  return stats;
+}
+
+function outcomeTotals(stats: MonthStats): Pick<TrendMonthRow, "approvals" | "changesRequested" | "comments" | "dismissed"> {
+  let approvals = 0;
+  let changesRequested = 0;
+  let comments = 0;
+  let dismissed = 0;
+  for (const acc of stats.reviewers.values()) {
+    approvals += acc.approvals;
+    changesRequested += acc.changesRequested;
+    comments += acc.comments;
+    dismissed += acc.dismissed;
+  }
+  return { approvals, changesRequested, comments, dismissed };
+}
+
+function toTrendRow(month: string, repo: string, stats: MonthStats): TrendMonthRow {
+  return {
+    month,
+    repo,
+    ...outcomeTotals(stats),
+    reviewedPrs: stats.internalReviewedPrs + stats.externalReviewedPrs,
+    multiReviewerPrs: stats.multiReviewerPrs,
+    firstReviews: stats.firstReviewMinutes.length,
+    medianMinutesToFirstReview: median(stats.firstReviewMinutes),
+    reviewedMerges: stats.reviewedMerges,
+    medianMinutesReviewToMerge: median(stats.reviewToMergeMinutes),
+    sizedReviewedPrs: stats.changedLines.length,
+    medianChangedLines: median(stats.changedLines),
+    medianChangedFiles: median(stats.changedFiles),
+    sizeSmall: stats.sizeSmall,
+    sizeMedium: stats.sizeMedium,
+    sizeLarge: stats.sizeLarge,
+    sizeXLarge: stats.sizeXLarge,
+  };
+}
+
+function reviewerRowsFor(month: string, repo: string, roster: string[], stats: MonthStats): ReviewerMonthRow[] {
+  return roster.map((login) => {
+    const acc = stats.reviewers.get(login) ?? emptyAcc();
+    return {
+      month,
+      repo,
+      login,
+      reviewSubmissions: acc.reviewSubmissions,
+      reviewedPrs: acc.reviewedPrs,
+      approvals: acc.approvals,
+      changesRequested: acc.changesRequested,
+      comments: acc.comments,
+      dismissed: acc.dismissed,
+    };
+  });
+}
+
+function emptyStats(roster: string[]): MonthStats {
+  const reviewers = new Map<string, ReviewerAcc>();
+  for (const login of roster) reviewers.set(login, emptyAcc());
+  return {
+    internalReviewedPrs: 0,
+    externalReviewedPrs: 0,
+    reviewSubmissions: 0,
+    reviewedUnmergedPrs: 0,
+    mergedInternalPrs: 0,
+    mergedExternalReviewedPrs: 0,
+    reviewers,
+    multiReviewerPrs: 0,
+    firstReviewMinutes: [],
+    reviewedMerges: 0,
+    reviewToMergeMinutes: [],
+    changedLines: [],
+    changedFiles: [],
+    sizeSmall: 0,
+    sizeMedium: 0,
+    sizeLarge: 0,
+    sizeXLarge: 0,
+  };
+}
+
+/** Sum per-repo months. Distinct-PR counts add (numbers collide across repos). Medians are recomputed from the pooled samples. */
+function poolStats(roster: string[], parts: MonthStats[]): MonthStats {
+  const pooled = emptyStats(roster);
+  for (const part of parts) {
+    pooled.internalReviewedPrs += part.internalReviewedPrs;
+    pooled.externalReviewedPrs += part.externalReviewedPrs;
+    pooled.reviewSubmissions += part.reviewSubmissions;
+    pooled.reviewedUnmergedPrs += part.reviewedUnmergedPrs;
+    pooled.mergedInternalPrs += part.mergedInternalPrs;
+    pooled.mergedExternalReviewedPrs += part.mergedExternalReviewedPrs;
+    pooled.multiReviewerPrs += part.multiReviewerPrs;
+    pooled.reviewedMerges += part.reviewedMerges;
+    pooled.sizeSmall += part.sizeSmall;
+    pooled.sizeMedium += part.sizeMedium;
+    pooled.sizeLarge += part.sizeLarge;
+    pooled.sizeXLarge += part.sizeXLarge;
+    pooled.firstReviewMinutes.push(...part.firstReviewMinutes);
+    pooled.reviewToMergeMinutes.push(...part.reviewToMergeMinutes);
+    pooled.changedLines.push(...part.changedLines);
+    pooled.changedFiles.push(...part.changedFiles);
+    for (const login of roster) {
+      const src = part.reviewers.get(login);
+      const dest = pooled.reviewers.get(login)!;
+      if (!src) continue;
+      dest.reviewSubmissions += src.reviewSubmissions;
+      dest.reviewedPrs += src.reviewedPrs;
+      dest.approvals += src.approvals;
+      dest.changesRequested += src.changesRequested;
+      dest.comments += src.comments;
+      dest.dismissed += src.dismissed;
+    }
+  }
+  return pooled;
 }
 
 export function aggregate(input: AggregateInput): DashboardData {
@@ -211,7 +518,11 @@ export function aggregate(input: AggregateInput): DashboardData {
   }
 
   // ---- Month rows (dependency-complete months only) -----------------------
+  const roster = rosterOrder(cfg);
   const monthRows: MonthRow[] = [];
+  const reviewerRows: ReviewerMonthRow[] = [];
+  const trendRows: TrendMonthRow[] = [];
+  const statsByKey = new Map<string, MonthStats>();
   for (const repo of cfg.repos) {
     const resolved = repoRecords.get(repo)!;
     for (const m of monthsList) {
@@ -221,54 +532,40 @@ export function aggregate(input: AggregateInput): DashboardData {
         return st?.status === "complete" && loadedKeys.has(key);
       });
       if (!depsComplete) continue;
-      const monthStartMs = Date.parse(startOfMonthIso(m));
-      const monthEndMs = Date.parse(startOfMonthIso(addMonths(m, 1)));
-      let internalReviewedPrs = 0;
-      let externalReviewedPrs = 0;
-      let reviewSubmissions = 0;
-      let reviewedUnmergedPrs = 0;
-      let mergedInternalPrs = 0;
-      let mergedExternalReviewedPrs = 0;
-      for (const rp of resolved) {
-        const record = rp.record;
-        const cutoffMs = Date.parse(rp.partitionCollectedAt); // per-record honest cutoff
-        const qReviews = qualifyingReviews(cfg, record, cutoffMs);
-        const inMonth = qReviews.filter((r) => {
-          const t = Date.parse(r.submittedAt!);
-          return t >= monthStartMs && t < monthEndMs && t < asOfMs;
-        });
-        if (inMonth.length > 0) {
-          const internal = isInternal(cfg, record);
-          if (internal) internalReviewedPrs++;
-          else externalReviewedPrs++;
-          reviewSubmissions += inMonth.length;
-          if (record.state !== "MERGED") reviewedUnmergedPrs++;
-        }
-        if (record.mergedAt !== null) {
-          const mergedMs = Date.parse(record.mergedAt);
-          const mergedInMonth = mergedMs >= monthStartMs && mergedMs < monthEndMs && mergedMs < asOfMs;
-          if (mergedInMonth) {
-            if (isInternal(cfg, record)) {
-              mergedInternalPrs++;
-            } else if (qReviews.some((r) => Date.parse(r.submittedAt!) <= mergedMs)) {
-              mergedExternalReviewedPrs++;
-            }
-          }
-        }
-      }
+      const stats = measureMonth(cfg, roster, resolved, m, asOfMs);
+      statsByKey.set(`${repo}|${m}`, stats);
       monthRows.push({
         month: m,
         repo,
-        internalReviewedPrs,
-        externalReviewedPrs,
-        reviewSubmissions,
-        reviewedUnmergedPrs,
-        mergedInternalPrs,
-        mergedExternalReviewedPrs,
+        internalReviewedPrs: stats.internalReviewedPrs,
+        externalReviewedPrs: stats.externalReviewedPrs,
+        reviewSubmissions: stats.reviewSubmissions,
+        reviewedUnmergedPrs: stats.reviewedUnmergedPrs,
+        mergedInternalPrs: stats.mergedInternalPrs,
+        mergedExternalReviewedPrs: stats.mergedExternalReviewedPrs,
       });
+      reviewerRows.push(...reviewerRowsFor(m, repo, roster, stats));
+      trendRows.push(toTrendRow(m, repo, stats));
     }
   }
+  for (const m of monthsList) {
+    const parts = cfg.repos
+      .map((repo) => statsByKey.get(`${repo}|${m}`))
+      .filter((s): s is MonthStats => s !== undefined);
+    if (parts.length === 0) continue;
+    const pooled = poolStats(roster, parts);
+    reviewerRows.push(...reviewerRowsFor(m, ALL_REPOS, roster, pooled));
+    trendRows.push(toTrendRow(m, ALL_REPOS, pooled));
+  }
   monthRows.sort((a, b) => (a.month === b.month ? a.repo.localeCompare(b.repo) : a.month.localeCompare(b.month)));
+  const rowOrder = (a: { month: string; repo: string }, b: { month: string; repo: string }) =>
+    a.month === b.month ? a.repo.localeCompare(b.repo) : a.month.localeCompare(b.month);
+  reviewerRows.sort((a, b) => {
+    const base = rowOrder(a, b);
+    if (base !== 0) return base;
+    return roster.indexOf(a.login) - roster.indexOf(b.login);
+  });
+  trendRows.sort(rowOrder);
 
   // ---- Coverage ------------------------------------------------------------
   const coverage: CoverageEntry[] = [];
@@ -299,6 +596,8 @@ export function aggregate(input: AggregateInput): DashboardData {
     methodology: { version: cfg.methodologyVersion, notes: cfg.methodologyNotes },
     coverage,
     months: monthRows,
+    reviewers: reviewerRows,
+    trends: trendRows,
     prs: prEntries,
   };
 }
@@ -356,5 +655,115 @@ export function validateDashboardData(data: DashboardData): string[] {
     }
   }
   void rowKeys;
+
+  if (!Array.isArray(data.reviewers)) problems.push("reviewers must be an array");
+  if (!Array.isArray(data.trends)) problems.push("trends must be an array");
+  if (Array.isArray(data.reviewers) && Array.isArray(data.trends)) {
+    const reviewerKeys = new Set<string>();
+    const loginsByGroup = new Map<string, string[]>();
+    const submissionSum = new Map<string, number>();
+    for (const row of data.reviewers) {
+      const path = `reviewer ${row.repo}|${row.month}|${row.login}`;
+      if (!row.month || !row.repo || !row.login) problems.push(`incomplete ${path}`);
+      const id = `${row.repo}|${row.month}|${row.login}`;
+      if (reviewerKeys.has(id)) problems.push(`duplicate ${path}`);
+      reviewerKeys.add(id);
+      const group = `${row.repo}|${row.month}`;
+      const logins = loginsByGroup.get(group) ?? [];
+      logins.push(row.login);
+      loginsByGroup.set(group, logins);
+      const outcomes = row.approvals + row.changesRequested + row.comments + row.dismissed;
+      if (outcomes !== row.reviewSubmissions) problems.push(`${path} outcomes ${outcomes} != submissions ${row.reviewSubmissions}`);
+      if (row.reviewedPrs > row.reviewSubmissions) problems.push(`${path} reviewedPrs exceeds submissions`);
+      for (const [k, v] of Object.entries(row)) {
+        if (k !== "month" && k !== "repo" && k !== "login" && (typeof v !== "number" || v < 0)) {
+          problems.push(`bad ${k} on ${path}`);
+        }
+      }
+      if (row.repo !== ALL_REPOS) {
+        submissionSum.set(group, (submissionSum.get(group) ?? 0) + row.reviewSubmissions);
+      }
+    }
+    const loginOrders = [...loginsByGroup.values()].map((l) => l.join("\0"));
+    if (new Set(loginOrders).size > 1) problems.push("reviewer login order is not stable across repo-months");
+    const sortedReviewers = [...data.reviewers].sort((a, b) => {
+      if (a.month !== b.month) return a.month.localeCompare(b.month);
+      if (a.repo !== b.repo) return a.repo.localeCompare(b.repo);
+      return data.reviewers.indexOf(a) - data.reviewers.indexOf(b);
+    });
+    // Month and repo must be grouped in order. Login order is the roster order,
+    // checked for stability above, so re-sorting by the original index keeps it.
+    if (data.reviewers.some((row, i) => row !== sortedReviewers[i])) {
+      // Fall back to a direct adjacent check so a swapped month fails loudly.
+      for (let i = 1; i < data.reviewers.length; i++) {
+        const prev = data.reviewers[i - 1]!;
+        const cur = data.reviewers[i]!;
+        const cmp = prev.month === cur.month ? prev.repo.localeCompare(cur.repo) : prev.month.localeCompare(cur.month);
+        if (cmp > 0) problems.push("reviewers not sorted");
+      }
+    }
+
+    for (const r of data.months) {
+      const key = `${r.repo}|${r.month}`;
+      if (!loginsByGroup.has(key)) problems.push(`missing reviewer rows for ${key}`);
+      else if ((submissionSum.get(key) ?? 0) !== r.reviewSubmissions) {
+        problems.push(`reviewer submissions for ${key} do not match the month row`);
+      }
+    }
+
+    const trendKeys = new Set<string>();
+    for (const row of data.trends) {
+      const path = `trend ${row.repo}|${row.month}`;
+      if (trendKeys.has(`${row.repo}|${row.month}`)) problems.push(`duplicate ${path}`);
+      trendKeys.add(`${row.repo}|${row.month}`);
+      const outcomes = row.approvals + row.changesRequested + row.comments + row.dismissed;
+      if (row.repo !== ALL_REPOS) {
+        const month = data.months.find((m) => m.repo === row.repo && m.month === row.month);
+        if (!month) problems.push(`${path} has no month row`);
+        else if (outcomes !== month.reviewSubmissions) problems.push(`${path} outcomes do not match reviewSubmissions`);
+        else if (row.reviewedPrs !== month.internalReviewedPrs + month.externalReviewedPrs) {
+          problems.push(`${path} reviewedPrs do not match the month row`);
+        }
+      }
+      if (row.multiReviewerPrs > row.reviewedPrs) problems.push(`${path} multiReviewerPrs exceeds reviewedPrs`);
+      if (row.sizedReviewedPrs > row.reviewedPrs) problems.push(`${path} sizedReviewedPrs exceeds reviewedPrs`);
+      const buckets = row.sizeSmall + row.sizeMedium + row.sizeLarge + row.sizeXLarge;
+      if (buckets !== row.sizedReviewedPrs) problems.push(`${path} size buckets do not sum to sizedReviewedPrs`);
+      if ((row.medianMinutesToFirstReview === null) !== (row.firstReviews === 0)) {
+        problems.push(`${path} first-review median does not match its sample count`);
+      }
+      if ((row.medianMinutesReviewToMerge === null) !== (row.reviewedMerges === 0)) {
+        problems.push(`${path} review-to-merge median does not match its sample count`);
+      }
+      if ((row.medianChangedLines === null) !== (row.sizedReviewedPrs === 0)) {
+        problems.push(`${path} line median does not match sizedReviewedPrs`);
+      }
+      if ((row.medianChangedFiles === null) !== (row.sizedReviewedPrs === 0)) {
+        problems.push(`${path} file median does not match sizedReviewedPrs`);
+      }
+      for (const [k, v] of Object.entries(row)) {
+        if (k === "month" || k === "repo") continue;
+        if (v === null) continue;
+        if (typeof v !== "number" || !Number.isInteger(v) || v < 0) problems.push(`bad ${k} on ${path}`);
+      }
+    }
+    const sortedTrends = [...data.trends].sort((a, b) =>
+      a.month === b.month ? a.repo.localeCompare(b.repo) : a.month.localeCompare(b.month),
+    );
+    if (JSON.stringify(sortedTrends) !== JSON.stringify(data.trends)) problems.push("trends not sorted");
+    const monthsWithRows = new Set(data.months.map((r) => r.month));
+    for (const m of monthsWithRows) {
+      if (!trendKeys.has(`${ALL_REPOS}|${m}`)) problems.push(`missing rollup trend for ${m}`);
+      if (!loginsByGroup.has(`${ALL_REPOS}|${m}`)) problems.push(`missing rollup reviewers for ${m}`);
+    }
+    for (const m of monthsWithRows) {
+      const rollup = data.trends.find((t) => t.repo === ALL_REPOS && t.month === m);
+      if (!rollup) continue;
+      const parts = data.months.filter((row) => row.month === m);
+      const submissions = parts.reduce((s, row) => s + row.reviewSubmissions, 0);
+      const outcomes = rollup.approvals + rollup.changesRequested + rollup.comments + rollup.dismissed;
+      if (outcomes !== submissions) problems.push(`rollup trend ${m} outcomes do not match summed month rows`);
+    }
+  }
   return problems;
 }

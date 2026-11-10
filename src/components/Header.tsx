@@ -14,7 +14,7 @@ export function Header({ loaded, page }: { loaded: LoadedDashboard; page: Page }
           <p className="site-subtitle">
             {page === 'daily'
               ? 'Daily · open PRs needing Assets review · collected live in your browser from public GitHub data'
-              : 'Historical team-level view · MetaMask Core, Mobile and Extension · internal metrics only, no individual data'}
+              : 'Historical view · MetaMask Core, Mobile and Extension · roster review counts, no review text'}
           </p>
         </div>
         <div className="site-header__actions">

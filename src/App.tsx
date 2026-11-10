@@ -18,6 +18,8 @@ import { StatCards } from './components/StatCards'
 import { TimelineSection } from './components/TimelineSection'
 import { MergeVsReviewSection } from './components/MergeVsReviewSection'
 import { UnmergedSection } from './components/UnmergedSection'
+import { ReviewerSection } from './components/ReviewerSection'
+import { TrendSection } from './components/TrendSection'
 import { MonthPanel } from './components/MonthPanel'
 import { CoveragePanel } from './components/CoveragePanel'
 import { MethodologyCard, WarningsCard } from './components/NotesCards'
@@ -139,6 +141,8 @@ export default function App() {
             />
             <MergeVsReviewSection aggregates={aggregates} />
             <UnmergedSection aggregates={aggregates} />
+            <ReviewerSection rows={data.reviewers} repoFilter={repoFilter} windowMonths={windowMonths} />
+            <TrendSection rows={data.trends} repoFilter={repoFilter} windowMonths={windowMonths} />
             {effectiveSelected && (
               <MonthPanel
                 data={data}

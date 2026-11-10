@@ -1,4 +1,12 @@
-import type { CoverageEntry, CoverageStatus, DashboardData, MonthEntry, PrEntry } from './types'
+import {
+  ALL_REPOS,
+  type CoverageEntry,
+  type CoverageStatus,
+  type MonthEntry,
+  type PrEntry,
+  type ReviewerMonthEntry,
+  type TrendMonthEntry,
+} from './types'
 import { compareRepos } from './format'
 
 export interface MonthAggregate {
@@ -207,4 +215,134 @@ export function latestMonth(windowMonths: string[]): string | null {
 
 export function countReviewedPrsInMonth(agg: MonthAggregate): number {
   return agg.internalReviewedPrs + agg.externalReviewedPrs
+}
+
+export interface PersonMonth {
+  login: string
+  reviewSubmissions: number
+  reviewedPrs: number
+}
+
+export interface ReviewerMonthView {
+  month: string
+  people: PersonMonth[]
+}
+
+/**
+ * Reviewer rows for the selected repo, or the cross-repo rollup when no
+ * repo is selected. Login order is the order the rows were emitted (roster
+ * order). Months in the window with no row contribute zeros.
+ */
+export function reviewerMonths(
+  rows: ReviewerMonthEntry[] | undefined,
+  repoFilter: string | null,
+  windowMonths: string[],
+): { months: ReviewerMonthView[]; logins: string[] } {
+  const list = Array.isArray(rows) ? rows : []
+  const repo = repoFilter ?? ALL_REPOS
+  const chosen = list.filter((r) => r.repo === repo && windowMonths.includes(r.month))
+  const logins: string[] = []
+  for (const row of chosen) {
+    if (!logins.includes(row.login)) logins.push(row.login)
+  }
+  if (logins.length === 0) return { months: [], logins: [] }
+  const byMonth = new Map<string, ReviewerMonthView>()
+  for (const month of windowMonths) {
+    byMonth.set(month, {
+      month,
+      people: logins.map((login) => ({ login, reviewSubmissions: 0, reviewedPrs: 0 })),
+    })
+  }
+  for (const row of chosen) {
+    const view = byMonth.get(row.month)
+    const slot = view?.people.find((p) => p.login === row.login)
+    if (!slot) continue
+    slot.reviewSubmissions += row.reviewSubmissions
+    slot.reviewedPrs += row.reviewedPrs
+  }
+  return { months: [...byMonth.values()], logins }
+}
+
+export interface TrendView {
+  month: string
+  approvals: number
+  changesRequested: number
+  comments: number
+  dismissed: number
+  reviewedPrs: number
+  multiReviewerPrs: number
+  firstReviews: number
+  medianMinutesToFirstReview: number | null
+  reviewedMerges: number
+  medianMinutesReviewToMerge: number | null
+  sizedReviewedPrs: number
+  medianChangedLines: number | null
+  medianChangedFiles: number | null
+  sizeSmall: number
+  sizeMedium: number
+  sizeLarge: number
+  sizeXLarge: number
+}
+
+function emptyTrend(month: string): TrendView {
+  return {
+    month,
+    approvals: 0,
+    changesRequested: 0,
+    comments: 0,
+    dismissed: 0,
+    reviewedPrs: 0,
+    multiReviewerPrs: 0,
+    firstReviews: 0,
+    medianMinutesToFirstReview: null,
+    reviewedMerges: 0,
+    medianMinutesReviewToMerge: null,
+    sizedReviewedPrs: 0,
+    medianChangedLines: null,
+    medianChangedFiles: null,
+    sizeSmall: 0,
+    sizeMedium: 0,
+    sizeLarge: 0,
+    sizeXLarge: 0,
+  }
+}
+
+/**
+ * Trend rows for one repo, or the precomputed cross-repo rollup. Medians are
+ * never summed: a missing rollup yields no series rather than an average of
+ * averages.
+ */
+export function trendMonths(
+  rows: TrendMonthEntry[] | undefined,
+  repoFilter: string | null,
+  windowMonths: string[],
+): TrendView[] {
+  const list = Array.isArray(rows) ? rows : []
+  const repo = repoFilter ?? ALL_REPOS
+  const chosen = new Map(list.filter((r) => r.repo === repo).map((r) => [r.month, r]))
+  if (![...chosen.keys()].some((month) => windowMonths.includes(month))) return []
+  return windowMonths.map((month) => {
+    const row = chosen.get(month)
+    if (!row) return emptyTrend(month)
+    return {
+      month,
+      approvals: row.approvals,
+      changesRequested: row.changesRequested,
+      comments: row.comments,
+      dismissed: row.dismissed,
+      reviewedPrs: row.reviewedPrs,
+      multiReviewerPrs: row.multiReviewerPrs,
+      firstReviews: row.firstReviews,
+      medianMinutesToFirstReview: row.medianMinutesToFirstReview,
+      reviewedMerges: row.reviewedMerges,
+      medianMinutesReviewToMerge: row.medianMinutesReviewToMerge,
+      sizedReviewedPrs: row.sizedReviewedPrs,
+      medianChangedLines: row.medianChangedLines,
+      medianChangedFiles: row.medianChangedFiles,
+      sizeSmall: row.sizeSmall,
+      sizeMedium: row.sizeMedium,
+      sizeLarge: row.sizeLarge,
+      sizeXLarge: row.sizeXLarge,
+    }
+  })
 }

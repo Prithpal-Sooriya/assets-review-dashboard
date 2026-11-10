@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'bun:test'
-import { buildWindowLabel, displayPath, maskQuotedValues, oneLine } from '../../src/data/format'
+import { buildWindowLabel, displayPath, formatDurationMinutes, maskQuotedValues, oneLine } from '../../src/data/format'
 
 describe('buildWindowLabel', () => {
   test('contiguous window: months-with-data count, no gap suffix', () => {
@@ -66,5 +66,18 @@ describe('public display helpers', () => {
   test('oneLine collapses to the first line and caps length', () => {
     expect(oneLine('first line\nsecond line')).toBe('first line')
     expect(oneLine('x'.repeat(200)).length).toBeLessThanOrEqual(161)
+  })
+})
+
+describe('formatDurationMinutes', () => {
+  test('formats minutes, hours and days, and a missing sample', () => {
+    expect(formatDurationMinutes(null)).toBe('—')
+    expect(formatDurationMinutes(0)).toBe('0m')
+    expect(formatDurationMinutes(45)).toBe('45m')
+    expect(formatDurationMinutes(90)).toBe('1.5h')
+    expect(formatDurationMinutes(10 * 60)).toBe('10h')
+    expect(formatDurationMinutes(36 * 60)).toBe('36h')
+    expect(formatDurationMinutes(3 * 24 * 60)).toBe('3d')
+    expect(formatDurationMinutes(2.5 * 24 * 60)).toBe('2.5d')
   })
 })

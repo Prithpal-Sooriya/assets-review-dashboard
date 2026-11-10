@@ -177,7 +177,15 @@ test('footer records provenance, schema and privacy stance', async ({ page }) =>
   await expect(footer).toContainText('Sample data (synthetic fixture)')
   await expect(footer).toContainText('src/data/demo-fixture.json')
   await expect(footer).toContainText('dashboard.json v1')
-  await expect(footer).toContainText('no individual reviewer data')
+  await expect(footer).toContainText('configured Assets roster')
+})
+
+test('historical trends name the fixture roster and show pull request size', async ({ page }) => {
+  await expect(page.getByRole('heading', { name: 'Who on the team reviewed' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'How the team reviewed' })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Pull request size' })).toBeVisible()
+  await expect(page.getByText('mina', { exact: true }).first()).toBeVisible()
+  await expect(page.getByText(/Widest share this window/)).toBeVisible()
 })
 
 test('has no detectable accessibility violations (axe)', async ({ page }) => {

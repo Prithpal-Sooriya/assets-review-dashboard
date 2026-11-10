@@ -86,10 +86,11 @@ vercel deploy --prebuilt --prod    # production deployment (see below)
 The repository and the production dashboard URL are **public by explicit
 owner decision** (recorded 2026-11-07; dates in this record were corrected
 from 2026-11-08 on 2026-11-07 — the original entries were written against a
-misread clock, the system UTC date was 2026-11-07): the dashboard shows team-level
-aggregates only (no individual reviewer metrics or names — enforced by tests),
-so publishing it publicly is acceptable. Real `data/dashboard.json` may be
-embedded in production builds.
+misread clock, the system UTC date was 2026-11-07): the dashboard shows
+team aggregates and, from methodology 1.1.0, review counts for the configured
+Assets roster (public GitHub logins already listed in `config/collector.json`).
+Review text, emails, and anyone outside that roster are not included. Real
+`data/dashboard.json` may be embedded in production builds.
 
 Historical context — the earlier posture (kept for the record):
 

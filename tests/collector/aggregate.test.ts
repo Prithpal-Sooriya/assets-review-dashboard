@@ -177,6 +177,8 @@ describe("aggregate", () => {
       "methodology",
       "coverage",
       "months",
+      "reviewers",
+      "trends",
       "prs",
     ]);
     expect(data.schemaVersion).toBe(1);
@@ -339,6 +341,9 @@ describe("aggregate", () => {
     expect(feb.mergedInternalPrs).toBe(1);
     expect(data.prs.find((p) => p.number === 50)?.ownershipReason).toBe("team-label");
     expect(data.prs.find((p) => p.number === 50)?.reviewCountsByMonth).toEqual({ "2026-02": 2 });
+    const alice = data.reviewers.find((r) => r.repo === "MetaMask/core" && r.month === "2026-02" && r.login === "alice");
+    expect(alice).toMatchObject({ reviewSubmissions: 2, reviewedPrs: 1, approvals: 1, comments: 1 });
+    expect(data.reviewers.some((r) => r.login === "Alice" || r.login === "ALICE")).toBe(false);
   });
 
   test("empty input -> valid empty dashboard with pending coverage", () => {
@@ -368,6 +373,114 @@ describe("aggregate", () => {
     const coreMonths = data.months.filter((r) => r.repo === "MetaMask/core").map((r) => r.month);
     expect(coreMonths).toEqual(["2026-03"]);
     expect(data.months.find((r) => r.repo === "MetaMask/core" && r.month === "2026-03")?.externalReviewedPrs).toBe(1);
+    expect(validateDashboardData(data)).toEqual([]);
+  });
+
+  test("reviewer rows attribute qualifying reviews and keep zero roster members", () => {
+    const data = aggregate({
+      config: testConfig,
+      asOf: AS_OF,
+      manifest: coreManifest(),
+      partitions: [...corePartitions(), ...extensionPartitions()],
+    });
+    const row = (repo: string, month: string, login: string) =>
+      data.reviewers.find((r) => r.repo === repo && r.month === month && r.login === login);
+
+    expect(row("MetaMask/core", "2026-01", "alice")).toMatchObject({
+      reviewSubmissions: 3,
+      reviewedPrs: 3,
+      approvals: 1,
+      changesRequested: 0,
+      comments: 2,
+      dismissed: 0,
+    });
+    expect(row("MetaMask/core", "2026-01", "bob")?.reviewSubmissions).toBe(0);
+    expect(row("MetaMask/core", "2026-01", "dawnseeker8")?.reviewSubmissions).toBe(0);
+    // Self-review and the excluded reviewer never become a login row.
+    expect(data.reviewers.some((r) => r.login === "excluded1")).toBe(false);
+
+    expect(row("MetaMask/core", "2026-02", "bob")).toMatchObject({
+      reviewSubmissions: 3,
+      reviewedPrs: 3,
+      approvals: 2,
+      comments: 1,
+    });
+    expect(row("MetaMask/core", "2026-03", "alice")).toMatchObject({
+      reviewSubmissions: 1,
+      reviewedPrs: 1,
+      dismissed: 1,
+    });
+    // Extension has no January row (partition pending), so the rollup is core alone.
+    expect(row("*", "2026-01", "alice")?.reviewSubmissions).toBe(3);
+    expect(row("*", "2026-02", "alice")?.reviewSubmissions).toBe(1); // extension PR100
+    expect(row("*", "2026-02", "bob")?.reviewSubmissions).toBe(3);
+
+    const minutes = (from: string, to: string) => Math.round((Date.parse(to) - Date.parse(from)) / 60000);
+    const jan = data.trends.find((t) => t.repo === "MetaMask/core" && t.month === "2026-01")!;
+    expect(jan.firstReviews).toBe(3); // PR2, PR1, PR9; PR11's first review is December
+    expect(jan.medianMinutesToFirstReview).toBe(minutes("2025-12-01T00:00:00Z", "2026-01-10T10:00:00Z"));
+    expect(jan.reviewedMerges).toBe(1); // PR11; PR4's only review is a self-review
+    expect(jan.medianMinutesReviewToMerge).toBe(minutes("2025-12-28T10:00:00Z", "2026-01-20T10:00:00Z"));
+    expect(jan.multiReviewerPrs).toBe(0);
+    expect(jan.sizedReviewedPrs).toBe(0);
+    expect(jan.medianChangedLines).toBeNull();
+
+    const feb = data.trends.find((t) => t.repo === "MetaMask/core" && t.month === "2026-02")!;
+    expect(feb.reviewedMerges).toBe(3); // PR3, PR1, PR9
+    // Three merges: PR3 (47h), PR9 (Jan 20 → Feb 28), PR1 (Jan 10 → Feb 25). Median is PR9.
+    expect(feb.medianMinutesReviewToMerge).toBe(minutes("2026-01-20T10:00:00Z", "2026-02-28T09:00:00Z"));
+    // PR8's review is after the partition cutoff and must not count.
+    const mar = data.trends.find((t) => t.repo === "MetaMask/core" && t.month === "2026-03")!;
+    expect(mar.firstReviews).toBe(1);
+    expect(mar.approvals + mar.changesRequested + mar.comments + mar.dismissed).toBe(1);
+  });
+
+  test("diff size is median and bucketed only for reviewed PRs that have it", () => {
+    const partitions = [
+      partition("MetaMask/core", "2026-02", "monthEnd", "2026-03-01T00:00:00Z", [
+        pr(1, {
+          updatedAt: "2026-02-02T00:00:00Z",
+          additions: 40,
+          deletions: 10,
+          changedFiles: 2, // 50 lines, small
+          reviews: [review(1, "alice", "APPROVED", "2026-02-02T00:00:00Z")],
+        }),
+        pr(2, {
+          updatedAt: "2026-02-03T00:00:00Z",
+          additions: 400,
+          deletions: 200,
+          changedFiles: 8, // 600 lines, large
+          reviews: [review(2, "bob", "COMMENTED", "2026-02-03T00:00:00Z")],
+        }),
+        pr(3, {
+          updatedAt: "2026-02-04T00:00:00Z",
+          // reviewed, but collected before size was stored
+          reviews: [review(3, "alice", "APPROVED", "2026-02-04T00:00:00Z")],
+        }),
+        pr(4, {
+          updatedAt: "2026-02-05T00:00:00Z",
+          additions: 5000,
+          deletions: 0,
+          changedFiles: 1, // not reviewed — must not enter the size sample
+        }),
+      ]),
+      partition("MetaMask/core", "2026-03", "asOfCutoff", "2026-03-15T11:00:00Z", []),
+    ];
+    const manifest = manifestOf({
+      "MetaMask/core|2026-01": completeEntry("2026-02-01T00:00:00Z", 0),
+      "MetaMask/core|2026-02": completeEntry("2026-03-01T00:00:00Z", 4),
+      "MetaMask/core|2026-03": completeEntry("2026-03-15T11:00:00Z", 0, "asOfCutoff"),
+    });
+    const data = aggregate({ config: testConfig, asOf: AS_OF, manifest, partitions });
+    const feb = data.trends.find((t) => t.repo === "MetaMask/core" && t.month === "2026-02")!;
+    expect(feb.reviewedPrs).toBe(3);
+    expect(feb.sizedReviewedPrs).toBe(2);
+    expect(feb.medianChangedLines).toBe(325); // round((50+600)/2)
+    expect(feb.medianChangedFiles).toBe(5);
+    expect(feb.sizeSmall).toBe(1);
+    expect(feb.sizeMedium).toBe(0);
+    expect(feb.sizeLarge).toBe(1);
+    expect(feb.sizeXLarge).toBe(0);
     expect(validateDashboardData(data)).toEqual([]);
   });
 

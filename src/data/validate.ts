@@ -7,6 +7,8 @@ import {
   type OwnershipReason,
   type PrEntry,
   type PrState,
+  type ReviewerMonthEntry,
+  type TrendMonthEntry,
 } from './types'
 import { isValidISOTimestamp, isValidMonthKey } from './format'
 
@@ -325,6 +327,95 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
         })
       }
     }
+  }
+
+  // Roster and trend rows are additive. A snapshot aggregated before they
+  // existed still renders the original charts; the new sections stay hidden
+  // and the gap is reported rather than failing the whole file.
+  if (monthsArr.length > 0 && !Array.isArray(at('reviewers'))) {
+    warnings.push({
+      path: '$.reviewers',
+      message: 'reviewer breakdown is absent; this snapshot was aggregated before roster rows existed',
+    })
+  }
+  if (monthsArr.length > 0 && !Array.isArray(at('trends'))) {
+    warnings.push({
+      path: '$.trends',
+      message: 'trend rows are absent; this snapshot was aggregated before pace and size rows existed',
+    })
+  }
+  if (Array.isArray(at('reviewers'))) {
+    const seen = new Set<string>()
+    ;(data.reviewers as ReviewerMonthEntry[]).forEach((row, i) => {
+      const path = `$.reviewers[${i}]`
+      if (!isRecord(row)) {
+        errors.push({ path, message: 'expected an object' })
+        return
+      }
+      if (!isValidMonthKey(row.month)) errors.push({ path: `${path}.month`, message: 'expected YYYY-MM' })
+      if (typeof row.repo !== 'string' || row.repo === '') errors.push({ path: `${path}.repo`, message: 'expected a non-empty string' })
+      if (typeof row.login !== 'string' || row.login === '') errors.push({ path: `${path}.login`, message: 'expected a non-empty string' })
+      const id = `${row.repo}|${row.month}|${row.login}`
+      if (seen.has(id)) warnings.push({ path, message: `duplicate reviewer row ${id}` })
+      seen.add(id)
+      for (const field of ['reviewSubmissions', 'reviewedPrs', 'approvals', 'changesRequested', 'comments', 'dismissed'] as const) {
+        checkNonNegativeInt(row[field], `${path}.${field}`, errors)
+      }
+    })
+  }
+  if (Array.isArray(at('trends'))) {
+    const seen = new Set<string>()
+    ;(data.trends as TrendMonthEntry[]).forEach((row, i) => {
+      const path = `$.trends[${i}]`
+      if (!isRecord(row)) {
+        errors.push({ path, message: 'expected an object' })
+        return
+      }
+      if (!isValidMonthKey(row.month)) errors.push({ path: `${path}.month`, message: 'expected YYYY-MM' })
+      if (typeof row.repo !== 'string' || row.repo === '') errors.push({ path: `${path}.repo`, message: 'expected a non-empty string' })
+      const id = `${row.repo}|${row.month}`
+      if (seen.has(id)) warnings.push({ path, message: `duplicate trend row ${id}` })
+      seen.add(id)
+      for (const field of [
+        'approvals', 'changesRequested', 'comments', 'dismissed', 'reviewedPrs', 'multiReviewerPrs',
+        'firstReviews', 'reviewedMerges', 'sizedReviewedPrs', 'sizeSmall', 'sizeMedium', 'sizeLarge', 'sizeXLarge',
+      ] as const) {
+        checkNonNegativeInt(row[field], `${path}.${field}`, errors)
+      }
+      for (const field of ['medianMinutesToFirstReview', 'medianMinutesReviewToMerge', 'medianChangedLines', 'medianChangedFiles'] as const) {
+        const value = row[field]
+        if (value !== null && (typeof value !== 'number' || !Number.isInteger(value) || value < 0)) {
+          errors.push({ path: `${path}.${field}`, message: 'expected a non-negative integer or null' })
+        }
+      }
+      if (isRecord(row)) {
+        const buckets = (row.sizeSmall ?? 0) + (row.sizeMedium ?? 0) + (row.sizeLarge ?? 0) + (row.sizeXLarge ?? 0)
+        if (
+          typeof row.sizedReviewedPrs === 'number' &&
+          buckets !== row.sizedReviewedPrs
+        ) {
+          errors.push({ path, message: 'size buckets must sum to sizedReviewedPrs' })
+        }
+        if (row.medianMinutesToFirstReview === null && row.firstReviews !== 0) {
+          errors.push({ path: `${path}.medianMinutesToFirstReview`, message: 'null median requires a zero sample' })
+        }
+        if (row.firstReviews === 0 && row.medianMinutesToFirstReview !== null) {
+          errors.push({ path: `${path}.medianMinutesToFirstReview`, message: 'zero samples require a null median' })
+        }
+        if (row.medianMinutesReviewToMerge === null && row.reviewedMerges !== 0) {
+          errors.push({ path: `${path}.medianMinutesReviewToMerge`, message: 'null median requires a zero sample' })
+        }
+        if (row.reviewedMerges === 0 && row.medianMinutesReviewToMerge !== null) {
+          errors.push({ path: `${path}.medianMinutesReviewToMerge`, message: 'zero samples require a null median' })
+        }
+        if (row.medianChangedLines === null && row.sizedReviewedPrs !== 0) {
+          errors.push({ path: `${path}.medianChangedLines`, message: 'null median requires a zero sample' })
+        }
+        if (row.sizedReviewedPrs === 0 && (row.medianChangedLines !== null || row.medianChangedFiles !== null)) {
+          errors.push({ path: `${path}.medianChangedLines`, message: 'zero sized PRs require null size medians' })
+        }
+      }
+    })
   }
 
   return { errors, warnings }

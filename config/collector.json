@@ -27,7 +27,7 @@
     "rateCheckInterval": 15,
     "rateReserve": 250
   },
-  "methodologyVersion": "1.0.0",
+  "methodologyVersion": "1.1.0",
   "methodologyNotes": [
     "Ownership is label/roster attribution at collection time (team-assets label, else supplied author roster), not historically proven organization membership.",
     "Fixed supplied roster is applied across the whole window; the join date of dawnseeker8 is unknown, so they are included for the entire window (never an invented date).",
@@ -38,6 +38,12 @@
     "reviewedUnmergedPrs reflects the current PR state at generation time (snapshot), not the historical month-end state.",
     "The current month is partial and covers data through the range end cutoff only; completeness means coverage through that cutoff, not that the month has ended.",
     "A month row is only emitted when partition coverage for that repo is complete from the month through the cutoff; otherwise the month is omitted and the gap is visible in coverage.",
-    "Discovery walks PRs ordered by updated_at and relies on review submissions updating PR updated_at; this assumption was validated empirically and cross-checked with reviewed-by search (see docs/collection.md)."
+    "Discovery walks PRs ordered by updated_at and relies on review submissions updating PR updated_at; this assumption was validated empirically and cross-checked with reviewed-by search (see docs/collection.md).",
+    "Reviewer rows count qualifying reviews by the configured roster only, using the roster's spelling. Self-reviews, excluded reviewers, pending reviews, and anyone outside the roster are omitted. A roster member with no reviews in a month is still listed, at zero.",
+    "Time to first review is from createdAt to the earliest qualifying roster review, counted in that review's month. Draft time is included; draft history is not stored. A first-review timestamp before createdAt is dropped.",
+    "Review-to-merge time is from the earliest qualifying review at or before merge to mergedAt, counted in the merge month, and only for PRs that had such a review.",
+    "A pull request counts as multi-reviewer in a month when two or more roster members submitted a qualifying review in that month.",
+    "Pull request size is additions plus deletions, and the changed-file count, as GitHub reported on the collected snapshot. It is not a reconstruction of the diff at the moment of review. Partitions collected before size was stored omit it, and medians use only the PRs that have it. Buckets are under 100 lines, 100–499, 500–999, and 1000 or more.",
+    "The \"*\" repo on reviewer and trend rows is the cross-repo rollup. Its medians are recomputed from the pooled samples, not averaged from the per-repo medians."
   ]
 }

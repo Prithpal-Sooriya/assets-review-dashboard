@@ -27,7 +27,7 @@ export function Footer({ loaded }: { loaded: LoadedDashboard }) {
           {d && <dt>Methodology</dt>}
           {d && <dd>v{d.methodology.version}</dd>}
           <dt>Privacy</dt>
-          <dd>Team-level aggregates only; no individual reviewer data is collected or displayed.</dd>
+          <dd>Review counts name the configured Assets roster. Review text, emails, and anyone outside that roster are not included.</dd>
         </dl>
       </div>
     </footer>

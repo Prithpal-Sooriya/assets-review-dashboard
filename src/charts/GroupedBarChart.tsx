@@ -15,13 +15,15 @@ interface GroupedBarChartProps {
   series: Series[]
   height?: number
   yLabel?: string
+  /** Axis tick labels. Defaults to grouped thousands. */
+  formatTick?: (value: number) => string
 }
 
 /**
  * Side-by-side monthly bars for 1-2 series (merge-vs-review comparisons,
  * unmerged snapshot). Purely presentational — no interaction.
  */
-export function GroupedBarChart({ months, series, height = 220 }: GroupedBarChartProps) {
+export function GroupedBarChart({ months, series, height = 220, formatTick = formatInt }: GroupedBarChartProps) {
   const [wrapRef, size] = useMeasure<HTMLDivElement>()
 
   if (size.width <= 0) {
@@ -52,7 +54,7 @@ export function GroupedBarChart({ months, series, height = 220 }: GroupedBarChar
             <g key={t}>
               <line className="gridline" x1={layout.x0} x2={layout.x0 + layout.plotWidth} y1={y} y2={y} />
               <text x={layout.x0 - 8} y={y + 4} textAnchor="end">
-                {formatInt(t)}
+                {formatTick(t)}
               </text>
             </g>
           )

@@ -115,7 +115,7 @@ async function main(): Promise<number> {
 
   for (const r of report.results) {
     log(
-      `[report] ${r.repo}: wanted ${r.wantedMonths.length}, closed ${r.closedMonths.length} (${r.closedMonths.join(", ") || "-"}), fetched ${r.prsFetched} PRs, ${r.reviewRequests} review requests, stopped=${r.stopped}`,
+      `[report] ${r.repo}: wanted ${r.wantedMonths.length}, closed ${r.closedMonths.length} (${r.closedMonths.join(", ") || "-"}), fetched ${r.prsFetched} PRs, ${r.reviewRequests} review requests, ${r.sizeRequests} size requests, stopped=${r.stopped}`,
     );
   }
   if (report.pending.length > 0) {

@@ -94,7 +94,10 @@
           "submittedAt": "2024-06-18T15:07:25Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 16,
+      "deletions": 1,
+      "changedFiles": 4
     },
     {
       "number": 25458,
@@ -321,7 +324,10 @@
           "submittedAt": "2024-10-22T16:30:49Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 10,
+      "deletions": 2,
+      "changedFiles": 2
     },
     {
       "number": 28176,
@@ -377,7 +383,10 @@
           "submittedAt": "2024-12-03T14:17:25Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 51,
+      "deletions": 3,
+      "changedFiles": 3
     },
     {
       "number": 29797,
@@ -447,7 +456,10 @@
           "submittedAt": "2025-02-03T16:00:47Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 7,
+      "deletions": 7,
+      "changedFiles": 3
     },
     {
       "number": 30089,
@@ -535,7 +547,10 @@
           "submittedAt": "2025-02-06T18:42:49Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 49,
+      "deletions": 3,
+      "changedFiles": 2
     },
     {
       "number": 30195,
@@ -837,7 +852,10 @@
           "submittedAt": "2025-11-05T10:32:12Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 1637,
+      "deletions": 1347,
+      "changedFiles": 35
     },
     {
       "number": 37431,
@@ -1047,7 +1065,10 @@
           "submittedAt": "2025-12-02T06:05:09Z",
           "authorLogin": "dawnseeker8"
         }
-      ]
+      ],
+      "additions": 19,
+      "deletions": 1,
+      "changedFiles": 1
     },
     {
       "number": 38144,
@@ -1680,7 +1701,10 @@
           "submittedAt": "2026-02-04T15:45:27Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 1429,
+      "deletions": 60,
+      "changedFiles": 29
     },
     {
       "number": 39452,
@@ -1856,7 +1880,10 @@
           "submittedAt": "2026-02-05T14:52:44Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 47,
+      "deletions": 42,
+      "changedFiles": 5
     },
     {
       "number": 39500,
@@ -2167,7 +2194,10 @@
           "submittedAt": "2026-02-03T11:15:25Z",
           "authorLogin": "Kriys94"
         }
-      ]
+      ],
+      "additions": 2608,
+      "deletions": 21,
+      "changedFiles": 33
     },
     {
       "number": 39639,
@@ -2276,7 +2306,10 @@
           "submittedAt": "2026-02-02T08:33:38Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 181,
+      "deletions": 85,
+      "changedFiles": 19
     },
     {
       "number": 39649,
@@ -2506,7 +2539,10 @@
           "submittedAt": "2026-02-12T16:34:14Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 145,
+      "deletions": 0,
+      "changedFiles": 6
     },
     {
       "number": 39678,
@@ -2692,7 +2728,10 @@
           "submittedAt": "2026-02-03T12:29:35Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 55,
+      "deletions": 60,
+      "changedFiles": 15
     },
     {
       "number": 39693,
@@ -3160,7 +3199,10 @@
           "submittedAt": "2026-02-09T14:29:45Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 18,
+      "deletions": 9,
+      "changedFiles": 1
     },
     {
       "number": 39744,
@@ -3731,7 +3773,10 @@
           "submittedAt": "2026-02-05T10:04:40Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 62,
+      "deletions": 10,
+      "changedFiles": 4
     },
     {
       "number": 39789,
@@ -3857,7 +3902,10 @@
           "submittedAt": "2026-02-06T11:07:57Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 1625,
+      "deletions": 9,
+      "changedFiles": 27
     },
     {
       "number": 39791,
@@ -3951,7 +3999,10 @@
           "submittedAt": "2026-02-06T11:05:56Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 240,
+      "deletions": 137,
+      "changedFiles": 14
     },
     {
       "number": 39797,
@@ -4280,7 +4331,10 @@
           "submittedAt": "2026-02-05T14:31:15Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 19,
+      "deletions": 27,
+      "changedFiles": 10
     },
     {
       "number": 39821,
@@ -4324,7 +4378,10 @@
           "submittedAt": "2026-02-05T16:55:49Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 41,
+      "deletions": 76,
+      "changedFiles": 3
     },
     {
       "number": 39825,
@@ -4682,7 +4739,10 @@
           "submittedAt": "2026-02-25T22:38:55Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 27338,
+      "deletions": 15568,
+      "changedFiles": 220
     },
     {
       "number": 39857,
@@ -4725,7 +4785,10 @@
           "submittedAt": "2026-02-24T18:10:33Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 3240,
+      "deletions": 1845,
+      "changedFiles": 315
     },
     {
       "number": 39860,
@@ -4883,7 +4946,10 @@
           "submittedAt": "2026-02-11T18:56:20Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 11,
+      "deletions": 172,
+      "changedFiles": 3
     },
     {
       "number": 39888,
@@ -5024,7 +5090,10 @@
           "submittedAt": "2026-02-19T17:04:58Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 2169,
+      "deletions": 3,
+      "changedFiles": 34
     },
     {
       "number": 39902,
@@ -5142,7 +5211,10 @@
           "submittedAt": "2026-02-10T18:01:45Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 40,
+      "deletions": 753,
+      "changedFiles": 70
     },
     {
       "number": 39914,
@@ -5269,7 +5341,10 @@
           "submittedAt": "2026-02-11T15:57:33Z",
           "authorLogin": "Kriys94"
         }
-      ]
+      ],
+      "additions": 1671,
+      "deletions": 14,
+      "changedFiles": 33
     },
     {
       "number": 39919,
@@ -6230,7 +6305,10 @@
           "submittedAt": "2026-02-16T12:28:00Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 709,
+      "deletions": 531,
+      "changedFiles": 21
     },
     {
       "number": 39994,
@@ -6509,7 +6587,10 @@
           "submittedAt": "2026-02-12T16:33:54Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 12,
+      "deletions": 25,
+      "changedFiles": 2
     },
     {
       "number": 40023,
@@ -6624,7 +6705,10 @@
           "submittedAt": "2026-02-13T18:54:53Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 94,
+      "deletions": 193,
+      "changedFiles": 6
     },
     {
       "number": 40031,
@@ -6958,7 +7042,10 @@
           "submittedAt": "2026-02-18T16:43:17Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 703,
+      "deletions": 150,
+      "changedFiles": 17
     },
     {
       "number": 40100,
@@ -7128,7 +7215,10 @@
           "submittedAt": "2026-02-24T15:20:07Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 85,
+      "deletions": 41,
+      "changedFiles": 7
     },
     {
       "number": 40103,
@@ -7401,7 +7491,10 @@
           "submittedAt": "2026-02-24T11:44:57Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 84,
+      "deletions": 165,
+      "changedFiles": 17
     },
     {
       "number": 40135,
@@ -7580,7 +7673,10 @@
           "submittedAt": "2026-02-17T12:35:04Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 54,
+      "deletions": 362,
+      "changedFiles": 8
     },
     {
       "number": 40144,
@@ -7849,7 +7945,10 @@
           "submittedAt": "2026-02-18T15:06:11Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 4,
+      "deletions": 75,
+      "changedFiles": 3
     },
     {
       "number": 40168,
@@ -8490,7 +8589,10 @@
           "submittedAt": "2026-02-20T09:51:44Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 976,
+      "deletions": 3,
+      "changedFiles": 8
     },
     {
       "number": 40229,
@@ -8540,7 +8642,10 @@
           "submittedAt": "2026-02-20T15:27:04Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 158,
+      "deletions": 1,
+      "changedFiles": 5
     },
     {
       "number": 40231,
@@ -8565,7 +8670,10 @@
           "submittedAt": "2026-02-19T15:32:09Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 24,
+      "deletions": 3,
+      "changedFiles": 4
     },
     {
       "number": 40233,
@@ -8638,7 +8746,10 @@
           "submittedAt": "2026-02-26T17:49:45Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 156,
+      "deletions": 12,
+      "changedFiles": 24
     },
     {
       "number": 40234,
@@ -8712,7 +8823,10 @@
           "submittedAt": "2026-02-24T14:22:35Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 526,
+      "deletions": 8,
+      "changedFiles": 8
     },
     {
       "number": 40241,
@@ -9095,7 +9209,10 @@
           "submittedAt": "2026-02-25T10:58:39Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 713,
+      "deletions": 50,
+      "changedFiles": 9
     },
     {
       "number": 40301,
@@ -9397,7 +9514,10 @@
           "submittedAt": "2026-02-24T13:21:10Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 300,
+      "deletions": 39,
+      "changedFiles": 12
     },
     {
       "number": 40333,
@@ -9463,7 +9583,10 @@
           "submittedAt": "2026-02-24T11:29:03Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 1,
+      "deletions": 0,
+      "changedFiles": 1
     },
     {
       "number": 40339,
@@ -10069,7 +10192,10 @@
           "submittedAt": "2026-02-26T12:57:37Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 378,
+      "deletions": 60,
+      "changedFiles": 14
     },
     {
       "number": 40401,
@@ -10106,7 +10232,10 @@
           "submittedAt": "2026-02-25T14:38:12Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 46,
+      "deletions": 12,
+      "changedFiles": 1
     },
     {
       "number": 40402,
@@ -10173,7 +10302,10 @@
           "submittedAt": "2026-02-27T10:06:52Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 4,
+      "deletions": 2,
+      "changedFiles": 1
     },
     {
       "number": 40403,
@@ -10223,7 +10355,10 @@
           "submittedAt": "2026-02-27T08:40:19Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 27,
+      "deletions": 9,
+      "changedFiles": 2
     },
     {
       "number": 40406,
@@ -10321,7 +10456,10 @@
           "submittedAt": "2026-02-25T18:18:28Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 56,
+      "deletions": 147,
+      "changedFiles": 3
     },
     {
       "number": 40413,
@@ -10364,7 +10502,10 @@
           "submittedAt": "2026-02-26T10:06:35Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 32,
+      "deletions": 3,
+      "changedFiles": 3
     },
     {
       "number": 40414,
@@ -10628,7 +10769,10 @@
           "submittedAt": "2026-02-26T16:33:17Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 185,
+      "deletions": 47,
+      "changedFiles": 9
     },
     {
       "number": 40434,
@@ -10751,7 +10895,10 @@
           "submittedAt": "2026-02-26T15:30:53Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 185,
+      "deletions": 113,
+      "changedFiles": 14
     },
     {
       "number": 40441,
@@ -10794,7 +10941,10 @@
           "submittedAt": "2026-02-27T17:36:10Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 558,
+      "deletions": 65,
+      "changedFiles": 5
     },
     {
       "number": 40442,
@@ -10838,7 +10988,10 @@
           "submittedAt": "2026-02-27T15:12:12Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 180,
+      "deletions": 7,
+      "changedFiles": 2
     },
     {
       "number": 40443,
@@ -11095,7 +11248,10 @@
           "submittedAt": "2026-02-27T10:00:42Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 20,
+      "deletions": 13,
+      "changedFiles": 2
     },
     {
       "number": 40477,
