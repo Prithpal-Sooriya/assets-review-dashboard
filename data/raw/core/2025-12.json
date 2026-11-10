@@ -83,7 +83,10 @@
           "submittedAt": "2025-12-01T08:02:24Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 103,
+      "deletions": 0,
+      "changedFiles": 5
     },
     {
       "number": 7080,
@@ -250,7 +253,10 @@
           "submittedAt": "2025-12-08T14:57:10Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 5,
+      "deletions": 0,
+      "changedFiles": 2
     },
     {
       "number": 7260,
@@ -408,7 +414,10 @@
           "submittedAt": "2025-12-01T11:13:26Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 35,
+      "deletions": 585,
+      "changedFiles": 5
     },
     {
       "number": 7276,
@@ -429,7 +438,10 @@
           "submittedAt": "2025-12-01T12:12:55Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 13,
+      "deletions": 16,
+      "changedFiles": 3
     },
     {
       "number": 7278,
@@ -482,7 +494,10 @@
           "submittedAt": "2025-12-01T21:45:10Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 128,
+      "deletions": 17,
+      "changedFiles": 6
     },
     {
       "number": 7280,
@@ -569,7 +584,10 @@
           "submittedAt": "2025-12-03T10:44:20Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 5,
+      "deletions": 0,
+      "changedFiles": 2
     },
     {
       "number": 7287,
@@ -596,7 +614,10 @@
           "submittedAt": "2025-12-03T08:58:35Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 8,
+      "deletions": 0,
+      "changedFiles": 2
     },
     {
       "number": 7289,
@@ -647,7 +668,10 @@
           "submittedAt": "2025-12-02T16:37:58Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 17,
+      "deletions": 10,
+      "changedFiles": 8
     },
     {
       "number": 7292,
@@ -945,7 +969,10 @@
           "submittedAt": "2025-12-04T09:46:40Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 8,
+      "deletions": 4,
+      "changedFiles": 3
     },
     {
       "number": 7311,
@@ -1212,7 +1239,10 @@
           "submittedAt": "2025-12-05T13:15:02Z",
           "authorLogin": "sahar-fehri"
         }
-      ]
+      ],
+      "additions": 33,
+      "deletions": 15,
+      "changedFiles": 3
     },
     {
       "number": 7325,
@@ -1315,7 +1345,10 @@
           "submittedAt": "2025-12-09T08:12:15Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 39,
+      "deletions": 22,
+      "changedFiles": 12
     },
     {
       "number": 7331,
@@ -1566,7 +1599,10 @@
           "submittedAt": "2025-12-11T13:27:31Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 3035,
+      "deletions": 1950,
+      "changedFiles": 9
     },
     {
       "number": 7409,
@@ -1717,7 +1753,10 @@
           "submittedAt": "2025-12-09T13:03:22Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 493,
+      "deletions": 217,
+      "changedFiles": 6
     },
     {
       "number": 7412,
@@ -1744,7 +1783,10 @@
           "submittedAt": "2025-12-10T09:45:37Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 5,
+      "deletions": 3,
+      "changedFiles": 4
     },
     {
       "number": 7414,
@@ -1929,7 +1971,10 @@
           "submittedAt": "2025-12-10T09:49:00Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 51,
+      "deletions": 3,
+      "changedFiles": 3
     },
     {
       "number": 7424,
@@ -1950,7 +1995,10 @@
           "submittedAt": "2025-12-10T15:27:57Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 184,
+      "deletions": 19,
+      "changedFiles": 4
     },
     {
       "number": 7426,
@@ -2021,7 +2069,10 @@
           "submittedAt": "2025-12-10T18:07:12Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 1,
+      "deletions": 3,
+      "changedFiles": 2
     },
     {
       "number": 7430,
@@ -2136,7 +2187,10 @@
           "submittedAt": "2025-12-10T16:40:23Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 270,
+      "deletions": 34,
+      "changedFiles": 4
     },
     {
       "number": 7437,
@@ -2159,7 +2213,10 @@
           "submittedAt": "2025-12-10T16:59:20Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 13,
+      "deletions": 8,
+      "changedFiles": 8
     },
     {
       "number": 7438,
@@ -2214,7 +2271,10 @@
           "submittedAt": "2025-12-11T09:36:49Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 0,
+      "deletions": 97,
+      "changedFiles": 5
     },
     {
       "number": 7443,
@@ -2257,7 +2317,10 @@
           "submittedAt": "2025-12-11T10:22:31Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 18,
+      "deletions": 10,
+      "changedFiles": 8
     },
     {
       "number": 7445,
@@ -2604,7 +2667,10 @@
           "submittedAt": "2025-12-12T15:42:27Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 17,
+      "deletions": 0,
+      "changedFiles": 2
     },
     {
       "number": 7466,
@@ -2631,7 +2697,10 @@
           "submittedAt": "2025-12-12T18:20:48Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 34,
+      "deletions": 2,
+      "changedFiles": 3
     },
     {
       "number": 7468,
@@ -2684,7 +2753,10 @@
           "submittedAt": "2025-12-15T09:19:12Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 652,
+      "deletions": 54,
+      "changedFiles": 9
     },
     {
       "number": 7470,
@@ -2839,7 +2911,10 @@
           "submittedAt": "2025-12-15T12:51:21Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 1,
+      "deletions": 6,
+      "changedFiles": 2
     },
     {
       "number": 7478,
@@ -2886,7 +2961,10 @@
           "submittedAt": "2025-12-15T12:51:34Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 4,
+      "deletions": 17,
+      "changedFiles": 4
     },
     {
       "number": 7479,
@@ -2939,7 +3017,10 @@
           "submittedAt": "2025-12-15T16:39:14Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 7,
+      "deletions": 21,
+      "changedFiles": 4
     },
     {
       "number": 7480,
@@ -2986,7 +3067,10 @@
           "submittedAt": "2025-12-15T12:52:38Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 11,
+      "deletions": 22,
+      "changedFiles": 4
     },
     {
       "number": 7481,
@@ -3027,7 +3111,10 @@
           "submittedAt": "2025-12-15T14:36:42Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 30,
+      "deletions": 30,
+      "changedFiles": 4
     },
     {
       "number": 7482,
@@ -3062,7 +3149,10 @@
           "submittedAt": "2025-12-15T12:53:24Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 59,
+      "deletions": 75,
+      "changedFiles": 4
     },
     {
       "number": 7483,
@@ -3103,7 +3193,10 @@
           "submittedAt": "2025-12-15T13:56:20Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 80,
+      "deletions": 60,
+      "changedFiles": 4
     },
     {
       "number": 7484,
@@ -3132,7 +3225,10 @@
           "submittedAt": "2025-12-15T15:03:46Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 133,
+      "deletions": 126,
+      "changedFiles": 4
     },
     {
       "number": 7485,
@@ -3173,7 +3269,10 @@
           "submittedAt": "2025-12-15T13:33:33Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 43,
+      "deletions": 45,
+      "changedFiles": 4
     },
     {
       "number": 7486,
@@ -3220,7 +3319,10 @@
           "submittedAt": "2025-12-15T14:50:27Z",
           "authorLogin": "juanmigdr"
         }
-      ]
+      ],
+      "additions": 12,
+      "deletions": 16,
+      "changedFiles": 4
     },
     {
       "number": 7487,
@@ -3243,7 +3345,10 @@
           "submittedAt": "2025-12-15T12:56:11Z",
           "authorLogin": "bergarces"
         }
-      ]
+      ],
+      "additions": 211,
+      "deletions": 144,
+      "changedFiles": 4
     },
     {
       "number": 7488,
@@ -3332,7 +3437,10 @@
           "submittedAt": "2025-12-15T14:34:35Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 78,
+      "deletions": 32,
+      "changedFiles": 3
     },
     {
       "number": 7493,
@@ -3403,7 +3511,10 @@
           "submittedAt": "2025-12-15T12:59:09Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 9,
+      "deletions": 2,
+      "changedFiles": 3
     },
     {
       "number": 7497,
@@ -3665,7 +3776,10 @@
           "submittedAt": "2025-12-16T17:21:24Z",
           "authorLogin": "salimtb"
         }
-      ]
+      ],
+      "additions": 13,
+      "deletions": 9,
+      "changedFiles": 8
     },
     {
       "number": 7516,
@@ -3704,7 +3818,10 @@
           "submittedAt": "2025-12-16T18:32:31Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 13,
+      "deletions": 9,
+      "changedFiles": 8
     },
     {
       "number": 7518,
@@ -4022,7 +4139,10 @@
           "submittedAt": "2025-12-19T15:23:16Z",
           "authorLogin": "Prithpal-Sooriya"
         }
-      ]
+      ],
+      "additions": 64,
+      "deletions": 245,
+      "changedFiles": 4
     },
     {
       "number": 7544,
