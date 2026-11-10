@@ -16,7 +16,10 @@ import { DataNotice } from './components/DataNotice'
 import { FilterBar } from './components/FilterBar'
 import { StatCards } from './components/StatCards'
 import { TimelineSection } from './components/TimelineSection'
+import { WeeklyBreakdownSection } from './components/WeeklyBreakdownSection'
+import { TimeToFirstReviewSection } from './components/TimeToFirstReviewSection'
 import { MergeVsReviewSection } from './components/MergeVsReviewSection'
+import { TeamMergeSection } from './components/TeamMergeSection'
 import { UnmergedSection } from './components/UnmergedSection'
 import { MonthPanel } from './components/MonthPanel'
 import { CoveragePanel } from './components/CoveragePanel'
@@ -137,7 +140,26 @@ export default function App() {
               onSelectMonth={selectMonth}
               partialMonths={partialMonths}
             />
+            <WeeklyBreakdownSection
+              weeks={data.weeks}
+              windowMonths={windowMonths}
+              repoFilter={repoFilter}
+            />
+            <TimeToFirstReviewSection
+              samples={data.firstReviews}
+              weeks={data.weeks}
+              windowMonths={windowMonths}
+              rangeEnd={data.range.end}
+              repoFilter={repoFilter}
+            />
             <MergeVsReviewSection aggregates={aggregates} />
+            <TeamMergeSection
+              samples={data.teamMerges}
+              weeks={data.weeks}
+              windowMonths={windowMonths}
+              rangeEnd={data.range.end}
+              repoFilter={repoFilter}
+            />
             <UnmergedSection aggregates={aggregates} />
             {effectiveSelected && (
               <MonthPanel

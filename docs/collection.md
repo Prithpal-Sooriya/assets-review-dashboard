@@ -105,6 +105,28 @@ aggregation dedupes by freshest snapshot per PR).
   at/before merge (pre-window review evidence retained in `reviewMonths`).
 - Roster is fixed across the whole window (dawnseeker8's join date is
   unknown/disclosed — assumed full-window).
+- `weeks[]` repeats the month-row counts on ISO weeks (Monday 00:00 UTC
+  through the next Monday). A week is emitted for a repo when at least one
+  collection-window month it overlaps is dependency-complete. Events that
+  fall in a month without a month row are omitted and the week is
+  `partial`. The week clipped by the window start or the cutoff is partial
+  too. Each submission and each merge has one timestamp, so those weekly
+  totals equal the monthly totals for the same repo. A PR reviewed in two
+  weeks counts in both, same as months.
+- `firstReviews[]` is one sample per PR whose earliest qualifying team
+  review falls inside the window and in a dependency-complete month:
+  `{ repo, ownership, at, minutes }`. `minutes` is the nearest whole minute
+  from `createdAt` to that review. There is no PR id, title, author or
+  reviewer. PRs with no qualifying review are absent (the metric is the
+  wait among reviews that happened). A negative span (review timestamp
+  before `createdAt`) is dropped. The UI buckets samples by the week and
+  the month of `at` and summarises each bucket with the median and the
+  75th percentile (linear interpolation).
+- `teamMerges[]` is one sample per internal PR merged inside the window,
+  in a dependency-complete month: `{ repo, mergedAt, minutes }` from
+  `createdAt` to `mergedAt`. Team PRs merged without a qualifying review
+  are included. Open team PRs are not. Same median / 75th percentile
+  summary, bucketed by the merge.
 
 ## Validation
 

@@ -38,6 +38,19 @@ describe('validateDashboardData — demo fixture', () => {
 describe('validateDashboardData — structural rules', () => {
   const base = (): DashboardData => JSON.parse(JSON.stringify(demo))
 
+  test('rejects a missing weeks array without throwing', () => {
+    const d = base() as unknown as { weeks?: unknown }
+    delete d.weeks
+    const r = validateDashboardData(d as unknown as DashboardData)
+    expect(r.errors.some((e) => e.path === '$.weeks' && /expected an array/.test(e.message))).toBe(true)
+  })
+
+  test('rejects a week key that is not an ISO week', () => {
+    const d = base()
+    d.weeks[0]!.week = '2026-W54'
+    expect(validateDashboardData(d).errors.some((e) => e.path === '$.weeks[0].week')).toBe(true)
+  })
+
   test('rejects wrong schemaVersion', () => {
     const d = base()
     d.schemaVersion = 2

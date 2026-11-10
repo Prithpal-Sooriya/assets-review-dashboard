@@ -27,7 +27,7 @@
     "rateCheckInterval": 15,
     "rateReserve": 250
   },
-  "methodologyVersion": "1.0.0",
+  "methodologyVersion": "1.1.0",
   "methodologyNotes": [
     "Ownership is label/roster attribution at collection time (team-assets label, else supplied author roster), not historically proven organization membership.",
     "Fixed supplied roster is applied across the whole window; the join date of dawnseeker8 is unknown, so they are included for the entire window (never an invented date).",
@@ -38,6 +38,10 @@
     "reviewedUnmergedPrs reflects the current PR state at generation time (snapshot), not the historical month-end state.",
     "The current month is partial and covers data through the range end cutoff only; completeness means coverage through that cutoff, not that the month has ended.",
     "A month row is only emitted when partition coverage for that repo is complete from the month through the cutoff; otherwise the month is omitted and the gap is visible in coverage.",
-    "Discovery walks PRs ordered by updated_at and relies on review submissions updating PR updated_at; this assumption was validated empirically and cross-checked with reviewed-by search (see docs/collection.md)."
+    "Discovery walks PRs ordered by updated_at and relies on review submissions updating PR updated_at; this assumption was validated empirically and cross-checked with reviewed-by search (see docs/collection.md).",
+    "Weeks are ISO 8601 weeks in UTC (Monday 00:00 through the next Monday). A week is included when at least one collected month it overlaps is dependency-complete; events in months that were not collected are omitted and that week is marked partial. The week that contains the window start or the cutoff is partial.",
+    "Weekly counts use the same qualifying-review and merge rules as months. A pull request reviewed in two weeks counts in each week. Each review submission and each merge falls in exactly one week, so those weekly totals equal the monthly totals.",
+    "Time to first review is the elapsed time from pull request creation to the earliest qualifying team review, for first reviews inside the window. It is shown by the week and by the month of that first review. Pull requests the team never reviewed are excluded, so the figure describes reviews that happened, not every open pull request. Self-reviews and excluded reviewers do not start the clock. The summary is the median and the 75th percentile.",
+    "Time to merge is the elapsed time from creation to merge for internal team pull requests merged inside the window, shown by the week and by the month of the merge. It includes team pull requests merged without a qualifying team review. Open team pull requests are not included."
   ]
 }

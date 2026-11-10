@@ -133,7 +133,7 @@ async function main(): Promise<number> {
     return acc;
   }, {});
   console.log(
-    `wrote ${outPath}: range ${data.range.start}..${data.range.end}, months rows ${data.months.length}, prs ${data.prs.length}, coverage ${JSON.stringify(covCounts)} (window ${startMonth}..${currentMonth}, partitions loaded ${partitions.length})`,
+    `wrote ${outPath}: range ${data.range.start}..${data.range.end}, months rows ${data.months.length}, weeks ${data.weeks.length}, prs ${data.prs.length}, firstReviews ${data.firstReviews.length}, teamMerges ${data.teamMerges.length}, coverage ${JSON.stringify(covCounts)} (window ${startMonth}..${currentMonth}, partitions loaded ${partitions.length})`,
   );
   return 0;
 }

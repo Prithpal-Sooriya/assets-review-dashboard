@@ -10,9 +10,10 @@ two pages, one app:
   read-only personal access token (held in memory only, never stored or sent
   anywhere else) makes team review requests visible.
 - **Historical** — <https://metamask-assets-dashboard-ui.vercel.app/historical>
-  Team-level monthly aggregates across the full collection window (reviews,
-  merges, unmerged PRs, coverage), embedded at build time from
-  `data/dashboard.json`. Team-level metrics only — no individual data.
+  Team-level monthly and weekly aggregates across the full collection window
+  (reviews, merges, unmerged PRs, time to first review, time to merge for
+  team PRs, coverage), embedded at build time from `data/dashboard.json`.
+  Team-level metrics only — no individual data.
 
 The top navigation switches between the two pages (real URLs — direct loads,
 reloads and back/forward all work). Hash routes are honored on any path:

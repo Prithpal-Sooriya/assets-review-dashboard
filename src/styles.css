@@ -354,6 +354,88 @@ select {
   margin-top: 8px;
 }
 
+.chart-row {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  margin-top: 8px;
+}
+
+.chart-row .chart-scroll {
+  flex: 1 1 auto;
+  margin-top: 0;
+}
+
+.chart-yaxis {
+  flex: none;
+  display: block;
+  width: 48px;
+}
+
+.chart-yaxis text {
+  fill: var(--chart-text);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-scroll {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  margin-top: 8px;
+  overflow-x: auto;
+}
+
+.chart-scroll:focus {
+  outline: none;
+}
+
+.chart-scroll:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.chart-scroll svg.chart {
+  width: auto;
+  max-width: none;
+}
+
+.timing-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  margin-top: 12px;
+}
+
+.timing-summary__label {
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.timing-summary__value {
+  margin-top: 2px;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.timing-summary__meta {
+  margin-top: 2px;
+  color: var(--text-faint);
+  font-size: 12px;
+}
+
+.chart-legend .swatch--hollow {
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  box-sizing: border-box;
+}
+
 .chart-legend {
   display: flex;
   flex-wrap: wrap;
