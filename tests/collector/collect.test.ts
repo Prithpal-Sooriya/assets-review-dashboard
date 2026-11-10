@@ -64,6 +64,7 @@ class FakeTransport implements RestTransport {
   reviews = new Map<string, RestReviewShape[]>(); // "repo#number"
   calls: string[] = [];
   reviewCalls = new Map<string, number>();
+  detailCalls = 0;
   rate: RateInfo = { remaining: 5000, limit: 5000, resetEpoch: 0 };
   /** When set, getRate() reports a low budget once this many calls happened. */
   exhaustAfter = Infinity;
@@ -74,6 +75,11 @@ class FakeTransport implements RestTransport {
     if (pullsMatch) {
       const key = `${pullsMatch[1]}|${pullsMatch[2]}`;
       return this.pullsPages.get(key) ?? [];
+    }
+    const detailMatch = path.match(/^\/repos\/([^/]+\/[^/]+)\/pulls\/(\d+)$/);
+    if (detailMatch) {
+      this.detailCalls++;
+      return { additions: 12, deletions: 3, changed_files: 2 };
     }
     const reviewsMatch = path.match(/^\/repos\/([^/]+\/[^/]+)\/pulls\/(\d+)\/reviews/);
     if (reviewsMatch) {
@@ -90,7 +96,11 @@ class FakeTransport implements RestTransport {
   }
 }
 
-function pull(n: number, updatedAt: string, login = "carol", merged: string | null = null): RestPullShape {
+function pull(n: number, updatedAt: string, login = "carol", merged: string | null = null): RestPullShape & {
+  additions?: number;
+  deletions?: number;
+  changed_files?: number;
+} {
   return {
     number: n,
     title: `PR ${n}`,
@@ -166,6 +176,14 @@ describe("collectPartitions", () => {
     const p30 = byMonth.get("2026-03")?.prs.find((p) => p.number === 30)!;
     expect(p30.reviews.map((r) => r.authorLogin)).toEqual(["BOB"]);
 
+    // Diff size is fetched only for PRs that kept a roster review. The list
+    // payload has none, so the detail endpoint supplies it.
+    expect(p31.additions).toBe(12);
+    expect(p31.deletions).toBe(3);
+    expect(p31.changedFiles).toBe(2);
+    expect(byMonth.get("2026-03")?.prs.find((p) => p.number === 21)?.additions).toBeUndefined();
+    expect(t.detailCalls).toBeGreaterThan(0);
+
     // merged state derived from merged_at
     expect(p30.state).toBe("MERGED");
     expect(p31.state).toBe("OPEN");
@@ -178,6 +196,25 @@ describe("collectPartitions", () => {
     ]);
     // walk state cleared after completion
     expect(await store.readWalkState("MetaMask/core")).toBeNull();
+  });
+
+  test("uses diff size from the list payload and does not fetch the pull again", async () => {
+    const t = new FakeTransport();
+    const store = new MemoryStore();
+    const sized = pull(1, "2026-03-10T00:00:00Z");
+    sized.additions = 8;
+    sized.deletions = 1;
+    sized.changed_files = 4;
+    t.pullsPages.set("MetaMask/core|1", [sized]);
+    t.pullsPages.set("MetaMask/core|2", []);
+    t.reviews.set("MetaMask/core#1", [rev(1, "alice", "APPROVED", "2026-03-09T00:00:00Z")]);
+    const cfg: CollectorConfig = { ...testConfig, repos: ["MetaMask/core"] };
+    await collectPartitions(cfg, depsFor(t, store), { fromMonth: "2026-03" });
+    const pr = store.partitions[0]!.prs[0]!;
+    expect(pr.additions).toBe(8);
+    expect(pr.deletions).toBe(1);
+    expect(pr.changedFiles).toBe(4);
+    expect(t.detailCalls).toBe(0);
   });
 
   test("exhausted repo history closes partitions via empty page", async () => {
@@ -225,10 +262,11 @@ describe("collectPartitions", () => {
       request: { ...testConfig.request, rateCheckInterval: 1 },
     };
 
-    // Exhaust after 3 transport calls: page 1 + reviews for #31/#30 are
-    // fetched, March closes mid-walk (asOfCutoff), then the budget stops at
-    // #20's review fetch. Jan+Feb remain open (pending).
-    t.exhaustAfter = 3;
+    // Exhaust once six transport calls have landed: the list page, reviews
+    // and a size fetch for #31 and #30, then reviews for #21. March closes
+    // when the walk reaches #21, and the budget stops at #20's review fetch.
+    // Jan+Feb remain open (pending).
+    t.exhaustAfter = 5;
     const report1 = await collectPartitions(cfg, depsFor(t, store), { fromMonth: "2026-01" });
     expect(report1.stopped).toBe("rate");
     expect(report1.pending.sort()).toEqual(["MetaMask/core|2026-01", "MetaMask/core|2026-02"]);

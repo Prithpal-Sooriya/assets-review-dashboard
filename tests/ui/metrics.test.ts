@@ -15,11 +15,13 @@ import {
   percentileMinutes,
   prsReviewedIn,
   reposInData,
+  reviewerMonths,
   totalAggregate,
+  trendMonths,
   weekPeriods,
   type Period,
 } from '../../src/data/metrics'
-import type { WeekEntry } from '../../src/data/types'
+import type { ReviewerMonthEntry, TrendMonthEntry, WeekEntry } from '../../src/data/types'
 import { coverageWindowMonths, formatMonthKey, monthKeyOfISO, repoDisplayName } from '../../src/data/format'
 import { coverageProblemEntries } from '../../src/components/CoveragePanel'
 
@@ -238,6 +240,59 @@ describe('coverageProblemEntries (the panel\'s full-disclosure list)', () => {
     const problems = coverageProblemEntries(coverage, allRepos, months)
     expect(problems).toHaveLength(29)
     expect(problems.every((p) => p.status === 'pending')).toBe(true)
+  })
+})
+
+describe('reviewerMonths and trendMonths', () => {
+  const reviewers: ReviewerMonthEntry[] = [
+    { month: '2026-01', repo: 'MetaMask/core', login: 'mina', reviewSubmissions: 2, reviewedPrs: 1, approvals: 2, changesRequested: 0, comments: 0, dismissed: 0 },
+    { month: '2026-01', repo: 'MetaMask/core', login: 'otto', reviewSubmissions: 0, reviewedPrs: 0, approvals: 0, changesRequested: 0, comments: 0, dismissed: 0 },
+    { month: '2026-01', repo: 'MetaMask/metamask-extension', login: 'mina', reviewSubmissions: 1, reviewedPrs: 1, approvals: 0, changesRequested: 1, comments: 0, dismissed: 0 },
+    { month: '2026-01', repo: 'MetaMask/metamask-extension', login: 'otto', reviewSubmissions: 0, reviewedPrs: 0, approvals: 0, changesRequested: 0, comments: 0, dismissed: 0 },
+    { month: '2026-01', repo: '*', login: 'mina', reviewSubmissions: 3, reviewedPrs: 2, approvals: 2, changesRequested: 1, comments: 0, dismissed: 0 },
+    { month: '2026-01', repo: '*', login: 'otto', reviewSubmissions: 0, reviewedPrs: 0, approvals: 0, changesRequested: 0, comments: 0, dismissed: 0 },
+  ]
+  const baseTrend = (repo: string, median: number | null): TrendMonthEntry => ({
+    month: '2026-01',
+    repo,
+    approvals: 1,
+    changesRequested: 0,
+    comments: 0,
+    dismissed: 0,
+    reviewedPrs: 1,
+    multiReviewerPrs: 0,
+    firstReviews: median === null ? 0 : 1,
+    medianMinutesToFirstReview: median,
+    reviewedMerges: 0,
+    medianMinutesReviewToMerge: null,
+    sizedReviewedPrs: 0,
+    medianChangedLines: null,
+    medianChangedFiles: null,
+    sizeSmall: 0,
+    sizeMedium: 0,
+    sizeLarge: 0,
+    sizeXLarge: 0,
+  })
+
+  test('no filter uses the rollup and keeps roster order', () => {
+    const view = reviewerMonths(reviewers, null, ['2026-01', '2026-02'])
+    expect(view.logins).toEqual(['mina', 'otto'])
+    expect(view.months[0]?.people[0]).toEqual({ login: 'mina', reviewSubmissions: 3, reviewedPrs: 2 })
+    expect(view.months[1]?.people[0]?.reviewSubmissions).toBe(0)
+  })
+
+  test('a repo filter does not add the other repo', () => {
+    const view = reviewerMonths(reviewers, 'MetaMask/core', ['2026-01'])
+    expect(view.months[0]?.people.find((p) => p.login === 'mina')?.reviewSubmissions).toBe(2)
+  })
+
+  test('trend medians come from the rollup row, not an average of repos', () => {
+    const rows = [baseTrend('MetaMask/core', 10), baseTrend('MetaMask/metamask-extension', 100), baseTrend('*', 40)]
+    const all = trendMonths(rows, null, ['2026-01'])
+    expect(all[0]?.medianMinutesToFirstReview).toBe(40)
+    const core = trendMonths(rows, 'MetaMask/core', ['2026-01'])
+    expect(core[0]?.medianMinutesToFirstReview).toBe(10)
+    expect(trendMonths(undefined, null, ['2026-01'])).toEqual([])
   })
 })
 

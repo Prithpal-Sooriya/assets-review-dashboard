@@ -79,6 +79,19 @@ describe('public display helpers', () => {
   })
 })
 
+describe('formatDurationMinutes', () => {
+  test('formats minutes, hours and days, and a missing sample', () => {
+    expect(formatDurationMinutes(null)).toBe('—')
+    expect(formatDurationMinutes(0)).toBe('0m')
+    expect(formatDurationMinutes(45)).toBe('45m')
+    expect(formatDurationMinutes(90)).toBe('1.5h')
+    expect(formatDurationMinutes(10 * 60)).toBe('10h')
+    expect(formatDurationMinutes(36 * 60)).toBe('36h')
+    expect(formatDurationMinutes(3 * 24 * 60)).toBe('3d')
+    expect(formatDurationMinutes(2.5 * 24 * 60)).toBe('2.5d')
+  })
+})
+
 describe('ISO weeks and durations', () => {
   test('ISO week keys use the Thursday week-year', () => {
     const jan1 = Date.parse('2026-01-01T00:00:00.000Z')

@@ -127,6 +127,26 @@ aggregation dedupes by freshest snapshot per PR).
   `createdAt` to `mergedAt`. Team PRs merged without a qualifying review
   are included. Open team PRs are not. Same median / 75th percentile
   summary, bucketed by the merge.
+- `reviewers[]` is one row per roster member per emitted repo-month, plus a
+  cross-repo rollup (`repo: "*"`). Counts are qualifying reviews only
+  (same exclusions as the team totals). A member with no reviews is stored
+  at zero so a quiet month stays visible. Login spelling is the roster's.
+- `trends[]` is one row per emitted repo-month, plus the same `"*"` rollup.
+  Outcome counts sum to `reviewSubmissions`. Time to first review on a
+  trend row is `createdAt` → earliest qualifying review, in that review's
+  month, draft time included. Review-to-merge is the earliest qualifying
+  review at or before merge → `mergedAt`, in the merge month. Medians are
+  whole minutes; null means the sample was empty. The rollup recomputes
+  medians from the pooled samples.
+- `multiReviewerPrs` counts reviewed PRs with qualifying reviews from two
+  or more roster members in that month.
+- Diff size (`additions`, `deletions`, `changedFiles` on the raw PR) is the
+  GitHub diff on the collected snapshot. The pulls list does not carry it;
+  the collector requests the single PR when a roster review was stored and
+  the list omitted the fields. `scripts/enrich-size.ts` backfills partitions
+  collected before that request existed (re-runnable; already-sized PRs are
+  skipped). Medians and the four line buckets (under 100, 100–499, 500–999,
+  1000 or more) use only PRs that have a complete size triple.
 
 ## Validation
 

@@ -57,6 +57,14 @@ export interface RawPrRecord {
   mergedAt: string | null;
   authorLogin: string | null;
   labels: string[];
+  /**
+   * Diff stats from GitHub at collection time. Absent on snapshots collected
+   * before size was recorded, and absent when GitHub did not report them.
+   * additions + deletions is the line count; changedFiles is the file count.
+   */
+  additions?: number;
+  deletions?: number;
+  changedFiles?: number;
   /** Reviews authored by roster members only (all states kept). */
   reviews: RawReview[];
 }
@@ -165,6 +173,66 @@ export interface TeamMergeSample {
   minutes: number;
 }
 
+/**
+ * Cross-repo rollup key on reviewer and trend rows. Not a GitHub repository.
+ * Per-repo rows are summed into this row; medians are recomputed from the
+ * pooled samples, not averaged.
+ */
+export const ALL_REPOS = "*";
+
+/**
+ * Qualifying reviews by one roster member in one repo-month.
+ * `repo` is a configured repo or ALL_REPOS. Login spelling is the roster's.
+ */
+export interface ReviewerMonthRow {
+  month: string;
+  repo: string;
+  login: string;
+  reviewSubmissions: number;
+  /** Distinct PRs with at least one qualifying review by this person in the month. */
+  reviewedPrs: number;
+  approvals: number;
+  changesRequested: number;
+  comments: number;
+  dismissed: number;
+}
+
+/**
+ * Team-level shape of the month: outcome mix, pace, how many people touched
+ * each PR, and diff size where the snapshot recorded it.
+ * Medians are null when the sample count is 0. Minutes are integers.
+ */
+export interface TrendMonthRow {
+  month: string;
+  repo: string;
+  approvals: number;
+  changesRequested: number;
+  comments: number;
+  dismissed: number;
+  /** PRs with at least one qualifying review in the month. */
+  reviewedPrs: number;
+  /** Of those, PRs with qualifying reviews from two or more roster members. */
+  multiReviewerPrs: number;
+  /** PRs whose earliest qualifying review falls in this month. */
+  firstReviews: number;
+  /** Median minutes from createdAt to that first review. */
+  medianMinutesToFirstReview: number | null;
+  /** PRs merged this month with a qualifying review at or before merge. */
+  reviewedMerges: number;
+  /** Median minutes from the earliest such review to mergedAt. */
+  medianMinutesReviewToMerge: number | null;
+  /** Reviewed PRs whose snapshot has a diff size. */
+  sizedReviewedPrs: number;
+  /** Median of additions + deletions. */
+  medianChangedLines: number | null;
+  medianChangedFiles: number | null;
+  /** Changed lines under 100, 100–499, 500–999, and 1000 or more. */
+  sizeSmall: number;
+  sizeMedium: number;
+  sizeLarge: number;
+  sizeXLarge: number;
+}
+
 export interface PrEntry {
   id: string; // `${repo}#${number}` — stable
   repo: string;
@@ -187,6 +255,10 @@ export interface DashboardData {
   methodology: { version: string; notes: string[] };
   coverage: CoverageEntry[];
   months: MonthRow[];
+  /** One row per roster member per emitted repo-month, plus an ALL_REPOS rollup. */
+  reviewers: ReviewerMonthRow[];
+  /** One row per emitted repo-month, plus an ALL_REPOS rollup. */
+  trends: TrendMonthRow[];
   prs: PrEntry[];
   /** ISO weeks overlapping the window. Same activity rules as `months`. */
   weeks: WeekRow[];

@@ -12,8 +12,10 @@ two pages, one app:
 - **Historical** — <https://metamask-assets-dashboard-ui.vercel.app/historical>
   Team-level monthly and weekly aggregates across the full collection window
   (reviews, merges, unmerged PRs, time to first review, time to merge for
-  team PRs, coverage), embedded at build time from `data/dashboard.json`.
-  Team-level metrics only — no individual data.
+  team PRs, coverage), plus who on the Assets roster reviewed, review pace,
+  and pull request size where the snapshot recorded it.
+  Embedded at build time from `data/dashboard.json`. Review text and anyone
+  outside the roster are not included.
 
 The top navigation switches between the two pages (real URLs — direct loads,
 reloads and back/forward all work). Hash routes are honored on any path:

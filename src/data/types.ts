@@ -60,6 +60,43 @@ export interface TeamMergeSample {
   minutes: number
 }
 
+/** Cross-repo rollup on reviewer and trend rows. Not a GitHub repository. */
+export const ALL_REPOS = '*'
+
+export interface ReviewerMonthEntry {
+  month: string
+  repo: string
+  login: string
+  reviewSubmissions: number
+  reviewedPrs: number
+  approvals: number
+  changesRequested: number
+  comments: number
+  dismissed: number
+}
+
+export interface TrendMonthEntry {
+  month: string
+  repo: string
+  approvals: number
+  changesRequested: number
+  comments: number
+  dismissed: number
+  reviewedPrs: number
+  multiReviewerPrs: number
+  firstReviews: number
+  medianMinutesToFirstReview: number | null
+  reviewedMerges: number
+  medianMinutesReviewToMerge: number | null
+  sizedReviewedPrs: number
+  medianChangedLines: number | null
+  medianChangedFiles: number | null
+  sizeSmall: number
+  sizeMedium: number
+  sizeLarge: number
+  sizeXLarge: number
+}
+
 export interface PrEntry {
   id: string
   repo: string
@@ -82,6 +119,10 @@ export interface DashboardData {
   methodology: { version: string; notes: string[] }
   coverage: CoverageEntry[]
   months: MonthEntry[]
+  /** Absent on snapshots aggregated before roster rows existed. */
+  reviewers?: ReviewerMonthEntry[]
+  /** Absent on snapshots aggregated before trend rows existed. */
+  trends?: TrendMonthEntry[]
   prs: PrEntry[]
   weeks: WeekEntry[]
   firstReviews: FirstReviewSample[]

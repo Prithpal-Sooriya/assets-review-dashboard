@@ -17,7 +17,9 @@ interface GroupedBarChartProps {
   series: Series[]
   height?: number
   yLabel?: string
-  /** Axis tick. Defaults to the short month name. */
+  /** Y-axis tick labels. Defaults to grouped thousands. */
+  formatYTick?: (value: number) => string
+  /** X-axis tick. Defaults to the short month name. */
   formatTick?: (key: string, index: number) => string
   /**
    * Minimum pixels per group. When the groups need more room than the
@@ -35,6 +37,7 @@ export function GroupedBarChart({
   months,
   series,
   height = 220,
+  formatYTick = formatInt,
   formatTick,
   minGroupPx,
   ariaLabel,
@@ -103,7 +106,7 @@ export function GroupedBarChart({
               <line className="gridline" x1={layout.x0} x2={layout.x0 + layout.plotWidth} y1={y} y2={y} />
               {!scrolling && (
                 <text x={layout.x0 - 8} y={y + 4} textAnchor="end">
-                  {formatInt(t)}
+                  {formatYTick(t)}
                 </text>
               )}
             </g>
@@ -153,7 +156,7 @@ export function GroupedBarChart({
         padBottom={pad.bottom}
         ticks={ticks}
         scale={scale}
-        format={(tick) => formatInt(tick)}
+        format={(tick) => formatYTick(tick)}
       />
       {plot}
     </div>

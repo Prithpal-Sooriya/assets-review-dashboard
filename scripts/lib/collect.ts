@@ -36,6 +36,7 @@ import {
 } from "./config";
 import type { RestTransport, RateInfo } from "./gh";
 import { RateLimitedError } from "./gh";
+import { parseDiffSize } from "./diff-size";
 
 // ============================================================================
 // Storage abstraction (disk implementation below; in-memory for tests)
@@ -72,6 +73,8 @@ export interface RepoCollectResult {
   stopped: "done" | "rate";
   prsFetched: number;
   reviewRequests: number;
+  /** Single-PR fetches made because the list payload had no diff size. */
+  sizeRequests: number;
 }
 
 export interface CollectReport {
@@ -97,6 +100,10 @@ interface RestPull {
   merged_at: string | null;
   user: { login: string } | null;
   labels?: { name?: string }[];
+  /** Present on the single-PR payload. The list payload omits them. */
+  additions?: number;
+  deletions?: number;
+  changed_files?: number;
 }
 
 interface RestReview {
@@ -121,6 +128,11 @@ function prState(p: RestPull): RawPrRecord["state"] {
 }
 
 function toRecord(p: RestPull, rosterReviews: RawReview[]): RawPrRecord {
+  const size = parseDiffSize({
+    additions: p.additions,
+    deletions: p.deletions,
+    changedFiles: p.changed_files,
+  });
   return {
     number: p.number,
     title: p.title,
@@ -133,6 +145,7 @@ function toRecord(p: RestPull, rosterReviews: RawReview[]): RawPrRecord {
     mergedAt: p.merged_at,
     authorLogin: p.user?.login ?? null,
     labels: (p.labels ?? []).map((l) => l.name ?? "").filter(Boolean),
+    ...(size ?? {}),
     reviews: rosterReviews.sort((a, b) => (a.submittedAt ?? "").localeCompare(b.submittedAt ?? "")),
   };
 }
@@ -177,7 +190,7 @@ export async function collectPartitions(
 
     for (const repo of repos) {
       if (budgetStop) {
-        results.push({ repo, wantedMonths: [], closedMonths: [], stopped: "rate", prsFetched: 0, reviewRequests: 0 });
+        results.push({ repo, wantedMonths: [], closedMonths: [], stopped: "rate", prsFetched: 0, reviewRequests: 0, sizeRequests: 0 });
         continue;
       }
       const result = await collectRepo({
@@ -244,7 +257,7 @@ async function collectRepo(args: CollectRepoArgs): Promise<RepoCollectResult> {
   });
   if (wantedMonths.length === 0) {
     deps.log(`[${repo}] all target months already month-end complete; skipping.`);
-    return { repo, wantedMonths: [], closedMonths: [], stopped: "done", prsFetched: 0, reviewRequests: 0 };
+    return { repo, wantedMonths: [], closedMonths: [], stopped: "done", prsFetched: 0, reviewRequests: 0, sizeRequests: 0 };
   }
   const wantedSet = new Set(wantedMonths);
   const floorIso = startOfMonthIso(fromMonth);
@@ -280,6 +293,7 @@ async function collectRepo(args: CollectRepoArgs): Promise<RepoCollectResult> {
   const walkStartedIso = deps.now().toISOString(); // honest cutoff for asOfCutoff partitions
   let prsFetched = 0;
   let reviewRequests = 0;
+  let sizeRequests = 0;
   let page = 1;
 
   const closeMonth = async (om: OpenMonth): Promise<void> => {
@@ -384,7 +398,17 @@ async function collectRepo(args: CollectRepoArgs): Promise<RepoCollectResult> {
         if (om.bucket[pr.number]) continue; // already captured (resume cache)
         const reviews = await fetchRosterReviews(pr.number);
         prsFetched++;
-        om.bucket[pr.number] = toRecord(pr, reviews);
+        // Diff size is not on the pulls list. Fetch it only for PRs a roster
+        // member actually reviewed, so the extra request tracks review load
+        // rather than every PR the walk passes.
+        let sized = pr;
+        if (reviews.length > 0 && !parseDiffSize({ additions: pr.additions, deletions: pr.deletions, changedFiles: pr.changed_files })) {
+          if (!(await checkRate())) throw new BudgetStop();
+          sizeRequests++;
+          const detail = (await deps.transport.getJson(`/repos/${repo}/pulls/${pr.number}`)) as RestPull;
+          sized = { ...pr, additions: detail.additions, deletions: detail.deletions, changed_files: detail.changed_files };
+        }
+        om.bucket[pr.number] = toRecord(sized, reviews);
       }
 
       page++;
@@ -418,6 +442,7 @@ async function collectRepo(args: CollectRepoArgs): Promise<RepoCollectResult> {
     stopped: openMonths.length > 0 ? "rate" : "done",
     prsFetched,
     reviewRequests,
+    sizeRequests,
   };
 }
 
