@@ -66,6 +66,96 @@ export function formatInt(n: number): string {
   return intFormatter.format(n)
 }
 
+// ISO weeks (UTC, Monday 00:00). Keep in lockstep with scripts/lib/config.ts.
+const DAY_MS = 86_400_000
+
+/** Monday 00:00:00.000 UTC of the ISO week containing `ms`. */
+export function startOfIsoWeekMs(ms: number): number {
+  const d = new Date(ms)
+  const daysFromMonday = (d.getUTCDay() + 6) % 7
+  return Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate() - daysFromMonday)
+}
+
+/** "YYYY-Www" using the ISO week-year (the year of that week's Thursday). */
+export function isoWeekKey(ms: number): string {
+  const startMs = startOfIsoWeekMs(ms)
+  const year = new Date(startMs + 3 * DAY_MS).getUTCFullYear()
+  const week1Start = startOfIsoWeekMs(Date.UTC(year, 0, 4))
+  const week = Math.round((startMs - week1Start) / (7 * DAY_MS)) + 1
+  return `${year}-W${String(week).padStart(2, '0')}`
+}
+
+export function isoWeekKeyFromIso(iso: string): string | null {
+  const ms = Date.parse(iso)
+  if (!Number.isFinite(ms)) return null
+  return isoWeekKey(ms)
+}
+
+const WEEK_KEY_RE = /^\d{4}-W(0[1-9]|[1-4]\d|5[0-3])$/
+
+export function isValidWeekKey(week: string): boolean {
+  return WEEK_KEY_RE.test(week)
+}
+
+/** True when `iso` is exactly Monday 00:00:00.000Z. */
+export function isMondayMidnightUtc(iso: string): boolean {
+  const ms = Date.parse(iso)
+  if (!Number.isFinite(ms)) return false
+  const d = new Date(ms)
+  return (
+    d.toISOString() === iso &&
+    d.getUTCDay() === 1 &&
+    d.getUTCHours() === 0 &&
+    d.getUTCMinutes() === 0 &&
+    d.getUTCSeconds() === 0 &&
+    d.getUTCMilliseconds() === 0
+  )
+}
+
+/**
+ * Elapsed minutes as a short duration. Under an hour stays in minutes, under
+ * two days in hours, otherwise days, with one decimal when it is needed.
+ */
+export function formatDurationMinutes(minutes: number | null): string {
+  if (minutes === null || !Number.isFinite(minutes)) return '—'
+  const sign = minutes < 0 ? '-' : ''
+  const abs = Math.abs(Math.round(minutes))
+  if (abs < 60) return `${sign}${abs}m`
+  if (abs < 48 * 60) {
+    const hours = Math.round((abs / 60) * 10) / 10
+    const text = Number.isInteger(hours) ? String(hours) : hours.toFixed(1)
+    return `${sign}${text}h`
+  }
+  const days = Math.round((abs / 1440) * 10) / 10
+  const text = Number.isInteger(days) ? String(days) : days.toFixed(1)
+  return `${sign}${text}d`
+}
+
+/** "W02 · 5 Jan 2026" and, when partial, a trailing marker. */
+export function formatWeekLabel(week: string, weekStart: string, partial = false): string {
+  const d = new Date(weekStart)
+  if (Number.isNaN(d.getTime())) return partial ? `${week} (partial)` : week
+  const text = `${week.slice(5)} · ${d.getUTCDate()} ${MONTH_NAMES[d.getUTCMonth()]} ${d.getUTCFullYear()}`
+  return partial ? `${text} (partial)` : text
+}
+
+/** Dense axis label, e.g. "5 Jan" or "5 Jan 2026". */
+export function formatWeekTick(weekStart: string, showYear: boolean): string {
+  const d = new Date(weekStart)
+  if (Number.isNaN(d.getTime())) return weekStart
+  const text = `${d.getUTCDate()} ${MONTH_NAMES[d.getUTCMonth()]}`
+  return showYear ? `${text} ${d.getUTCFullYear()}` : text
+}
+
+/** The month is still open when range end falls before the next month starts. */
+export function monthExtendsPastRange(month: string, rangeEnd: string): boolean {
+  const match = /^(\d{4})-(\d{2})$/.exec(month)
+  if (!match) return false
+  const nextMonthStart = Date.UTC(Number(match[1]), Number(match[2]), 1)
+  const end = Date.parse(rangeEnd)
+  return Number.isFinite(end) && end < nextMonthStart
+}
+
 /** Hard cap so a corrupt range can never loop the month walk. */
 const COVERAGE_WINDOW_MONTHS_CAP = 1200
 

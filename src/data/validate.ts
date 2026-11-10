@@ -2,13 +2,16 @@ import {
   type CoverageEntry,
   type CoverageStatus,
   type DashboardData,
+  type FirstReviewSample,
   type MonthEntry,
   type Ownership,
   type OwnershipReason,
   type PrEntry,
   type PrState,
+  type TeamMergeSample,
+  type WeekEntry,
 } from './types'
-import { isValidISOTimestamp, isValidMonthKey } from './format'
+import { isMondayMidnightUtc, isValidISOTimestamp, isValidMonthKey, isValidWeekKey, isoWeekKeyFromIso } from './format'
 
 export interface ValidationIssue {
   path: string
@@ -295,6 +298,99 @@ export function validateDashboardData(data: DashboardData): ValidationResult {
           }
         }
       }
+    })
+  }
+
+  const countFields: [keyof WeekEntry, string][] = [
+    ['internalReviewedPrs', 'internalReviewedPrs'],
+    ['externalReviewedPrs', 'externalReviewedPrs'],
+    ['reviewSubmissions', 'reviewSubmissions'],
+    ['reviewedUnmergedPrs', 'reviewedUnmergedPrs'],
+    ['mergedInternalPrs', 'mergedInternalPrs'],
+    ['mergedExternalReviewedPrs', 'mergedExternalReviewedPrs'],
+  ]
+
+  if (!Array.isArray(at('weeks'))) {
+    errors.push({ path: '$.weeks', message: 'expected an array' })
+  } else {
+    const seenWeek = new Set<string>()
+    data.weeks.forEach((entry: WeekEntry, i: number) => {
+      const path = `$.weeks[${i}]`
+      if (!isRecord(entry)) {
+        errors.push({ path, message: 'expected an object' })
+        return
+      }
+      if (!isValidWeekKey(entry.week)) {
+        errors.push({ path: `${path}.week`, message: `expected YYYY-Www, got ${JSON.stringify(entry.week)}` })
+      }
+      if (typeof entry.weekStart !== 'string' || !isMondayMidnightUtc(entry.weekStart)) {
+        errors.push({ path: `${path}.weekStart`, message: 'expected Monday 00:00:00.000Z' })
+      } else if (isValidWeekKey(entry.week) && isoWeekKeyFromIso(entry.weekStart) !== entry.week) {
+        errors.push({ path: `${path}.week`, message: `week ${entry.week} does not match weekStart` })
+      }
+      if (typeof entry.repo !== 'string' || entry.repo === '') {
+        errors.push({ path: `${path}.repo`, message: 'expected a non-empty string' })
+      }
+      if (typeof entry.partial !== 'boolean') {
+        errors.push({ path: `${path}.partial`, message: 'expected a boolean' })
+      }
+      const key = `${entry.repo}|${entry.week}`
+      if (seenWeek.has(key)) {
+        warnings.push({ path, message: `duplicate entry for repo ${entry.repo}, week ${entry.week}` })
+      }
+      seenWeek.add(key)
+      for (const [field, label] of countFields) {
+        checkNonNegativeInt(entry[field], `${path}.${label}`, errors)
+      }
+    })
+  }
+
+  const rangeStartMs = isRecord(range) && isValidISOTimestamp(range.start) ? Date.parse(range.start) : NaN
+  const rangeEndMs = isRecord(range) && isValidISOTimestamp(range.end) ? Date.parse(range.end) : NaN
+
+  if (!Array.isArray(at('firstReviews'))) {
+    errors.push({ path: '$.firstReviews', message: 'expected an array' })
+  } else {
+    data.firstReviews.forEach((sample: FirstReviewSample, i: number) => {
+      const path = `$.firstReviews[${i}]`
+      if (!isRecord(sample)) {
+        errors.push({ path, message: 'expected an object' })
+        return
+      }
+      if (typeof sample.repo !== 'string' || sample.repo === '') {
+        errors.push({ path: `${path}.repo`, message: 'expected a non-empty string' })
+      }
+      checkEnum(sample.ownership, OWNERSHIPS, `${path}.ownership`, errors)
+      if (!isValidISOTimestamp(sample.at)) {
+        errors.push({ path: `${path}.at`, message: 'expected an ISO timestamp' })
+      } else if (Number.isFinite(rangeStartMs) && (Date.parse(sample.at) < rangeStartMs || Date.parse(sample.at) >= rangeEndMs)) {
+        errors.push({ path: `${path}.at`, message: 'timestamp falls outside the collection range' })
+      }
+      checkNonNegativeInt(sample.minutes, `${path}.minutes`, errors)
+    })
+  }
+
+  if (!Array.isArray(at('teamMerges'))) {
+    errors.push({ path: '$.teamMerges', message: 'expected an array' })
+  } else {
+    data.teamMerges.forEach((sample: TeamMergeSample, i: number) => {
+      const path = `$.teamMerges[${i}]`
+      if (!isRecord(sample)) {
+        errors.push({ path, message: 'expected an object' })
+        return
+      }
+      if (typeof sample.repo !== 'string' || sample.repo === '') {
+        errors.push({ path: `${path}.repo`, message: 'expected a non-empty string' })
+      }
+      if (!isValidISOTimestamp(sample.mergedAt)) {
+        errors.push({ path: `${path}.mergedAt`, message: 'expected an ISO timestamp' })
+      } else if (
+        Number.isFinite(rangeStartMs) &&
+        (Date.parse(sample.mergedAt) < rangeStartMs || Date.parse(sample.mergedAt) >= rangeEndMs)
+      ) {
+        errors.push({ path: `${path}.mergedAt`, message: 'timestamp falls outside the collection range' })
+      }
+      checkNonNegativeInt(sample.minutes, `${path}.minutes`, errors)
     })
   }
 

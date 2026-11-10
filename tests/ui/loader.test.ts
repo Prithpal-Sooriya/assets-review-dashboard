@@ -28,6 +28,23 @@ describe('loadDashboard', () => {
     expect(loaded.isDemo).toBe(false)
   })
 
+  test('pre-1.1.0 dashboard.json without weeks/timing arrays still loads', () => {
+    const legacy = JSON.parse(realRaw) as Record<string, unknown>
+    delete legacy.weeks
+    delete legacy.firstReviews
+    delete legacy.teamMerges
+    const loaded = loadDashboard({
+      source: 'real',
+      dataPath: 'data/dashboard.json',
+      raw: JSON.stringify(legacy),
+      loadError: null,
+    })
+    expect(loaded.status).toBe('ok')
+    expect(loaded.data?.weeks).toEqual([])
+    expect(loaded.data?.firstReviews).toEqual([])
+    expect(loaded.data?.teamMerges).toEqual([])
+  })
+
   test('real source carrying the demo marker still flags as demo (belt and suspenders)', () => {
     const marked = JSON.parse(realRaw) as DashboardData
     marked.methodology.notes = ['DEMO SAMPLE DATA: synthetic', ...marked.methodology.notes]

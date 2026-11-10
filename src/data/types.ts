@@ -20,15 +20,44 @@ export interface CoverageEntry {
   detail?: string
 }
 
-export interface MonthEntry {
-  month: string
-  repo: string
+export interface ActivityCounts {
   internalReviewedPrs: number
   externalReviewedPrs: number
   reviewSubmissions: number
   reviewedUnmergedPrs: number
   mergedInternalPrs: number
   mergedExternalReviewedPrs: number
+}
+
+export interface MonthEntry extends ActivityCounts {
+  month: string
+  repo: string
+}
+
+/** ISO week (Monday 00:00 UTC) activity for one repository. */
+export interface WeekEntry extends ActivityCounts {
+  week: string
+  weekStart: string
+  repo: string
+  partial: boolean
+}
+
+/**
+ * Wait from creation to the earliest qualifying team review.
+ * No pull-request identity.
+ */
+export interface FirstReviewSample {
+  repo: string
+  ownership: Ownership
+  at: string
+  minutes: number
+}
+
+/** Wait from creation to merge for one internal team pull request. */
+export interface TeamMergeSample {
+  repo: string
+  mergedAt: string
+  minutes: number
 }
 
 export interface PrEntry {
@@ -54,4 +83,7 @@ export interface DashboardData {
   coverage: CoverageEntry[]
   months: MonthEntry[]
   prs: PrEntry[]
+  weeks: WeekEntry[]
+  firstReviews: FirstReviewSample[]
+  teamMerges: TeamMergeSample[]
 }

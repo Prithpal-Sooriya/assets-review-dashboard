@@ -3,16 +3,23 @@ import { readFileSync } from 'node:fs'
 import type { CoverageEntry, DashboardData } from '../../src/data/types'
 import {
   aggregateMonths,
+  aggregateWeeks,
   coverageLookup,
   coverageSummary,
   displayWindow,
+  durationSeries,
   incompleteCoverageMonths,
   latestMonth,
+  monthPeriods,
   orderedMonthKeys,
+  percentileMinutes,
   prsReviewedIn,
   reposInData,
   totalAggregate,
+  weekPeriods,
+  type Period,
 } from '../../src/data/metrics'
+import type { WeekEntry } from '../../src/data/types'
 import { coverageWindowMonths, formatMonthKey, monthKeyOfISO, repoDisplayName } from '../../src/data/format'
 import { coverageProblemEntries } from '../../src/components/CoveragePanel'
 
@@ -252,5 +259,63 @@ describe('formatting helpers', () => {
   test('latestMonth picks the trailing month', () => {
     expect(latestMonth(['2026-01', '2026-02', '2026-03'])).toBe('2026-03')
     expect(latestMonth([])).toBeNull()
+  })
+})
+
+describe('weekly activity and timing', () => {
+  const weeks: WeekEntry[] = [
+    { week: '2026-W02', weekStart: '2026-01-05T00:00:00.000Z', repo: 'MetaMask/core', partial: false, internalReviewedPrs: 2, externalReviewedPrs: 1, reviewSubmissions: 4, reviewedUnmergedPrs: 1, mergedInternalPrs: 1, mergedExternalReviewedPrs: 0 },
+    { week: '2026-W02', weekStart: '2026-01-05T00:00:00.000Z', repo: 'MetaMask/metamask-mobile', partial: true, internalReviewedPrs: 1, externalReviewedPrs: 0, reviewSubmissions: 1, reviewedUnmergedPrs: 0, mergedInternalPrs: 0, mergedExternalReviewedPrs: 1 },
+    { week: '2026-W03', weekStart: '2026-01-12T00:00:00.000Z', repo: 'MetaMask/core', partial: false, internalReviewedPrs: 0, externalReviewedPrs: 3, reviewSubmissions: 3, reviewedUnmergedPrs: 0, mergedInternalPrs: 0, mergedExternalReviewedPrs: 0 },
+  ]
+
+  test('week periods dedupe repos and keep a partial flag', () => {
+    const periods = weekPeriods(weeks, ['2026-01'])
+    expect(periods.map((p) => p.key)).toEqual(['2026-W02', '2026-W03'])
+    expect(periods[0]!.partial).toBe(true)
+    expect(periods[1]!.partial).toBe(false)
+  })
+
+  test('aggregateWeeks sums repos and the filter keeps one', () => {
+    const periods: Period[] = weekPeriods(weeks, ['2026-01'])
+    const all = aggregateWeeks(weeks, null, periods)
+    expect(all[0]!.internalReviewedPrs).toBe(3)
+    expect(all[0]!.reviewSubmissions).toBe(5)
+    expect(all[0]!.mergedExternalReviewedPrs).toBe(1)
+    const core = aggregateWeeks(weeks, 'MetaMask/core', periods)
+    expect(core[0]!.internalReviewedPrs).toBe(2)
+    expect(core[1]!.externalReviewedPrs).toBe(3)
+  })
+
+  test('percentileMinutes interpolates and rounds to a minute', () => {
+    expect(percentileMinutes([], 0.5)).toBeNull()
+    expect(percentileMinutes([10], 0.75)).toBe(10)
+    expect(percentileMinutes([10, 20, 30], 0.5)).toBe(20)
+    expect(percentileMinutes([10, 20, 30, 40], 0.5)).toBe(25)
+    expect(percentileMinutes([10, 20, 30, 40], 0.75)).toBe(33)
+  })
+
+  test('durationSeries median is over the samples, and the repo filter applies', () => {
+    const periods: Period[] = [
+      { key: '2026-W02', start: '2026-01-05T00:00:00.000Z', partial: false },
+      { key: '2026-W03', start: '2026-01-12T00:00:00.000Z', partial: false },
+    ]
+    const samples = [
+      { repo: 'MetaMask/core', at: '2026-01-06T00:00:00Z', minutes: 10 },
+      { repo: 'MetaMask/core', at: '2026-01-07T00:00:00Z', minutes: 30 },
+      { repo: 'MetaMask/metamask-mobile', at: '2026-01-06T00:00:00Z', minutes: 100 },
+      { repo: 'MetaMask/core', at: '2026-01-13T00:00:00Z', minutes: 50 },
+    ]
+    const all = durationSeries(samples, 'week', periods, null)
+    expect(all.points[0]!.count).toBe(3)
+    expect(all.points[0]!.medianMinutes).toBe(30)
+    expect(all.points[1]!.count).toBe(1)
+    expect(all.summary).toEqual({ count: 4, medianMinutes: 40, p75Minutes: 63 })
+    const core = durationSeries(samples, 'week', periods, 'MetaMask/core')
+    expect(core.summary.count).toBe(3)
+    expect(core.points[0]!.count).toBe(2)
+    const months = monthPeriods(['2026-01'], '2026-02-01T00:00:00Z')
+    expect(months[0]!.partial).toBe(false)
+    expect(durationSeries(samples, 'month', months, null).summary.count).toBe(4)
   })
 })
